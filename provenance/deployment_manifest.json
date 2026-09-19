@@ -57,5 +57,33 @@
     "REAL_DATA_COLLECTION=NO",
     "FORMAL_FINE_TUNING=NO",
     "BASE_MODEL_OUTPUT_IS_NOT_PIPER_ACTION"
-  ]
+  ],
+  "phase_status_authority": "docs/PI05_PIPER_PHASE_GATES.json",
+  "project_phase_status": {
+    "P0": "PASS",
+    "P1": "PASS",
+    "P2": "READY"
+  },
+  "current_status": "P0_PASS_P1_PASS_P2_READY",
+  "autonomous_execution_authorized": false,
+  "nonclaims": {
+    "REAL_PIPER_CONNECTED": "NO",
+    "REAL_ROBOT_MOTION": "NO",
+    "REAL_DATA_COLLECTION": "NO",
+    "FORMAL_FINE_TUNING": "NO"
+  },
+  "status_reconciliation": {
+    "metadata_only": true,
+    "evidence_sources": [
+      "reports/P0_P1_DEPLOYMENT_REPORT.md",
+      "provenance/deployment_manifest.json",
+      "docs/PI05_PIPER_MASTER_PLAN.md"
+    ],
+    "experiments_rerun": false,
+    "download_rerun": false,
+    "inference_rerun": false,
+    "training_rerun": false,
+    "server_benchmark_rerun": false,
+    "can_access": false
+  }
 }

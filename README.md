@@ -17,13 +17,33 @@ project does not use ManiSkill, PiperPegInsertion, or their task/dataset/policy.
 
 ## Current status
 
-`PLAN_ONLY / NO_HARDWARE_EXECUTION`
+```text
+P0 = PASS
+P1 = PASS
+P2 = READY
+autonomous_execution_authorized = false
+```
 
-This initial scaffold contains the project contract, phase gates, provenance
-records, data schema, network options, safety plan, and laptop diagnostic
-specifications. It intentionally does not clone OpenPI, download weights,
-install dependencies, connect CAN, collect data, train, or move the robot.
+This status is reconciled from the completed P0/P1 evidence in
+`reports/P0_P1_DEPLOYMENT_REPORT.md`,
+`provenance/deployment_manifest.json`, and
+`docs/PI05_PIPER_MASTER_PLAN.md`. It is metadata reconciliation only;
+no experiment, download, inference, training, benchmark, server startup,
+or CAN access is performed by a status update.
 
+The current safety nonclaims remain:
+
+```text
+REAL_PIPER_CONNECTED = NO
+REAL_ROBOT_MOTION = NO
+REAL_DATA_COLLECTION = NO
+FORMAL_FINE_TUNING = NO
+```
+
+The single machine-readable authority for phase status is
+`docs/PI05_PIPER_PHASE_GATES.json`. After any phase completion, update
+that file together with this README current-status block and
+`provenance/deployment_manifest.json`.
 Start with:
 
 - [Master plan](docs/PI05_PIPER_MASTER_PLAN.md)
@@ -32,6 +52,8 @@ Start with:
 - [OpenPI provenance](docs/OPENPI_PROVENANCE.md)
 - [Real-robot safety plan](docs/REAL_ROBOT_SAFETY_PLAN.md)
 
-The only valid path to autonomous execution is through the gates in
+The unique machine-readable authority for phase status is
 `docs/PI05_PIPER_PHASE_GATES.json`. A technical check, a shadow prediction,
 and a real-robot success are separate claims.
+`autonomous_execution_authorized` remains `false` until the safety-gated
+project process explicitly changes it.
