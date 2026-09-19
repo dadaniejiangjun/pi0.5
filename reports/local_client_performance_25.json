@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "host": "127.0.0.1",
+  "port": 8000,
+  "request_count": 25,
+  "successful_responses": 25,
+  "failures": [],
+  "connect_ms": 1.6222652047872543,
+  "client_roundtrip_ms": {
+    "mean": 333.8848315179348,
+    "median": 60.57949457317591,
+    "p90": 61.57270036637783,
+    "p95": 62.95594833791255,
+    "max": 6893.680529668927
+  },
+  "server_infer_ms": {
+    "mean": 333.02166160196066,
+    "median": 59.70040522515774,
+    "p90": 60.384819842875004,
+    "p95": 61.06152776628733,
+    "max": 6892.460707575083
+  },
+  "response_shape": [
+    50,
+    14
+  ],
+  "server_metadata": {
+    "reset_pose": [
+      0,
+      -1.5,
+      1.5,
+      0,
+      0,
+      0
+    ],
+    "project": "07_pi0.5",
+    "bind_address": "127.0.0.1",
+    "config": "pi05_aloha",
+    "checkpoint": "gs://openpi-assets/checkpoints/pi05_base",
+    "piper_policy": false
+  },
+  "policy_semantics": "official_pi05_aloha_sanity_only; not_piper_policy"
+}

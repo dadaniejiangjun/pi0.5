@@ -1,0 +1,177 @@
+{
+  "project": "07_pi0.5",
+  "status": "PLAN_ONLY",
+  "autonomous_execution_authorized": false,
+  "gates": [
+    {
+      "id": "P0",
+      "name": "official_docs_and_architecture_audit",
+      "status": "PLANNED",
+      "robot_motion": false,
+      "requires": [],
+      "evidence": [
+        "provenance/openpi_contract.json",
+        "docs/OPENPI_PROVENANCE.md",
+        "docs/REMOTE_ARCHITECTURE.md"
+      ],
+      "pass": [
+        "official OpenPI commit and submodules locally pinned",
+        "server/laptop authority boundary reviewed",
+        "pi05_base checkpoint versus pi05_droid config distinction recorded",
+        "D1-D5 remain explicit user decisions"
+      ],
+      "hard_stop": ["ambiguous source", "ambiguous control authority"]
+    },
+    {
+      "id": "P1",
+      "name": "server_openpi_bringup",
+      "status": "BLOCKED_ON_P0",
+      "robot_motion": false,
+      "requires": ["P0"],
+      "evidence": ["reports/server_dummy_inference.json"],
+      "pass": ["dummy inference finite", "shape recorded", "VRAM/load/compile/inference timing recorded"],
+      "hard_stop": ["checkpoint/config mismatch", "NaN_or_Inf", "unapproved_large_download"]
+    },
+    {
+      "id": "P2",
+      "name": "laptop_hardware_camera_probe",
+      "status": "BLOCKED_ON_P0",
+      "robot_motion": false,
+      "requires": ["P0"],
+      "evidence": ["reports/laptop_piper_hardware_audit.json", "reports/laptop_camera_audit.json"],
+      "pass": ["firmware verified", "units verified", "camera identity verified", "feedback and teach behavior recorded"],
+      "hard_stop": ["unknown_firmware", "unknown_units", "unknown_camera", "unknown_safe_hold"]
+    },
+    {
+      "id": "P3",
+      "name": "laptop_server_network",
+      "status": "BLOCKED_ON_P0",
+      "robot_motion": false,
+      "requires": ["P0", "P1"],
+      "evidence": ["reports/network_latency_report.json", "configs/network_template.yaml"],
+      "pass": ["user_selected_private_transport", "1000_request_matrix_complete", "timeout_and_reconnect_fail_closed"],
+      "hard_stop": ["public_raw_websocket", "unreliable_network", "stale_response_possible"]
+    },
+    {
+      "id": "P4",
+      "name": "teach_mode_multimodal_recorder",
+      "status": "BLOCKED_ON_P2",
+      "robot_motion": "manual_operator_teach_only",
+      "requires": ["P2"],
+      "evidence": ["one_closed_raw_episode", "docs/DATA_SCHEMA.md"],
+      "pass": ["dual_video", "state", "gripper", "timestamps", "instruction", "events", "checksums"],
+      "hard_stop": ["gripper_recording_unavailable", "timestamp_failure", "camera_dropout"]
+    },
+    {
+      "id": "P5",
+      "name": "five_demo_recorder_validation",
+      "status": "BLOCKED_ON_P4",
+      "robot_motion": false,
+      "requires": ["P4"],
+      "evidence": ["reports/p5_recorder_validation.json"],
+      "pass": ["five_episodes_integrity_pass", "skew_statistics_recorded", "no_manual_repair_required"],
+      "hard_stop": ["any_required_modality_missing"]
+    },
+    {
+      "id": "P6",
+      "name": "twenty_to_fifty_demonstrations",
+      "status": "BLOCKED_ON_P5",
+      "robot_motion": "manual_operator_teach_only",
+      "requires": ["P5"],
+      "evidence": ["datasets/manifests/p6_manifest.json", "success_failure_notes"],
+      "pass": ["natural_variation", "labels_present", "no_replay_as_diversity"],
+      "hard_stop": ["coverage_insufficient", "labels_or_units_uncertain"]
+    },
+    {
+      "id": "P7",
+      "name": "lerobot_conversion_and_data_audit",
+      "status": "BLOCKED_ON_P6",
+      "robot_motion": false,
+      "requires": ["P6"],
+      "evidence": ["datasets/manifests/p7_conversion_manifest.json", "datasets/lerobot/meta"],
+      "pass": ["episode_split", "schema_match", "stats_match", "raw_preserved"],
+      "hard_stop": ["split_leakage", "schema_mismatch", "normalization_missing"]
+    },
+    {
+      "id": "P8",
+      "name": "piper_transforms_and_tiny_overfit",
+      "status": "BLOCKED_ON_P7",
+      "robot_motion": false,
+      "requires": ["P7"],
+      "evidence": ["reports/p8_transform_roundtrip.json", "reports/p8_tiny_overfit.json"],
+      "pass": ["7d_round_trip", "online_offline_equivalence", "loss_descent", "beats_trivial_baseline"],
+      "hard_stop": ["transform_mismatch", "no_tiny_fit", "normalization_mismatch"]
+    },
+    {
+      "id": "P9",
+      "name": "pilot_finetune",
+      "status": "BLOCKED_ON_P8",
+      "robot_motion": false,
+      "requires": ["P8"],
+      "evidence": ["reports/p9_offline_eval.json", "checkpoints/p9_manifest.json"],
+      "pass": ["early_mid_final_saved", "offline_eval_complete", "failure_slices_reviewed"],
+      "hard_stop": ["data_path_untrusted", "offline_failure_unexplained"]
+    },
+    {
+      "id": "P10",
+      "name": "formal_finetune",
+      "status": "BLOCKED_ON_P9",
+      "robot_motion": false,
+      "requires": ["P9"],
+      "evidence": ["reports/p10_training_manifest.json", "checkpoints/p10_manifest.json"],
+      "pass": ["all_provenance_hashes_frozen", "measured_gpu_feasibility", "norm_stats_frozen"],
+      "hard_stop": ["provenance_drift", "multi_gpu_unjustified", "norm_drift"]
+    },
+    {
+      "id": "P11",
+      "name": "real_shadow_inference",
+      "status": "BLOCKED_ON_P10",
+      "robot_motion": false,
+      "requires": ["P3", "P10"],
+      "evidence": ["reports/p11_shadow_inference.json", "shadow_video"],
+      "pass": ["no_robot_command", "prediction_overlay", "limit_margin", "latency_logged"],
+      "hard_stop": ["unsafe_prediction", "metadata_mismatch", "stale_response"]
+    },
+    {
+      "id": "P12",
+      "name": "single_action_guarded_execution",
+      "status": "BLOCKED_ON_P11_AND_USER_DECISIONS",
+      "robot_motion": true,
+      "requires": ["P11", "D1", "D2", "D3"],
+      "evidence": ["reports/g1_g2_safety_evidence.json", "rollout_logs"],
+      "pass": ["operator_present", "estop_ready", "very_low_speed", "one_action_only", "fail_closed"],
+      "hard_stop": ["any_safety_check_failure", "unknown_safe_hold", "stale_feedback"]
+    },
+    {
+      "id": "P13",
+      "name": "single_object_pick_place",
+      "status": "BLOCKED_ON_P12_AND_USER_DECISIONS",
+      "robot_motion": true,
+      "requires": ["P12", "D4", "D5"],
+      "evidence": ["reports/p13_task_evidence.json", "rollout_logs", "videos"],
+      "pass": ["g3_g4_g5_ladder", "task_outcome_labeled", "no_unlogged_intervention"],
+      "hard_stop": ["unsafe_margin", "unlogged_intervention", "failure_recovery_missing"]
+    },
+    {
+      "id": "P14",
+      "name": "language_grounded_multi_object",
+      "status": "BLOCKED_ON_P13",
+      "robot_motion": true,
+      "requires": ["P13"],
+      "evidence": ["reports/p14_language_grounding.json"],
+      "pass": ["target_controlled_data", "held_out_language_evaluation", "baseline_comparison"],
+      "hard_stop": ["grounding_claim_without_target_data"]
+    }
+  ],
+  "universal_hard_stops": [
+    "unknown_piper_firmware",
+    "unknown_action_units",
+    "camera_state_synchronization_failure",
+    "gripper_recording_unavailable",
+    "unreliable_network",
+    "missing_safety_bridge",
+    "missing_stale_action_protection",
+    "piper_transform_mismatch",
+    "normalization_mismatch"
+  ]
+}

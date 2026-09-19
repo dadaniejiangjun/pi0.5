@@ -1,0 +1,53 @@
+dataset:
+  source: real_piper_manual_drag_teach
+  phase_1_collection: operator_manual_teach_entry
+  programmatic_teach_entry: not_assumed
+  laptop_time_authority: monotonic_ns
+  raw_episode_layout:
+    metadata: metadata.json
+    instruction: instruction.txt
+    robot: robot.parquet_or_npz
+    base_video: base.mp4
+    wrist_video: wrist.mp4
+    events: events.jsonl
+    manifest: manifest.json
+  required_sample_fields:
+    - episode_id
+    - frame_id
+    - monotonic_ns
+    - base_capture_ts
+    - wrist_capture_ts
+    - joint_sample_ts
+    - gripper_sample_ts
+    - q1
+    - q2
+    - q3
+    - q4
+    - q5
+    - q6
+    - gripper
+  lerobot_target_keys:
+    - observation.images.image
+    - observation.images.wrist_image
+    - observation.state
+    - action
+    - task
+  state_dim: 7
+  action_dim: 7
+  canonical_prompt: "Pick up the block and place it in the tray."
+  split:
+    level: episode
+    train_fraction: 0.8
+    val_fraction: 0.2
+    test: frozen_future_holdout
+    frame_level_split: prohibited
+  normalization:
+    source: PiPER_specific_dataset_statistics
+    droid_stats_reuse: prohibited_by_default
+    record: [min, max, mean, std, q01, q99, percentiles, outliers]
+  acceptance:
+    preserve_raw: true
+    checksum_before_upload: true
+    checksum_before_conversion: true
+    failed_demo_training_use: false
+    duplicate_replay_as_diversity: false

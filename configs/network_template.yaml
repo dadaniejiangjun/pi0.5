@@ -1,0 +1,63 @@
+network:
+  selected_option: null
+  status: USER_DECISION_REQUIRED
+  public_raw_websocket: prohibited
+  policy_server_default_port_candidate: 8000
+  server_bind_policy: private_or_tunnel_only
+  laptop_is_robot_authority: true
+  server_is_robot_authority: false
+
+options:
+  NET-A:
+    name: ssh_tunnel
+    recommended_for: P0_P1_bringup
+    laptop_endpoint: 127.0.0.1
+    server_bind: 127.0.0.1_or_firewall_restricted
+    tunnel_template: "ssh -N -L <local_port>:127.0.0.1:<server_port> <user>@<server>"
+    status: not_selected
+  NET-B:
+    name: tailscale_private_vpn
+    recommended_for: long_running_experiments
+    endpoint: private_overlay_address
+    status: not_selected
+  NET-C:
+    name: self_managed_wireguard
+    recommended_for: independently_managed_infrastructure
+    endpoint: private_wireguard_address
+    status: not_selected
+
+diagnostics:
+  request_count: 1000
+  payloads:
+    - name: small_dummy
+      contains: dummy_metadata
+    - name: one_rgb
+      contains: one_model_sized_rgb
+    - name: dual_rgb
+      contains: base_and_wrist_model_sized_rgb
+    - name: dual_rgb_state
+      contains: base_wrist_and_state_7d
+  metrics:
+    - rtt_median_ms
+    - rtt_p90_ms
+    - rtt_p95_ms
+    - rtt_p99_ms
+    - connection_failures
+    - packet_failures
+    - reconnect_time_ms
+  output: reports/network_latency_report.json
+
+telemetry:
+  client_fields:
+    - episode_id
+    - request_id
+    - capture_monotonic_ns
+    - send_time_ns
+    - receive_time_ns
+    - prompt_hash
+    - state_hash
+  server_fields:
+    - actions
+    - server_infer_ms
+    - checkpoint_id
+    - model_config_hash

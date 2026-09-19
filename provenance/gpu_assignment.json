@@ -1,0 +1,39 @@
+{
+  "recorded_at": "2026-09-19T13:18:15+08:00",
+  "selection_policy": "choose one idle GPU from GPU0/GPU1/GPU2; never touch GPU3",
+  "selected": {
+    "index": 0,
+    "uuid": "GPU-8326cca9-a5e8-cec8-7409-8d52c146eb57",
+    "name": "NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition",
+    "memory_total_mib": 97887,
+    "memory_used_mib": 31,
+    "utilization_gpu_percent": 0,
+    "selection_reason": "no compute workload; only Xorg display allocation"
+  },
+  "not_selected": {
+    "gpu1": {
+      "uuid": "GPU-7f906a98-2416-20bb-9198-3563ac6fa96a",
+      "memory_used_mib": 31,
+      "utilization_gpu_percent": 0,
+      "reason": "available but not selected"
+    },
+    "gpu2": {
+      "uuid": "GPU-fd7c4754-191e-f77a-118e-217a34ae2f8e",
+      "memory_used_mib": 30,
+      "utilization_gpu_percent": 0,
+      "reason": "available but not selected"
+    },
+    "gpu3": {
+      "uuid": "GPU-070d7c9a-974c-d7a7-faae-d98fb192ff8d",
+      "memory_used_mib": 86438,
+      "utilization_gpu_percent": 98,
+      "reason": "DO NOT TOUCH; existing Qwen/SGLang workload"
+    }
+  },
+  "command_policy": {
+    "cuda_visible_devices": "0",
+    "kill_or_preempt_existing_processes": false,
+    "use_all_gpus": false
+  },
+  "source_command": "nvidia-smi --query-gpu=index,uuid,name,memory.total,memory.used,utilization.gpu,pstate,temperature.gpu --format=csv,noheader"
+}

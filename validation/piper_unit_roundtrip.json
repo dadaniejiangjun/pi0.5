@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "samples": 10000,
+  "joint_max_abs_error_rad": 8.72607832036465e-06,
+  "joint_half_quantization_bound_rad": 8.726646259971648e-06,
+  "gripper_max_abs_error_m": 4.999031828732681e-07,
+  "gripper_half_quantization_bound_m": 5e-07,
+  "round_trip_direction": "canonical -> SDK integer -> canonical",
+  "hardware_accessed": false,
+  "scale_status": "NOMINAL_OFFICIAL_SCALE_PENDING_FIRMWARE_AUDIT"
+}

@@ -1,0 +1,5 @@
+# This package intentionally does not install JAX, full openpi, or checkpoints.
+openpi-client @ git+https://github.com/Physical-Intelligence/openpi.git@215abfb217dbac7d5f1273282331b9b1866c0479#subdirectory=packages/openpi-client
+numpy==1.26.4
+Pillow>=10,<12
+opencv-python>=4.8,<5

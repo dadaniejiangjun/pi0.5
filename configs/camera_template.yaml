@@ -1,0 +1,49 @@
+cameras:
+  base:
+    manufacturer: null
+    model: null
+    serial: null
+    usb_identifier: null
+    connection_topology: null
+    resolution: null
+    fps: null
+    pixel_format: null
+    intrinsics: null
+    distortion: null
+    frame_name: null
+    mount_description: null
+  wrist:
+    manufacturer: null
+    model: null
+    serial: null
+    usb_identifier: null
+    connection_topology: null
+    resolution: null
+    fps: null
+    pixel_format: null
+    intrinsics: null
+    distortion: null
+    frame_name: null
+    mount_description: null
+
+recording:
+  timestamp_authority: laptop_monotonic_clock
+  raw_stream_preserved: true
+  raw_resolution_policy: native_or_640x480_if_supported
+  model_input_size: [224, 224]
+  model_input_dtype: uint8
+  resize_policy: official_openpi_resize_with_pad_after_audit
+  pixel_mapping_audit_required: true
+  dropout_detection_required: true
+  camera_state_skew_metrics: [median, p95, max]
+
+special_checks:
+  wrist_d435_if_present:
+    check_rgb_stream: true
+    check_intrinsics: true
+    check_mount: true
+    check_camera_frame: true
+  unknown_large_white_camera:
+    identify_from_laptop_probe: true
+    identify_from_official_manufacturer_or_agilex_docs: true
+    guessing_prohibited: true

@@ -1,0 +1,18 @@
+{
+  "source": "/mnt/ssd/users/mingkai/07_pi0.5/laptop/diagnostics/probe_piper_readonly.py",
+  "source_sha256": "3aca9c67cb480e990b3ab2d5780a3998bed59a818d0d186242fc2f1a71b79731",
+  "forbidden_identifiers": [
+    "JointCtrl",
+    "EndPoseCtrl",
+    "GripperCtrl",
+    "EnableArm",
+    "DisableArm",
+    "EmergencyStop",
+    "ResetPiper",
+    "ModeCtrl",
+    "MotionCtrl"
+  ],
+  "forbidden_hits": [],
+  "read_only_probe_safety": "PASS",
+  "hardware_accessed": false
+}

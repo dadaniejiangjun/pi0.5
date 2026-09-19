@@ -1,0 +1,23 @@
+schema: piper_joint_limits_v1
+status: NOMINAL_OFFICIAL_LIMITS
+hardware_status: NOT_REAL_CONFIRMED_LIMITS
+source:
+  url: https://github.com/agilexrobotics/piper_sdk/blob/c9e8a28174e71eeaac448593cb65f8ab258a92fe/asserts/V2/INTERFACE_V2.MD
+  source_commit: c9e8a28174e71eeaac448593cb65f8ab258a92fe
+  source_date: "2026-09-19 official master probe"
+  authority: AgileX official piper_sdk V2 interface documentation
+units: radian
+joints:
+  joint1: {min: -2.6179, max: 2.6179}
+  joint2: {min: 0.0, max: 3.14}
+  joint3: {min: -2.967, max: 0.0}
+  joint4: {min: -1.745, max: 1.745}
+  joint5: {min: -1.22, max: 1.22}
+  joint6: {min: -2.09439, max: 2.09439}
+gripper:
+  min: null
+  max: null
+  status: PENDING_GETSDKGRIPPERRANGEPARAM_AND_FIRMWARE_AUDIT
+warning: >-
+  These are nominal documentation values for action validation only. They do
+  not authorize motion and must not be treated as confirmed firmware limits.

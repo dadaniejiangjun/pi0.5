@@ -1,0 +1,16 @@
+schema: pi05_piper_v1
+base_checkpoint: pi05_base
+training: NOT_STARTED
+formal_fine_tuning: NOT_STARTED
+normalization: NOT_AVAILABLE
+piper_dataset: NOT_AVAILABLE
+action_semantics: absolute_joint_position
+state_semantics: joint_position_plus_gripper
+action:
+  fields: [q1_target, q2_target, q3_target, q4_target, q5_target, q6_target, gripper_target]
+  dimension: 7
+  units: [radian, radian, radian, radian, radian, radian, meter]
+interpretation: >-
+  This file records initialization intent only. pi05_base ALOHA outputs must
+  not be interpreted as PiPER actions before a PiPER DataConfig, normalization,
+  dataset, and fine-tuned checkpoint exist.

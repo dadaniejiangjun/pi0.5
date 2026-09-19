@@ -1,0 +1,30 @@
+{
+  "name": "probe_piper_readonly",
+  "mode": "read_only_hardware_audit",
+  "status": "NOT_RUN",
+  "hardware_accessed": false,
+  "can_accessed": false,
+  "allowed_future_read_apis": [
+    "GetCurrentSDKVersion",
+    "GetCurrentProtocolVersion",
+    "GetCanFps",
+    "GetCanName",
+    "GetArmStatus",
+    "GetArmJointMsgs",
+    "GetArmGripperMsgs",
+    "GetArmEndPoseMsgs",
+    "GetSDKJointLimitParam",
+    "GetSDKGripperRangeParam"
+  ],
+  "fields": [
+    "sdk_version",
+    "protocol_version",
+    "firmware_version",
+    "can_fps",
+    "arm_status",
+    "ctrl_mode",
+    "joint_state",
+    "gripper_state"
+  ],
+  "reason": "P2 laptop hardware audit is explicitly out of scope for P0/P1."
+}

@@ -1,0 +1,57 @@
+{
+  "project": "07_pi0.5",
+  "status": "LOCAL_PIN_PENDING",
+  "authority": {
+    "repository": "https://github.com/Physical-Intelligence/openpi",
+    "branch": "main",
+    "observed_commit": "215abfb217dbac7d5f1273282331b9b1866c0479",
+    "local_commit": null,
+    "checkout_path": "third_party/openpi",
+    "checkout_required": "git clone --recurse-submodules"
+  },
+  "observed_at": "2026-09-19",
+  "submodules": {
+    "third_party/aloha": {
+      "url": "https://github.com/Physical-Intelligence/aloha.git",
+      "local_sha": null
+    },
+    "third_party/libero": {
+      "url": "https://github.com/Lifelong-Robot-Learning/LIBERO.git",
+      "local_sha": null
+    }
+  },
+  "configs_to_verify": [
+    "pi05_base",
+    "pi05_droid",
+    "pi05_droid_finetune",
+    "pi05_full_droid_finetune"
+  ],
+  "checkpoint_identity": {
+    "pi05_base": "checkpoint_or_asset_path; verify whether it is not a config name",
+    "pi05_droid": "official DROID config; not a PiPER contract"
+  },
+  "backend": {
+    "training": "PENDING_P0_SOURCE_AUDIT",
+    "serving": "official websocket policy server; PENDING_LOCAL_SMOKE_TEST",
+    "client": "packages/openpi-client"
+  },
+  "submodule_status": null,
+  "dependency_lock": null,
+  "source_file_hashes": {},
+  "piper_local_transform": {
+    "inputs": "PENDING",
+    "outputs": "PENDING",
+    "data_config": "PENDING",
+    "train_config": "PENDING",
+    "state_dim": 7,
+    "action_dim": 7,
+    "execution_horizon": 1
+  },
+  "prohibited_in_this_turn": [
+    "large_checkpoint_download",
+    "fine_tuning",
+    "CAN_connection",
+    "robot_command",
+    "real_data_collection"
+  ]
+}

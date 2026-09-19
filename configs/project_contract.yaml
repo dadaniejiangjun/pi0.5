@@ -1,0 +1,121 @@
+project:
+  id: 07_pi0.5
+  title: real-world-pi05-agilex-piper-vla
+  status: PLAN_ONLY
+  planning_date: 2026-09-19
+  root: /mnt/ssd/users/mingkai/07_pi0.5
+  uses_maniskill: false
+  uses_piperpeg_insertion: false
+  reference_only_projects:
+    - /mnt/ssd/users/mingkai/06_maniskill_tactile
+    - /mnt/ssd/users/mingkai/03_gripper2
+
+scope:
+  milestone_1: real_piPER_single_object_language_conditioned_pick_place
+  inputs:
+    - natural_language_prompt
+    - real_base_rgb
+    - real_wrist_rgb
+    - real_piper_proprioception
+  output: joint_position_action_chunk
+  future_modalities:
+    tactile: out_of_scope_for_phase_1
+
+authority:
+  robot_authority: laptop
+  policy_training_authority: server
+  server_can_access_robot_low_level_control: false
+  server_can_enable_reset_stop_robot: false
+  laptop_safety_bridge_final_veto: true
+
+decisions:
+  D1_network:
+    selected: null
+    status: USER_DECISION_REQUIRED
+    recommended_bringup: NET-A
+    recommended_long_running: NET-B
+  D2_action:
+    selected: null
+    status: USER_DECISION_REQUIRED
+    recommendation: ACTION-A
+  D3_gripper_teach_input:
+    selected: null
+    status: USER_DECISION_REQUIRED_AFTER_HARDWARE_AUDIT
+  D4_first_task:
+    selected: null
+    status: USER_DECISION_REQUIRED
+    recommendation: TASK-A
+  D5_initial_checkpoint:
+    selected: null
+    status: USER_DECISION_REQUIRED
+    recommendation: CKPT-A
+
+  # Recommendations above are not frozen contracts.
+  frozen: false
+
+contracts:
+  time:
+    authority: laptop_monotonic_clock
+    remote_server_wall_clock_for_sensor_alignment: forbidden
+  observation:
+    state_name: STATE_7
+    state_dim: 7
+    state_layout: [q1, q2, q3, q4, q5, q6, gripper]
+    joint_unit: PENDING_HARDWARE_AUDIT
+    gripper_unit: PENDING_HARDWARE_AUDIT
+    images: [base_rgb, wrist_rgb]
+    model_input_shape: [224, 224, 3]
+    model_input_dtype: uint8
+    raw_camera_resolution: PENDING_CAMERA_AUDIT
+  action:
+    dim: 7
+    layout: [q1, q2, q3, q4, q5, q6, gripper]
+    selected_representation: null
+    recommended_representation: absolute_joint_position_plus_gripper
+    execution_horizon: 1
+    larger_horizons: [2, 4]
+    enable_larger_horizons_only_after: guarded_single_step_pass
+  prompt:
+    phase_1: "Pick up the block and place it in the tray."
+    source: episode_instruction
+    equivalent_phrasings: forbidden_until_phase_1_pass
+
+safety:
+  public_raw_websocket: forbidden
+  stale_response_execution: forbidden
+  timeout_execution: forbidden
+  malformed_response_execution: forbidden
+  camera_loss_execution: forbidden
+  stale_joint_feedback_execution: forbidden
+  execution_requires_safety_bridge: true
+  execution_requires_operator_and_estop: true
+  safe_hold_behavior: PENDING_REAL_PIPER_CONTROL_AUDIT
+
+storage:
+  cache_root: cache
+  hf_home: cache/huggingface
+  xdg_cache_home: cache/xdg
+  uv_cache_dir: cache/uv
+  openpi_data_home: cache/openpi
+  server_master_raw: datasets/raw
+  server_lerobot: datasets/lerobot
+  laptop_spool: data_spool/ready
+  checkpoints_server_only: true
+
+provenance:
+  openpi_contract: provenance/openpi_contract.json
+  raw_data_read_only_after_close: true
+  overwrite_existing_episode: false
+  upload_requires_sha256: true
+  upload_requires_atomic_rename: true
+
+hard_stops:
+  - unknown_piper_firmware
+  - unknown_action_units
+  - camera_state_sync_failure
+  - gripper_recording_unavailable
+  - unreliable_network_for_online_mode
+  - missing_safety_bridge
+  - missing_stale_action_protection
+  - piper_transform_mismatch
+  - normalization_mismatch

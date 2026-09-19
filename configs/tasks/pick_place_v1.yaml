@@ -1,0 +1,11 @@
+task_id: pick_place_single_object_v1
+canonical_instruction: "Pick up the block and place it in the tray."
+objects:
+  object_count: 1
+  object_semantics: block
+  tray_count: 1
+language: fixed_semantic_instruction
+scope:
+  multi_object: false
+  color_conditioning: false
+  complex_language: false

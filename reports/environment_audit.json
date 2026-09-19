@@ -1,0 +1,64 @@
+{
+  "status": "PASS_WITH_WARNING",
+  "gate": "OPENPI_ENV=PASS",
+  "recorded_at": "2026-09-19",
+  "python": "3.11.16",
+  "python_executable": "/mnt/ssd/users/mingkai/07_pi0.5/.venv/bin/python",
+  "cuda_visible_devices": "0",
+  "cache_env": {
+    "HF_HOME": "/mnt/ssd/users/mingkai/07_pi0.5/cache/huggingface",
+    "XDG_CACHE_HOME": "/mnt/ssd/users/mingkai/07_pi0.5/cache/xdg",
+    "UV_CACHE_DIR": "/mnt/ssd/users/mingkai/07_pi0.5/cache/uv",
+    "OPENPI_DATA_HOME": "/mnt/ssd/users/mingkai/07_pi0.5/cache/openpi"
+  },
+  "packages": {
+    "openpi": "0.1.0",
+    "openpi-client": "0.1.0",
+    "jax": "0.5.3",
+    "jaxlib": "0.5.3",
+    "torch": "2.7.1+cu126",
+    "transformers": "4.53.2",
+    "lerobot": "0.1.0",
+    "numpy": "1.26.4",
+    "pillow": "11.2.1"
+  },
+  "jax": {
+    "backend": "gpu",
+    "devices": [
+      "cuda:0"
+    ],
+    "status": "PASS"
+  },
+  "torch": {
+    "cuda_available": true,
+    "device_count_under_cuda_visible_devices": 1,
+    "device": "NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition",
+    "status": "IMPORT_AND_ENUMERATION_PASS",
+    "warning": "Torch 2.7.1+cu126 reports sm_120 is outside its compiled architecture list; no Torch policy path is claimed."
+  },
+  "gpu_assignment": {
+    "selected_index": 0,
+    "selected_uuid": "GPU-8326cca9-a5e8-cec8-7409-8d52c146eb57",
+    "gpu3_policy": "DO_NOT_TOUCH",
+    "gpu3_existing_workload_preserved": true
+  },
+  "official_smoke": {
+    "status": "PASS",
+    "report": "reports/pi05_base_inference_smoke.json",
+    "config": "pi05_aloha",
+    "checkpoint": "pi05_base"
+  },
+  "warnings": [
+    "Host nvidia-smi inventory can list all physical GPUs; JAX/Torch enumerated one compute device under CUDA_VISIBLE_DEVICES=0.",
+    "Torch sm_120 warning is retained explicitly; validated official pi05_base inference used JAX."
+  ],
+  "uv_version": "uv 0.12.9 (x86_64-unknown-linux-gnu)",
+  "cuda_backend": "JAX CUDA12 plugin; validated official serving path",
+  "gpu_visible_host_inventory": [
+    "0, NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition, GPU-8326cca9-a5e8-cec8-7409-8d52c146eb57, 97887 MiB, 31 MiB, 0 %",
+    "1, NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition, GPU-7f906a98-2416-20bb-9198-3563ac6fa96a, 97887 MiB, 31 MiB, 0 %",
+    "2, NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition, GPU-fd7c4754-191e-f77a-118e-217a34ae2f8e, 97887 MiB, 30 MiB, 0 %",
+    "3, NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition, GPU-070d7c9a-974c-d7a7-faae-d98fb192ff8d, 97887 MiB, 86438 MiB, 0 %"
+  ],
+  "gpu_inventory_note": "Host inventory lists physical GPUs; compute process was constrained with CUDA_VISIBLE_DEVICES=0."
+}

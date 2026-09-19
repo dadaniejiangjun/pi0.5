@@ -1,0 +1,57 @@
+schema: piper_state_v1
+status: FROZEN_SEMANTIC_CONTRACT
+hardware_confirmation: PENDING_P2_HARDWARE_AUDIT
+fields:
+  - field: q1
+    index: 0
+    canonical_unit: radian
+    raw_source: piper_sdk.GetArmJointMsgs().joint_1
+    conversion: "sdk_joint_to_rad(raw, degrees_per_sdk_unit=0.001)"
+    valid_range: "configs/piper_joint_limits.yaml:joints.joint1"
+    status: NOMINAL_OFFICIAL_UNIT_PENDING_FIRMWARE_CONFIRMATION
+  - field: q2
+    index: 1
+    canonical_unit: radian
+    raw_source: piper_sdk.GetArmJointMsgs().joint_2
+    conversion: "sdk_joint_to_rad(raw, degrees_per_sdk_unit=0.001)"
+    valid_range: "configs/piper_joint_limits.yaml:joints.joint2"
+    status: NOMINAL_OFFICIAL_UNIT_PENDING_FIRMWARE_CONFIRMATION
+  - field: q3
+    index: 2
+    canonical_unit: radian
+    raw_source: piper_sdk.GetArmJointMsgs().joint_3
+    conversion: "sdk_joint_to_rad(raw, degrees_per_sdk_unit=0.001)"
+    valid_range: "configs/piper_joint_limits.yaml:joints.joint3"
+    status: NOMINAL_OFFICIAL_UNIT_PENDING_FIRMWARE_CONFIRMATION
+  - field: q4
+    index: 3
+    canonical_unit: radian
+    raw_source: piper_sdk.GetArmJointMsgs().joint_4
+    conversion: "sdk_joint_to_rad(raw, degrees_per_sdk_unit=0.001)"
+    valid_range: "configs/piper_joint_limits.yaml:joints.joint4"
+    status: NOMINAL_OFFICIAL_UNIT_PENDING_FIRMWARE_CONFIRMATION
+  - field: q5
+    index: 4
+    canonical_unit: radian
+    raw_source: piper_sdk.GetArmJointMsgs().joint_5
+    conversion: "sdk_joint_to_rad(raw, degrees_per_sdk_unit=0.001)"
+    valid_range: "configs/piper_joint_limits.yaml:joints.joint5"
+    status: NOMINAL_OFFICIAL_UNIT_PENDING_FIRMWARE_CONFIRMATION
+  - field: q6
+    index: 5
+    canonical_unit: radian
+    raw_source: piper_sdk.GetArmJointMsgs().joint_6
+    conversion: "sdk_joint_to_rad(raw, degrees_per_sdk_unit=0.001)"
+    valid_range: "configs/piper_joint_limits.yaml:joints.joint6"
+    status: NOMINAL_OFFICIAL_UNIT_PENDING_FIRMWARE_CONFIRMATION
+  - field: gripper
+    index: 6
+    canonical_unit: meter
+    raw_source: piper_sdk.GetArmGripperMsgs().grippers_angle
+    conversion: "sdk_gripper_to_m(raw, mm_per_sdk_unit=0.001)"
+    valid_range: PENDING_GETSDKGRIPPERRANGEPARAM
+    status: NOMINAL_OFFICIAL_UNIT_PENDING_FIRMWARE_CONFIRMATION
+notes:
+  - "Raw SDK integers must never enter the model contract."
+  - "The 0.001 degree and 0.001 mm scales are documented nominal scales; firmware audit remains required."
+  - "No SDK or CAN call is performed in P0/P1."

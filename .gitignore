@@ -1,0 +1,32 @@
+# Runtime and environment material
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+
+# Project-local caches and generated runtime outputs
+cache/*
+logs/*
+experiments/*
+checkpoints/*
+datasets/incoming/*
+datasets/raw/*
+datasets/lerobot/*
+datasets/manifests/generated/*
+
+# Keep directory documentation and explicit manifests tracked.
+!cache/.gitkeep
+!logs/.gitkeep
+!experiments/.gitkeep
+!checkpoints/.gitkeep
+!datasets/incoming/.gitkeep
+!datasets/raw/.gitkeep
+!datasets/lerobot/.gitkeep
+
+# Local secrets and machine-specific state
+*.pem
+*.key
+*.token
+*.secret

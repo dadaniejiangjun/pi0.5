@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "semantic_input": [
+    "base_rgb",
+    "wrist_rgb",
+    "state",
+    "prompt"
+  ],
+  "model_image_keys": [
+    "base_0_rgb",
+    "left_wrist_0_rgb",
+    "right_wrist_0_rgb"
+  ],
+  "image_shapes": {
+    "base_0_rgb": [
+      224,
+      224,
+      3
+    ],
+    "left_wrist_0_rgb": [
+      224,
+      224,
+      3
+    ],
+    "right_wrist_0_rgb": [
+      224,
+      224,
+      3
+    ]
+  },
+  "image_dtypes": {
+    "base_0_rgb": "uint8",
+    "left_wrist_0_rgb": "uint8",
+    "right_wrist_0_rgb": "uint8"
+  },
+  "image_masks": {
+    "base_0_rgb": true,
+    "left_wrist_0_rgb": true,
+    "right_wrist_0_rgb": false
+  },
+  "state_shape": [
+    7
+  ],
+  "state_dtype": "float32",
+  "prompt": "Pick up the block and place it in the tray.",
+  "preprocessing": "official openpi-client convert_to_uint8 + resize_with_pad",
+  "base_action_interpretation": false
+}

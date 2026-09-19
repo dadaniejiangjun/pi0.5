@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "policy_scope": "official_pi05_aloha_base_load_only",
+  "piper_policy_claim": false,
+  "checkpoint": "gs://openpi-assets/checkpoints/pi05_base",
+  "config": "pi05_aloha",
+  "cuda_visible_devices": "0",
+  "openpi_data_home": "/mnt/ssd/users/mingkai/07_pi0.5/cache/openpi",
+  "inference_count_requested": 3,
+  "load_seconds": 680.9344722339883,
+  "latencies_ms": [
+    21811.502939090133,
+    61.771802604198456,
+    61.75648048520088
+  ],
+  "action_shapes": [
+    [
+      50,
+      14
+    ],
+    [
+      50,
+      14
+    ],
+    [
+      50,
+      14
+    ]
+  ],
+  "nonfinite_counts": [
+    0,
+    0,
+    0
+  ],
+  "observed_gpu_memory_mib": [
+    8879,
+    8881,
+    8881
+  ],
+  "metadata_keys": [
+    "reset_pose"
+  ],
+  "cold_latency_ms": 21811.502939090133,
+  "warm_latency_ms": {
+    "median": 61.76414154469967,
+    "p90": 61.7702703922987,
+    "values": [
+      61.771802604198456,
+      61.75648048520088
+    ]
+  },
+  "peak_observed_gpu_memory_mib": 8881,
+  "load_wall_time_seconds": 680.9344722339883,
+  "device": "cuda:0",
+  "dtype": "bfloat16",
+  "observation_contract": {
+    "prompt_accepted": true,
+    "image_inputs_accepted": true,
+    "state_accepted": true,
+    "source": "official openpi.policies.aloha_policy.make_aloha_example",
+    "semantic_scope": "official ALOHA sanity only"
+  },
+  "jax_compile_time_ms": null,
+  "first_inference_compile_plus_infer_ms": 21811.502939090133,
+  "jax_compile_time_note": "The first inference includes JAX/XLA compilation and execution; this smoke did not isolate compilation from the first call."
+}

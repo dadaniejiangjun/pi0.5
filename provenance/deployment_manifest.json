@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "recorded_at": "2026-09-19T06:04:31.443076+00:00",
+  "project": "/mnt/ssd/users/mingkai/07_pi0.5",
+  "openpi": {
+    "repository": "https://github.com/Physical-Intelligence/openpi.git",
+    "head_sha": "215abfb217dbac7d5f1273282331b9b1866c0479",
+    "submodule_status": "d1dc83afd89ded4379851257fe5d85632d31d5ec third_party/aloha (d1dc83a)\n f78abd68ee283de9f9be3c8f7e2a9ad60246e95c third_party/libero (f78abd6)",
+    "working_tree_status": ""
+  },
+  "environment": {
+    "python": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+    "python_executable": "/mnt/ssd/users/mingkai/07_pi0.5/.venv/bin/python",
+    "platform": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+    "jax": "0.5.3",
+    "jaxlib": "0.5.3",
+    "torch": "2.7.1+cu126",
+    "transformers": "4.53.2",
+    "lerobot": "0.1.0",
+    "openpi": "unknown",
+    "openpi_client": "0.1.0",
+    "cuda_visible_devices": "0",
+    "cuda_driver_gpu0": "0, NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition, GPU-8326cca9-a5e8-cec8-7409-8d52c146eb57, 590.48.01"
+  },
+  "checkpoint": {
+    "name": "pi05_base",
+    "source_uri": "gs://openpi-assets/checkpoints/pi05_base",
+    "provenance_file": "provenance/pi05_base_checkpoint.json"
+  },
+  "files_sha256": {
+    "third_party/openpi/uv.lock": "793488b5a55bb87200db90a61fd0af51922b686d94e1da4f4c587ab119b37d74",
+    "server/serve_policy_local.py": "f14d9799a7e4b3c8ecf44f01036554c0136449e7fdcd692a1db7c8c3526b125f",
+    "configs/piper_state_v1.yaml": "948ef20155fa8f42726054689c46c696809d561eec88be41ec4655b3f0e94d57",
+    "configs/piper_joint_limits.yaml": "ff7580c77890e4865b40dde175e19379a998d4cda587f8dd70b86038f22fc62e",
+    "configs/tasks/pick_place_v1.yaml": "09b8163dd0176bbe43f238a1f56019f78d625a05472859b62541deb1b75535fd",
+    "configs/model/pi05_piper_v1.yaml": "654b346484a27e452d78e9e7355264a48eff47fb4cce08b482539e78453d69aa"
+  },
+  "gates": {
+    "OPENPI_ENV": "PASS",
+    "PI05_BASE_LOAD": "PASS",
+    "PI05_INFERENCE_SMOKE": "PASS",
+    "LOCAL_POLICY_SERVER": "PASS",
+    "SOCKET_BINDING_LOCAL_ONLY": "PASS",
+    "LOCAL_CLIENT_ROUNDTRIP": "PASS",
+    "PIPER_STATE_CONTRACT": "PASS",
+    "PIPER_ACTION_CONTRACT": "PASS",
+    "UNIT_CONVERSION_TEST": "PASS",
+    "LAPTOP_READONLY_TOOLS": "PASS",
+    "PIPER_CONTRACT_SCAFFOLD": "PASS",
+    "LAPTOP_PACKAGE_READY": "PASS",
+    "REMOTE_TUNNEL": "READY_FOR_LAPTOP_TEST",
+    "READY_FOR_LAPTOP_P2": "YES"
+  },
+  "explicit_nonclaims": [
+    "REAL_PIPER_CONNECTED=NO",
+    "REAL_ROBOT_MOTION=NO",
+    "REAL_DATA_COLLECTION=NO",
+    "FORMAL_FINE_TUNING=NO",
+    "BASE_MODEL_OUTPUT_IS_NOT_PIPER_ACTION"
+  ]
+}
