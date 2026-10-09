@@ -1,0 +1,6 @@
+{
+  "original": "tests/server/test_policy_artifact_identity.py::test_proxy_server_imports_all_identity_helpers_before_runtime",
+  "archived": "archive/legacy_snapshot_20261009/tests/server/test_historical_proxy_identity_import.py",
+  "fragment_sha256": "067a1dd67bd5088e9b8fdabcb397551ade8a455c7389144bee1ff38acfd81509",
+  "reason": "Only checks archived serve_proxy_piper_shadow source; retain current identity tests"
+}

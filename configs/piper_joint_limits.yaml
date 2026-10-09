@@ -1,6 +1,7 @@
-schema: piper_joint_limits_v1
-status: NOMINAL_OFFICIAL_LIMITS
-hardware_status: NOT_REAL_CONFIRMED_LIMITS
+schema: piper_joint_limits_v2
+status: FULL_LIVE_CAN_READBACK_WITH_UNIT_CAVEATS
+hardware_status: LIVE_CONTROLLER_PARAMETER_RESPONSES_PRESENT
+limits_role: official_sdk_nominal_reference_not_a_verified_mechanical_envelope
 source:
   url: https://github.com/agilexrobotics/piper_sdk/blob/c9e8a28174e71eeaac448593cb65f8ab258a92fe/asserts/V2/INTERFACE_V2.MD
   source_commit: c9e8a28174e71eeaac448593cb65f8ab258a92fe
@@ -9,15 +10,78 @@ source:
 units: radian
 joints:
   joint1: {min: -2.6179, max: 2.6179}
-  joint2: {min: 0.0, max: 3.14}
-  joint3: {min: -2.967, max: 0.0}
+  joint2: {min: 0.0, max: 3.141592654}
+  joint3: {min: -2.967059728, max: 0.0}
   joint4: {min: -1.745, max: 1.745}
   joint5: {min: -1.22, max: 1.22}
   joint6: {min: -2.09439, max: 2.09439}
+hardware_query_evidence:
+  date: "2026-10-05"
+  test_utc: "2026-10-05T14:13:03.423170+00:00"
+  report: ../validation/can_joint_parameters_20261005.json
+  protocol: "CAN request 0x472; angle/speed response 0x473; acceleration response 0x47C"
+  sdk_package_version: "0.6.2"
+  can_data_tx_calls: 12
+  robot_motion_commanded: false
+  only_parameter_read_requests_sent: true
+  mode_enable_reset_joint_target_gripper_or_setter_frames_sent: false
+  angle_units: {raw: "0.1 degree", decoded: degree}
+  speed_units: {raw: "0.001 rad/s", documented_decoded: rad/s}
+  acceleration_units:
+    raw: 500
+    sdk_query_response_documentation: "0.001 rad/s^2"
+    sdk_setter_documentation: "0.01 rad/s^2"
+    decoded_value_status: CONFLICTING_SDK_UNIT_DOCUMENTATION
+  controller_parameter_readback:
+    joint1: {min_deg: -150.0, max_deg: 150.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
+    joint2: {min_deg: 0.0, max_deg: 180.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
+    joint3: {min_deg: -170.0, max_deg: 0.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
+    joint4: {min_deg: -100.0, max_deg: 100.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
+    joint5: {min_deg: -70.0, max_deg: 70.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
+    joint6: {min_deg: -170.0, max_deg: 170.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
+  live_feedback_snapshot:
+    ctrl_mode: "CAN_CTRL(0x1)"
+    arm_status: "NORMAL(0x0)"
+    teach_status: "STOP_RECORDING(0x2)"
+    error_code: 0
+    joint_feedback_raw_0p001deg: [-89703, 22210, -62037, -572, 50628, -6198]
+    gripper_feedback_raw: {angle_or_stroke: 52100, effort: 100, status_code: "0x40"}
+software_displayed_settings:
+  source: operator_provided_upper_computer_screenshots
+  date: "2026-10-05"
+  status: DISPLAYED_CONFIGURATION_NOT_HARDWARE_LIMIT_VERIFICATION
+  angle_unit: degree
+  speed_unit: rad/s
+  acceleration_unit: rad/s^2
+  joints:
+    joint1: {min_deg: -150.0, max_deg: 150.0, max_rad_s: 3.0, max_rad_s2: 5.0}
+    joint2: {min_deg: 0.0, max_deg: 180.0, max_rad_s: 3.0, max_rad_s2: 5.0}
+    joint3: {min_deg: -170.0, max_deg: 0.0, max_rad_s: 3.0, max_rad_s2: 5.0}
+    joint4: {min_deg: -100.0, max_deg: 100.0, max_rad_s: 3.0, max_rad_s2: 5.0}
+    joint5: {min_deg: -70.0, max_deg: 70.0, max_rad_s: 3.0, max_rad_s2: 5.0}
+    joint6: {min_deg: -170.0, max_deg: 170.0, max_rad_s: 3.0, max_rad_s2: 5.0}
+  discrepancies:
+    - all_joint_max_speed: "UI displays 3.0 rad/s; all six CAN responses returned raw 300, which the SDK query-response documentation decodes as 0.3 rad/s."
+    - all_joint_max_acceleration: "UI displays 5.0 rad/s^2 and all six CAN responses returned raw 500. The SDK query response and setter documentation specify different scales, so the physical value is unresolved."
+    - joint6_angle_range: "CAN reports +/-170 degrees, while the official SDK nominal JointCtrl range is +/-120 degrees. Keep the narrower nominal range for any software motion guard until the branch and firmware behavior are verified."
+    - earlier_joint2_joint3_feedback_range: "The earlier feedback-change log's nominal ranges extended about 1.96 degrees below J2 min and 1.82 degrees above J3 max; that old sample's zero/sign/unit mapping remains unverified."
+  evidence: ../validation/joint_limit_software_display_20261005.json
 gripper:
   min: null
   max: null
-  status: PENDING_GETSDKGRIPPERRANGEPARAM_AND_FIRMWARE_AUDIT
+  status: FEEDBACK_PRESENT_RANGE_AND_UNITS_UNVERIFIED
+  latest_feedback_raw: {angle_or_stroke: 101800, effort: 0, status_code: "0x00"}
+  operator_observed_endpoints_raw: {closed: 200, fully_open: 101800, delta: 101600}
+  nominal_sdk_scale_mm_per_raw_unit: 0.001
+  nominal_endpoint_delta_mm: 101.6
+  configured_max_range_mm: 100
+  physical_gap_measured: false
+  evidence: ../validation/lab_gripper_endpoint_feedback_comparison_20261006.json
 warning: >-
-  These are nominal documentation values for action validation only. They do
-  not authorize motion and must not be treated as confirmed firmware limits.
+  The CAN responses confirm current controller parameter values, not the
+  mechanical safe travel envelope. Keep software motion limits at the
+  intersection of the SDK nominal ranges and CAN angle ranges. Treat the speed
+  query scale as documented but not experimentally validated; do not use the
+  acceleration conversion or gripper value as a control limit until the SDK,
+  firmware, and upper-computer units are reconciled. No motion authorization is
+  implied by this readback.

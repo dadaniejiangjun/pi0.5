@@ -34,7 +34,7 @@ dataset:
     - task
   state_dim: 7
   action_dim: 7
-  canonical_prompt: "Pick up the block and place it in the tray."
+  canonical_prompt: "Pick up the black rod and place it on the green desk mat."
   split:
     level: episode
     train_fraction: 0.8

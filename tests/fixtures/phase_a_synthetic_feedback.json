@@ -1,0 +1,55 @@
+{
+  "source": "synthetic_protocol_fixture_no_hardware_capture",
+  "frames": [
+    {
+      "can_id": 673,
+      "data_hex": "0100010000000000",
+      "received_monotonic_ns": 1000000000
+    },
+    {
+      "can_id": 677,
+      "data_hex": "000003e8fffff830",
+      "received_monotonic_ns": 1001000000
+    },
+    {
+      "can_id": 678,
+      "data_hex": "fffff44800000fa0",
+      "received_monotonic_ns": 1002000000
+    },
+    {
+      "can_id": 679,
+      "data_hex": "00001388ffffe890",
+      "received_monotonic_ns": 1003000000
+    },
+    {
+      "can_id": 680,
+      "data_hex": "00001bbc012c0100",
+      "received_monotonic_ns": 1004000000
+    },
+    {
+      "can_id": 673,
+      "data_hex": "0100010000000000",
+      "received_monotonic_ns": 1005000000
+    },
+    {
+      "can_id": 677,
+      "data_hex": "000003e9fffff830",
+      "received_monotonic_ns": 1006000000
+    },
+    {
+      "can_id": 678,
+      "data_hex": "fffff44800000fa1",
+      "received_monotonic_ns": 1007000000
+    },
+    {
+      "can_id": 679,
+      "data_hex": "00001388ffffe88f",
+      "received_monotonic_ns": 1008000000
+    },
+    {
+      "can_id": 680,
+      "data_hex": "00001bbd012c0100",
+      "received_monotonic_ns": 1009000000
+    }
+  ]
+}

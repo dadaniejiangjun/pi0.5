@@ -1,0 +1,3066 @@
+{
+  "candidates": [
+    {
+      "path": "scripts/add_final_gate_aliases.py",
+      "classification": "ARCHIVE_READY",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/history/README.md",
+        "docs/reference/DOCUMENTATION_CLEANUP_REPORT.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "dated deployment manifest + CURRENT_STATUS + formal PHASE_GATES (do not replay PASS patch)",
+      "unique_functionality": "Add the user-facing aggregate gate aliases to the deployment manifest.",
+      "archive_readiness": "A-I satisfied; no active/test incoming calls"
+    },
+    {
+      "path": "scripts/annotate_pi05_smoke_metadata.py",
+      "classification": "ARCHIVE_READY",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/history/README.md",
+        "docs/reference/DOCUMENTATION_CLEANUP_REPORT.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "existing immutable smoke + current service artifact metadata",
+      "unique_functionality": "Make the official smoke report's observed/qualified metadata explicit.",
+      "archive_readiness": "A-I satisfied; no active/test incoming calls"
+    },
+    {
+      "path": "scripts/audit_laptop_probe.py",
+      "classification": "ACTIVE_TOOL",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Static safety audit for the project-local PiPER read-only probe.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "scripts/refresh_environment_audit.py",
+      "classification": "ACTIVE_TOOL",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Add the uv and final host-driver fields to the environment audit.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "scripts/run_local_policy_server_smoke.py",
+      "classification": "ACTIVE_TOOL",
+      "current_callers": [
+        "scripts/run_server_performance.py"
+      ],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Start, audit, exercise, and cleanly stop the local policy server.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "scripts/run_pi05_base_smoke.py",
+      "classification": "ACTIVE_TOOL",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Official pi05_base + pi05_aloha load and inference smoke.\n\nThis intentionally exercises the official ALOHA policy contract only. It is\nnot a PiPER policy test and never connects to a robot.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "scripts/run_server_performance.py",
+      "classification": "ACTIVE_TOOL",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Measure a 25-request official base server run with GPU sampling.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "scripts/validate_piper_continuous.py",
+      "classification": "ACTIVE_TOOL",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Overwrite the unit report with continuous random-value quantization checks.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "scripts/validate_piper_contract.py",
+      "classification": "ACTIVE_TOOL",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Generate synthetic P1 PiPER contract validation artifacts.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "scripts/write_checkpoint_provenance.py",
+      "classification": "ACTIVE_TOOL",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Inventory and hash the project-local pi05_base checkpoint cache.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "scripts/write_deployment_manifest.py",
+      "classification": "ACTIVE_TOOL",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Write the final P0/P1 deployment provenance manifest.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "scripts/write_socket_binding_report.py",
+      "classification": "ACTIVE_TOOL",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "scripts/README.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Persist the observed localhost-only binding from the server smoke.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "validation/camera_base_retry_runner_20261007_r1.py",
+      "classification": "ARCHIVE_READY",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "laptop.camera.dual_camera / camera.source (historical backend comparison preserved)",
+      "unique_functionality": "Read source; specific historical diagnostic / offline helper role retained",
+      "archive_readiness": "A-I satisfied; no active/test incoming calls"
+    },
+    {
+      "path": "validation/camera_index_scan_runner_20261007_r1.py",
+      "classification": "ARCHIVE_READY",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "laptop.camera.dual_camera + diagnostics.probe_cameras",
+      "unique_functionality": "Read source; specific historical diagnostic / offline helper role retained",
+      "archive_readiness": "A-I satisfied; no active/test incoming calls"
+    },
+    {
+      "path": "validation/derived_state_shadow_loopback_20261007.py",
+      "classification": "LEGACY_REFERENCED",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Read source; specific historical diagnostic / offline helper role retained",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "validation/inspect_cando_function.py",
+      "classification": "UNKNOWN",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Read source; specific historical diagnostic / offline helper role retained",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j1_step_trial.py",
+      "classification": "LEGACY_REFERENCED",
+      "current_callers": [
+        "laptop/robot_client/supervised_j1_one_degree_trial.py",
+        "laptop/robot_client/supervised_j5_probe.py",
+        "laptop/robot_client/supervised_joint_replay.py",
+        "laptop/robot_client/supervised_restore_gripper.py",
+        "laptop/robot_client/supervised_restore_start.py",
+        "laptop/robot_client/supervised_smooth_joint_replay.py"
+      ],
+      "test_callers": [
+        "tests/laptop/test_legacy_hil_guard.py",
+        "tests/laptop/test_supervised_j1_one_degree_trial.py",
+        "tests/laptop/test_supervised_j1_step_trial.py",
+        "tests/laptop/test_supervised_restore_start.py"
+      ],
+      "doc_callers": [
+        "docs/reference/CURRENT_PROJECT_PLAN.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "One-off supervised J1 +0.1 degree trial; NEVER a policy or trajectory sender.\n\nThis is the first physical command test, not a SafetyBridge. It does not\nenable, home, change mode, operate the gripper, or implement a verified\nsoftware stop. A human must remain at the physical emergency stop.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j1_one_degree_trial.py",
+      "classification": "LEGACY_REFERENCED",
+      "current_callers": [],
+      "test_callers": [
+        "tests/laptop/test_legacy_hil_guard.py",
+        "tests/laptop/test_supervised_j1_one_degree_trial.py"
+      ],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "One authorized, supervised J1 +1 degree trial, never a trajectory sender.\n\nThis requires a human at the physical emergency stop. It sends no enable,\nhome, mode, gripper, hold, or stop command. Closing USB is not a robot stop.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j5_probe.py",
+      "classification": "LEGACY_REFERENCED",
+      "current_callers": [],
+      "test_callers": [
+        "tests/laptop/test_legacy_hil_guard.py",
+        "tests/laptop/test_supervised_j5_probe.py"
+      ],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "One supervised J5 +1.0 degree diagnostic from the stopped restore state.\n\nNo enable, mode, home, gripper, reset, or stop command is sent. Not a policy\nor replay interface. The operator must remain by the physical E-stop.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/robot_client/supervised_joint_replay.py",
+      "classification": "LEGACY_REFERENCED",
+      "current_callers": [],
+      "test_callers": [
+        "tests/laptop/test_legacy_hil_guard.py"
+      ],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "One supervised, retimed, joint-only replay of the saved PiPER episode.\n\nThis is a one-off observation trial, not a policy interface. It uses recorded\njoint positions only; the gripper channel is left at its current position.\nEach target is interpolated to at most 1 degree per axis, then checked against\nlive CAN feedback before the next target. The operator owns the physical E-stop.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/robot_client/supervised_restore_gripper.py",
+      "classification": "LEGACY_REFERENCED",
+      "current_callers": [],
+      "test_callers": [
+        "tests/laptop/test_legacy_hil_guard.py",
+        "tests/laptop/test_supervised_restore_gripper.py"
+      ],
+      "doc_callers": [
+        "docs/reference/CURRENT_PROJECT_PLAN.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "One authorized PiPER V2 gripper opening to the recorded 7.1 mm start.\n\nThe 0x159 command necessarily contains a gripper-enable bit. It does not\nenable arm joints, home, alter mode, or replay a trajectory. A human must\nremain beside the physical E-stop. USB close is not an emergency stop.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/robot_client/supervised_restore_start.py",
+      "classification": "LEGACY_REFERENCED",
+      "current_callers": [
+        "laptop/robot_client/supervised_j5_probe.py",
+        "laptop/robot_client/supervised_joint_replay.py",
+        "laptop/robot_client/supervised_restore_gripper.py",
+        "laptop/robot_client/supervised_smooth_joint_replay.py"
+      ],
+      "test_callers": [
+        "tests/laptop/test_legacy_hil_guard.py",
+        "tests/laptop/test_supervised_restore_start.py"
+      ],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "One-shot supervised, joint-only return to a recorded episode start.\n\nNot a general trajectory player or policy interface. Each waypoint differs\nby at most 1.0 degree per joint. No enable, mode, home, gripper, or software\nstop command is sent. The operator must watch and own the physical E-stop.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/robot_client/supervised_smooth_joint_replay.py",
+      "classification": "LEGACY_REFERENCED",
+      "current_callers": [],
+      "test_callers": [
+        "tests/laptop/test_legacy_hil_guard.py"
+      ],
+      "doc_callers": [
+        "docs/reference/CURRENT_PROJECT_PLAN.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md",
+        "docs/reference/REDUNDANCY_CANDIDATES.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Smooth supervised joint-only replay of the saved PiPER episode.\n\nThe recorded episode is sampled into a continuous cubic Hermite position\nprofile, time-scaled to conservative velocity/acceleration limits, and sent at\nfixed frequency. It first reverses the same path to the episode start, then\nplays forward. The gripper and policy model are not connected.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/client/action_shadow_replay.py",
+      "classification": "TEST_SUPPORT",
+      "current_callers": [],
+      "test_callers": [
+        "tests/laptop/test_action_shadow_replay.py"
+      ],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Replay verified, file-backed PiPER action episodes against a prediction-only server.\n\nThis tool has no camera, CAN, robot SDK, or SafetyBridge imports. It compares\nserver predictions with source-verified command targets and writes a local\nreport; it never turns a prediction into a robot command.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/client/offline_latency_replay.py",
+      "classification": "UNKNOWN",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Time saved dual-camera observations over a prediction-only SSH tunnel.\n\nNo CAN access, live cameras, PiPER SDK, or robot transport is used. Raw images\nare sent only to a loopback policy server through an existing private tunnel.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/client/policy_client_smoke.py",
+      "classification": "ACTIVE_ENTRYPOINT",
+      "current_callers": [
+        "laptop/client/latency_probe.py",
+        "scripts/run_local_policy_server_smoke.py",
+        "scripts/run_server_performance.py"
+      ],
+      "test_callers": [],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Run sequential official openpi-client requests against localhost.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/client/public_piper_transport_smoke.py",
+      "classification": "UNKNOWN",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "docs/history/project-diagnosis-week-plan-2026-10-02.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Private-tunnel \u03c00.5 request with synthetic input; never controls PiPER.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/client/shadow_preview_smoke.py",
+      "classification": "TEST_SUPPORT",
+      "current_callers": [],
+      "test_callers": [
+        "tests/laptop/test_shadow_preview_smoke.py"
+      ],
+      "doc_callers": [
+        "docs/reference/CURRENT_PROJECT_PLAN.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Send a recent passive PiPER preview to a prediction-only policy server.\n\nNo CAN, SDK interface, robot transport, or command sender is imported here.\nThis is a bounded nearline shadow smoke, not live robot control.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "laptop/client/synthetic_policy_reject_smoke.py",
+      "classification": "TEST_SUPPORT",
+      "current_callers": [],
+      "test_callers": [
+        "tests/laptop/test_synthetic_policy_reject_smoke.py"
+      ],
+      "doc_callers": [
+        "docs/reference/CURRENT_PROJECT_PLAN.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Exercise synthetic observation -> remote proxy -> SafetyBridge reject-only.\n\nThis is an off-robot integration smoke. It only connects to a loopback\nendpoint (normally a temporary SSH tunnel), uses synthetic inputs, and records\nthe SafetyBridge decision. It never opens cameras, a CAN adapter, or a PiPER SDK\ninterface, and has no command-transmit path.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "server/serve_derived_state_multi_shadow.py",
+      "classification": "ACTIVE_ENTRYPOINT",
+      "current_callers": [
+        "server/training/post_capture_pipeline.py",
+        "server/training/serve_trained_demonstrations.py"
+      ],
+      "test_callers": [
+        "tests/server/test_derived_state_multi_shadow.py",
+        "tests/server/test_post_capture_pipeline.py"
+      ],
+      "doc_callers": [
+        "docs/reference/CURRENT_PROJECT_PLAN.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Serve a multi-episode derived-state Pi0.5 checkpoint for prediction only.\n\nThis entrypoint accepts only a hash-bound, train-only LeRobot dataset and its\nmatching pilot checkpoint. It binds WebSocket to loopback and exposes no CAN\nor robot transport.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "server/serve_piper_action_shadow.py",
+      "classification": "UNKNOWN",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Loopback-only server for a fine-tuned PiPER action checkpoint.\n\nThe server returns action-shaped predictions for offline shadow inspection.\nIt imports no robot/CAN transport and advertises control as disabled.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "server/serve_policy_local.py",
+      "classification": "ACTIVE_ENTRYPOINT",
+      "current_callers": [
+        "scripts/run_local_policy_server_smoke.py",
+        "scripts/run_server_performance.py",
+        "scripts/write_deployment_manifest.py"
+      ],
+      "test_callers": [],
+      "doc_callers": [
+        "docs/history/PI05_PIPER_MASTER_PLAN.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [
+        "provenance/deployment_manifest.json"
+      ],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Run the official OpenPI WebSocket server on localhost only.\n\nThis wrapper does not modify the official checkout. It uses the official\npolicy/config/server classes and hard-codes the bind address to 127.0.0.1.\nThe default is the official pi05_aloha + pi05_base load sanity, not a PiPER\npolicy and not a robot-control path.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "server/serve_proxy_piper_shadow.py",
+      "classification": "TEST_SUPPORT",
+      "current_callers": [],
+      "test_callers": [
+        "tests/server/test_policy_artifact_identity.py"
+      ],
+      "doc_callers": [
+        "docs/reference/CURRENT_PROJECT_PLAN.md",
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Loopback-only PiPER proxy policy server for prediction-only shadow tests.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    },
+    {
+      "path": "server/serve_public_piper_smoke.py",
+      "classification": "UNKNOWN",
+      "current_callers": [],
+      "test_callers": [],
+      "doc_callers": [
+        "docs/reference/PROJECT_CODEBASE_AUDIT.md"
+      ],
+      "other_references": [],
+      "replacement": "KEEP; no established complete replacement",
+      "unique_functionality": "Serve the public-data pi0.5 smoke policy on localhost, prediction only.",
+      "archive_readiness": "Not all A-I satisfied; retain"
+    }
+  ],
+  "imports": {
+    "laptop/test_policy_tunnel.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "socket",
+      "urllib.request",
+      "pathlib"
+    ],
+    "laptop/__init__.py": [],
+    "laptop/camera/dual_camera.py": [
+      "__future__",
+      "argparse",
+      "datetime",
+      "json",
+      "math",
+      "multiprocessing",
+      "pathlib",
+      "subprocess",
+      "threading",
+      "time",
+      "laptop.diagnostics.probe_dual_cameras",
+      "cv2"
+    ],
+    "laptop/camera/source.py": [
+      "cv2"
+    ],
+    "laptop/camera/worker.py": [
+      "__future__",
+      "threading",
+      "time",
+      "cv2",
+      "laptop.camera.source"
+    ],
+    "laptop/client/action_shadow_replay.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "math",
+      "pathlib",
+      "re",
+      "sys",
+      "time",
+      "cv2",
+      "numpy",
+      "laptop.recorder.piper_command_targets",
+      "laptop.recorder.verify_source",
+      "websockets.sync.client",
+      "openpi_client"
+    ],
+    "laptop/client/audit_live_shadow.py": [
+      "__future__",
+      "argparse",
+      "collections",
+      "hashlib",
+      "json",
+      "pathlib",
+      "re",
+      "laptop.safety.offline_guard"
+    ],
+    "laptop/client/bounded_model_trial.py": [
+      "argparse",
+      "json",
+      "math",
+      "threading",
+      "time",
+      "uuid",
+      "pathlib",
+      "numpy",
+      "concurrent.futures",
+      "laptop.camera.dual_camera",
+      "laptop.recorder.record_demonstrations",
+      "laptop.camera.worker",
+      "laptop.client.policy_client",
+      "laptop.piper.unit_conversion",
+      "laptop.client.observation_schema",
+      "laptop.robot_client.piper_session",
+      "laptop.robot_client.bounded_policy_target",
+      "laptop.transport.bounded_trial",
+      "laptop.safety.bridge",
+      "laptop.runtime.modes",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.diagnostics.bounded_process",
+      "cv2",
+      "openpi_client.websocket_client_policy",
+      "gc"
+    ],
+    "laptop/client/latency_probe.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "policy_client_smoke"
+    ],
+    "laptop/client/live_model_preview.py": [
+      "argparse",
+      "json",
+      "pathlib",
+      "laptop.camera.dual_camera",
+      "laptop.recorder.record_demonstrations",
+      "laptop.client.live_shadow",
+      "laptop.client.policy_client",
+      "laptop.diagnostics.bounded_process",
+      "laptop.robot_client.bounded_policy_target"
+    ],
+    "laptop/client/live_shadow.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "math",
+      "re",
+      "threading",
+      "time",
+      "pathlib",
+      "numpy",
+      "laptop.diagnostics.camera_identity",
+      "laptop.client.observation_schema",
+      "laptop.control.contracts",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.client.policy_client",
+      "laptop.camera.worker",
+      "laptop.client.observation_schema",
+      "laptop.piper.unit_conversion",
+      "laptop.robot_client.feedback",
+      "cv2",
+      "can",
+      "piper_sdk.piper_msgs.msg_v2",
+      "piper_sdk.protocol.protocol_v2.piper_protocol_v2",
+      "openpi_client.websocket_client_policy",
+      "laptop.diagnostics.bounded_process",
+      "laptop.transport.can_transport"
+    ],
+    "laptop/client/network_latency_probe.py": [
+      "__future__",
+      "argparse",
+      "datetime",
+      "hashlib",
+      "json",
+      "math",
+      "pathlib",
+      "socket",
+      "statistics",
+      "time",
+      "typing",
+      "numpy",
+      "laptop.client.live_shadow",
+      "laptop.client.observation_schema",
+      "openpi_client",
+      "openpi_client.websocket_client_policy"
+    ],
+    "laptop/client/observation_schema.py": [
+      "__future__",
+      "numpy"
+    ],
+    "laptop/client/offline_latency_replay.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "statistics",
+      "time",
+      "numpy",
+      "laptop.client.live_shadow",
+      "laptop.client.observation_schema",
+      "cv2",
+      "openpi_client.websocket_client_policy"
+    ],
+    "laptop/client/policy_client.py": [
+      "__future__",
+      "json",
+      "math",
+      "re",
+      "time",
+      "pathlib",
+      "numpy",
+      "laptop.client.observation_schema"
+    ],
+    "laptop/client/policy_client_smoke.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "statistics",
+      "time",
+      "pathlib",
+      "numpy",
+      "openpi_client.websocket_client_policy",
+      "observation_schema"
+    ],
+    "laptop/client/public_piper_transport_smoke.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "numpy",
+      "openpi_client.websocket_client_policy",
+      "server.training.public_data_contract"
+    ],
+    "laptop/client/shadow_preview_smoke.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "time",
+      "typing",
+      "numpy",
+      "PIL",
+      "laptop.client.live_shadow",
+      "laptop.client.network_latency_probe",
+      "laptop.client.observation_schema",
+      "laptop.robot_client.policy_reject_only",
+      "laptop.runtime.config",
+      "laptop.runtime.modes",
+      "laptop.recorder.verify_source",
+      "openpi_client.websocket_client_policy"
+    ],
+    "laptop/client/supervised_live_step.py": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "pathlib",
+      "threading",
+      "time",
+      "laptop.client.observation_schema",
+      "laptop.diagnostics.camera_identity",
+      "laptop.diagnostics.bounded_process",
+      "laptop.robot_client.supervised_policy_session",
+      "laptop.robot_client.supervised_policy_step",
+      "laptop.robot_client.supervised_site_profile",
+      "laptop.safety.bridge",
+      "laptop.runtime.modes",
+      "laptop.transport.gs_usb_piper_can",
+      "numpy",
+      "laptop.client.live_shadow",
+      "openpi_client.websocket_client_policy",
+      "laptop.client.live_shadow",
+      "laptop.camera.worker",
+      "laptop.client.live_shadow",
+      "laptop.robot_client.supervised_policy_session",
+      "openpi_client.websocket_client_policy",
+      "laptop.client.live_shadow"
+    ],
+    "laptop/client/synthetic_policy_reject_smoke.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "socket",
+      "time",
+      "typing",
+      "numpy",
+      "laptop.client.live_shadow",
+      "laptop.client.observation_schema",
+      "laptop.robot_client.policy_reject_only",
+      "laptop.runtime.config",
+      "laptop.runtime.modes",
+      "openpi_client.websocket_client_policy",
+      "openpi_client"
+    ],
+    "laptop/client/__init__.py": [],
+    "laptop/control/contracts.py": [
+      "__future__",
+      "dataclasses",
+      "math",
+      "numbers",
+      "typing"
+    ],
+    "laptop/control/__init__.py": [
+      "contracts"
+    ],
+    "laptop/diagnostics/audit_feedback_log.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "statistics",
+      "collections",
+      "pathlib"
+    ],
+    "laptop/diagnostics/bounded_process.py": [
+      "__future__",
+      "multiprocessing",
+      "time",
+      "typing"
+    ],
+    "laptop/diagnostics/camera_identity.py": [
+      "__future__",
+      "json",
+      "re",
+      "subprocess"
+    ],
+    "laptop/diagnostics/camera_stream_smoke.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "time",
+      "laptop.diagnostics.probe_dual_cameras"
+    ],
+    "laptop/diagnostics/can_diagnostic_session.py": [
+      "__future__",
+      "time",
+      "pathlib",
+      "laptop.runtime.config",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport",
+      "laptop.transport.diagnostic_queries",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "laptop/diagnostics/capture_oem_can.py": [
+      "argparse",
+      "collections",
+      "datetime",
+      "hashlib",
+      "json",
+      "pathlib",
+      "struct",
+      "sys",
+      "threading",
+      "time",
+      "frida"
+    ],
+    "laptop/diagnostics/compare_gripper_feedback.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "statistics",
+      "pathlib",
+      "laptop.diagnostics.audit_feedback_log"
+    ],
+    "laptop/diagnostics/list_candlelight_adapters.py": [
+      "__future__",
+      "json",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "laptop/diagnostics/probe_cameras.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "time",
+      "pathlib",
+      "pyrealsense2",
+      "cv2"
+    ],
+    "laptop/diagnostics/probe_can_ack_only.py": [
+      "__future__",
+      "argparse",
+      "collections",
+      "json",
+      "time",
+      "datetime",
+      "pathlib",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "laptop/diagnostics/probe_can_listen_only.py": [
+      "__future__",
+      "argparse",
+      "collections",
+      "json",
+      "time",
+      "datetime",
+      "pathlib",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "laptop/diagnostics/probe_dual_cameras.py": [
+      "__future__",
+      "argparse",
+      "bisect",
+      "json",
+      "statistics",
+      "threading",
+      "time",
+      "datetime",
+      "pathlib",
+      "typing",
+      "laptop.camera.source",
+      "numpy",
+      "cv2",
+      "laptop.diagnostics.bounded_process",
+      "laptop.diagnostics.camera_identity",
+      "laptop.camera.source"
+    ],
+    "laptop/diagnostics/probe_motor_enable_ack_only.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "time",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "laptop/diagnostics/probe_network.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "socket",
+      "time",
+      "urllib.request",
+      "pathlib",
+      "numpy",
+      "openpi_client.websocket_client_policy"
+    ],
+    "laptop/diagnostics/probe_piper.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib"
+    ],
+    "laptop/diagnostics/probe_piper_feedback_ack_only.py": [
+      "__future__",
+      "argparse",
+      "collections",
+      "importlib.metadata",
+      "json",
+      "math",
+      "time",
+      "datetime",
+      "pathlib",
+      "typing",
+      "laptop.robot_client.feedback",
+      "laptop.piper.unit_conversion",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport",
+      "laptop.transport.gs_usb_piper_can",
+      "can",
+      "piper_sdk.piper_msgs.msg_v2",
+      "piper_sdk.protocol.protocol_v2.piper_protocol_v2"
+    ],
+    "laptop/diagnostics/probe_piper_readonly.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib"
+    ],
+    "laptop/diagnostics/query_all_joint_parameters.py": [
+      "__future__",
+      "collections",
+      "importlib.metadata",
+      "json",
+      "struct",
+      "time",
+      "datetime",
+      "pathlib",
+      "laptop.diagnostics.can_diagnostic_session",
+      "laptop.transport.can_transport",
+      "laptop.transport.diagnostic_queries",
+      "can",
+      "piper_sdk.piper_msgs.msg_v2",
+      "piper_sdk.protocol.protocol_v2.piper_protocol_v2",
+      "argparse"
+    ],
+    "laptop/diagnostics/query_joint_limits.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "struct",
+      "time",
+      "laptop.diagnostics.can_diagnostic_session",
+      "laptop.transport.can_transport",
+      "laptop.transport.diagnostic_queries"
+    ],
+    "laptop/diagnostics/query_piper_firmware.py": [
+      "__future__",
+      "argparse",
+      "importlib.metadata",
+      "json",
+      "time",
+      "datetime",
+      "laptop.diagnostics.can_diagnostic_session",
+      "laptop.transport.can_transport",
+      "laptop.transport.diagnostic_queries"
+    ],
+    "laptop/diagnostics/query_piper_gripper_parameters.py": [
+      "__future__",
+      "argparse",
+      "collections",
+      "importlib.metadata",
+      "json",
+      "time",
+      "datetime",
+      "pathlib",
+      "typing",
+      "laptop.diagnostics.can_diagnostic_session",
+      "laptop.transport.can_transport",
+      "laptop.transport.diagnostic_queries",
+      "can",
+      "piper_sdk.piper_msgs.msg_v2",
+      "piper_sdk.protocol.protocol_v2.piper_protocol_v2"
+    ],
+    "laptop/diagnostics/query_piper_readiness_snapshot.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "time",
+      "datetime",
+      "pathlib",
+      "typing",
+      "laptop.diagnostics"
+    ],
+    "laptop/piper/unit_conversion.py": [
+      "__future__",
+      "math",
+      "numpy"
+    ],
+    "laptop/piper/__init__.py": [
+      "unit_conversion"
+    ],
+    "laptop/recorder/align_raw.py": [
+      "__future__",
+      "laptop.piper.unit_conversion",
+      "argparse",
+      "bisect",
+      "hashlib",
+      "json",
+      "math",
+      "pathlib",
+      "shutil",
+      "uuid",
+      "cv2",
+      "laptop.recorder.piper_command_targets"
+    ],
+    "laptop/recorder/audit_episode.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "laptop.recorder.episode"
+    ],
+    "laptop/recorder/capture_session.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "time",
+      "uuid",
+      "datetime",
+      "getpass",
+      "pathlib",
+      "typing",
+      "laptop.recorder.label_episode",
+      "laptop.recorder.passive_capture",
+      "laptop.diagnostics.camera_identity"
+    ],
+    "laptop/recorder/episode.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "math",
+      "bisect",
+      "statistics",
+      "time",
+      "uuid",
+      "datetime",
+      "pathlib",
+      "cv2",
+      "laptop.recorder.piper_command_targets"
+    ],
+    "laptop/recorder/label_episode.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "datetime",
+      "pathlib",
+      "laptop.recorder.episode"
+    ],
+    "laptop/recorder/manual_teach_capture.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "laptop.recorder.passive_capture",
+      "laptop.diagnostics.camera_identity"
+    ],
+    "laptop/recorder/next_state_proxy.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "math",
+      "pathlib",
+      "laptop.recorder.label_episode",
+      "laptop.recorder.verify_source",
+      "laptop.robot_client.supervised_site_profile"
+    ],
+    "laptop/recorder/passive_capture.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "threading",
+      "time",
+      "uuid",
+      "pathlib",
+      "laptop.recorder.episode",
+      "laptop.diagnostics.probe_dual_cameras",
+      "laptop.diagnostics.probe_piper_feedback_ack_only",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.diagnostics.bounded_process",
+      "laptop.diagnostics.camera_identity",
+      "laptop.recorder.piper_command_targets"
+    ],
+    "laptop/recorder/piper_command_targets.py": [
+      "__future__",
+      "bisect",
+      "dataclasses",
+      "json",
+      "math",
+      "pathlib",
+      "struct"
+    ],
+    "laptop/recorder/record_demonstrations.py": [
+      "__future__",
+      "argparse",
+      "getpass",
+      "json",
+      "pathlib",
+      "laptop.camera.dual_camera",
+      "laptop.recorder.capture_session",
+      "laptop.recorder.episode"
+    ],
+    "laptop/recorder/synthetic_smoke.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "laptop.recorder.episode",
+      "cv2",
+      "numpy"
+    ],
+    "laptop/recorder/verify_source.py": [
+      "__future__",
+      "laptop.piper.unit_conversion",
+      "argparse",
+      "hashlib",
+      "json",
+      "math",
+      "pathlib",
+      "cv2",
+      "numpy",
+      "laptop.recorder.align_raw",
+      "laptop.recorder.piper_command_targets"
+    ],
+    "laptop/recorder/__init__.py": [],
+    "laptop/robot_client/bounded_policy_target.py": [
+      "math",
+      "laptop.robot_client.replay_preflight"
+    ],
+    "laptop/robot_client/bounded_zero_return.py": [
+      "argparse",
+      "gc",
+      "json",
+      "time",
+      "uuid",
+      "pathlib",
+      "laptop.diagnostics.bounded_process",
+      "laptop.robot_client.piper_session",
+      "laptop.safety.bridge",
+      "laptop.runtime.modes",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.bounded_trial"
+    ],
+    "laptop/robot_client/feedback.py": [
+      "dataclasses",
+      "struct"
+    ],
+    "laptop/robot_client/gripper_command_preview.py": [
+      "__future__",
+      "dataclasses",
+      "struct"
+    ],
+    "laptop/robot_client/hil_guard.py": [
+      "__future__",
+      "json",
+      "laptop.safety.bridge"
+    ],
+    "laptop/robot_client/joint_command_preview.py": [
+      "__future__",
+      "dataclasses",
+      "math",
+      "struct",
+      "typing",
+      "laptop.robot_client.replay_preflight"
+    ],
+    "laptop/robot_client/offline_replay.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "typing",
+      "laptop.safety.offline_guard"
+    ],
+    "laptop/robot_client/piper_session.py": [
+      "dataclasses",
+      "datetime",
+      "json",
+      "pathlib",
+      "struct",
+      "threading",
+      "time",
+      "laptop.robot_client.feedback",
+      "laptop.safety.bridge",
+      "laptop.runtime.modes",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "laptop/robot_client/piper_tool.py": [
+      "__future__",
+      "argparse",
+      "datetime",
+      "json",
+      "pathlib",
+      "laptop.diagnostics.probe_piper_feedback_ack_only",
+      "laptop.diagnostics.probe_motor_enable_ack_only",
+      "laptop.robot_client.supervised_mode_initialization",
+      "laptop.robot_client.supervised_enable_j6",
+      "laptop.robot_client.supervised_axis_commissioning",
+      "laptop.robot_client.supervised_gripper_commissioning",
+      "laptop.robot_client.supervised_j1_commissioning"
+    ],
+    "laptop/robot_client/policy_reject_only.py": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "hashlib",
+      "json",
+      "math",
+      "pathlib",
+      "time",
+      "typing",
+      "laptop.control.contracts",
+      "laptop.runtime.config",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport"
+    ],
+    "laptop/robot_client/policy_sdk_preview.py": [
+      "__future__",
+      "dataclasses",
+      "math",
+      "struct",
+      "laptop.control.contracts",
+      "laptop.piper.unit_conversion",
+      "laptop.robot_client.joint_command_preview",
+      "laptop.robot_client.replay_preflight"
+    ],
+    "laptop/robot_client/replay_preflight.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "math",
+      "pathlib",
+      "typing",
+      "laptop.piper.unit_conversion"
+    ],
+    "laptop/robot_client/single_step_dry_run.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "math",
+      "time",
+      "dataclasses",
+      "typing",
+      "laptop.control.contracts",
+      "laptop.robot_client.joint_command_preview",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport"
+    ],
+    "laptop/robot_client/supervised_axis_commissioning.py": [
+      "argparse",
+      "datetime",
+      "json",
+      "pathlib",
+      "laptop.robot_client.supervised_j1_commissioning"
+    ],
+    "laptop/robot_client/supervised_enable_j6.py": [
+      "argparse",
+      "json",
+      "pathlib",
+      "laptop.robot_client.supervised_mode_initialization",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "laptop/robot_client/supervised_gripper_commissioning.py": [
+      "laptop.robot_client.piper_session",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "laptop/robot_client/supervised_gripper_max_open.py": [
+      "argparse",
+      "json",
+      "pathlib",
+      "laptop.robot_client.piper_session",
+      "laptop.robot_client.supervised_near_zero_home",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "laptop/robot_client/supervised_j1_commissioning.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "struct",
+      "time",
+      "uuid",
+      "typing",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.position_commands"
+    ],
+    "laptop/robot_client/supervised_j1_one_degree_trial.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "struct",
+      "time",
+      "laptop.diagnostics.probe_motor_enable_ack_only",
+      "laptop.diagnostics.probe_piper_feedback_ack_only",
+      "laptop.robot_client.hil_guard",
+      "laptop.robot_client.supervised_j1_step_trial",
+      "gs_usb.gs_usb"
+    ],
+    "laptop/robot_client/supervised_j1_step_trial.py": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "struct",
+      "time",
+      "laptop.diagnostics.probe_motor_enable_ack_only",
+      "laptop.diagnostics.probe_piper_feedback_ack_only",
+      "laptop.robot_client.hil_guard",
+      "laptop.robot_client.joint_command_preview",
+      "gs_usb.gs_usb",
+      "gs_usb.gs_usb"
+    ],
+    "laptop/robot_client/supervised_j5_probe.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "struct",
+      "time",
+      "laptop.diagnostics.probe_piper_feedback_ack_only",
+      "laptop.robot_client.hil_guard",
+      "laptop.robot_client.supervised_j1_step_trial",
+      "laptop.robot_client.supervised_restore_start",
+      "gs_usb.gs_usb"
+    ],
+    "laptop/robot_client/supervised_joint_replay.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "math",
+      "pathlib",
+      "struct",
+      "time",
+      "laptop.diagnostics.probe_motor_enable_ack_only",
+      "laptop.diagnostics.probe_piper_feedback_ack_only",
+      "laptop.robot_client.hil_guard",
+      "laptop.robot_client.replay_preflight",
+      "laptop.robot_client.supervised_j1_step_trial",
+      "laptop.robot_client.supervised_restore_start",
+      "gs_usb.gs_usb"
+    ],
+    "laptop/robot_client/supervised_mode_initialization.py": [
+      "argparse",
+      "json",
+      "pathlib",
+      "time",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.mode_initialization"
+    ],
+    "laptop/robot_client/supervised_near_zero_home.py": [
+      "argparse",
+      "json",
+      "struct",
+      "time",
+      "uuid",
+      "pathlib",
+      "laptop.robot_client.piper_session",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.position_commands"
+    ],
+    "laptop/robot_client/supervised_oem_gripper_test.py": [
+      "argparse",
+      "json",
+      "time",
+      "pathlib",
+      "laptop.robot_client.piper_session",
+      "laptop.robot_client.supervised_near_zero_home",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.gripper_commissioning"
+    ],
+    "laptop/robot_client/supervised_policy_session.py": [
+      "__future__",
+      "dataclasses",
+      "threading",
+      "time",
+      "typing",
+      "uuid",
+      "laptop.control.contracts",
+      "laptop.robot_client.single_step_dry_run",
+      "laptop.robot_client.supervised_policy_step",
+      "laptop.safety.bridge",
+      "laptop.transport.position_commands"
+    ],
+    "laptop/robot_client/supervised_policy_step.py": [
+      "__future__",
+      "dataclasses",
+      "time",
+      "laptop.control.contracts",
+      "laptop.robot_client.policy_sdk_preview",
+      "laptop.robot_client.single_step_dry_run",
+      "laptop.robot_client.verified_policy_command",
+      "laptop.safety.bridge",
+      "laptop.transport.position_commands"
+    ],
+    "laptop/robot_client/supervised_restore_gripper.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "struct",
+      "time",
+      "laptop.diagnostics.probe_piper_feedback_ack_only",
+      "laptop.robot_client.hil_guard",
+      "laptop.robot_client.gripper_command_preview",
+      "laptop.robot_client.supervised_j1_step_trial",
+      "laptop.robot_client.supervised_restore_start",
+      "gs_usb.gs_usb",
+      "gs_usb.gs_usb"
+    ],
+    "laptop/robot_client/supervised_restore_start.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "math",
+      "pathlib",
+      "struct",
+      "time",
+      "laptop.diagnostics.probe_motor_enable_ack_only",
+      "laptop.diagnostics.probe_piper_feedback_ack_only",
+      "laptop.robot_client.hil_guard",
+      "laptop.robot_client.replay_preflight",
+      "laptop.robot_client.supervised_j1_step_trial",
+      "gs_usb.gs_usb"
+    ],
+    "laptop/robot_client/supervised_site_profile.py": [
+      "__future__",
+      "dataclasses",
+      "datetime",
+      "json",
+      "math",
+      "pathlib",
+      "typing",
+      "laptop.robot_client.replay_preflight",
+      "laptop.robot_client.single_step_dry_run",
+      "laptop.safety.bridge",
+      "laptop.transport.position_commands"
+    ],
+    "laptop/robot_client/supervised_smooth_joint_replay.py": [
+      "__future__",
+      "argparse",
+      "bisect",
+      "json",
+      "math",
+      "pathlib",
+      "struct",
+      "time",
+      "laptop.diagnostics.probe_motor_enable_ack_only",
+      "laptop.diagnostics.probe_piper_feedback_ack_only",
+      "laptop.robot_client.hil_guard",
+      "laptop.robot_client.replay_preflight",
+      "laptop.robot_client.supervised_j1_step_trial",
+      "laptop.robot_client.supervised_restore_start",
+      "gs_usb.gs_usb",
+      "gs_usb.gs_usb"
+    ],
+    "laptop/robot_client/verified_policy_command.py": [
+      "__future__",
+      "laptop.control.contracts",
+      "laptop.robot_client.policy_sdk_preview",
+      "laptop.robot_client.single_step_dry_run",
+      "laptop.safety.bridge"
+    ],
+    "laptop/robot_client/__init__.py": [],
+    "laptop/runtime/bridge_protocol.py": [
+      "__future__",
+      "struct",
+      "typing",
+      "msgpack"
+    ],
+    "laptop/runtime/config.py": [
+      "__future__",
+      "dataclasses",
+      "json",
+      "pathlib",
+      "laptop.runtime.modes"
+    ],
+    "laptop/runtime/modes.py": [
+      "enum"
+    ],
+    "laptop/runtime/__init__.py": [
+      "modes"
+    ],
+    "laptop/safety/bridge.py": [
+      "__future__",
+      "dataclasses",
+      "dataclasses",
+      "enum",
+      "hashlib",
+      "json",
+      "math",
+      "numbers",
+      "struct",
+      "time",
+      "typing",
+      "laptop.control.contracts",
+      "laptop.runtime.modes",
+      "laptop.transport.can_transport",
+      "laptop.transport.diagnostic_queries",
+      "laptop.transport.position_commands",
+      "laptop.transport.mode_initialization",
+      "laptop.transport.mode_initialization",
+      "laptop.transport.mode_initialization",
+      "laptop.transport.gripper_commissioning",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.bounded_trial",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.position_commands",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "laptop/safety/offline_guard.py": [
+      "__future__",
+      "dataclasses",
+      "math",
+      "typing"
+    ],
+    "laptop/safety/__init__.py": [],
+    "laptop/transport/bounded_trial.py": [
+      "dataclasses",
+      "struct",
+      "time",
+      "laptop.transport.position_commands"
+    ],
+    "laptop/transport/can_transport.py": [
+      "__future__",
+      "collections",
+      "dataclasses",
+      "time",
+      "typing",
+      "laptop.control.contracts",
+      "laptop.transport.diagnostic_queries",
+      "laptop.transport.position_commands"
+    ],
+    "laptop/transport/diagnostic_queries.py": [
+      "__future__",
+      "dataclasses",
+      "hashlib"
+    ],
+    "laptop/transport/gripper_commissioning.py": [
+      "dataclasses",
+      "struct",
+      "laptop.transport.position_commands"
+    ],
+    "laptop/transport/gs_usb_piper_can.py": [
+      "__future__",
+      "struct",
+      "sys",
+      "time",
+      "enum",
+      "pathlib",
+      "typing",
+      "laptop.control.contracts",
+      "laptop.transport.can_transport",
+      "laptop.transport.diagnostic_queries",
+      "laptop.transport.mode_initialization",
+      "laptop.transport.position_commands",
+      "usb.backend",
+      "gs_usb.gs_usb",
+      "gs_usb.gs_usb",
+      "laptop.transport.gripper_commissioning",
+      "laptop.transport.gripper_commissioning",
+      "laptop.transport.bounded_trial",
+      "laptop.transport.position_commands",
+      "gs_usb.constants",
+      "usb.util"
+    ],
+    "laptop/transport/mode_initialization.py": [
+      "dataclasses",
+      "struct",
+      "time"
+    ],
+    "laptop/transport/position_commands.py": [
+      "__future__",
+      "dataclasses",
+      "math",
+      "numbers",
+      "struct",
+      "laptop.control.contracts",
+      "laptop.piper.unit_conversion",
+      "laptop.control.contracts",
+      "laptop.safety.bridge"
+    ],
+    "laptop/transport/__init__.py": [
+      "can_transport",
+      "can_transport",
+      "gs_usb_piper_can",
+      "position_commands",
+      "diagnostic_queries"
+    ],
+    "server/public_piper_smoke_infer.py": [
+      "__future__",
+      "json",
+      "os",
+      "numpy",
+      "openpi.policies",
+      "server.training.public_piper_smoke",
+      "lerobot.common.datasets.lerobot_dataset"
+    ],
+    "server/serve_derived_state_multi_shadow.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "typing",
+      "server.training.proxy_multi_episode_contract",
+      "server.training.proxy_multi_episode_pilot",
+      "server.policy_server.artifact_identity",
+      "openpi.policies",
+      "openpi.serving.websocket_policy_server"
+    ],
+    "server/serve_piper_action_shadow.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "openpi.policies",
+      "openpi.serving.websocket_policy_server",
+      "server.policy_server.artifact_identity",
+      "server.training.piper_train_entry"
+    ],
+    "server/serve_policy_local.py": [
+      "__future__",
+      "argparse",
+      "logging",
+      "signal",
+      "sys",
+      "openpi.policies",
+      "openpi.serving",
+      "openpi.training"
+    ],
+    "server/serve_proxy_piper_shadow.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "openpi.policies",
+      "openpi.serving.websocket_policy_server",
+      "server.policy_server.artifact_identity",
+      "server.training.proxy_piper_tiny_fit",
+      "server.policy_server.proxy_config"
+    ],
+    "server/serve_public_piper_smoke.py": [
+      "__future__",
+      "argparse",
+      "openpi.policies",
+      "openpi.serving.websocket_policy_server",
+      "server.training.public_piper_smoke",
+      "server.training.public_data_contract"
+    ],
+    "server/__init__.py": [],
+    "server/dataset_tools/audit_proxy_lerobot.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "statistics",
+      "uuid",
+      "numpy",
+      "server.dataset_tools.convert_next_state_proxy",
+      "pyarrow.parquet",
+      "av",
+      "PIL"
+    ],
+    "server/dataset_tools/audit_training_data.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "pathlib",
+      "numpy",
+      "lerobot.common.datasets.lerobot_dataset"
+    ],
+    "server/dataset_tools/compare_proxy_sampling_rates.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "datetime",
+      "pathlib",
+      "laptop.recorder.label_episode",
+      "laptop.recorder.verify_source",
+      "server.dataset_tools.convert_next_state_proxy"
+    ],
+    "server/dataset_tools/convert_next_state_proxy.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "importlib.metadata",
+      "json",
+      "pathlib",
+      "re",
+      "uuid",
+      "numpy",
+      "PIL",
+      "lerobot.common.datasets.lerobot_dataset",
+      "datasets",
+      "lerobot.common.datasets.lerobot_dataset",
+      "lerobot.common.datasets.lerobot_dataset"
+    ],
+    "server/dataset_tools/convert_piper_aligned.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "dataclasses",
+      "pathlib",
+      "re",
+      "uuid",
+      "numpy",
+      "PIL",
+      "lerobot.common.datasets.lerobot_dataset",
+      "laptop.recorder.piper_command_targets",
+      "laptop.recorder.verify_source"
+    ],
+    "server/dataset_tools/synthetic_lerobot_smoke.py": [
+      "__future__",
+      "json",
+      "tempfile",
+      "pathlib",
+      "numpy",
+      "lerobot.common.datasets.lerobot_dataset",
+      "openpi",
+      "server.training.piper_openpi_config"
+    ],
+    "server/piper_policy/piper_data_config.py": [
+      "__future__",
+      "dataclasses"
+    ],
+    "server/piper_policy/piper_inputs.py": [
+      "__future__",
+      "dataclasses",
+      "numpy",
+      "openpi_client.image_tools"
+    ],
+    "server/piper_policy/piper_outputs.py": [
+      "__future__",
+      "dataclasses",
+      "numpy"
+    ],
+    "server/piper_policy/piper_policy_config.py": [
+      "__future__",
+      "dataclasses"
+    ],
+    "server/piper_policy/__init__.py": [
+      "piper_inputs",
+      "piper_outputs"
+    ],
+    "server/policy_server/artifact_identity.py": [
+      "__future__",
+      "hashlib",
+      "pathlib",
+      "typing"
+    ],
+    "server/policy_server/proxy_config.py": [
+      "__future__",
+      "dataclasses",
+      "json",
+      "pathlib",
+      "re"
+    ],
+    "server/training/action_target_contract.py": [
+      "__future__",
+      "typing"
+    ],
+    "server/training/check_piper_readiness.py": [
+      "__future__",
+      "json",
+      "hashlib",
+      "pathlib",
+      "openpi.training",
+      "server.training.piper_openpi_config",
+      "server.training.public_data_contract",
+      "server.training.action_target_contract",
+      "argparse"
+    ],
+    "server/training/evaluate_demonstrations.py": [
+      "argparse",
+      "json",
+      "os",
+      "pathlib",
+      "server.training.proxy_multi_episode_pilot"
+    ],
+    "server/training/piper_action_eval.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "pathlib",
+      "numpy",
+      "server.policy_server.artifact_identity",
+      "lerobot.common.datasets.lerobot_dataset",
+      "openpi.policies",
+      "server.training.piper_train_entry"
+    ],
+    "server/training/piper_openpi_config.py": [
+      "__future__",
+      "dataclasses",
+      "pathlib",
+      "numpy",
+      "openpi",
+      "openpi.models",
+      "openpi.models",
+      "openpi.training",
+      "openpi.training",
+      "openpi_client.image_tools"
+    ],
+    "server/training/piper_train_entry.py": [
+      "__future__",
+      "argparse",
+      "ast",
+      "dataclasses",
+      "datetime",
+      "hashlib",
+      "importlib.util",
+      "json",
+      "os",
+      "pathlib",
+      "platform",
+      "sys",
+      "server.training.check_piper_readiness",
+      "server.training.piper_openpi_config",
+      "server.policy_server.artifact_identity",
+      "openpi.training"
+    ],
+    "server/training/post_capture_pipeline.py": [
+      "__future__",
+      "argparse",
+      "datetime",
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "re",
+      "sys",
+      "typing",
+      "laptop.recorder.align_raw",
+      "laptop.recorder.label_episode",
+      "laptop.recorder.next_state_proxy",
+      "server.dataset_tools.convert_next_state_proxy",
+      "server.training",
+      "server.training.proxy_multi_episode_contract"
+    ],
+    "server/training/proxy_dataset_contract.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "re",
+      "dataclasses",
+      "pathlib",
+      "typing"
+    ],
+    "server/training/proxy_latency_profile.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "math",
+      "os",
+      "socket",
+      "statistics",
+      "threading",
+      "time",
+      "server.training.proxy_piper_tiny_fit",
+      "openpi_client.websocket_client_policy",
+      "openpi.policies",
+      "openpi.serving.websocket_policy_server",
+      "lerobot.common.datasets.lerobot_dataset",
+      "jax",
+      "numpy"
+    ],
+    "server/training/proxy_multi_episode_contract.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "math",
+      "pathlib",
+      "re"
+    ],
+    "server/training/proxy_multi_episode_pilot.py": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "hashlib",
+      "importlib.util",
+      "json",
+      "os",
+      "pathlib",
+      "re",
+      "sys",
+      "datetime",
+      "server.training.proxy_multi_episode_contract",
+      "openpi",
+      "openpi.training",
+      "server.training.piper_openpi_config",
+      "openpi.training",
+      "numpy",
+      "lerobot.common.datasets.lerobot_dataset",
+      "openpi.policies",
+      "server.policy_server.artifact_identity",
+      "jax",
+      "server.policy_server.artifact_identity"
+    ],
+    "server/training/proxy_piper_eval.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "os",
+      "numpy",
+      "server.training.proxy_dataset_contract",
+      "server.training.proxy_piper_tiny_fit",
+      "lerobot.common.datasets.lerobot_dataset",
+      "openpi.policies"
+    ],
+    "server/training/proxy_piper_tiny_fit.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "importlib.util",
+      "json",
+      "os",
+      "re",
+      "pathlib",
+      "openpi.models",
+      "openpi.training",
+      "openpi.training",
+      "server.training.piper_openpi_config",
+      "server.training.proxy_dataset_contract",
+      "jax"
+    ],
+    "server/training/public_data_contract.py": [
+      "__future__"
+    ],
+    "server/training/public_piper_smoke.py": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "importlib.util",
+      "json",
+      "os",
+      "pathlib",
+      "openpi",
+      "openpi.models",
+      "openpi.training",
+      "openpi.training",
+      "server.training.piper_openpi_config"
+    ],
+    "server/training/serve_trained_demonstrations.py": [
+      "argparse",
+      "json",
+      "os",
+      "sys",
+      "subprocess",
+      "hashlib",
+      "pathlib",
+      "server.serve_derived_state_multi_shadow"
+    ],
+    "server/training/summarize_training_loss.py": [
+      "argparse",
+      "csv",
+      "json",
+      "re",
+      "statistics",
+      "pathlib",
+      "matplotlib",
+      "matplotlib.pyplot"
+    ],
+    "server/training/train_demonstrations.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "os",
+      "subprocess",
+      "sys",
+      "datetime",
+      "pathlib",
+      "server.training.proxy_multi_episode_pilot"
+    ],
+    "scripts/add_final_gate_aliases.py": [
+      "__future__",
+      "json",
+      "pathlib"
+    ],
+    "scripts/annotate_pi05_smoke_metadata.py": [
+      "__future__",
+      "json",
+      "pathlib"
+    ],
+    "scripts/audit_laptop_probe.py": [
+      "__future__",
+      "argparse",
+      "ast",
+      "hashlib",
+      "json",
+      "pathlib"
+    ],
+    "scripts/refresh_environment_audit.py": [
+      "__future__",
+      "json",
+      "shutil",
+      "subprocess",
+      "pathlib"
+    ],
+    "scripts/run_local_policy_server_smoke.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "os",
+      "select",
+      "signal",
+      "subprocess",
+      "sys",
+      "time",
+      "urllib.request",
+      "pathlib"
+    ],
+    "scripts/run_pi05_base_smoke.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "os",
+      "pathlib",
+      "subprocess",
+      "time",
+      "traceback",
+      "numpy",
+      "openpi.policies",
+      "openpi.policies",
+      "openpi.training"
+    ],
+    "scripts/run_server_performance.py": [
+      "__future__",
+      "json",
+      "os",
+      "signal",
+      "subprocess",
+      "sys",
+      "time",
+      "pathlib",
+      "run_local_policy_server_smoke"
+    ],
+    "scripts/validate_piper_continuous.py": [
+      "__future__",
+      "json",
+      "pathlib",
+      "numpy",
+      "laptop.piper.unit_conversion"
+    ],
+    "scripts/validate_piper_contract.py": [
+      "__future__",
+      "json",
+      "pathlib",
+      "numpy",
+      "laptop.piper.unit_conversion",
+      "server.piper_policy.piper_inputs",
+      "server.piper_policy.piper_outputs"
+    ],
+    "scripts/write_checkpoint_provenance.py": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "json",
+      "pathlib"
+    ],
+    "scripts/write_deployment_manifest.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "platform",
+      "subprocess",
+      "sys",
+      "datetime",
+      "pathlib"
+    ],
+    "scripts/write_socket_binding_report.py": [
+      "__future__",
+      "json",
+      "pathlib"
+    ],
+    "tests/__init__.py": [],
+    "tests/contracts/test_control_contracts.py": [
+      "pytest",
+      "laptop.control.contracts"
+    ],
+    "tests/contracts/test_piper_contract.py": [
+      "__future__",
+      "unittest",
+      "pathlib",
+      "numpy",
+      "laptop.client.observation_schema",
+      "server.piper_policy.piper_inputs",
+      "server.piper_policy.piper_outputs"
+    ],
+    "tests/contracts/test_piper_units.py": [
+      "__future__",
+      "unittest",
+      "numpy",
+      "laptop.piper.unit_conversion"
+    ],
+    "tests/contracts/test_runtime_config.py": [
+      "json",
+      "pathlib",
+      "pytest",
+      "laptop.runtime.config",
+      "laptop.runtime.modes"
+    ],
+    "tests/contracts/__init__.py": [],
+    "tests/data/test_align_raw.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "struct",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "cv2",
+      "numpy",
+      "laptop.recorder.align_raw",
+      "laptop.recorder.episode",
+      "laptop.recorder.piper_command_targets",
+      "laptop.recorder.verify_source"
+    ],
+    "tests/data/test_align_raw_to_lerobot.py": [
+      "__future__",
+      "json",
+      "hashlib",
+      "importlib.util",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "laptop.recorder.align_raw",
+      "laptop.recorder.piper_command_targets",
+      "tests.data.test_align_raw",
+      "lerobot.common.datasets.lerobot_dataset",
+      "server.dataset_tools.convert_piper_aligned"
+    ],
+    "tests/data/test_convert_next_state_proxy.py": [
+      "__future__",
+      "json",
+      "importlib.util",
+      "tempfile",
+      "unittest",
+      "unittest.mock",
+      "pathlib",
+      "laptop.recorder.align_raw",
+      "laptop.recorder.label_episode",
+      "laptop.recorder.next_state_proxy",
+      "server.dataset_tools.convert_next_state_proxy",
+      "server.training.proxy_multi_episode_contract",
+      "server.training.proxy_multi_episode_pilot",
+      "tests.data.test_align_raw",
+      "datasets",
+      "datasets",
+      "datasets",
+      "datasets",
+      "lerobot.common.datasets.lerobot_dataset",
+      "lerobot.common.datasets.lerobot_dataset"
+    ],
+    "tests/data/test_next_state_proxy.py": [
+      "__future__",
+      "json",
+      "math",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "laptop.recorder.align_raw",
+      "laptop.recorder.label_episode",
+      "laptop.recorder.next_state_proxy",
+      "tests.data.test_align_raw"
+    ],
+    "tests/data/test_piper_command_targets.py": [
+      "__future__",
+      "json",
+      "pathlib",
+      "struct",
+      "tempfile",
+      "unittest",
+      "laptop.recorder.piper_command_targets"
+    ],
+    "tests/data/test_proxy_lerobot_audit.py": [
+      "__future__",
+      "copy",
+      "importlib.util",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "laptop.recorder.align_raw",
+      "laptop.recorder.label_episode",
+      "laptop.recorder.next_state_proxy",
+      "server.dataset_tools.audit_proxy_lerobot",
+      "server.dataset_tools.compare_proxy_sampling_rates",
+      "server.dataset_tools.convert_next_state_proxy",
+      "tests.data.test_align_raw"
+    ],
+    "tests/data/test_proxy_sampling_rate_comparison.py": [
+      "__future__",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "laptop.recorder.align_raw",
+      "laptop.recorder.label_episode",
+      "laptop.recorder.next_state_proxy",
+      "server.dataset_tools.compare_proxy_sampling_rates",
+      "tests.data.test_align_raw"
+    ],
+    "tests/data/test_source_verification.py": [
+      "__future__",
+      "json",
+      "hashlib",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "cv2",
+      "numpy",
+      "laptop.recorder.align_raw",
+      "laptop.recorder.piper_command_targets",
+      "laptop.recorder.verify_source",
+      "tests.data.test_align_raw"
+    ],
+    "tests/data/__init__.py": [],
+    "tests/laptop/test_action_shadow_replay.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "struct",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "numpy",
+      "laptop.client.action_shadow_replay",
+      "laptop.recorder.align_raw",
+      "laptop.recorder.piper_command_targets",
+      "tests.data.test_align_raw"
+    ],
+    "tests/laptop/test_bounded_model_trial.py": [
+      "struct",
+      "time",
+      "pytest",
+      "laptop.transport.bounded_trial",
+      "laptop.transport.can_transport",
+      "tests.laptop.test_j1_commissioning_bridge",
+      "dataclasses",
+      "dataclasses",
+      "dataclasses",
+      "dataclasses",
+      "laptop.client.bounded_model_trial",
+      "dataclasses",
+      "dataclasses"
+    ],
+    "tests/laptop/test_bounded_policy_target.py": [
+      "math",
+      "pytest",
+      "laptop.robot_client.bounded_policy_target"
+    ],
+    "tests/laptop/test_bounded_process.py": [
+      "__future__",
+      "os",
+      "time",
+      "unittest",
+      "laptop.diagnostics.bounded_process"
+    ],
+    "tests/laptop/test_bounded_zero_return.py": [
+      "pytest",
+      "laptop.robot_client.bounded_zero_return"
+    ],
+    "tests/laptop/test_bridge_protocol.py": [
+      "struct",
+      "pytest",
+      "laptop.runtime.bridge_protocol"
+    ],
+    "tests/laptop/test_camera_identity_inventory.py": [
+      "__future__",
+      "subprocess",
+      "unittest",
+      "unittest.mock",
+      "laptop.diagnostics.camera_identity"
+    ],
+    "tests/laptop/test_camera_stream_smoke.py": [
+      "laptop.diagnostics"
+    ],
+    "tests/laptop/test_can_ack_only_guard.py": [
+      "__future__",
+      "unittest",
+      "time",
+      "pathlib",
+      "laptop.diagnostics.probe_can_ack_only",
+      "laptop.transport.can_transport"
+    ],
+    "tests/laptop/test_can_listen_only_guard.py": [
+      "__future__",
+      "unittest",
+      "time",
+      "pathlib",
+      "laptop.diagnostics.probe_can_listen_only",
+      "laptop.transport.can_transport"
+    ],
+    "tests/laptop/test_capture_boundary_frames.py": [
+      "cv2",
+      "numpy",
+      "pytest",
+      "laptop.recorder.episode"
+    ],
+    "tests/laptop/test_capture_supervision.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "unittest.mock",
+      "laptop.diagnostics.camera_identity",
+      "laptop.diagnostics.probe_dual_cameras",
+      "laptop.recorder.episode",
+      "laptop.recorder.label_episode",
+      "laptop.recorder.passive_capture"
+    ],
+    "tests/laptop/test_compare_gripper_feedback.py": [
+      "__future__",
+      "json",
+      "pathlib",
+      "tempfile",
+      "unittest",
+      "unittest.mock",
+      "laptop.diagnostics.compare_gripper_feedback"
+    ],
+    "tests/laptop/test_diagnostic_queries.py": [
+      "__future__",
+      "pytest",
+      "time",
+      "pathlib",
+      "laptop.diagnostics.can_diagnostic_session",
+      "laptop.runtime.config",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport",
+      "laptop.transport.diagnostic_queries"
+    ],
+    "tests/laptop/test_dual_camera_capture.py": [
+      "json",
+      "pathlib",
+      "numpy",
+      "pytest",
+      "laptop.camera.dual_camera",
+      "cv2"
+    ],
+    "tests/laptop/test_dual_camera_probe.py": [
+      "__future__",
+      "unittest",
+      "numpy",
+      "laptop.diagnostics.probe_dual_cameras"
+    ],
+    "tests/laptop/test_episode_recorder.py": [
+      "__future__",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "laptop.recorder.episode",
+      "cv2",
+      "numpy"
+    ],
+    "tests/laptop/test_fake_can_single_step_rehearsal.py": [
+      "__future__",
+      "time",
+      "unittest",
+      "laptop.control.contracts",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport"
+    ],
+    "tests/laptop/test_feedback_log_audit.py": [
+      "__future__",
+      "json",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "laptop.diagnostics.audit_feedback_log",
+      "laptop.diagnostics.probe_piper_feedback_ack_only"
+    ],
+    "tests/laptop/test_firmware_query.py": [
+      "__future__",
+      "unittest",
+      "laptop.diagnostics.query_piper_firmware"
+    ],
+    "tests/laptop/test_gripper_command_preview.py": [
+      "__future__",
+      "unittest",
+      "laptop.robot_client.gripper_command_preview",
+      "can",
+      "piper_sdk.piper_msgs.msg_v2",
+      "piper_sdk.protocol.protocol_v2.piper_protocol_v2"
+    ],
+    "tests/laptop/test_gripper_commissioning.py": [
+      "struct",
+      "time",
+      "pytest",
+      "laptop.transport.gripper_commissioning",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "tests/laptop/test_gripper_parameter_query.py": [
+      "laptop.diagnostics.query_piper_gripper_parameters"
+    ],
+    "tests/laptop/test_j1_commissioning_bridge.py": [
+      "__future__",
+      "struct",
+      "time",
+      "dataclasses",
+      "pytest",
+      "laptop.runtime.modes",
+      "laptop.robot_client.supervised_j1_commissioning",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.position_commands",
+      "laptop.transport.position_commands",
+      "laptop.transport.position_commands"
+    ],
+    "tests/laptop/test_joint_command_preview.py": [
+      "__future__",
+      "unittest",
+      "laptop.robot_client.joint_command_preview",
+      "can",
+      "piper_sdk.piper_msgs.msg_v2",
+      "piper_sdk.protocol.protocol_v2.piper_protocol_v2"
+    ],
+    "tests/laptop/test_legacy_hil_guard.py": [
+      "__future__",
+      "ast",
+      "json",
+      "pathlib",
+      "pytest",
+      "laptop.robot_client.supervised_j1_one_degree_trial",
+      "laptop.robot_client.supervised_j1_step_trial",
+      "laptop.robot_client.supervised_j5_probe",
+      "laptop.robot_client.supervised_joint_replay",
+      "laptop.robot_client.supervised_restore_gripper",
+      "laptop.robot_client.supervised_restore_start",
+      "laptop.robot_client.supervised_smooth_joint_replay"
+    ],
+    "tests/laptop/test_live_shadow.py": [
+      "__future__",
+      "inspect",
+      "unittest",
+      "json",
+      "tempfile",
+      "pathlib",
+      "numpy",
+      "laptop.client",
+      "laptop.client.live_shadow",
+      "laptop.client.audit_live_shadow",
+      "laptop.diagnostics"
+    ],
+    "tests/laptop/test_near_zero_home.py": [
+      "struct",
+      "pytest",
+      "laptop.transport.position_commands",
+      "laptop.transport.gripper_commissioning"
+    ],
+    "tests/laptop/test_network_latency_probe.py": [
+      "__future__",
+      "math",
+      "numpy",
+      "pytest",
+      "laptop.client",
+      "laptop.client.network_latency_probe"
+    ],
+    "tests/laptop/test_oem_can_capture.py": [
+      "laptop.diagnostics.capture_oem_can"
+    ],
+    "tests/laptop/test_oem_gripper_test.py": [
+      "struct",
+      "time",
+      "pytest",
+      "laptop.transport.gripper_commissioning",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "tests/laptop/test_offline_safety_bridge.py": [
+      "__future__",
+      "copy",
+      "dataclasses",
+      "contextlib",
+      "io",
+      "json",
+      "pathlib",
+      "tempfile",
+      "unittest",
+      "unittest.mock",
+      "laptop.robot_client.offline_replay",
+      "laptop.safety.offline_guard"
+    ],
+    "tests/laptop/test_passive_capture.py": [
+      "__future__",
+      "json",
+      "struct",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "unittest.mock",
+      "laptop.recorder.episode",
+      "laptop.recorder.label_episode",
+      "laptop.recorder.capture_session",
+      "laptop.recorder.passive_capture",
+      "laptop.transport.gs_usb_piper_can",
+      "cv2",
+      "numpy",
+      "cv2",
+      "numpy",
+      "cv2",
+      "numpy"
+    ],
+    "tests/laptop/test_phase_a_pure_core.py": [
+      "ast",
+      "copy",
+      "json",
+      "math",
+      "struct",
+      "threading",
+      "pathlib",
+      "types",
+      "numpy",
+      "pytest",
+      "laptop.piper",
+      "laptop.client",
+      "laptop.camera.worker",
+      "laptop.robot_client.feedback",
+      "laptop.robot_client.piper_session",
+      "can",
+      "piper_sdk.piper_msgs.msg_v2",
+      "piper_sdk.protocol.protocol_v2.piper_protocol_v2",
+      "laptop.robot_client.piper_session",
+      "tests.laptop.test_live_shadow",
+      "inspect",
+      "laptop.camera",
+      "inspect",
+      "laptop.client.bounded_model_trial"
+    ],
+    "tests/laptop/test_piper_can_transport.py": [
+      "__future__",
+      "collections",
+      "types",
+      "sys",
+      "pytest",
+      "laptop.transport.can_transport",
+      "laptop.transport.diagnostic_queries",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport",
+      "usb.util"
+    ],
+    "tests/laptop/test_piper_feedback_ack_only_guard.py": [
+      "__future__",
+      "unittest",
+      "json",
+      "pathlib",
+      "struct",
+      "tempfile",
+      "time",
+      "laptop.diagnostics.probe_piper_feedback_ack_only",
+      "laptop.transport.can_transport",
+      "laptop.transport.gs_usb_piper_can"
+    ],
+    "tests/laptop/test_piper_session.py": [
+      "collections",
+      "json",
+      "struct",
+      "time",
+      "types",
+      "pytest",
+      "laptop.robot_client.piper_session",
+      "laptop.transport.can_transport"
+    ],
+    "tests/laptop/test_piper_tool.py": [
+      "json",
+      "pytest",
+      "laptop.robot_client"
+    ],
+    "tests/laptop/test_policy_reject_only.py": [
+      "json",
+      "pathlib",
+      "laptop.robot_client.policy_reject_only",
+      "laptop.runtime.config"
+    ],
+    "tests/laptop/test_policy_sdk_preview.py": [
+      "__future__",
+      "math",
+      "unittest",
+      "dataclasses",
+      "laptop.control.contracts",
+      "laptop.robot_client.policy_sdk_preview",
+      "can",
+      "piper_sdk.piper_msgs.msg_v2",
+      "piper_sdk.protocol.protocol_v2.piper_protocol_v2"
+    ],
+    "tests/laptop/test_probe_motor_enable_ack_only.py": [
+      "__future__",
+      "time",
+      "unittest",
+      "pathlib",
+      "laptop.diagnostics.probe_motor_enable_ack_only",
+      "laptop.transport.can_transport"
+    ],
+    "tests/laptop/test_process_exit_watchdog.py": [
+      "__future__",
+      "multiprocessing",
+      "time",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport"
+    ],
+    "tests/laptop/test_query_all_joint_parameters.py": [
+      "__future__",
+      "struct",
+      "unittest",
+      "laptop.diagnostics.query_all_joint_parameters"
+    ],
+    "tests/laptop/test_query_joint_limits.py": [
+      "__future__",
+      "struct",
+      "unittest",
+      "laptop.diagnostics.query_joint_limits"
+    ],
+    "tests/laptop/test_query_piper_readiness_snapshot.py": [
+      "__future__",
+      "laptop.diagnostics",
+      "laptop.diagnostics.query_piper_readiness_snapshot"
+    ],
+    "tests/laptop/test_record_demonstrations.py": [
+      "json",
+      "pathlib",
+      "unittest.mock",
+      "laptop.recorder.record_demonstrations",
+      "laptop.recorder.capture_session",
+      "laptop.recorder.episode",
+      "pytest"
+    ],
+    "tests/laptop/test_replay_preflight.py": [
+      "__future__",
+      "math",
+      "unittest",
+      "laptop.robot_client.replay_preflight"
+    ],
+    "tests/laptop/test_safety_bridge_runtime.py": [
+      "pytest",
+      "math",
+      "laptop.control.contracts",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport"
+    ],
+    "tests/laptop/test_shadow_preview_smoke.py": [
+      "json",
+      "pathlib",
+      "numpy",
+      "PIL",
+      "pytest",
+      "laptop.client",
+      "laptop.client.live_shadow"
+    ],
+    "tests/laptop/test_single_step_dry_run.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "time",
+      "unittest",
+      "laptop.control.contracts",
+      "laptop.robot_client.single_step_dry_run",
+      "laptop.transport.can_transport"
+    ],
+    "tests/laptop/test_supervised_enable_j6.py": [
+      "struct",
+      "time",
+      "pytest",
+      "laptop.robot_client.supervised_enable_j6",
+      "laptop.transport.can_transport",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.mode_initialization",
+      "can",
+      "piper_sdk.piper_msgs.msg_v2",
+      "piper_sdk.protocol.protocol_v2.piper_protocol_v2"
+    ],
+    "tests/laptop/test_supervised_j1_one_degree_trial.py": [
+      "__future__",
+      "struct",
+      "unittest",
+      "laptop.robot_client.supervised_j1_one_degree_trial",
+      "laptop.robot_client.supervised_j1_step_trial"
+    ],
+    "tests/laptop/test_supervised_j1_step_trial.py": [
+      "__future__",
+      "struct",
+      "unittest",
+      "laptop.robot_client.supervised_j1_step_trial"
+    ],
+    "tests/laptop/test_supervised_j5_probe.py": [
+      "__future__",
+      "unittest",
+      "laptop.robot_client.supervised_j5_probe"
+    ],
+    "tests/laptop/test_supervised_live_step.py": [
+      "__future__",
+      "pathlib",
+      "sys",
+      "time",
+      "types",
+      "numpy",
+      "pytest",
+      "laptop.client",
+      "laptop.client.observation_schema",
+      "laptop.control.contracts",
+      "laptop.client.supervised_live_step",
+      "laptop.robot_client.single_step_dry_run",
+      "laptop.robot_client.supervised_policy_session",
+      "laptop.robot_client.supervised_site_profile",
+      "laptop.safety.bridge",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.position_commands"
+    ],
+    "tests/laptop/test_supervised_mode_initialization.py": [
+      "struct",
+      "time",
+      "pytest",
+      "laptop.robot_client.supervised_mode_initialization",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.mode_initialization",
+      "can",
+      "piper_sdk.piper_msgs.msg_v2",
+      "piper_sdk.protocol.protocol_v2.piper_protocol_v2"
+    ],
+    "tests/laptop/test_supervised_policy_session.py": [
+      "__future__",
+      "dataclasses",
+      "pickle",
+      "time",
+      "pytest",
+      "laptop.control.contracts",
+      "laptop.robot_client.single_step_dry_run",
+      "laptop.robot_client.supervised_policy_session",
+      "laptop.robot_client.supervised_policy_step",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.position_commands"
+    ],
+    "tests/laptop/test_supervised_policy_step.py": [
+      "__future__",
+      "time",
+      "dataclasses",
+      "pytest",
+      "laptop.control.contracts",
+      "laptop.robot_client.single_step_dry_run",
+      "laptop.robot_client.supervised_policy_step",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.position_commands"
+    ],
+    "tests/laptop/test_supervised_position_bridge.py": [
+      "__future__",
+      "math",
+      "struct",
+      "time",
+      "pytest",
+      "laptop.control.contracts",
+      "laptop.runtime.modes",
+      "laptop.safety.bridge",
+      "laptop.transport.can_transport",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.position_commands"
+    ],
+    "tests/laptop/test_supervised_position_transport.py": [
+      "__future__",
+      "math",
+      "struct",
+      "time",
+      "dataclasses",
+      "types",
+      "sys",
+      "pytest",
+      "laptop.control.contracts",
+      "laptop.transport.gs_usb_piper_can",
+      "laptop.transport.can_transport",
+      "laptop.transport.position_commands",
+      "laptop.transport",
+      "laptop.safety.bridge"
+    ],
+    "tests/laptop/test_supervised_restore_gripper.py": [
+      "__future__",
+      "unittest",
+      "laptop.robot_client.supervised_restore_gripper"
+    ],
+    "tests/laptop/test_supervised_restore_start.py": [
+      "__future__",
+      "struct",
+      "unittest",
+      "laptop.robot_client.supervised_j1_step_trial",
+      "laptop.robot_client.supervised_restore_start"
+    ],
+    "tests/laptop/test_supervised_site_profile.py": [
+      "__future__",
+      "json",
+      "pytest",
+      "laptop.robot_client.single_step_dry_run",
+      "laptop.robot_client.supervised_site_profile",
+      "laptop.transport.position_commands"
+    ],
+    "tests/laptop/test_synthetic_policy_reject_smoke.py": [
+      "pathlib",
+      "inspect",
+      "numpy",
+      "pytest",
+      "laptop.client",
+      "laptop.client.live_shadow",
+      "laptop.runtime.config",
+      "laptop.runtime.modes"
+    ],
+    "tests/laptop/test_verified_policy_command.py": [
+      "__future__",
+      "math",
+      "unittest",
+      "dataclasses",
+      "laptop.control.contracts",
+      "laptop.robot_client.policy_sdk_preview",
+      "laptop.robot_client.single_step_dry_run",
+      "laptop.robot_client.verified_policy_command",
+      "laptop.safety.bridge",
+      "laptop.transport.position_commands"
+    ],
+    "tests/laptop/__init__.py": [],
+    "tests/server/test_action_target_contract.py": [
+      "server.training.action_target_contract"
+    ],
+    "tests/server/test_derived_state_multi_shadow.py": [
+      "__future__",
+      "pathlib",
+      "pytest",
+      "server.training.proxy_multi_episode_contract",
+      "server.serve_derived_state_multi_shadow"
+    ],
+    "tests/server/test_piper_action_eval.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "pathlib",
+      "tempfile",
+      "unittest",
+      "server.training.piper_action_eval",
+      "server.policy_server.artifact_identity"
+    ],
+    "tests/server/test_piper_aligned_converter.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "unittest.mock",
+      "numpy",
+      "PIL",
+      "lerobot.common.datasets.lerobot_dataset",
+      "openpi",
+      "server.dataset_tools.convert_piper_aligned",
+      "server.dataset_tools.convert_piper_aligned",
+      "server.training.check_piper_readiness",
+      "server.training.piper_openpi_config"
+    ],
+    "tests/server/test_piper_openpi_offline.py": [
+      "__future__",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "numpy",
+      "server.training.piper_openpi_config",
+      "server.training.check_piper_readiness",
+      "server.training.piper_train_entry",
+      "server.training.proxy_piper_tiny_fit",
+      "server.training.piper_openpi_config"
+    ],
+    "tests/server/test_piper_train_entry.py": [
+      "__future__",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "server.training.piper_train_entry"
+    ],
+    "tests/server/test_policy_artifact_identity.py": [
+      "__future__",
+      "ast",
+      "hashlib",
+      "pathlib",
+      "pytest",
+      "server.policy_server.artifact_identity"
+    ],
+    "tests/server/test_post_capture_pipeline.py": [
+      "__future__",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "types",
+      "unittest.mock",
+      "laptop.recorder.label_episode",
+      "server.training",
+      "tests.data.test_align_raw",
+      "server.training.proxy_multi_episode_pilot",
+      "server.training.proxy_multi_episode_pilot",
+      "server.training.proxy_multi_episode_pilot"
+    ],
+    "tests/server/test_proxy_dataset_contract.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "server.training.proxy_dataset_contract",
+      "server.training.proxy_dataset_contract"
+    ],
+    "tests/server/test_proxy_latency_profile.py": [
+      "__future__",
+      "unittest",
+      "server.training.proxy_latency_profile"
+    ],
+    "tests/server/test_proxy_multi_episode_contract.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "server.training.proxy_multi_episode_contract"
+    ],
+    "tests/server/test_proxy_policy_config.py": [
+      "json",
+      "pathlib",
+      "pytest",
+      "server.policy_server.proxy_config"
+    ],
+    "tests/server/test_public_data_contract.py": [
+      "__future__",
+      "unittest",
+      "server.training.public_data_contract"
+    ],
+    "tests/server/test_training_data_audit.py": [
+      "__future__",
+      "hashlib",
+      "json",
+      "shutil",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "server.dataset_tools.audit_training_data",
+      "server.dataset_tools.convert_piper_aligned",
+      "tests.server.test_piper_aligned_converter"
+    ],
+    "tests/server/test_training_modes.py": [
+      "__future__",
+      "json",
+      "hashlib",
+      "tempfile",
+      "unittest",
+      "pathlib",
+      "types",
+      "unittest.mock",
+      "server.training.check_piper_readiness",
+      "server.training.piper_train_entry",
+      "server.training.public_data_contract"
+    ],
+    "tests/server/test_train_demonstrations.py": [
+      "pathlib",
+      "pytest",
+      "json",
+      "server.training.train_demonstrations",
+      "server.training",
+      "server.training"
+    ],
+    "tests/server/__init__.py": []
+  }
+}

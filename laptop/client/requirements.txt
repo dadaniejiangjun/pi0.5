@@ -3,3 +3,4 @@ openpi-client @ git+https://github.com/Physical-Intelligence/openpi.git@215abfb2
 numpy==1.26.4
 Pillow>=10,<12
 opencv-python>=4.8,<5
+msgpack>=1,<2

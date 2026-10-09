@@ -1,0 +1,18 @@
+[
+  [
+    "scripts/add_final_gate_aliases.py",
+    "archive/deprecated_scripts/add_final_gate_aliases.py"
+  ],
+  [
+    "scripts/annotate_pi05_smoke_metadata.py",
+    "archive/deprecated_scripts/annotate_pi05_smoke_metadata.py"
+  ],
+  [
+    "validation/camera_base_retry_runner_20261007_r1.py",
+    "archive/old_diagnostics/camera_base_retry_runner_20261007_r1.py"
+  ],
+  [
+    "validation/camera_index_scan_runner_20261007_r1.py",
+    "archive/old_diagnostics/camera_index_scan_runner_20261007_r1.py"
+  ]
+]

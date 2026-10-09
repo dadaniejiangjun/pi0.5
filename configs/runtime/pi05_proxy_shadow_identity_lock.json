@@ -1,0 +1,17 @@
+{
+  "schema": "piper_proxy_artifact_lock_v1",
+  "artifact_identity_schema": "piper_policy_artifact_identity_v1",
+  "config_schema": "pi05_proxy_shadow_v1",
+  "checkpoint": "checkpoints/pi05_piper_next_state_proxy_tiny_fit/cef166e2_two_step/1",
+  "dataset": "local/pi05_proxy_cef166e2_2fps",
+  "normalization_identity": "proxy_dataset_train_split_stats",
+  "action_semantics": "next_observed_state_proxy_nominal_units",
+  "hardware_control_allowed": false,
+  "openpi_commit": "215abfb217dbac7d5f1273282331b9b1866c0479",
+  "checkpoint_sha256": "a22bdec09c2b164d57b8a8f0223d87fa4e18ee37a0dd849e6b93837b56fdb573",
+  "policy_config_sha256": "2b547470e7a315eee20bd5f6eea6665790472233ceb7c2d3fe87e91df91e1708",
+  "policy_pipeline_code_sha256": "ca821904e963499fde780df962a0c95492773564aa4e2a9095e120920f955520",
+  "training_config_code_sha256": "4bf4a275c68af7d6e700fbc6572b3a67897fed2558a012abf74e23f4bb442602",
+  "normalization_sha256": "35a215388c3985f20cca910ba25bd162749ec052f753e7aff762b8f841281c4e",
+  "dataset_tree_sha256": "2f0d76aa7c22fbc5cb588bb388a9250e492af61c15218faca48194c890a44677"
+}

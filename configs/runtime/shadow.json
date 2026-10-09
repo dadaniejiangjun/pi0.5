@@ -1,0 +1,10 @@
+{
+  "schema": "piper_runtime_v1",
+  "mode": "SHADOW",
+  "policy_config": "configs/policy/pi05_proxy_shadow.json",
+  "can_tx_enabled": false,
+  "single_can_owner": "safety-bridge",
+  "max_state_age_ms": 250,
+  "max_prediction_age_ms": 250,
+  "notes": "Offline default. Runtime code in this build rejects every CAN transmit path."
+}

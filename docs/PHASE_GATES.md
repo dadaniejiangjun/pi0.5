@@ -1,3 +1,11 @@
+---
+Document status: CURRENT
+Current authority: docs/PHASE_GATES.md
+Last reviewed: 2026-10-08
+---
+
+> **CURRENT**：Experimental success does not automatically satisfy a formal phase gate. 本轮不把 commissioning 结果自动改成 PASS；状态见 CURRENT_STATUS。 当前领域主文档见 [authority](PHASE_GATES.md)。
+
 # Phase gates
 
 Each gate has a status, evidence path and stop condition. `PASS` means the

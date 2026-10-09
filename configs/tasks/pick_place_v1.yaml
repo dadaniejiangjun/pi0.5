@@ -1,9 +1,12 @@
-task_id: pick_place_single_object_v1
-canonical_instruction: "Pick up the block and place it in the tray."
+task_id: pick_place_black_rod_green_mat_v1
+canonical_instruction: "Pick up the black rod and place it on the green desk mat."
+readiness: VISUAL_AND_HARDWARE_AUDIT_PENDING
 objects:
   object_count: 1
-  object_semantics: block
-  tray_count: 1
+  object_semantics: black_rod
+  target_surface_count: 1
+  target_surface_semantics: green_desk_mat
+success_criterion: black_rod_released_and_resting_on_green_mat
 language: fixed_semantic_instruction
 scope:
   multi_object: false

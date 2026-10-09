@@ -1,0 +1,20 @@
+[
+  "tests/contracts/test_piper_units.py",
+  "tests/laptop/test_live_shadow.py",
+  "tests/laptop/test_piper_session.py",
+  "tests/laptop/test_piper_feedback_ack_only_guard.py",
+  "tests/laptop/test_bounded_policy_target.py",
+  "tests/laptop/test_bounded_model_trial.py",
+  "tests/laptop/test_safety_bridge_runtime.py",
+  "tests/laptop/test_offline_safety_bridge.py",
+  "tests/laptop/test_phase_a_pure_core.py",
+  "tests/laptop/test_supervised_position_bridge.py",
+  "tests/laptop/test_supervised_policy_session.py",
+  "tests/laptop/test_shadow_preview_smoke.py",
+  "tests/laptop/test_legacy_hil_guard.py",
+  "tests/laptop/test_supervised_j1_step_trial.py",
+  "tests/laptop/test_supervised_j1_one_degree_trial.py",
+  "tests/laptop/test_supervised_j5_probe.py",
+  "tests/laptop/test_supervised_restore_gripper.py",
+  "tests/laptop/test_supervised_restore_start.py"
+]

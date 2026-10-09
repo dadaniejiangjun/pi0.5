@@ -1,3 +1,9 @@
+# Document status: TEMPLATE
+# Current authority: docs/CURRENT_STATUS.md; docs/RUNBOOK.md
+# Last reviewed: 2026-10-08
+# This is an initial contract / network-options template, not active deployment state.
+# PLAN_ONLY, pending choices and candidate ports below are HISTORICAL planning fields.
+# Parsed configuration is intentionally unchanged; runtime args / reports / identity control execution.
 project:
   id: 07_pi0.5
   title: real-world-pi05-agilex-piper-vla
@@ -42,8 +48,8 @@ decisions:
     selected: null
     status: USER_DECISION_REQUIRED_AFTER_HARDWARE_AUDIT
   D4_first_task:
-    selected: null
-    status: USER_DECISION_REQUIRED
+    selected: TASK-A
+    status: USER_SELECTED_PENDING_VISUAL_AND_HARDWARE_AUDIT
     recommendation: TASK-A
   D5_initial_checkpoint:
     selected: null
@@ -76,7 +82,7 @@ contracts:
     larger_horizons: [2, 4]
     enable_larger_horizons_only_after: guarded_single_step_pass
   prompt:
-    phase_1: "Pick up the block and place it in the tray."
+    phase_1: "Pick up the black rod and place it on the green desk mat."
     source: episode_instruction
     equivalent_phrasings: forbidden_until_phase_1_pass
 

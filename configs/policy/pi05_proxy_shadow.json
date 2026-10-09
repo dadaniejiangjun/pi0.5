@@ -1,0 +1,19 @@
+{
+  "schema": "pi05_proxy_shadow_v1",
+  "experiment_name": "cef166e2_two_step",
+  "checkpoint_step": 1,
+  "comparison_experiment_name": "cef166e2_ten_step",
+  "comparison_checkpoint_step": 9,
+  "dataset_identity": "local/pi05_proxy_cef166e2_2fps",
+  "normalization_identity": "proxy_dataset_train_split_stats",
+  "action_semantics": "next_observed_state_proxy_nominal_units",
+  "action_horizon": 16,
+  "action_dimension": 7,
+  "source_fps": 2.0,
+  "first_target_dt_s": 0.5,
+  "server_host": "127.0.0.1",
+  "server_port": 8002,
+  "sampling_steps": 10,
+  "prediction_only": true,
+  "hardware_control_allowed": false
+}

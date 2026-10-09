@@ -1,0 +1,2779 @@
+{
+  "roots": [
+    "laptop.camera.dual_camera",
+    "laptop.recorder.record_demonstrations",
+    "laptop.robot_client.piper_tool",
+    "laptop.client.bounded_model_trial",
+    "laptop.client.live_model_preview",
+    "server.training.post_capture_pipeline",
+    "server.training.train_demonstrations",
+    "server.training.evaluate_demonstrations",
+    "server.training.serve_trained_demonstrations",
+    "server.training.summarize_training_loss"
+  ],
+  "graph": {
+    "laptop/test_policy_tunnel.py": [
+      "laptop/__init__.py"
+    ],
+    "laptop/__init__.py": [],
+    "laptop/camera/dual_camera.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_dual_cameras.py"
+    ],
+    "laptop/camera/source.py": [],
+    "laptop/camera/worker.py": [
+      "laptop/__init__.py",
+      "laptop/camera/source.py"
+    ],
+    "laptop/client/action_shadow_replay.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/piper_command_targets.py",
+      "laptop/recorder/verify_source.py",
+      "server/__init__.py"
+    ],
+    "laptop/client/audit_live_shadow.py": [
+      "laptop/__init__.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/offline_guard.py"
+    ],
+    "laptop/client/bounded_model_trial.py": [
+      "laptop/__init__.py",
+      "laptop/camera/dual_camera.py",
+      "laptop/camera/worker.py",
+      "laptop/client/__init__.py",
+      "laptop/client/observation_schema.py",
+      "laptop/client/policy_client.py",
+      "laptop/diagnostics/bounded_process.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/record_demonstrations.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/bounded_policy_target.py",
+      "laptop/robot_client/piper_session.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/bounded_trial.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "server/__init__.py"
+    ],
+    "laptop/client/latency_probe.py": [],
+    "laptop/client/live_model_preview.py": [
+      "laptop/__init__.py",
+      "laptop/camera/dual_camera.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/policy_client.py",
+      "laptop/diagnostics/bounded_process.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/record_demonstrations.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/bounded_policy_target.py"
+    ],
+    "laptop/client/live_shadow.py": [
+      "laptop/__init__.py",
+      "laptop/camera/worker.py",
+      "laptop/client/__init__.py",
+      "laptop/client/observation_schema.py",
+      "laptop/client/policy_client.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/diagnostics/bounded_process.py",
+      "laptop/diagnostics/camera_identity.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/feedback.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "server/__init__.py"
+    ],
+    "laptop/client/network_latency_probe.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/observation_schema.py",
+      "server/__init__.py"
+    ],
+    "laptop/client/observation_schema.py": [
+      "server/__init__.py",
+      "tests/__init__.py"
+    ],
+    "laptop/client/offline_latency_replay.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/observation_schema.py",
+      "server/__init__.py"
+    ],
+    "laptop/client/policy_client.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/observation_schema.py",
+      "server/__init__.py"
+    ],
+    "laptop/client/policy_client_smoke.py": [
+      "server/__init__.py"
+    ],
+    "laptop/client/public_piper_transport_smoke.py": [
+      "server/__init__.py",
+      "server/training/public_data_contract.py"
+    ],
+    "laptop/client/shadow_preview_smoke.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/network_latency_probe.py",
+      "laptop/client/observation_schema.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/verify_source.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/policy_reject_only.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py",
+      "laptop/runtime/modes.py",
+      "server/__init__.py"
+    ],
+    "laptop/client/supervised_live_step.py": [
+      "laptop/__init__.py",
+      "laptop/camera/worker.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/observation_schema.py",
+      "laptop/diagnostics/bounded_process.py",
+      "laptop/diagnostics/camera_identity.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_policy_session.py",
+      "laptop/robot_client/supervised_policy_step.py",
+      "laptop/robot_client/supervised_site_profile.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "server/__init__.py"
+    ],
+    "laptop/client/synthetic_policy_reject_smoke.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/observation_schema.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/policy_reject_only.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py",
+      "laptop/runtime/modes.py",
+      "server/__init__.py"
+    ],
+    "laptop/client/__init__.py": [
+      "laptop/__init__.py"
+    ],
+    "laptop/control/contracts.py": [
+      "laptop/__init__.py",
+      "server/__init__.py"
+    ],
+    "laptop/control/__init__.py": [
+      "laptop/control/contracts.py"
+    ],
+    "laptop/diagnostics/audit_feedback_log.py": [],
+    "laptop/diagnostics/bounded_process.py": [],
+    "laptop/diagnostics/camera_identity.py": [],
+    "laptop/diagnostics/camera_stream_smoke.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_dual_cameras.py"
+    ],
+    "laptop/diagnostics/can_diagnostic_session.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/diagnostics/capture_oem_can.py": [],
+    "laptop/diagnostics/compare_gripper_feedback.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/audit_feedback_log.py"
+    ],
+    "laptop/diagnostics/list_candlelight_adapters.py": [
+      "laptop/__init__.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/diagnostics/probe_cameras.py": [
+      "laptop/__init__.py",
+      "server/__init__.py"
+    ],
+    "laptop/diagnostics/probe_can_ack_only.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/diagnostics/probe_can_listen_only.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/diagnostics/probe_dual_cameras.py": [
+      "laptop/__init__.py",
+      "laptop/camera/source.py",
+      "laptop/diagnostics/bounded_process.py",
+      "laptop/diagnostics/camera_identity.py"
+    ],
+    "laptop/diagnostics/probe_motor_enable_ack_only.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/diagnostics/probe_network.py": [],
+    "laptop/diagnostics/probe_piper.py": [
+      "laptop/__init__.py"
+    ],
+    "laptop/diagnostics/probe_piper_feedback_ack_only.py": [
+      "laptop/__init__.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/feedback.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/diagnostics/probe_piper_readonly.py": [
+      "laptop/__init__.py"
+    ],
+    "laptop/diagnostics/query_all_joint_parameters.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/can_diagnostic_session.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py"
+    ],
+    "laptop/diagnostics/query_joint_limits.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/can_diagnostic_session.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py"
+    ],
+    "laptop/diagnostics/query_piper_firmware.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/can_diagnostic_session.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py"
+    ],
+    "laptop/diagnostics/query_piper_gripper_parameters.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/can_diagnostic_session.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py"
+    ],
+    "laptop/diagnostics/query_piper_readiness_snapshot.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/query_all_joint_parameters.py",
+      "laptop/diagnostics/query_piper_firmware.py",
+      "laptop/diagnostics/query_piper_gripper_parameters.py",
+      "tests/__init__.py"
+    ],
+    "laptop/piper/unit_conversion.py": [],
+    "laptop/piper/__init__.py": [
+      "laptop/piper/unit_conversion.py"
+    ],
+    "laptop/recorder/align_raw.py": [
+      "laptop/__init__.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/piper_command_targets.py"
+    ],
+    "laptop/recorder/audit_episode.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/episode.py"
+    ],
+    "laptop/recorder/capture_session.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/camera_identity.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/passive_capture.py",
+      "tests/__init__.py"
+    ],
+    "laptop/recorder/episode.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/piper_command_targets.py"
+    ],
+    "laptop/recorder/label_episode.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/episode.py"
+    ],
+    "laptop/recorder/manual_teach_capture.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/camera_identity.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/passive_capture.py"
+    ],
+    "laptop/recorder/next_state_proxy.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/verify_source.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_site_profile.py"
+    ],
+    "laptop/recorder/passive_capture.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/bounded_process.py",
+      "laptop/diagnostics/camera_identity.py",
+      "laptop/diagnostics/probe_dual_cameras.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/episode.py",
+      "laptop/recorder/piper_command_targets.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/recorder/piper_command_targets.py": [],
+    "laptop/recorder/record_demonstrations.py": [
+      "laptop/__init__.py",
+      "laptop/camera/dual_camera.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/capture_session.py",
+      "laptop/recorder/episode.py"
+    ],
+    "laptop/recorder/synthetic_smoke.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/episode.py"
+    ],
+    "laptop/recorder/verify_source.py": [
+      "laptop/__init__.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/piper_command_targets.py"
+    ],
+    "laptop/recorder/__init__.py": [],
+    "laptop/robot_client/bounded_policy_target.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/replay_preflight.py"
+    ],
+    "laptop/robot_client/bounded_zero_return.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/bounded_process.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/piper_session.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/bounded_trial.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/robot_client/feedback.py": [],
+    "laptop/robot_client/gripper_command_preview.py": [],
+    "laptop/robot_client/hil_guard.py": [
+      "laptop/__init__.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py"
+    ],
+    "laptop/robot_client/joint_command_preview.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/replay_preflight.py"
+    ],
+    "laptop/robot_client/offline_replay.py": [
+      "laptop/__init__.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/offline_guard.py"
+    ],
+    "laptop/robot_client/piper_session.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/feedback.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/robot_client/piper_tool.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_motor_enable_ack_only.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_axis_commissioning.py",
+      "laptop/robot_client/supervised_enable_j6.py",
+      "laptop/robot_client/supervised_gripper_commissioning.py",
+      "laptop/robot_client/supervised_j1_commissioning.py",
+      "laptop/robot_client/supervised_mode_initialization.py"
+    ],
+    "laptop/robot_client/policy_reject_only.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "laptop/robot_client/policy_sdk_preview.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/joint_command_preview.py",
+      "laptop/robot_client/replay_preflight.py"
+    ],
+    "laptop/robot_client/replay_preflight.py": [
+      "laptop/__init__.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py"
+    ],
+    "laptop/robot_client/single_step_dry_run.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/joint_command_preview.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "tests/__init__.py"
+    ],
+    "laptop/robot_client/supervised_axis_commissioning.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j1_commissioning.py"
+    ],
+    "laptop/robot_client/supervised_enable_j6.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_mode_initialization.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/robot_client/supervised_gripper_commissioning.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/piper_session.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/robot_client/supervised_gripper_max_open.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/piper_session.py",
+      "laptop/robot_client/supervised_near_zero_home.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/robot_client/supervised_j1_commissioning.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py",
+      "tests/__init__.py"
+    ],
+    "laptop/robot_client/supervised_j1_one_degree_trial.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_motor_enable_ack_only.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/hil_guard.py",
+      "laptop/robot_client/supervised_j1_step_trial.py"
+    ],
+    "laptop/robot_client/supervised_j1_step_trial.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_motor_enable_ack_only.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/hil_guard.py",
+      "laptop/robot_client/joint_command_preview.py"
+    ],
+    "laptop/robot_client/supervised_j5_probe.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/hil_guard.py",
+      "laptop/robot_client/supervised_j1_step_trial.py",
+      "laptop/robot_client/supervised_restore_start.py"
+    ],
+    "laptop/robot_client/supervised_joint_replay.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_motor_enable_ack_only.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/hil_guard.py",
+      "laptop/robot_client/replay_preflight.py",
+      "laptop/robot_client/supervised_j1_step_trial.py",
+      "laptop/robot_client/supervised_restore_start.py"
+    ],
+    "laptop/robot_client/supervised_mode_initialization.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/mode_initialization.py"
+    ],
+    "laptop/robot_client/supervised_near_zero_home.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/piper_session.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "laptop/robot_client/supervised_oem_gripper_test.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/piper_session.py",
+      "laptop/robot_client/supervised_near_zero_home.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gripper_commissioning.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "laptop/robot_client/supervised_policy_session.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/supervised_policy_step.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "laptop/robot_client/supervised_policy_step.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/policy_sdk_preview.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/verified_policy_command.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "laptop/robot_client/supervised_restore_gripper.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/gripper_command_preview.py",
+      "laptop/robot_client/hil_guard.py",
+      "laptop/robot_client/supervised_j1_step_trial.py",
+      "laptop/robot_client/supervised_restore_start.py"
+    ],
+    "laptop/robot_client/supervised_restore_start.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_motor_enable_ack_only.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/hil_guard.py",
+      "laptop/robot_client/replay_preflight.py",
+      "laptop/robot_client/supervised_j1_step_trial.py"
+    ],
+    "laptop/robot_client/supervised_site_profile.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/replay_preflight.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "laptop/robot_client/supervised_smooth_joint_replay.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_motor_enable_ack_only.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/hil_guard.py",
+      "laptop/robot_client/replay_preflight.py",
+      "laptop/robot_client/supervised_j1_step_trial.py",
+      "laptop/robot_client/supervised_restore_start.py"
+    ],
+    "laptop/robot_client/verified_policy_command.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/policy_sdk_preview.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py"
+    ],
+    "laptop/robot_client/__init__.py": [],
+    "laptop/runtime/bridge_protocol.py": [],
+    "laptop/runtime/config.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py"
+    ],
+    "laptop/runtime/modes.py": [],
+    "laptop/runtime/__init__.py": [
+      "laptop/runtime/modes.py"
+    ],
+    "laptop/safety/bridge.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/bounded_trial.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py",
+      "laptop/transport/gripper_commissioning.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/mode_initialization.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "laptop/safety/offline_guard.py": [],
+    "laptop/safety/__init__.py": [],
+    "laptop/transport/bounded_trial.py": [
+      "laptop/__init__.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "laptop/transport/can_transport.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/diagnostic_queries.py",
+      "laptop/transport/position_commands.py",
+      "tests/__init__.py"
+    ],
+    "laptop/transport/diagnostic_queries.py": [],
+    "laptop/transport/gripper_commissioning.py": [
+      "laptop/__init__.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "laptop/transport/gs_usb_piper_can.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/bounded_trial.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py",
+      "laptop/transport/gripper_commissioning.py",
+      "laptop/transport/mode_initialization.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "laptop/transport/mode_initialization.py": [],
+    "laptop/transport/position_commands.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py"
+    ],
+    "laptop/transport/__init__.py": [
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "server/public_piper_smoke_infer.py": [
+      "server/__init__.py",
+      "server/training/public_piper_smoke.py"
+    ],
+    "server/serve_derived_state_multi_shadow.py": [
+      "server/__init__.py",
+      "server/policy_server/artifact_identity.py",
+      "server/training/proxy_multi_episode_contract.py",
+      "server/training/proxy_multi_episode_pilot.py"
+    ],
+    "server/serve_piper_action_shadow.py": [
+      "server/__init__.py",
+      "server/policy_server/artifact_identity.py",
+      "server/training/piper_train_entry.py"
+    ],
+    "server/serve_policy_local.py": [
+      "server/__init__.py"
+    ],
+    "server/serve_proxy_piper_shadow.py": [
+      "server/__init__.py",
+      "server/policy_server/artifact_identity.py",
+      "server/policy_server/proxy_config.py",
+      "server/training/proxy_piper_tiny_fit.py",
+      "tests/__init__.py"
+    ],
+    "server/serve_public_piper_smoke.py": [
+      "server/__init__.py",
+      "server/training/public_data_contract.py",
+      "server/training/public_piper_smoke.py"
+    ],
+    "server/__init__.py": [],
+    "server/dataset_tools/audit_proxy_lerobot.py": [
+      "server/__init__.py",
+      "server/dataset_tools/convert_next_state_proxy.py"
+    ],
+    "server/dataset_tools/audit_training_data.py": [],
+    "server/dataset_tools/compare_proxy_sampling_rates.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/verify_source.py",
+      "server/__init__.py",
+      "server/dataset_tools/convert_next_state_proxy.py"
+    ],
+    "server/dataset_tools/convert_next_state_proxy.py": [],
+    "server/dataset_tools/convert_piper_aligned.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/piper_command_targets.py",
+      "laptop/recorder/verify_source.py"
+    ],
+    "server/dataset_tools/synthetic_lerobot_smoke.py": [
+      "server/__init__.py",
+      "server/training/piper_openpi_config.py"
+    ],
+    "server/piper_policy/piper_data_config.py": [],
+    "server/piper_policy/piper_inputs.py": [],
+    "server/piper_policy/piper_outputs.py": [],
+    "server/piper_policy/piper_policy_config.py": [],
+    "server/piper_policy/__init__.py": [
+      "server/piper_policy/piper_inputs.py",
+      "server/piper_policy/piper_outputs.py"
+    ],
+    "server/policy_server/artifact_identity.py": [],
+    "server/policy_server/proxy_config.py": [
+      "server/__init__.py"
+    ],
+    "server/training/action_target_contract.py": [],
+    "server/training/check_piper_readiness.py": [
+      "server/__init__.py",
+      "server/training/action_target_contract.py",
+      "server/training/piper_openpi_config.py",
+      "server/training/public_data_contract.py"
+    ],
+    "server/training/evaluate_demonstrations.py": [
+      "server/__init__.py",
+      "server/training/proxy_multi_episode_pilot.py"
+    ],
+    "server/training/piper_action_eval.py": [
+      "server/__init__.py",
+      "server/policy_server/artifact_identity.py",
+      "server/training/piper_train_entry.py"
+    ],
+    "server/training/piper_openpi_config.py": [
+      "tests/__init__.py"
+    ],
+    "server/training/piper_train_entry.py": [
+      "server/__init__.py",
+      "server/policy_server/artifact_identity.py",
+      "server/training/check_piper_readiness.py",
+      "server/training/piper_openpi_config.py",
+      "server/training/public_piper_smoke.py"
+    ],
+    "server/training/post_capture_pipeline.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/next_state_proxy.py",
+      "server/__init__.py",
+      "server/dataset_tools/convert_next_state_proxy.py",
+      "server/serve_derived_state_multi_shadow.py",
+      "server/training/proxy_multi_episode_contract.py",
+      "server/training/proxy_multi_episode_pilot.py"
+    ],
+    "server/training/proxy_dataset_contract.py": [
+      "laptop/__init__.py"
+    ],
+    "server/training/proxy_latency_profile.py": [
+      "server/__init__.py",
+      "server/training/proxy_piper_tiny_fit.py"
+    ],
+    "server/training/proxy_multi_episode_contract.py": [],
+    "server/training/proxy_multi_episode_pilot.py": [
+      "server/__init__.py",
+      "server/policy_server/artifact_identity.py",
+      "server/training/piper_openpi_config.py",
+      "server/training/proxy_multi_episode_contract.py"
+    ],
+    "server/training/proxy_piper_eval.py": [
+      "laptop/__init__.py",
+      "server/__init__.py",
+      "server/training/proxy_dataset_contract.py",
+      "server/training/proxy_piper_tiny_fit.py"
+    ],
+    "server/training/proxy_piper_tiny_fit.py": [
+      "laptop/__init__.py",
+      "server/__init__.py",
+      "server/training/piper_openpi_config.py",
+      "server/training/proxy_dataset_contract.py"
+    ],
+    "server/training/public_data_contract.py": [],
+    "server/training/public_piper_smoke.py": [
+      "server/__init__.py",
+      "server/training/piper_openpi_config.py"
+    ],
+    "server/training/serve_trained_demonstrations.py": [
+      "server/__init__.py",
+      "server/serve_derived_state_multi_shadow.py"
+    ],
+    "server/training/summarize_training_loss.py": [],
+    "server/training/train_demonstrations.py": [
+      "server/__init__.py",
+      "server/training/proxy_multi_episode_pilot.py"
+    ],
+    "scripts/audit_laptop_probe.py": [
+      "laptop/__init__.py"
+    ],
+    "scripts/refresh_environment_audit.py": [],
+    "scripts/run_local_policy_server_smoke.py": [
+      "laptop/__init__.py",
+      "server/__init__.py"
+    ],
+    "scripts/run_pi05_base_smoke.py": [],
+    "scripts/run_server_performance.py": [
+      "laptop/__init__.py",
+      "server/__init__.py"
+    ],
+    "scripts/validate_piper_continuous.py": [
+      "laptop/__init__.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py"
+    ],
+    "scripts/validate_piper_contract.py": [
+      "laptop/__init__.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py",
+      "server/__init__.py",
+      "server/piper_policy/__init__.py",
+      "server/piper_policy/piper_inputs.py",
+      "server/piper_policy/piper_outputs.py"
+    ],
+    "scripts/write_checkpoint_provenance.py": [],
+    "scripts/write_deployment_manifest.py": [
+      "server/__init__.py"
+    ],
+    "scripts/write_socket_binding_report.py": [
+      "server/__init__.py"
+    ],
+    "tests/__init__.py": [],
+    "tests/contracts/test_control_contracts.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py"
+    ],
+    "tests/contracts/test_piper_contract.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/observation_schema.py",
+      "server/__init__.py",
+      "server/piper_policy/__init__.py",
+      "server/piper_policy/piper_inputs.py",
+      "server/piper_policy/piper_outputs.py"
+    ],
+    "tests/contracts/test_piper_units.py": [
+      "laptop/__init__.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py"
+    ],
+    "tests/contracts/test_runtime_config.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py",
+      "laptop/runtime/modes.py"
+    ],
+    "tests/contracts/__init__.py": [],
+    "tests/data/test_align_raw.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/episode.py",
+      "laptop/recorder/piper_command_targets.py",
+      "laptop/recorder/verify_source.py"
+    ],
+    "tests/data/test_align_raw_to_lerobot.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/piper_command_targets.py",
+      "server/__init__.py",
+      "server/dataset_tools/convert_piper_aligned.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/data/test_convert_next_state_proxy.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/next_state_proxy.py",
+      "server/__init__.py",
+      "server/dataset_tools/convert_next_state_proxy.py",
+      "server/training/proxy_multi_episode_contract.py",
+      "server/training/proxy_multi_episode_pilot.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/data/test_next_state_proxy.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/next_state_proxy.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/data/test_piper_command_targets.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/piper_command_targets.py"
+    ],
+    "tests/data/test_proxy_lerobot_audit.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/next_state_proxy.py",
+      "server/__init__.py",
+      "server/dataset_tools/audit_proxy_lerobot.py",
+      "server/dataset_tools/compare_proxy_sampling_rates.py",
+      "server/dataset_tools/convert_next_state_proxy.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/data/test_proxy_sampling_rate_comparison.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/next_state_proxy.py",
+      "server/__init__.py",
+      "server/dataset_tools/compare_proxy_sampling_rates.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/data/test_source_verification.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/piper_command_targets.py",
+      "laptop/recorder/verify_source.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/data/__init__.py": [],
+    "tests/laptop/test_action_shadow_replay.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/action_shadow_replay.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/piper_command_targets.py",
+      "server/__init__.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/laptop/test_bounded_model_trial.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/bounded_model_trial.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/bounded_trial.py",
+      "laptop/transport/can_transport.py",
+      "tests/__init__.py",
+      "tests/laptop/__init__.py",
+      "tests/laptop/test_j1_commissioning_bridge.py"
+    ],
+    "tests/laptop/test_bounded_policy_target.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/bounded_policy_target.py"
+    ],
+    "tests/laptop/test_bounded_process.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/bounded_process.py"
+    ],
+    "tests/laptop/test_bounded_zero_return.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/bounded_zero_return.py"
+    ],
+    "tests/laptop/test_bridge_protocol.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/bridge_protocol.py"
+    ],
+    "tests/laptop/test_camera_identity_inventory.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/camera_identity.py"
+    ],
+    "tests/laptop/test_camera_stream_smoke.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/camera_stream_smoke.py"
+    ],
+    "tests/laptop/test_can_ack_only_guard.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_can_ack_only.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_can_listen_only_guard.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_can_listen_only.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_capture_boundary_frames.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/episode.py"
+    ],
+    "tests/laptop/test_capture_supervision.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/bounded_process.py",
+      "laptop/diagnostics/camera_identity.py",
+      "laptop/diagnostics/probe_dual_cameras.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/episode.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/passive_capture.py"
+    ],
+    "tests/laptop/test_compare_gripper_feedback.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/compare_gripper_feedback.py"
+    ],
+    "tests/laptop/test_diagnostic_queries.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/can_diagnostic_session.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py"
+    ],
+    "tests/laptop/test_dual_camera_capture.py": [
+      "laptop/__init__.py",
+      "laptop/camera/dual_camera.py"
+    ],
+    "tests/laptop/test_dual_camera_probe.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_dual_cameras.py"
+    ],
+    "tests/laptop/test_episode_recorder.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/episode.py"
+    ],
+    "tests/laptop/test_fake_can_single_step_rehearsal.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_feedback_log_audit.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/audit_feedback_log.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py"
+    ],
+    "tests/laptop/test_firmware_query.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/query_piper_firmware.py"
+    ],
+    "tests/laptop/test_gripper_command_preview.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/gripper_command_preview.py"
+    ],
+    "tests/laptop/test_gripper_commissioning.py": [
+      "laptop/__init__.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gripper_commissioning.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "tests/laptop/test_gripper_parameter_query.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/query_piper_gripper_parameters.py"
+    ],
+    "tests/laptop/test_j1_commissioning_bridge.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j1_commissioning.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_joint_command_preview.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/joint_command_preview.py"
+    ],
+    "tests/laptop/test_legacy_hil_guard.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j1_one_degree_trial.py",
+      "laptop/robot_client/supervised_j1_step_trial.py",
+      "laptop/robot_client/supervised_j5_probe.py",
+      "laptop/robot_client/supervised_joint_replay.py",
+      "laptop/robot_client/supervised_restore_gripper.py",
+      "laptop/robot_client/supervised_restore_start.py",
+      "laptop/robot_client/supervised_smooth_joint_replay.py"
+    ],
+    "tests/laptop/test_live_shadow.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/audit_live_shadow.py",
+      "laptop/client/live_shadow.py",
+      "laptop/diagnostics/bounded_process.py",
+      "server/__init__.py"
+    ],
+    "tests/laptop/test_near_zero_home.py": [
+      "laptop/__init__.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gripper_commissioning.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_network_latency_probe.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/network_latency_probe.py",
+      "server/__init__.py"
+    ],
+    "tests/laptop/test_oem_can_capture.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/capture_oem_can.py"
+    ],
+    "tests/laptop/test_oem_gripper_test.py": [
+      "laptop/__init__.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gripper_commissioning.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "tests/laptop/test_offline_safety_bridge.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/offline_replay.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/offline_guard.py"
+    ],
+    "tests/laptop/test_passive_capture.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_dual_cameras.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/capture_session.py",
+      "laptop/recorder/episode.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/passive_capture.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "tests/laptop/test_phase_a_pure_core.py": [
+      "laptop/__init__.py",
+      "laptop/camera/source.py",
+      "laptop/camera/worker.py",
+      "laptop/client/__init__.py",
+      "laptop/client/bounded_model_trial.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/observation_schema.py",
+      "laptop/client/policy_client.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/feedback.py",
+      "laptop/robot_client/piper_session.py",
+      "tests/__init__.py",
+      "tests/laptop/__init__.py",
+      "tests/laptop/test_live_shadow.py"
+    ],
+    "tests/laptop/test_piper_can_transport.py": [
+      "laptop/__init__.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "tests/laptop/test_piper_feedback_ack_only_guard.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "tests/laptop/test_piper_session.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/piper_session.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_piper_tool.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/piper_tool.py"
+    ],
+    "tests/laptop/test_policy_reject_only.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/policy_reject_only.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py"
+    ],
+    "tests/laptop/test_policy_sdk_preview.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/policy_sdk_preview.py"
+    ],
+    "tests/laptop/test_probe_motor_enable_ack_only.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_motor_enable_ack_only.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_process_exit_watchdog.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_query_all_joint_parameters.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/query_all_joint_parameters.py"
+    ],
+    "tests/laptop/test_query_joint_limits.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/query_joint_limits.py"
+    ],
+    "tests/laptop/test_query_piper_readiness_snapshot.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/query_all_joint_parameters.py",
+      "laptop/diagnostics/query_piper_firmware.py",
+      "laptop/diagnostics/query_piper_gripper_parameters.py",
+      "laptop/diagnostics/query_piper_readiness_snapshot.py"
+    ],
+    "tests/laptop/test_record_demonstrations.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/capture_session.py",
+      "laptop/recorder/episode.py",
+      "laptop/recorder/record_demonstrations.py"
+    ],
+    "tests/laptop/test_replay_preflight.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/replay_preflight.py"
+    ],
+    "tests/laptop/test_safety_bridge_runtime.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_shadow_preview_smoke.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/shadow_preview_smoke.py",
+      "server/__init__.py"
+    ],
+    "tests/laptop/test_single_step_dry_run.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_supervised_enable_j6.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_enable_j6.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/mode_initialization.py"
+    ],
+    "tests/laptop/test_supervised_j1_one_degree_trial.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j1_one_degree_trial.py",
+      "laptop/robot_client/supervised_j1_step_trial.py"
+    ],
+    "tests/laptop/test_supervised_j1_step_trial.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j1_step_trial.py"
+    ],
+    "tests/laptop/test_supervised_j5_probe.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j5_probe.py"
+    ],
+    "tests/laptop/test_supervised_live_step.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/observation_schema.py",
+      "laptop/client/supervised_live_step.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/supervised_policy_session.py",
+      "laptop/robot_client/supervised_site_profile.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py",
+      "server/__init__.py"
+    ],
+    "tests/laptop/test_supervised_mode_initialization.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_mode_initialization.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/mode_initialization.py"
+    ],
+    "tests/laptop/test_supervised_policy_session.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/supervised_policy_session.py",
+      "laptop/robot_client/supervised_policy_step.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_supervised_policy_step.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/supervised_policy_step.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_supervised_position_bridge.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_supervised_position_transport.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_supervised_restore_gripper.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_restore_gripper.py"
+    ],
+    "tests/laptop/test_supervised_restore_start.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j1_step_trial.py",
+      "laptop/robot_client/supervised_restore_start.py"
+    ],
+    "tests/laptop/test_supervised_site_profile.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/supervised_site_profile.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_synthetic_policy_reject_smoke.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/synthetic_policy_reject_smoke.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py",
+      "laptop/runtime/modes.py",
+      "server/__init__.py"
+    ],
+    "tests/laptop/test_verified_policy_command.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/policy_sdk_preview.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/verified_policy_command.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/__init__.py": [
+      "laptop/__init__.py"
+    ],
+    "tests/server/test_action_target_contract.py": [
+      "server/__init__.py",
+      "server/training/action_target_contract.py"
+    ],
+    "tests/server/test_derived_state_multi_shadow.py": [
+      "server/__init__.py",
+      "server/serve_derived_state_multi_shadow.py",
+      "server/training/proxy_multi_episode_contract.py"
+    ],
+    "tests/server/test_piper_action_eval.py": [
+      "server/__init__.py",
+      "server/policy_server/artifact_identity.py",
+      "server/training/piper_action_eval.py"
+    ],
+    "tests/server/test_piper_aligned_converter.py": [
+      "server/__init__.py",
+      "server/dataset_tools/convert_piper_aligned.py",
+      "server/training/check_piper_readiness.py",
+      "server/training/piper_openpi_config.py"
+    ],
+    "tests/server/test_piper_openpi_offline.py": [
+      "server/__init__.py",
+      "server/training/check_piper_readiness.py",
+      "server/training/piper_openpi_config.py",
+      "server/training/piper_train_entry.py",
+      "server/training/proxy_piper_tiny_fit.py"
+    ],
+    "tests/server/test_piper_train_entry.py": [
+      "server/__init__.py",
+      "server/training/piper_train_entry.py"
+    ],
+    "tests/server/test_policy_artifact_identity.py": [
+      "server/__init__.py",
+      "server/policy_server/artifact_identity.py"
+    ],
+    "tests/server/test_post_capture_pipeline.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/label_episode.py",
+      "server/__init__.py",
+      "server/serve_derived_state_multi_shadow.py",
+      "server/training/post_capture_pipeline.py",
+      "server/training/proxy_multi_episode_pilot.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/server/test_proxy_dataset_contract.py": [
+      "server/__init__.py",
+      "server/training/proxy_dataset_contract.py"
+    ],
+    "tests/server/test_proxy_latency_profile.py": [
+      "server/__init__.py",
+      "server/training/proxy_latency_profile.py"
+    ],
+    "tests/server/test_proxy_multi_episode_contract.py": [
+      "server/__init__.py",
+      "server/training/proxy_multi_episode_contract.py"
+    ],
+    "tests/server/test_proxy_policy_config.py": [
+      "server/__init__.py",
+      "server/policy_server/proxy_config.py"
+    ],
+    "tests/server/test_public_data_contract.py": [
+      "server/__init__.py",
+      "server/training/public_data_contract.py"
+    ],
+    "tests/server/test_training_data_audit.py": [
+      "server/__init__.py",
+      "server/dataset_tools/audit_training_data.py",
+      "server/dataset_tools/convert_piper_aligned.py",
+      "tests/__init__.py",
+      "tests/server/__init__.py",
+      "tests/server/test_piper_aligned_converter.py"
+    ],
+    "tests/server/test_training_modes.py": [
+      "server/__init__.py",
+      "server/training/check_piper_readiness.py",
+      "server/training/piper_train_entry.py",
+      "server/training/public_data_contract.py"
+    ],
+    "tests/server/test_train_demonstrations.py": [
+      "server/__init__.py",
+      "server/training/proxy_multi_episode_pilot.py",
+      "server/training/train_demonstrations.py"
+    ],
+    "tests/server/__init__.py": [
+      "server/__init__.py"
+    ]
+  },
+  "closure_keep": [
+    "laptop/__init__.py",
+    "laptop/camera/dual_camera.py",
+    "laptop/camera/source.py",
+    "laptop/camera/worker.py",
+    "laptop/client/__init__.py",
+    "laptop/client/bounded_model_trial.py",
+    "laptop/client/live_model_preview.py",
+    "laptop/client/live_shadow.py",
+    "laptop/client/observation_schema.py",
+    "laptop/client/policy_client.py",
+    "laptop/control/__init__.py",
+    "laptop/control/contracts.py",
+    "laptop/diagnostics/audit_feedback_log.py",
+    "laptop/diagnostics/bounded_process.py",
+    "laptop/diagnostics/camera_identity.py",
+    "laptop/diagnostics/camera_stream_smoke.py",
+    "laptop/diagnostics/can_diagnostic_session.py",
+    "laptop/diagnostics/capture_oem_can.py",
+    "laptop/diagnostics/compare_gripper_feedback.py",
+    "laptop/diagnostics/list_candlelight_adapters.py",
+    "laptop/diagnostics/probe_cameras.py",
+    "laptop/diagnostics/probe_can_ack_only.py",
+    "laptop/diagnostics/probe_can_listen_only.py",
+    "laptop/diagnostics/probe_dual_cameras.py",
+    "laptop/diagnostics/probe_motor_enable_ack_only.py",
+    "laptop/diagnostics/probe_network.py",
+    "laptop/diagnostics/probe_piper.py",
+    "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+    "laptop/diagnostics/probe_piper_readonly.py",
+    "laptop/diagnostics/query_all_joint_parameters.py",
+    "laptop/diagnostics/query_joint_limits.py",
+    "laptop/diagnostics/query_piper_firmware.py",
+    "laptop/diagnostics/query_piper_gripper_parameters.py",
+    "laptop/diagnostics/query_piper_readiness_snapshot.py",
+    "laptop/piper/__init__.py",
+    "laptop/piper/unit_conversion.py",
+    "laptop/recorder/__init__.py",
+    "laptop/recorder/align_raw.py",
+    "laptop/recorder/capture_session.py",
+    "laptop/recorder/episode.py",
+    "laptop/recorder/label_episode.py",
+    "laptop/recorder/next_state_proxy.py",
+    "laptop/recorder/passive_capture.py",
+    "laptop/recorder/piper_command_targets.py",
+    "laptop/recorder/record_demonstrations.py",
+    "laptop/recorder/verify_source.py",
+    "laptop/robot_client/__init__.py",
+    "laptop/robot_client/bounded_policy_target.py",
+    "laptop/robot_client/feedback.py",
+    "laptop/robot_client/joint_command_preview.py",
+    "laptop/robot_client/piper_session.py",
+    "laptop/robot_client/piper_tool.py",
+    "laptop/robot_client/replay_preflight.py",
+    "laptop/robot_client/single_step_dry_run.py",
+    "laptop/robot_client/supervised_axis_commissioning.py",
+    "laptop/robot_client/supervised_enable_j6.py",
+    "laptop/robot_client/supervised_gripper_commissioning.py",
+    "laptop/robot_client/supervised_j1_commissioning.py",
+    "laptop/robot_client/supervised_mode_initialization.py",
+    "laptop/robot_client/supervised_site_profile.py",
+    "laptop/runtime/__init__.py",
+    "laptop/runtime/bridge_protocol.py",
+    "laptop/runtime/config.py",
+    "laptop/runtime/modes.py",
+    "laptop/safety/__init__.py",
+    "laptop/safety/bridge.py",
+    "laptop/safety/offline_guard.py",
+    "laptop/transport/__init__.py",
+    "laptop/transport/bounded_trial.py",
+    "laptop/transport/can_transport.py",
+    "laptop/transport/diagnostic_queries.py",
+    "laptop/transport/gripper_commissioning.py",
+    "laptop/transport/gs_usb_piper_can.py",
+    "laptop/transport/mode_initialization.py",
+    "laptop/transport/position_commands.py",
+    "server/__init__.py",
+    "server/dataset_tools/convert_next_state_proxy.py",
+    "server/policy_server/artifact_identity.py",
+    "server/serve_derived_state_multi_shadow.py",
+    "server/training/evaluate_demonstrations.py",
+    "server/training/piper_openpi_config.py",
+    "server/training/post_capture_pipeline.py",
+    "server/training/proxy_multi_episode_contract.py",
+    "server/training/proxy_multi_episode_pilot.py",
+    "server/training/serve_trained_demonstrations.py",
+    "server/training/summarize_training_loss.py",
+    "server/training/train_demonstrations.py",
+    "tests/__init__.py"
+  ],
+  "outside_chain": [
+    "laptop/test_policy_tunnel.py",
+    "laptop/client/action_shadow_replay.py",
+    "laptop/client/audit_live_shadow.py",
+    "laptop/client/latency_probe.py",
+    "laptop/client/network_latency_probe.py",
+    "laptop/client/offline_latency_replay.py",
+    "laptop/client/policy_client_smoke.py",
+    "laptop/client/public_piper_transport_smoke.py",
+    "laptop/client/shadow_preview_smoke.py",
+    "laptop/client/supervised_live_step.py",
+    "laptop/client/synthetic_policy_reject_smoke.py",
+    "laptop/recorder/audit_episode.py",
+    "laptop/recorder/manual_teach_capture.py",
+    "laptop/recorder/synthetic_smoke.py",
+    "laptop/robot_client/bounded_zero_return.py",
+    "laptop/robot_client/gripper_command_preview.py",
+    "laptop/robot_client/hil_guard.py",
+    "laptop/robot_client/offline_replay.py",
+    "laptop/robot_client/policy_reject_only.py",
+    "laptop/robot_client/policy_sdk_preview.py",
+    "laptop/robot_client/supervised_gripper_max_open.py",
+    "laptop/robot_client/supervised_j1_one_degree_trial.py",
+    "laptop/robot_client/supervised_j1_step_trial.py",
+    "laptop/robot_client/supervised_j5_probe.py",
+    "laptop/robot_client/supervised_joint_replay.py",
+    "laptop/robot_client/supervised_near_zero_home.py",
+    "laptop/robot_client/supervised_oem_gripper_test.py",
+    "laptop/robot_client/supervised_policy_session.py",
+    "laptop/robot_client/supervised_policy_step.py",
+    "laptop/robot_client/supervised_restore_gripper.py",
+    "laptop/robot_client/supervised_restore_start.py",
+    "laptop/robot_client/supervised_smooth_joint_replay.py",
+    "laptop/robot_client/verified_policy_command.py",
+    "server/public_piper_smoke_infer.py",
+    "server/serve_piper_action_shadow.py",
+    "server/serve_policy_local.py",
+    "server/serve_proxy_piper_shadow.py",
+    "server/serve_public_piper_smoke.py",
+    "server/dataset_tools/audit_proxy_lerobot.py",
+    "server/dataset_tools/audit_training_data.py",
+    "server/dataset_tools/compare_proxy_sampling_rates.py",
+    "server/dataset_tools/convert_piper_aligned.py",
+    "server/dataset_tools/synthetic_lerobot_smoke.py",
+    "server/piper_policy/piper_data_config.py",
+    "server/piper_policy/piper_inputs.py",
+    "server/piper_policy/piper_outputs.py",
+    "server/piper_policy/piper_policy_config.py",
+    "server/policy_server/proxy_config.py",
+    "server/training/action_target_contract.py",
+    "server/training/check_piper_readiness.py",
+    "server/training/piper_action_eval.py",
+    "server/training/piper_train_entry.py",
+    "server/training/proxy_dataset_contract.py",
+    "server/training/proxy_latency_profile.py",
+    "server/training/proxy_piper_eval.py",
+    "server/training/proxy_piper_tiny_fit.py",
+    "server/training/public_data_contract.py",
+    "server/training/public_piper_smoke.py",
+    "scripts/audit_laptop_probe.py",
+    "scripts/refresh_environment_audit.py",
+    "scripts/run_local_policy_server_smoke.py",
+    "scripts/run_pi05_base_smoke.py",
+    "scripts/run_server_performance.py",
+    "scripts/validate_piper_continuous.py",
+    "scripts/validate_piper_contract.py",
+    "scripts/write_checkpoint_provenance.py",
+    "scripts/write_deployment_manifest.py",
+    "scripts/write_socket_binding_report.py"
+  ],
+  "tests": {
+    "tests/contracts/test_control_contracts.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py"
+    ],
+    "tests/contracts/test_piper_contract.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/observation_schema.py",
+      "server/__init__.py",
+      "server/piper_policy/__init__.py",
+      "server/piper_policy/piper_inputs.py",
+      "server/piper_policy/piper_outputs.py"
+    ],
+    "tests/contracts/test_piper_units.py": [
+      "laptop/__init__.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py"
+    ],
+    "tests/contracts/test_runtime_config.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py",
+      "laptop/runtime/modes.py"
+    ],
+    "tests/data/test_align_raw.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/episode.py",
+      "laptop/recorder/piper_command_targets.py",
+      "laptop/recorder/verify_source.py"
+    ],
+    "tests/data/test_align_raw_to_lerobot.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/piper_command_targets.py",
+      "server/__init__.py",
+      "server/dataset_tools/convert_piper_aligned.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/data/test_convert_next_state_proxy.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/next_state_proxy.py",
+      "server/__init__.py",
+      "server/dataset_tools/convert_next_state_proxy.py",
+      "server/training/proxy_multi_episode_contract.py",
+      "server/training/proxy_multi_episode_pilot.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/data/test_next_state_proxy.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/next_state_proxy.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/data/test_piper_command_targets.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/piper_command_targets.py"
+    ],
+    "tests/data/test_proxy_lerobot_audit.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/next_state_proxy.py",
+      "server/__init__.py",
+      "server/dataset_tools/audit_proxy_lerobot.py",
+      "server/dataset_tools/compare_proxy_sampling_rates.py",
+      "server/dataset_tools/convert_next_state_proxy.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/data/test_proxy_sampling_rate_comparison.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/next_state_proxy.py",
+      "server/__init__.py",
+      "server/dataset_tools/compare_proxy_sampling_rates.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/data/test_source_verification.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/piper_command_targets.py",
+      "laptop/recorder/verify_source.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/laptop/test_action_shadow_replay.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/action_shadow_replay.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/align_raw.py",
+      "laptop/recorder/piper_command_targets.py",
+      "server/__init__.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/laptop/test_bounded_model_trial.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/bounded_model_trial.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/bounded_trial.py",
+      "laptop/transport/can_transport.py",
+      "tests/__init__.py",
+      "tests/laptop/__init__.py",
+      "tests/laptop/test_j1_commissioning_bridge.py"
+    ],
+    "tests/laptop/test_bounded_policy_target.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/bounded_policy_target.py"
+    ],
+    "tests/laptop/test_bounded_process.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/bounded_process.py"
+    ],
+    "tests/laptop/test_bounded_zero_return.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/bounded_zero_return.py"
+    ],
+    "tests/laptop/test_bridge_protocol.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/bridge_protocol.py"
+    ],
+    "tests/laptop/test_camera_identity_inventory.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/camera_identity.py"
+    ],
+    "tests/laptop/test_camera_stream_smoke.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/camera_stream_smoke.py"
+    ],
+    "tests/laptop/test_can_ack_only_guard.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_can_ack_only.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_can_listen_only_guard.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_can_listen_only.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_capture_boundary_frames.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/episode.py"
+    ],
+    "tests/laptop/test_capture_supervision.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/bounded_process.py",
+      "laptop/diagnostics/camera_identity.py",
+      "laptop/diagnostics/probe_dual_cameras.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/episode.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/passive_capture.py"
+    ],
+    "tests/laptop/test_compare_gripper_feedback.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/compare_gripper_feedback.py"
+    ],
+    "tests/laptop/test_diagnostic_queries.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/can_diagnostic_session.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py"
+    ],
+    "tests/laptop/test_dual_camera_capture.py": [
+      "laptop/__init__.py",
+      "laptop/camera/dual_camera.py"
+    ],
+    "tests/laptop/test_dual_camera_probe.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_dual_cameras.py"
+    ],
+    "tests/laptop/test_episode_recorder.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/episode.py"
+    ],
+    "tests/laptop/test_fake_can_single_step_rehearsal.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_feedback_log_audit.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/audit_feedback_log.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py"
+    ],
+    "tests/laptop/test_firmware_query.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/query_piper_firmware.py"
+    ],
+    "tests/laptop/test_gripper_command_preview.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/gripper_command_preview.py"
+    ],
+    "tests/laptop/test_gripper_commissioning.py": [
+      "laptop/__init__.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gripper_commissioning.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "tests/laptop/test_gripper_parameter_query.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/query_piper_gripper_parameters.py"
+    ],
+    "tests/laptop/test_j1_commissioning_bridge.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j1_commissioning.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_joint_command_preview.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/joint_command_preview.py"
+    ],
+    "tests/laptop/test_legacy_hil_guard.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j1_one_degree_trial.py",
+      "laptop/robot_client/supervised_j1_step_trial.py",
+      "laptop/robot_client/supervised_j5_probe.py",
+      "laptop/robot_client/supervised_joint_replay.py",
+      "laptop/robot_client/supervised_restore_gripper.py",
+      "laptop/robot_client/supervised_restore_start.py",
+      "laptop/robot_client/supervised_smooth_joint_replay.py"
+    ],
+    "tests/laptop/test_live_shadow.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/audit_live_shadow.py",
+      "laptop/client/live_shadow.py",
+      "laptop/diagnostics/bounded_process.py",
+      "server/__init__.py"
+    ],
+    "tests/laptop/test_near_zero_home.py": [
+      "laptop/__init__.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gripper_commissioning.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_network_latency_probe.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/network_latency_probe.py",
+      "server/__init__.py"
+    ],
+    "tests/laptop/test_oem_can_capture.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/capture_oem_can.py"
+    ],
+    "tests/laptop/test_oem_gripper_test.py": [
+      "laptop/__init__.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gripper_commissioning.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "tests/laptop/test_offline_safety_bridge.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/offline_replay.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/offline_guard.py"
+    ],
+    "tests/laptop/test_passive_capture.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_dual_cameras.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/capture_session.py",
+      "laptop/recorder/episode.py",
+      "laptop/recorder/label_episode.py",
+      "laptop/recorder/passive_capture.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "tests/laptop/test_phase_a_pure_core.py": [
+      "laptop/__init__.py",
+      "laptop/camera/source.py",
+      "laptop/camera/worker.py",
+      "laptop/client/__init__.py",
+      "laptop/client/bounded_model_trial.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/observation_schema.py",
+      "laptop/client/policy_client.py",
+      "laptop/piper/__init__.py",
+      "laptop/piper/unit_conversion.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/feedback.py",
+      "laptop/robot_client/piper_session.py",
+      "tests/__init__.py",
+      "tests/laptop/__init__.py",
+      "tests/laptop/test_live_shadow.py"
+    ],
+    "tests/laptop/test_piper_can_transport.py": [
+      "laptop/__init__.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/diagnostic_queries.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "tests/laptop/test_piper_feedback_ack_only_guard.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_piper.py",
+      "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py"
+    ],
+    "tests/laptop/test_piper_session.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/piper_session.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_piper_tool.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/piper_tool.py"
+    ],
+    "tests/laptop/test_policy_reject_only.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/policy_reject_only.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py"
+    ],
+    "tests/laptop/test_policy_sdk_preview.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/policy_sdk_preview.py"
+    ],
+    "tests/laptop/test_probe_motor_enable_ack_only.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/probe_motor_enable_ack_only.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_process_exit_watchdog.py": [
+      "laptop/__init__.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_query_all_joint_parameters.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/query_all_joint_parameters.py"
+    ],
+    "tests/laptop/test_query_joint_limits.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/query_joint_limits.py"
+    ],
+    "tests/laptop/test_query_piper_readiness_snapshot.py": [
+      "laptop/__init__.py",
+      "laptop/diagnostics/query_all_joint_parameters.py",
+      "laptop/diagnostics/query_piper_firmware.py",
+      "laptop/diagnostics/query_piper_gripper_parameters.py",
+      "laptop/diagnostics/query_piper_readiness_snapshot.py"
+    ],
+    "tests/laptop/test_record_demonstrations.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/capture_session.py",
+      "laptop/recorder/episode.py",
+      "laptop/recorder/record_demonstrations.py"
+    ],
+    "tests/laptop/test_replay_preflight.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/replay_preflight.py"
+    ],
+    "tests/laptop/test_safety_bridge_runtime.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_shadow_preview_smoke.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/shadow_preview_smoke.py",
+      "server/__init__.py"
+    ],
+    "tests/laptop/test_single_step_dry_run.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py"
+    ],
+    "tests/laptop/test_supervised_enable_j6.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_enable_j6.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/mode_initialization.py"
+    ],
+    "tests/laptop/test_supervised_j1_one_degree_trial.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j1_one_degree_trial.py",
+      "laptop/robot_client/supervised_j1_step_trial.py"
+    ],
+    "tests/laptop/test_supervised_j1_step_trial.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j1_step_trial.py"
+    ],
+    "tests/laptop/test_supervised_j5_probe.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j5_probe.py"
+    ],
+    "tests/laptop/test_supervised_live_step.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/observation_schema.py",
+      "laptop/client/supervised_live_step.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/supervised_policy_session.py",
+      "laptop/robot_client/supervised_site_profile.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py",
+      "server/__init__.py"
+    ],
+    "tests/laptop/test_supervised_mode_initialization.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_mode_initialization.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/mode_initialization.py"
+    ],
+    "tests/laptop/test_supervised_policy_session.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/supervised_policy_session.py",
+      "laptop/robot_client/supervised_policy_step.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_supervised_policy_step.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/supervised_policy_step.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_supervised_position_bridge.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/modes.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_supervised_position_transport.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/can_transport.py",
+      "laptop/transport/gs_usb_piper_can.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_supervised_restore_gripper.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_restore_gripper.py"
+    ],
+    "tests/laptop/test_supervised_restore_start.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/supervised_j1_step_trial.py",
+      "laptop/robot_client/supervised_restore_start.py"
+    ],
+    "tests/laptop/test_supervised_site_profile.py": [
+      "laptop/__init__.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/supervised_site_profile.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/laptop/test_synthetic_policy_reject_smoke.py": [
+      "laptop/__init__.py",
+      "laptop/client/__init__.py",
+      "laptop/client/live_shadow.py",
+      "laptop/client/synthetic_policy_reject_smoke.py",
+      "laptop/runtime/__init__.py",
+      "laptop/runtime/config.py",
+      "laptop/runtime/modes.py",
+      "server/__init__.py"
+    ],
+    "tests/laptop/test_verified_policy_command.py": [
+      "laptop/__init__.py",
+      "laptop/control/__init__.py",
+      "laptop/control/contracts.py",
+      "laptop/robot_client/__init__.py",
+      "laptop/robot_client/policy_sdk_preview.py",
+      "laptop/robot_client/single_step_dry_run.py",
+      "laptop/robot_client/verified_policy_command.py",
+      "laptop/safety/__init__.py",
+      "laptop/safety/bridge.py",
+      "laptop/transport/__init__.py",
+      "laptop/transport/position_commands.py"
+    ],
+    "tests/server/test_action_target_contract.py": [
+      "server/__init__.py",
+      "server/training/action_target_contract.py"
+    ],
+    "tests/server/test_derived_state_multi_shadow.py": [
+      "server/__init__.py",
+      "server/serve_derived_state_multi_shadow.py",
+      "server/training/proxy_multi_episode_contract.py"
+    ],
+    "tests/server/test_piper_action_eval.py": [
+      "server/__init__.py",
+      "server/policy_server/artifact_identity.py",
+      "server/training/piper_action_eval.py"
+    ],
+    "tests/server/test_piper_aligned_converter.py": [
+      "server/__init__.py",
+      "server/dataset_tools/convert_piper_aligned.py",
+      "server/training/check_piper_readiness.py",
+      "server/training/piper_openpi_config.py"
+    ],
+    "tests/server/test_piper_openpi_offline.py": [
+      "server/__init__.py",
+      "server/training/check_piper_readiness.py",
+      "server/training/piper_openpi_config.py",
+      "server/training/piper_train_entry.py",
+      "server/training/proxy_piper_tiny_fit.py"
+    ],
+    "tests/server/test_piper_train_entry.py": [
+      "server/__init__.py",
+      "server/training/piper_train_entry.py"
+    ],
+    "tests/server/test_policy_artifact_identity.py": [
+      "server/__init__.py",
+      "server/policy_server/artifact_identity.py"
+    ],
+    "tests/server/test_post_capture_pipeline.py": [
+      "laptop/__init__.py",
+      "laptop/recorder/__init__.py",
+      "laptop/recorder/label_episode.py",
+      "server/__init__.py",
+      "server/serve_derived_state_multi_shadow.py",
+      "server/training/post_capture_pipeline.py",
+      "server/training/proxy_multi_episode_pilot.py",
+      "tests/__init__.py",
+      "tests/data/__init__.py",
+      "tests/data/test_align_raw.py"
+    ],
+    "tests/server/test_proxy_dataset_contract.py": [
+      "server/__init__.py",
+      "server/training/proxy_dataset_contract.py"
+    ],
+    "tests/server/test_proxy_latency_profile.py": [
+      "server/__init__.py",
+      "server/training/proxy_latency_profile.py"
+    ],
+    "tests/server/test_proxy_multi_episode_contract.py": [
+      "server/__init__.py",
+      "server/training/proxy_multi_episode_contract.py"
+    ],
+    "tests/server/test_proxy_policy_config.py": [
+      "server/__init__.py",
+      "server/policy_server/proxy_config.py"
+    ],
+    "tests/server/test_public_data_contract.py": [
+      "server/__init__.py",
+      "server/training/public_data_contract.py"
+    ],
+    "tests/server/test_training_data_audit.py": [
+      "server/__init__.py",
+      "server/dataset_tools/audit_training_data.py",
+      "server/dataset_tools/convert_piper_aligned.py",
+      "tests/__init__.py",
+      "tests/server/__init__.py",
+      "tests/server/test_piper_aligned_converter.py"
+    ],
+    "tests/server/test_training_modes.py": [
+      "server/__init__.py",
+      "server/training/check_piper_readiness.py",
+      "server/training/piper_train_entry.py",
+      "server/training/public_data_contract.py"
+    ],
+    "tests/server/test_train_demonstrations.py": [
+      "server/__init__.py",
+      "server/training/proxy_multi_episode_pilot.py",
+      "server/training/train_demonstrations.py"
+    ]
+  },
+  "final_keep": [
+    "laptop/__init__.py",
+    "laptop/camera/dual_camera.py",
+    "laptop/camera/source.py",
+    "laptop/camera/worker.py",
+    "laptop/client/__init__.py",
+    "laptop/client/audit_live_shadow.py",
+    "laptop/client/bounded_model_trial.py",
+    "laptop/client/live_model_preview.py",
+    "laptop/client/live_shadow.py",
+    "laptop/client/observation_schema.py",
+    "laptop/client/policy_client.py",
+    "laptop/control/__init__.py",
+    "laptop/control/contracts.py",
+    "laptop/diagnostics/audit_feedback_log.py",
+    "laptop/diagnostics/bounded_process.py",
+    "laptop/diagnostics/camera_identity.py",
+    "laptop/diagnostics/camera_stream_smoke.py",
+    "laptop/diagnostics/can_diagnostic_session.py",
+    "laptop/diagnostics/capture_oem_can.py",
+    "laptop/diagnostics/compare_gripper_feedback.py",
+    "laptop/diagnostics/list_candlelight_adapters.py",
+    "laptop/diagnostics/probe_cameras.py",
+    "laptop/diagnostics/probe_can_ack_only.py",
+    "laptop/diagnostics/probe_can_listen_only.py",
+    "laptop/diagnostics/probe_dual_cameras.py",
+    "laptop/diagnostics/probe_motor_enable_ack_only.py",
+    "laptop/diagnostics/probe_network.py",
+    "laptop/diagnostics/probe_piper.py",
+    "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+    "laptop/diagnostics/probe_piper_readonly.py",
+    "laptop/diagnostics/query_all_joint_parameters.py",
+    "laptop/diagnostics/query_joint_limits.py",
+    "laptop/diagnostics/query_piper_firmware.py",
+    "laptop/diagnostics/query_piper_gripper_parameters.py",
+    "laptop/diagnostics/query_piper_readiness_snapshot.py",
+    "laptop/piper/__init__.py",
+    "laptop/piper/unit_conversion.py",
+    "laptop/recorder/__init__.py",
+    "laptop/recorder/align_raw.py",
+    "laptop/recorder/audit_episode.py",
+    "laptop/recorder/capture_session.py",
+    "laptop/recorder/episode.py",
+    "laptop/recorder/label_episode.py",
+    "laptop/recorder/next_state_proxy.py",
+    "laptop/recorder/passive_capture.py",
+    "laptop/recorder/piper_command_targets.py",
+    "laptop/recorder/record_demonstrations.py",
+    "laptop/recorder/verify_source.py",
+    "laptop/robot_client/__init__.py",
+    "laptop/robot_client/bounded_policy_target.py",
+    "laptop/robot_client/bounded_zero_return.py",
+    "laptop/robot_client/feedback.py",
+    "laptop/robot_client/joint_command_preview.py",
+    "laptop/robot_client/piper_session.py",
+    "laptop/robot_client/piper_tool.py",
+    "laptop/robot_client/replay_preflight.py",
+    "laptop/robot_client/single_step_dry_run.py",
+    "laptop/robot_client/supervised_axis_commissioning.py",
+    "laptop/robot_client/supervised_enable_j6.py",
+    "laptop/robot_client/supervised_gripper_commissioning.py",
+    "laptop/robot_client/supervised_gripper_max_open.py",
+    "laptop/robot_client/supervised_j1_commissioning.py",
+    "laptop/robot_client/supervised_mode_initialization.py",
+    "laptop/robot_client/supervised_near_zero_home.py",
+    "laptop/robot_client/supervised_oem_gripper_test.py",
+    "laptop/robot_client/supervised_site_profile.py",
+    "laptop/runtime/__init__.py",
+    "laptop/runtime/bridge_protocol.py",
+    "laptop/runtime/config.py",
+    "laptop/runtime/modes.py",
+    "laptop/safety/__init__.py",
+    "laptop/safety/bridge.py",
+    "laptop/safety/offline_guard.py",
+    "laptop/transport/__init__.py",
+    "laptop/transport/bounded_trial.py",
+    "laptop/transport/can_transport.py",
+    "laptop/transport/diagnostic_queries.py",
+    "laptop/transport/gripper_commissioning.py",
+    "laptop/transport/gs_usb_piper_can.py",
+    "laptop/transport/mode_initialization.py",
+    "laptop/transport/position_commands.py",
+    "server/__init__.py",
+    "server/dataset_tools/convert_next_state_proxy.py",
+    "server/policy_server/artifact_identity.py",
+    "server/serve_derived_state_multi_shadow.py",
+    "server/training/evaluate_demonstrations.py",
+    "server/training/piper_openpi_config.py",
+    "server/training/post_capture_pipeline.py",
+    "server/training/proxy_multi_episode_contract.py",
+    "server/training/proxy_multi_episode_pilot.py",
+    "server/training/serve_trained_demonstrations.py",
+    "server/training/summarize_training_loss.py",
+    "server/training/train_demonstrations.py",
+    "tests/__init__.py"
+  ],
+  "archive_code": [
+    "laptop/test_policy_tunnel.py",
+    "laptop/client/action_shadow_replay.py",
+    "laptop/client/latency_probe.py",
+    "laptop/client/network_latency_probe.py",
+    "laptop/client/offline_latency_replay.py",
+    "laptop/client/policy_client_smoke.py",
+    "laptop/client/public_piper_transport_smoke.py",
+    "laptop/client/shadow_preview_smoke.py",
+    "laptop/client/supervised_live_step.py",
+    "laptop/client/synthetic_policy_reject_smoke.py",
+    "laptop/recorder/manual_teach_capture.py",
+    "laptop/recorder/synthetic_smoke.py",
+    "laptop/robot_client/gripper_command_preview.py",
+    "laptop/robot_client/hil_guard.py",
+    "laptop/robot_client/offline_replay.py",
+    "laptop/robot_client/policy_reject_only.py",
+    "laptop/robot_client/policy_sdk_preview.py",
+    "laptop/robot_client/supervised_j1_one_degree_trial.py",
+    "laptop/robot_client/supervised_j1_step_trial.py",
+    "laptop/robot_client/supervised_j5_probe.py",
+    "laptop/robot_client/supervised_joint_replay.py",
+    "laptop/robot_client/supervised_policy_session.py",
+    "laptop/robot_client/supervised_policy_step.py",
+    "laptop/robot_client/supervised_restore_gripper.py",
+    "laptop/robot_client/supervised_restore_start.py",
+    "laptop/robot_client/supervised_smooth_joint_replay.py",
+    "laptop/robot_client/verified_policy_command.py",
+    "server/public_piper_smoke_infer.py",
+    "server/serve_piper_action_shadow.py",
+    "server/serve_policy_local.py",
+    "server/serve_proxy_piper_shadow.py",
+    "server/serve_public_piper_smoke.py",
+    "server/dataset_tools/audit_proxy_lerobot.py",
+    "server/dataset_tools/audit_training_data.py",
+    "server/dataset_tools/compare_proxy_sampling_rates.py",
+    "server/dataset_tools/convert_piper_aligned.py",
+    "server/dataset_tools/synthetic_lerobot_smoke.py",
+    "server/piper_policy/piper_data_config.py",
+    "server/piper_policy/piper_inputs.py",
+    "server/piper_policy/piper_outputs.py",
+    "server/piper_policy/piper_policy_config.py",
+    "server/policy_server/proxy_config.py",
+    "server/training/action_target_contract.py",
+    "server/training/check_piper_readiness.py",
+    "server/training/piper_action_eval.py",
+    "server/training/piper_train_entry.py",
+    "server/training/proxy_dataset_contract.py",
+    "server/training/proxy_latency_profile.py",
+    "server/training/proxy_piper_eval.py",
+    "server/training/proxy_piper_tiny_fit.py",
+    "server/training/public_data_contract.py",
+    "server/training/public_piper_smoke.py",
+    "scripts/audit_laptop_probe.py",
+    "scripts/refresh_environment_audit.py",
+    "scripts/run_local_policy_server_smoke.py",
+    "scripts/run_pi05_base_smoke.py",
+    "scripts/run_server_performance.py",
+    "scripts/validate_piper_continuous.py",
+    "scripts/validate_piper_contract.py",
+    "scripts/write_checkpoint_provenance.py",
+    "scripts/write_deployment_manifest.py",
+    "scripts/write_socket_binding_report.py"
+  ],
+  "archive_tests": [
+    "tests/contracts/test_piper_contract.py",
+    "tests/data/test_align_raw_to_lerobot.py",
+    "tests/data/test_proxy_lerobot_audit.py",
+    "tests/data/test_proxy_sampling_rate_comparison.py",
+    "tests/laptop/test_action_shadow_replay.py",
+    "tests/laptop/test_gripper_command_preview.py",
+    "tests/laptop/test_legacy_hil_guard.py",
+    "tests/laptop/test_network_latency_probe.py",
+    "tests/laptop/test_offline_safety_bridge.py",
+    "tests/laptop/test_policy_reject_only.py",
+    "tests/laptop/test_policy_sdk_preview.py",
+    "tests/laptop/test_shadow_preview_smoke.py",
+    "tests/laptop/test_supervised_j1_one_degree_trial.py",
+    "tests/laptop/test_supervised_j1_step_trial.py",
+    "tests/laptop/test_supervised_j5_probe.py",
+    "tests/laptop/test_supervised_live_step.py",
+    "tests/laptop/test_supervised_policy_session.py",
+    "tests/laptop/test_supervised_policy_step.py",
+    "tests/laptop/test_supervised_restore_gripper.py",
+    "tests/laptop/test_supervised_restore_start.py",
+    "tests/laptop/test_synthetic_policy_reject_smoke.py",
+    "tests/laptop/test_verified_policy_command.py",
+    "tests/server/test_action_target_contract.py",
+    "tests/server/test_piper_action_eval.py",
+    "tests/server/test_piper_aligned_converter.py",
+    "tests/server/test_piper_openpi_offline.py",
+    "tests/server/test_piper_train_entry.py",
+    "tests/server/test_proxy_dataset_contract.py",
+    "tests/server/test_proxy_latency_profile.py",
+    "tests/server/test_proxy_policy_config.py",
+    "tests/server/test_public_data_contract.py",
+    "tests/server/test_training_data_audit.py",
+    "tests/server/test_training_modes.py"
+  ],
+  "archive_validation": [
+    "validation/derived_state_shadow_loopback_20261007.py",
+    "validation/inspect_cando_function.py"
+  ],
+  "active_tests": [
+    "tests/contracts/test_control_contracts.py",
+    "tests/contracts/test_piper_units.py",
+    "tests/contracts/test_runtime_config.py",
+    "tests/data/test_align_raw.py",
+    "tests/data/test_convert_next_state_proxy.py",
+    "tests/data/test_next_state_proxy.py",
+    "tests/data/test_piper_command_targets.py",
+    "tests/data/test_source_verification.py",
+    "tests/laptop/test_bounded_model_trial.py",
+    "tests/laptop/test_bounded_policy_target.py",
+    "tests/laptop/test_bounded_process.py",
+    "tests/laptop/test_bounded_zero_return.py",
+    "tests/laptop/test_bridge_protocol.py",
+    "tests/laptop/test_camera_identity_inventory.py",
+    "tests/laptop/test_camera_stream_smoke.py",
+    "tests/laptop/test_can_ack_only_guard.py",
+    "tests/laptop/test_can_listen_only_guard.py",
+    "tests/laptop/test_capture_boundary_frames.py",
+    "tests/laptop/test_capture_supervision.py",
+    "tests/laptop/test_compare_gripper_feedback.py",
+    "tests/laptop/test_diagnostic_queries.py",
+    "tests/laptop/test_dual_camera_capture.py",
+    "tests/laptop/test_dual_camera_probe.py",
+    "tests/laptop/test_episode_recorder.py",
+    "tests/laptop/test_fake_can_single_step_rehearsal.py",
+    "tests/laptop/test_feedback_log_audit.py",
+    "tests/laptop/test_firmware_query.py",
+    "tests/laptop/test_gripper_commissioning.py",
+    "tests/laptop/test_gripper_parameter_query.py",
+    "tests/laptop/test_j1_commissioning_bridge.py",
+    "tests/laptop/test_joint_command_preview.py",
+    "tests/laptop/test_live_shadow.py",
+    "tests/laptop/test_near_zero_home.py",
+    "tests/laptop/test_oem_can_capture.py",
+    "tests/laptop/test_oem_gripper_test.py",
+    "tests/laptop/test_passive_capture.py",
+    "tests/laptop/test_phase_a_pure_core.py",
+    "tests/laptop/test_piper_can_transport.py",
+    "tests/laptop/test_piper_feedback_ack_only_guard.py",
+    "tests/laptop/test_piper_session.py",
+    "tests/laptop/test_piper_tool.py",
+    "tests/laptop/test_probe_motor_enable_ack_only.py",
+    "tests/laptop/test_process_exit_watchdog.py",
+    "tests/laptop/test_query_all_joint_parameters.py",
+    "tests/laptop/test_query_joint_limits.py",
+    "tests/laptop/test_query_piper_readiness_snapshot.py",
+    "tests/laptop/test_record_demonstrations.py",
+    "tests/laptop/test_replay_preflight.py",
+    "tests/laptop/test_safety_bridge_runtime.py",
+    "tests/laptop/test_single_step_dry_run.py",
+    "tests/laptop/test_supervised_enable_j6.py",
+    "tests/laptop/test_supervised_mode_initialization.py",
+    "tests/laptop/test_supervised_position_bridge.py",
+    "tests/laptop/test_supervised_position_transport.py",
+    "tests/laptop/test_supervised_site_profile.py",
+    "tests/server/test_derived_state_multi_shadow.py",
+    "tests/server/test_policy_artifact_identity.py",
+    "tests/server/test_post_capture_pipeline.py",
+    "tests/server/test_proxy_multi_episode_contract.py",
+    "tests/server/test_train_demonstrations.py"
+  ]
+}

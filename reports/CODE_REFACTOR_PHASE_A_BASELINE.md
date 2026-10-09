@@ -1,0 +1,2912 @@
+# Code refactor Phase A baseline
+
+开始时间：2026-10-08。本轮只读保存现有工作树，不reset/clean；未访问设备。
+
+## head
+
+```text
+99ab21c9ebbe1048c66c54880af1b9a7e2a12382
+```
+
+## branch
+
+```text
+main
+```
+
+## status
+
+```text
+ M .gitignore
+ M README.md
+ M configs/dataset_template.yaml
+ M configs/network_template.yaml
+ M configs/piper_joint_limits.yaml
+ M configs/project_contract.yaml
+ M configs/tasks/pick_place_v1.yaml
+ D docs/AGILEX_SOURCE_AUDIT.md
+ D docs/CHECKPOINT_INIT_DECISION.md
+ D docs/DATA_SCHEMA.md
+ D docs/DIAGNOSTIC_SCRIPT_SPEC.md
+ D docs/GRIPPER_TEACH_OPTIONS.md
+ D docs/LAPTOP_SETUP_PLAN.md
+ D docs/NETWORK_OPTIONS.md
+ D docs/OPENPI_PROVENANCE.md
+ M docs/PHASE_GATES.md
+ D docs/PI05_PIPER_MASTER_PLAN.md
+ D docs/PI05_PIPER_MASTER_PLAN_HISTORY.md
+ D docs/PI05_PIPER_MASTER_PLAN_ORIGINAL.md
+ D docs/PI05_PIPER_PHASE_GATES.json
+ D docs/REAL_ROBOT_SAFETY_PLAN.md
+ D docs/REMOTE_ARCHITECTURE.md
+ D docs/SERVER_SETUP_PLAN.md
+ D docs/SSH_TUNNEL_SETUP.md
+ D docs/TEACH_DATA_PIPELINE.md
+ D docs/USER_DECISIONS.md
+ M laptop/README_FIRST_CONNECTION.md
+ M laptop/camera/README.md
+ M laptop/client/README.md
+ M laptop/client/observation_schema.py
+ M laptop/client/requirements.txt
+ M laptop/diagnostics/README.md
+ M laptop/piper/README.md
+ M laptop/piper/unit_conversion.py
+ M laptop/recorder/README.md
+ M laptop/robot_client/README.md
+ M laptop/safety/README.md
+ M scripts/README.md
+ M scripts/validate_piper_contract.py
+ M server/dataset_tools/README.md
+ M server/piper_policy/piper_inputs.py
+ M server/policy_server/README.md
+ M server/training/README.md
+ D tests/test_piper_contract.py
+ D tests/test_piper_units.py
+?? Log/OrbbecSDK.log.txt
+?? artifacts/knowledge_world_map/knowledge_world_map.py
+?? artifacts/knowledge_world_map/land_water_1440x720.png
+?? artifacts/knowledge_world_map/land_water_180x90.png
+?? artifacts/knowledge_world_map/land_water_90x180.csv
+?? configs/policy/pi05_derived_state_10fps_shadow.json
+?? configs/policy/pi05_proxy_shadow.json
+?? configs/runtime/diagnostic_query.json
+?? configs/runtime/pi05_proxy_shadow_identity_lock.json
+?? configs/runtime/policy_reject_only.json
+?? configs/runtime/shadow.json
+?? configs/runtime/supervised_site_profile.template.json
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_success_proxy/proxy_manifest.json
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_success_proxy/proxy_targets.jsonl
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/aligned_episode.json
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000000.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000001.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000002.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000003.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000004.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000005.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000006.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000007.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000008.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000009.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000010.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000011.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000012.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000013.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000014.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000015.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000016.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000017.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000018.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000019.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000020.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000021.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000022.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000023.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000024.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000025.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000026.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000027.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000028.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000029.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000030.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000031.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000032.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000033.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000034.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000035.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000036.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000037.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000038.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000039.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000040.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000041.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000042.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000043.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000044.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000045.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000046.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000047.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000048.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000049.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000050.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000051.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000052.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000053.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000054.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000055.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000056.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000057.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000058.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000059.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000060.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000061.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000062.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000063.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000064.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000065.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000066.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000067.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000068.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000069.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000070.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000071.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000072.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000073.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000074.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000075.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000076.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000077.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000078.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000079.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000080.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000081.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000082.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000083.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000084.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000085.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000086.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000087.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000088.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000089.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000090.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000091.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000092.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000093.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000094.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000095.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000096.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000097.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000098.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000099.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000100.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000101.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000102.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000103.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000104.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000105.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000106.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000107.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000108.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000109.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000110.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000111.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000112.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000113.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000114.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000115.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000116.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000117.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000118.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000119.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000120.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000121.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000122.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000123.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000124.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000125.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000126.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000127.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000128.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000129.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000130.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000131.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000132.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000133.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000134.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000135.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000136.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000137.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000138.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000139.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000140.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000141.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000142.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000143.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000144.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000145.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000146.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000147.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000148.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000149.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000150.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000151.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000152.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000153.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000154.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000155.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000156.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000157.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000158.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000159.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000160.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000161.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000162.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000163.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000164.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000165.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000166.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000167.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000168.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000169.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000170.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000171.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000172.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000173.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000174.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000175.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000176.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000177.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000178.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000179.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000180.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000181.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000182.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000183.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000184.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000185.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000186.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000187.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000188.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000189.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000190.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000191.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000192.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000193.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000194.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000195.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000196.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000197.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000198.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/base_000199.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/frames.jsonl
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000000.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000001.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000002.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000003.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000004.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000005.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000006.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000007.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000008.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000009.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000010.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000011.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000012.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000013.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000014.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000015.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000016.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000017.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000018.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000019.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000020.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000021.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000022.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000023.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000024.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000025.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000026.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000027.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000028.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000029.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000030.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000031.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000032.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000033.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000034.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000035.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000036.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000037.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000038.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000039.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000040.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000041.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000042.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000043.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000044.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000045.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000046.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000047.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000048.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000049.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000050.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000051.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000052.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000053.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000054.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000055.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000056.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000057.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000058.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000059.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000060.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000061.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000062.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000063.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000064.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000065.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000066.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000067.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000068.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000069.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000070.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000071.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000072.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000073.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000074.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000075.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000076.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000077.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000078.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000079.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000080.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000081.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000082.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000083.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000084.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000085.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000086.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000087.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000088.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000089.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000090.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000091.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000092.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000093.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000094.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000095.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000096.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000097.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000098.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000099.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000100.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000101.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000102.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000103.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000104.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000105.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000106.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000107.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000108.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000109.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000110.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000111.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000112.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000113.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000114.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000115.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000116.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000117.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000118.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000119.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000120.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000121.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000122.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000123.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000124.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000125.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000126.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000127.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000128.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000129.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000130.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000131.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000132.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000133.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000134.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000135.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000136.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000137.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000138.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000139.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000140.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000141.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000142.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000143.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000144.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000145.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000146.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000147.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000148.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000149.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000150.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000151.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000152.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000153.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000154.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000155.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000156.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000157.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000158.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000159.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000160.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000161.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000162.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000163.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000164.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000165.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000166.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000167.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000168.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000169.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000170.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000171.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000172.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000173.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000174.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000175.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000176.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000177.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000178.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000179.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000180.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000181.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000182.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000183.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000184.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000185.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000186.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000187.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000188.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000189.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000190.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000191.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000192.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000193.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000194.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000195.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000196.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000197.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000198.png
+?? datasets/derived/0cd272a037f0489bbebaad76f45287c3_verified_preview/wrist_000199.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/aligned_episode.json
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000000.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000001.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000002.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000003.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000004.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000005.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000006.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000007.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000008.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000009.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000010.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000011.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000012.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000013.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000014.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000015.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000016.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000017.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000018.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000019.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000020.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000021.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000022.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000023.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000024.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000025.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000026.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000027.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000028.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000029.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000030.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000031.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000032.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000033.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000034.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000035.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000036.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000037.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000038.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000039.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000040.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000041.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000042.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000043.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000044.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000045.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000046.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000047.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000048.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000049.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000050.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000051.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000052.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000053.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000054.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000055.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000056.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000057.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000058.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000059.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000060.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000061.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000062.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000063.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000064.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000065.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000066.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000067.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000068.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000069.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000070.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000071.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000072.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000073.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000074.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000075.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000076.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000077.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000078.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000079.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000080.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000081.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000082.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000083.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000084.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000085.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000086.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000087.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000088.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000089.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000090.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000091.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000092.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000093.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000094.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000095.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000096.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000097.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000098.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000099.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000100.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000101.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000102.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000103.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000104.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000105.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000106.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000107.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000108.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000109.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000110.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000111.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000112.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000113.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000114.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000115.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000116.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000117.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000118.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000119.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000120.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000121.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000122.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000123.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000124.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000125.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000126.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000127.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000128.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000129.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000130.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000131.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000132.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000133.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000134.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000135.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000136.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000137.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000138.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000139.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000140.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000141.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000142.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000143.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000144.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000145.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000146.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000147.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000148.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000149.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000150.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000151.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000152.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000153.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000154.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000155.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000156.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000157.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000158.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000159.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000160.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000161.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000162.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000163.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000164.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000165.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000166.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000167.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000168.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000169.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000170.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000171.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000172.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000173.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000174.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000175.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000176.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000177.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000178.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000179.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000180.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000181.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000182.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000183.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000184.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000185.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000186.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000187.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000188.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000189.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000190.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000191.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000192.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000193.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000194.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000195.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000196.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000197.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/base_000198.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/frames.jsonl
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000000.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000001.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000002.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000003.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000004.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000005.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000006.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000007.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000008.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000009.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000010.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000011.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000012.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000013.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000014.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000015.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000016.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000017.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000018.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000019.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000020.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000021.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000022.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000023.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000024.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000025.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000026.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000027.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000028.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000029.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000030.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000031.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000032.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000033.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000034.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000035.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000036.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000037.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000038.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000039.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000040.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000041.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000042.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000043.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000044.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000045.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000046.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000047.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000048.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000049.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000050.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000051.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000052.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000053.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000054.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000055.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000056.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000057.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000058.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000059.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000060.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000061.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000062.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000063.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000064.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000065.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000066.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000067.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000068.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000069.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000070.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000071.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000072.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000073.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000074.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000075.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000076.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000077.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000078.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000079.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000080.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000081.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000082.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000083.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000084.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000085.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000086.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000087.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000088.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000089.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000090.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000091.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000092.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000093.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000094.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000095.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000096.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000097.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000098.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000099.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000100.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000101.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000102.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000103.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000104.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000105.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000106.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000107.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000108.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000109.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000110.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000111.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000112.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000113.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000114.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000115.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000116.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000117.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000118.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000119.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000120.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000121.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000122.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000123.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000124.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000125.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000126.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000127.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000128.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000129.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000130.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000131.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000132.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000133.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000134.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000135.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000136.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000137.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000138.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000139.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000140.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000141.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000142.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000143.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000144.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000145.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000146.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000147.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000148.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000149.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000150.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000151.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000152.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000153.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000154.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000155.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000156.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000157.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000158.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000159.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000160.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000161.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000162.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000163.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000164.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000165.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000166.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000167.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000168.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000169.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000170.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000171.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000172.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000173.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000174.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000175.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000176.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000177.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000178.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000179.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000180.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000181.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000182.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000183.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000184.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000185.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000186.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000187.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000188.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000189.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000190.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000191.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000192.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000193.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000194.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000195.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000196.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000197.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_boundary_fix_preview/wrist_000198.png
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_success_proxy/proxy_manifest.json
+?? datasets/derived/6a5a627971ee4347a0d3533fd7ce2921_success_proxy/proxy_targets.jsonl
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_success_proxy/proxy_manifest.json
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_success_proxy/proxy_targets.jsonl
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/aligned_episode.json
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000000.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000001.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000002.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000003.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000004.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000005.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000006.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000007.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000008.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000009.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000010.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000011.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000012.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000013.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000014.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000015.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000016.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000017.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000018.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000019.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000020.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000021.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000022.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000023.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000024.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000025.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000026.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000027.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000028.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000029.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000030.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000031.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000032.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000033.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000034.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000035.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000036.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000037.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000038.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000039.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000040.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000041.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000042.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000043.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000044.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000045.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000046.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000047.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000048.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000049.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000050.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000051.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000052.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000053.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000054.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000055.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000056.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000057.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000058.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000059.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000060.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000061.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000062.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000063.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000064.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000065.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000066.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000067.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000068.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000069.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000070.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000071.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000072.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000073.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000074.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000075.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000076.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000077.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000078.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000079.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000080.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000081.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000082.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000083.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000084.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000085.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000086.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000087.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000088.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000089.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000090.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000091.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000092.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000093.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000094.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000095.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000096.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000097.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000098.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000099.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000100.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000101.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000102.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000103.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000104.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000105.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000106.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000107.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000108.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000109.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000110.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000111.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000112.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000113.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000114.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000115.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000116.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000117.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000118.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000119.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000120.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000121.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000122.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000123.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000124.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000125.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000126.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000127.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000128.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000129.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000130.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000131.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000132.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000133.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000134.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000135.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000136.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000137.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000138.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000139.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000140.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000141.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000142.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000143.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000144.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000145.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000146.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000147.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000148.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000149.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000150.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000151.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000152.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000153.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000154.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000155.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000156.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000157.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000158.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000159.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000160.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000161.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000162.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000163.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000164.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000165.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000166.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000167.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000168.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000169.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000170.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000171.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000172.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000173.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000174.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000175.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000176.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000177.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000178.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000179.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000180.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000181.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000182.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000183.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000184.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000185.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000186.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000187.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000188.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000189.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000190.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000191.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000192.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000193.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000194.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000195.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000196.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000197.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/base_000198.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/frames.jsonl
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000000.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000001.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000002.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000003.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000004.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000005.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000006.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000007.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000008.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000009.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000010.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000011.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000012.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000013.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000014.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000015.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000016.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000017.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000018.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000019.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000020.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000021.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000022.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000023.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000024.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000025.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000026.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000027.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000028.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000029.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000030.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000031.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000032.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000033.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000034.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000035.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000036.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000037.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000038.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000039.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000040.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000041.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000042.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000043.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000044.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000045.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000046.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000047.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000048.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000049.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000050.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000051.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000052.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000053.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000054.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000055.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000056.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000057.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000058.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000059.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000060.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000061.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000062.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000063.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000064.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000065.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000066.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000067.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000068.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000069.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000070.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000071.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000072.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000073.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000074.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000075.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000076.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000077.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000078.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000079.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000080.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000081.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000082.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000083.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000084.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000085.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000086.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000087.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000088.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000089.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000090.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000091.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000092.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000093.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000094.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000095.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000096.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000097.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000098.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000099.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000100.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000101.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000102.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000103.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000104.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000105.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000106.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000107.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000108.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000109.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000110.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000111.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000112.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000113.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000114.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000115.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000116.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000117.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000118.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000119.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000120.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000121.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000122.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000123.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000124.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000125.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000126.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000127.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000128.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000129.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000130.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000131.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000132.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000133.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000134.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000135.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000136.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000137.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000138.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000139.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000140.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000141.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000142.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000143.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000144.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000145.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000146.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000147.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000148.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000149.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000150.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000151.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000152.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000153.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000154.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000155.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000156.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000157.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000158.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000159.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000160.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000161.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000162.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000163.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000164.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000165.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000166.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000167.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000168.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000169.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000170.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000171.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000172.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000173.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000174.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000175.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000176.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000177.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000178.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000179.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000180.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000181.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000182.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000183.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000184.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000185.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000186.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000187.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000188.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000189.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000190.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000191.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000192.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000193.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000194.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000195.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000196.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000197.png
+?? datasets/derived/992b4ed369c847bcad42f348470b791b_verified_preview/wrist_000198.png
+?? datasets/manifests/capture_sessions/84e6a0058cd34f69a08635db5fbea589/events.jsonl
+?? datasets/manifests/capture_sessions/84e6a0058cd34f69a08635db5fbea589/manifest.json
+?? datasets/manifests/capture_sessions/a055d8c05c4b48559f8c51a8b093ae8f/events.jsonl
+?? datasets/manifests/capture_sessions/a055d8c05c4b48559f8c51a8b093ae8f/manifest.json
+?? datasets/manifests/capture_sessions/bd7ffa2c237c48febdf486885571558b/events.jsonl
+?? datasets/manifests/capture_sessions/bd7ffa2c237c48febdf486885571558b/manifest.json
+?? datasets/manifests/derived_state_pilot/piper_local_reuse_20261007_r1/proxy_manifest.json
+?? datasets/manifests/derived_state_pilot/piper_local_reuse_20261007_r1/proxy_targets.jsonl
+?? docs/ACTION_SEMANTICS.md
+?? docs/ARCHITECTURE.md
+?? docs/CURRENT_STATUS.md
+?? docs/DATA_AND_TRAINING.md
+?? docs/README.md
+?? docs/RUNBOOK.md
+?? docs/SAFETY_AND_CONTROL.md
+?? docs/decisions/README.md
+?? docs/history/CHECKPOINT_INIT_DECISION.md
+?? docs/history/LAPTOP_SETUP_PLAN.md
+?? docs/history/NETWORK_OPTIONS.md
+?? docs/history/PI05_PIPER_MASTER_PLAN.md
+?? docs/history/PI05_PIPER_MASTER_PLAN_HISTORY.md
+?? docs/history/PI05_PIPER_MASTER_PLAN_ORIGINAL.md
+?? docs/history/PI05_PIPER_PHASE_GATES.json
+?? docs/history/README.md
+?? docs/history/REAL_ROBOT_SAFETY_PLAN.md
+?? docs/history/REMOTE_ARCHITECTURE.md
+?? docs/history/SERVER_SETUP_PLAN.md
+?? docs/history/USER_DECISIONS.md
+?? docs/history/project-diagnosis-week-plan-2026-10-02.md
+?? docs/reference/AGILEX_SOURCE_AUDIT.md
+?? docs/reference/CURRENT_PROJECT_PLAN.md
+?? docs/reference/DATA_SCHEMA.md
+?? docs/reference/DIAGNOSTIC_SCRIPT_SPEC.md
+?? docs/reference/DOCUMENTATION_CLEANUP_REPORT.md
+?? docs/reference/GRIPPER_TEACH_OPTIONS.md
+?? docs/reference/OPENPI_PROVENANCE.md
+?? docs/reference/PROJECT_CODEBASE_AUDIT.md
+?? docs/reference/PROJECT_LAYOUT.md
+?? docs/reference/README.md
+?? docs/reference/REDUNDANCY_CANDIDATES.md
+?? docs/reference/SSH_TUNNEL_SETUP.md
+?? docs/reference/TEACH_DATA_PIPELINE.md
+?? knowledge_landsea_experiment/test.txt
+?? laptop/camera/dual_camera.py
+?? laptop/camera/source.py
+?? laptop/client/action_shadow_replay.py
+?? laptop/client/audit_live_shadow.py
+?? laptop/client/bounded_model_trial.py
+?? laptop/client/live_model_preview.py
+?? laptop/client/live_shadow.py
+?? laptop/client/network_latency_probe.py
+?? laptop/client/offline_latency_replay.py
+?? laptop/client/public_piper_transport_smoke.py
+?? laptop/client/requirements-dev.txt
+?? laptop/client/shadow_preview_smoke.py
+?? laptop/client/supervised_live_step.py
+?? laptop/client/synthetic_policy_reject_smoke.py
+?? laptop/control/__init__.py
+?? laptop/control/contracts.py
+?? laptop/diagnostics/OEM_CAN_CAPTURE.md
+?? laptop/diagnostics/audit_feedback_log.py
+?? laptop/diagnostics/bounded_process.py
+?? laptop/diagnostics/camera_identity.py
+?? laptop/diagnostics/camera_stream_smoke.py
+?? laptop/diagnostics/can_diagnostic_session.py
+?? laptop/diagnostics/capture_oem_can.py
+?? laptop/diagnostics/compare_gripper_feedback.py
+?? laptop/diagnostics/list_candlelight_adapters.py
+?? laptop/diagnostics/list_directshow_cameras.ps1
+?? laptop/diagnostics/oem_can_send_hook.js
+?? laptop/diagnostics/probe_can_ack_only.py
+?? laptop/diagnostics/probe_can_listen_only.py
+?? laptop/diagnostics/probe_dual_cameras.py
+?? laptop/diagnostics/probe_motor_enable_ack_only.py
+?? laptop/diagnostics/probe_piper_feedback_ack_only.py
+?? laptop/diagnostics/query_all_joint_parameters.py
+?? laptop/diagnostics/query_joint_limits.py
+?? laptop/diagnostics/query_piper_firmware.py
+?? laptop/diagnostics/query_piper_gripper_parameters.py
+?? laptop/diagnostics/query_piper_readiness_snapshot.py
+?? laptop/recorder/USAGE.md
+?? laptop/recorder/__init__.py
+?? laptop/recorder/align_raw.py
+?? laptop/recorder/audit_episode.py
+?? laptop/recorder/capture_session.py
+?? laptop/recorder/episode.py
+?? laptop/recorder/label_episode.py
+?? laptop/recorder/manual_teach_capture.py
+?? laptop/recorder/next_state_proxy.py
+?? laptop/recorder/passive_capture.py
+?? laptop/recorder/piper_command_targets.py
+?? laptop/recorder/record_demonstrations.py
+?? laptop/recorder/synthetic_smoke.py
+?? laptop/recorder/verify_source.py
+?? laptop/robot_client/__init__.py
+?? laptop/robot_client/bounded_policy_target.py
+?? laptop/robot_client/bounded_zero_return.py
+?? laptop/robot_client/gripper_command_preview.py
+?? laptop/robot_client/hil_guard.py
+?? laptop/robot_client/joint_command_preview.py
+?? laptop/robot_client/offline_replay.py
+?? laptop/robot_client/piper_session.py
+?? laptop/robot_client/piper_tool.py
+?? laptop/robot_client/policy_reject_only.py
+?? laptop/robot_client/policy_sdk_preview.py
+?? laptop/robot_client/replay_preflight.py
+?? laptop/robot_client/single_step_dry_run.py
+?? laptop/robot_client/supervised_axis_commissioning.py
+?? laptop/robot_client/supervised_enable_j6.py
+?? laptop/robot_client/supervised_gripper_commissioning.py
+?? laptop/robot_client/supervised_gripper_max_open.py
+?? laptop/robot_client/supervised_j1_commissioning.py
+?? laptop/robot_client/supervised_j1_one_degree_trial.py
+?? laptop/robot_client/supervised_j1_step_trial.py
+?? laptop/robot_client/supervised_j5_probe.py
+?? laptop/robot_client/supervised_joint_replay.py
+?? laptop/robot_client/supervised_mode_initialization.py
+?? laptop/robot_client/supervised_near_zero_home.py
+?? laptop/robot_client/supervised_oem_gripper_test.py
+?? laptop/robot_client/supervised_policy_session.py
+?? laptop/robot_client/supervised_policy_step.py
+?? laptop/robot_client/supervised_restore_gripper.py
+?? laptop/robot_client/supervised_restore_start.py
+?? laptop/robot_client/supervised_site_profile.py
+?? laptop/robot_client/supervised_smooth_joint_replay.py
+?? laptop/robot_client/verified_policy_command.py
+?? laptop/runtime/__init__.py
+?? laptop/runtime/bridge_protocol.py
+?? laptop/runtime/config.py
+?? laptop/runtime/modes.py
+?? laptop/safety/__init__.py
+?? laptop/safety/bridge.py
+?? laptop/safety/offline_guard.py
+?? laptop/transport/README.md
+?? laptop/transport/__init__.py
+?? laptop/transport/bounded_trial.py
+?? laptop/transport/can_transport.py
+?? laptop/transport/diagnostic_queries.py
+?? laptop/transport/gripper_commissioning.py
+?? laptop/transport/gs_usb_piper_can.py
+?? laptop/transport/mode_initialization.py
+?? laptop/transport/position_commands.py
+?? server/dataset_tools/audit_proxy_lerobot.py
+?? server/dataset_tools/audit_training_data.py
+?? server/dataset_tools/compare_proxy_sampling_rates.py
+?? server/dataset_tools/convert_next_state_proxy.py
+?? server/dataset_tools/convert_piper_aligned.py
+?? server/dataset_tools/synthetic_lerobot_smoke.py
+?? server/policy_server/artifact_identity.py
+?? server/policy_server/proxy_config.py
+?? server/public_piper_smoke_infer.py
+?? server/serve_derived_state_multi_shadow.py
+?? server/serve_piper_action_shadow.py
+?? server/serve_proxy_piper_shadow.py
+?? server/serve_public_piper_smoke.py
+?? server/training/TRAINING_USAGE.md
+?? server/training/action_target_contract.py
+?? server/training/check_piper_readiness.py
+?? server/training/evaluate_demonstrations.py
+?? server/training/piper_action_eval.py
+?? server/training/piper_openpi_config.py
+?? server/training/piper_train_entry.py
+?? server/training/post_capture_pipeline.py
+?? server/training/proxy_dataset_contract.py
+?? server/training/proxy_latency_profile.py
+?? server/training/proxy_multi_episode_contract.py
+?? server/training/proxy_multi_episode_pilot.py
+?? server/training/proxy_piper_eval.py
+?? server/training/proxy_piper_tiny_fit.py
+?? server/training/public_data_contract.py
+?? server/training/public_piper_smoke.py
+?? server/training/serve_trained_demonstrations.py
+?? server/training/summarize_training_loss.py
+?? server/training/train_demonstrations.py
+?? tests/README.md
+?? tests/contracts/__init__.py
+?? tests/contracts/test_control_contracts.py
+?? tests/contracts/test_piper_contract.py
+?? tests/contracts/test_piper_units.py
+?? tests/contracts/test_runtime_config.py
+?? tests/data/__init__.py
+?? tests/data/test_align_raw.py
+?? tests/data/test_align_raw_to_lerobot.py
+?? tests/data/test_convert_next_state_proxy.py
+?? tests/data/test_next_state_proxy.py
+?? tests/data/test_piper_command_targets.py
+?? tests/data/test_proxy_lerobot_audit.py
+?? tests/data/test_proxy_sampling_rate_comparison.py
+?? tests/data/test_source_verification.py
+?? tests/laptop/__init__.py
+?? tests/laptop/test_action_shadow_replay.py
+?? tests/laptop/test_bounded_model_trial.py
+?? tests/laptop/test_bounded_policy_target.py
+?? tests/laptop/test_bounded_process.py
+?? tests/laptop/test_bounded_zero_return.py
+?? tests/laptop/test_bridge_protocol.py
+?? tests/laptop/test_camera_identity_inventory.py
+?? tests/laptop/test_camera_stream_smoke.py
+?? tests/laptop/test_can_ack_only_guard.py
+?? tests/laptop/test_can_listen_only_guard.py
+?? tests/laptop/test_capture_boundary_frames.py
+?? tests/laptop/test_capture_supervision.py
+?? tests/laptop/test_compare_gripper_feedback.py
+?? tests/laptop/test_diagnostic_queries.py
+?? tests/laptop/test_dual_camera_capture.py
+?? tests/laptop/test_dual_camera_probe.py
+?? tests/laptop/test_episode_recorder.py
+?? tests/laptop/test_fake_can_single_step_rehearsal.py
+?? tests/laptop/test_feedback_log_audit.py
+?? tests/laptop/test_firmware_query.py
+?? tests/laptop/test_gripper_command_preview.py
+?? tests/laptop/test_gripper_commissioning.py
+?? tests/laptop/test_gripper_parameter_query.py
+?? tests/laptop/test_j1_commissioning_bridge.py
+?? tests/laptop/test_joint_command_preview.py
+?? tests/laptop/test_legacy_hil_guard.py
+?? tests/laptop/test_live_shadow.py
+?? tests/laptop/test_near_zero_home.py
+?? tests/laptop/test_network_latency_probe.py
+?? tests/laptop/test_oem_can_capture.py
+?? tests/laptop/test_oem_gripper_test.py
+?? tests/laptop/test_offline_safety_bridge.py
+?? tests/laptop/test_passive_capture.py
+?? tests/laptop/test_piper_can_transport.py
+?? tests/laptop/test_piper_feedback_ack_only_guard.py
+?? tests/laptop/test_piper_session.py
+?? tests/laptop/test_piper_tool.py
+?? tests/laptop/test_policy_reject_only.py
+?? tests/laptop/test_policy_sdk_preview.py
+?? tests/laptop/test_probe_motor_enable_ack_only.py
+?? tests/laptop/test_process_exit_watchdog.py
+?? tests/laptop/test_query_all_joint_parameters.py
+?? tests/laptop/test_query_joint_limits.py
+?? tests/laptop/test_query_piper_readiness_snapshot.py
+?? tests/laptop/test_record_demonstrations.py
+?? tests/laptop/test_replay_preflight.py
+?? tests/laptop/test_safety_bridge_runtime.py
+?? tests/laptop/test_shadow_preview_smoke.py
+?? tests/laptop/test_single_step_dry_run.py
+?? tests/laptop/test_supervised_enable_j6.py
+?? tests/laptop/test_supervised_j1_one_degree_trial.py
+?? tests/laptop/test_supervised_j1_step_trial.py
+?? tests/laptop/test_supervised_j5_probe.py
+?? tests/laptop/test_supervised_live_step.py
+?? tests/laptop/test_supervised_mode_initialization.py
+?? tests/laptop/test_supervised_policy_session.py
+?? tests/laptop/test_supervised_policy_step.py
+?? tests/laptop/test_supervised_position_bridge.py
+?? tests/laptop/test_supervised_position_transport.py
+?? tests/laptop/test_supervised_restore_gripper.py
+?? tests/laptop/test_supervised_restore_start.py
+?? tests/laptop/test_supervised_site_profile.py
+?? tests/laptop/test_synthetic_policy_reject_smoke.py
+?? tests/laptop/test_verified_policy_command.py
+?? tests/server/__init__.py
+?? tests/server/test_action_target_contract.py
+?? tests/server/test_derived_state_multi_shadow.py
+?? tests/server/test_piper_action_eval.py
+?? tests/server/test_piper_aligned_converter.py
+?? tests/server/test_piper_openpi_offline.py
+?? tests/server/test_piper_train_entry.py
+?? tests/server/test_policy_artifact_identity.py
+?? tests/server/test_post_capture_pipeline.py
+?? tests/server/test_proxy_dataset_contract.py
+?? tests/server/test_proxy_latency_profile.py
+?? tests/server/test_proxy_multi_episode_contract.py
+?? tests/server/test_proxy_policy_config.py
+?? tests/server/test_public_data_contract.py
+?? tests/server/test_train_demonstrations.py
+?? tests/server/test_training_data_audit.py
+?? tests/server/test_training_modes.py
+?? validation/.pytest-codex-session-grant-20261007-01/test_runtime_config_fails_clos0/runtime.json
+?? validation/.pytest-codex-session-grant-20261007-01/test_runtime_config_fails_clos1/runtime.json
+?? validation/.pytest-codex-session-grant-20261007-01/test_runtime_config_fails_clos2/runtime.json
+?? validation/.pytest-codex-session-grant-20261007-01/test_runtime_config_fails_clos3/runtime.json
+?? validation/.pytest-codex-session-grant-20261007-01/test_runtime_config_fails_clos4/runtime.json
+?? validation/.pytest-codex-session-grant-20261007-01/test_supervised_mode_requires_0/supervised-position.json
+?? validation/.pytest-mainline-post-restart-20261006/test_preview_rejects_server_id0/preview/aligned_episode.json
+?? validation/.pytest-mainline-post-restart-20261006/test_preview_rejects_server_id0/preview/base_0.png
+?? validation/.pytest-mainline-post-restart-20261006/test_preview_rejects_server_id0/preview/base_1.png
+?? validation/.pytest-mainline-post-restart-20261006/test_preview_rejects_server_id0/preview/base_2.png
+?? validation/.pytest-mainline-post-restart-20261006/test_preview_rejects_server_id0/preview/frames.jsonl
+?? validation/.pytest-mainline-post-restart-20261006/test_preview_rejects_server_id0/preview/wrist_0.png
+?? validation/.pytest-mainline-post-restart-20261006/test_preview_rejects_server_id0/preview/wrist_1.png
+?? validation/.pytest-mainline-post-restart-20261006/test_preview_rejects_server_id0/preview/wrist_2.png
+?? validation/.pytest-mainline-post-restart-20261006/test_runtime_config_fails_clos0/runtime.json
+?? validation/.pytest-mainline-post-restart-20261006/test_runtime_config_fails_clos1/runtime.json
+?? validation/.pytest-mainline-post-restart-20261006/test_runtime_config_fails_clos2/runtime.json
+?? validation/.pytest-mainline-post-restart-20261006/test_runtime_config_fails_clos3/runtime.json
+?? validation/.pytest-mainline-post-restart-20261006/test_source_verified_preview_r0/preview/aligned_episode.json
+?? validation/.pytest-mainline-post-restart-20261006/test_source_verified_preview_r0/preview/base_0.png
+?? validation/.pytest-mainline-post-restart-20261006/test_source_verified_preview_r0/preview/base_1.png
+?? validation/.pytest-mainline-post-restart-20261006/test_source_verified_preview_r0/preview/base_2.png
+?? validation/.pytest-mainline-post-restart-20261006/test_source_verified_preview_r0/preview/frames.jsonl
+?? validation/.pytest-mainline-post-restart-20261006/test_source_verified_preview_r0/preview/wrist_0.png
+?? validation/.pytest-mainline-post-restart-20261006/test_source_verified_preview_r0/preview/wrist_1.png
+?? validation/.pytest-mainline-post-restart-20261006/test_source_verified_preview_r0/preview/wrist_2.png
+?? validation/.pytest-supervised-session-20261007/test_loads_complete_site_profi0/site-profile.json
+?? validation/.pytest-supervised-session-20261007/test_refuses_draft_and_incompl0/site-profile.json
+?? validation/.pytest-supervised-session-20261007/test_refuses_sdk_nominal_joint0/site-profile.json
+?? validation/.pytest-supervised-session-20261007/test_refuses_timezone_free_tim0/sdk-nominal-limits.json
+?? validation/.pytest-supervised-session-20261007/test_refuses_timezone_free_tim0/site-profile.json
+?? validation/.pytest-supervised-session-20261007/test_rejects_ambiguous_json_an0/duplicate.json
+?? validation/.pytest-supervised-session-20261007/test_rejects_ambiguous_json_an0/non-finite.json
+?? validation/.pytest-supervised-session-20261007/test_rejects_ambiguous_json_an0/site-profile.json
+?? validation/.pytest-supervised-session-20261007/test_requires_one_evidence_ref0/site-profile.json
+?? validation/action_target_raw_corpus_inventory_20261006.json
+?? validation/action_target_source_audit_20261006.json
+?? validation/camera_acer_device_recheck_20261007_r1.json
+?? validation/camera_acer_directshow_bind_20261007_r1.json
+?? validation/camera_acer_format_probe_20261007.json
+?? validation/camera_acer_msmf_probe_20261007.json
+?? validation/camera_acer_unsandboxed_20261007_r1.jpg
+?? validation/camera_acer_wrist_recheck_after_broadcast_probe_20261007.json
+?? validation/camera_after_broadcast_exit_20261007_r1.json
+?? validation/camera_after_broadcast_stopped_20261007_r1.json
+?? validation/camera_base_after_container_stop_20261007_r1.json
+?? validation/camera_base_after_windows_camera_20261007_r1.json
+?? validation/camera_base_retry_20261007_r1.json
+?? validation/camera_base_retry_runner_20261007_r1.py
+?? validation/camera_broadcast_ab_diagnostic_20261006.json
+?? validation/camera_broadcast_wrist_stream_20261007.json
+?? validation/camera_directshow_enumeration_20261007.json
+?? validation/camera_directshow_inventory_20261007_r1.json
+?? validation/camera_dual_unsandboxed_20261007_r1.json
+?? validation/camera_high_index_scan_20261007.json
+?? validation/camera_identity_inventory_20261007.json
+?? validation/camera_index2_wrist_candidate_20261007.json
+?? validation/camera_index_scan_20261007_r1.json
+?? validation/camera_index_scan_20261007_r1/camera_01_frame_00.png
+?? validation/camera_index_scan_20261007_r1/camera_02_frame_00.png
+?? validation/camera_index_scan_runner_20261007_r1.py
+?? validation/camera_initial_debug_20261007_r1.json
+?? validation/camera_initial_debug_summary_20261007_r1.json
+?? validation/camera_skew_test_20261008_r1/report.json
+?? validation/camera_stream_access_recheck_20261007.json
+?? validation/camera_stream_after_broadcast_off_1_2_20261006.json
+?? validation/camera_stream_after_broadcast_off_20261006.json
+?? validation/camera_stream_backend_recheck_20261006.json
+?? validation/camera_stream_current_0_1_20261006.json
+?? validation/camera_stream_current_1_2_20261006.json
+?? validation/camera_stream_index_recheck_20261006.json
+?? validation/camera_stream_properties_20261006.json
+?? validation/camera_stream_qualification_recheck_20261006.json
+?? validation/camera_stream_qualified_current_1_2_20261006.json
+?? validation/camera_stream_quality_guard_validation_20261006.json
+?? validation/camera_stream_smoke_0_1_30s_20261006.json
+?? validation/camera_stream_smoke_20261006.json
+?? validation/camera_stream_smoke_20261006_0835.json
+?? validation/camera_stream_smoke_indices_1_2_20261006.json
+?? validation/camera_wrist_preview_20261007_r1.jpg
+?? validation/camera_wrist_probe_20261007_r1.json
+?? validation/can_ack_only_recheck_20261007.json
+?? validation/can_bus_after_interrupt5000_20261008_r1.json
+?? validation/can_joint_parameters_20261005.json
+?? validation/can_passive_feedback_20261006.json
+?? validation/can_passive_feedback_live_recheck_20261006_0838.json
+?? validation/can_passive_feedback_recheck_20261006.json
+?? validation/cef166e2_visual_alignment_20261003.json
+?? validation/control_contract_type_validation_20261006.json
+?? validation/derived_state_shadow_identity_lock_20261007.json
+?? validation/derived_state_shadow_loopback_20261007.json
+?? validation/derived_state_shadow_loopback_20261007.py
+?? validation/derived_state_tiny_fit_reuse_20261006.json
+?? validation/diagnostic_query_bridge_validation_20261006.json
+?? validation/dual_camera_reusable_live_20261007_r1/base.mp4
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000000.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000004.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000008.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000012.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000015.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000019.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000023.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000026.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000030.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000034.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000038.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000042.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000046.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000050.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000053.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000057.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000061.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000064.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000068.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000072.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000076.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000079.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000083.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000087.png
+?? validation/dual_camera_reusable_live_20261007_r1/base/00000090.png
+?? validation/dual_camera_reusable_live_20261007_r1/base_snapshot.jpg
+?? validation/dual_camera_reusable_live_20261007_r1/base_timestamps.jsonl
+?? validation/dual_camera_reusable_live_20261007_r1/report.json
+?? validation/dual_camera_reusable_live_20261007_r1/wrist.mp4
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000000.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000004.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000007.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000011.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000015.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000018.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000022.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000026.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000029.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000033.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000037.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000040.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000044.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000048.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000051.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000055.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000059.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000062.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000066.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000070.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000073.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000077.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist/00000081.png
+?? validation/dual_camera_reusable_live_20261007_r1/wrist_snapshot.jpg
+?? validation/dual_camera_reusable_live_20261007_r1/wrist_timestamps.jsonl
+?? validation/dual_camera_reusable_live_20261007_r2/base.mp4
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000000.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000004.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000007.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000010.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000013.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000016.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000019.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000022.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000025.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000028.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000031.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000034.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000037.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000040.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000043.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000046.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000049.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000052.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000055.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000058.png
+?? validation/dual_camera_reusable_live_20261007_r2/base/00000061.png
+?? validation/dual_camera_reusable_live_20261007_r2/base_snapshot.jpg
+?? validation/dual_camera_reusable_live_20261007_r2/base_timestamps.jsonl
+?? validation/dual_camera_reusable_live_20261007_r2/report.json
+?? validation/dual_camera_reusable_live_20261007_r2/wrist.mp4
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000000.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000004.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000007.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000009.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000013.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000016.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000018.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000021.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000025.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000028.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000030.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000033.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000037.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000039.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000042.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000045.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000049.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist/00000051.png
+?? validation/dual_camera_reusable_live_20261007_r2/wrist_snapshot.jpg
+?? validation/dual_camera_reusable_live_20261007_r2/wrist_timestamps.jsonl
+?? validation/enable_j6_before5000_20261008_r1.json
+?? validation/eval1000_report_20261008.json
+?? validation/eval20_vs1000_20261008.json
+?? validation/feedback_change_20261005.json
+?? validation/first_demo_alignment_20261007.json
+?? validation/first_demo_reaudit_20261007.json
+?? validation/gripper_parameter_query_offline_20261006.json
+?? validation/hil_entrypoint_bridge_gate_20261006.json
+?? validation/inspect_cando_function.py
+?? validation/j1_commissioning_bridge_20261007.json
+?? validation/j1_preflight_20261007.json
+?? validation/j2_j3_limit_query_20261005.json
+?? validation/joint_limit_software_display_20261005.json
+?? validation/lab_camera_preflight_20261006_170029.json
+?? validation/lab_can_readonly_preflight_20261006_170113.json
+?? validation/lab_firmware_query_20261006_170233.json
+?? validation/lab_gripper_closed_feedback_20261006_171202.json
+?? validation/lab_gripper_endpoint_feedback_comparison_20261006.json
+?? validation/lab_gripper_fully_open_feedback_20261006_171731.json
+?? validation/lab_gripper_parameter_read_20261006_170212.json
+?? validation/lab_gripper_signed_feedback_recheck_20261006.json
+?? validation/lab_joint_parameter_read_20261006_170250.json
+?? validation/lab_live_shadow_20261006_170525.json
+?? validation/lab_live_shadow_channel_diagnostics_20261006_1836.json
+?? validation/lab_live_shadow_post_timing_contract_20261006.json
+?? validation/lab_live_shadow_signed_gripper_recheck_20261006_1840.json
+?? validation/lab_live_shadow_startup_fix_20261006_1719.json
+?? validation/lab_live_shadow_startup_fix_20261006_172633.json
+?? validation/lab_passive_feedback_recheck_post_restart_20261006.json
+?? validation/live1000_identity_20261008.json
+?? validation/live1000_preview_20261008_r1.json
+?? validation/live5000_before60deg_retry_20261008_r1.json
+?? validation/live5000_identity_20261008.json
+?? validation/live5000_preview_20261008_r1.json
+?? validation/live5000_preview_20261008_r2.json
+?? validation/live5000_restart_r2_identity_20261008.json
+?? validation/live_shadow_recheck_20261005.json
+?? validation/live_shadow_recheck_20261006_0852.json
+?? validation/measured_policy_update_rate_20261008.json
+?? validation/mode_initialization_preparation_20261007_r1.json
+?? validation/mode_initialization_preview_20261007_r1.json
+?? validation/motor_before5000_20261008_r1.json
+?? validation/motor_mode_check_20261008_r1.json
+?? validation/network_latency_probe_unit_tests_20261006.json
+?? validation/network_latency_ssh_tunnel_20261006.json
+?? validation/network_latency_ssh_tunnel_recheck_20261006.json
+?? validation/new_demo_after_model_step2_readonly_20261007.json
+?? validation/new_demo_after_model_step_readonly_20261007.json
+?? validation/new_demo_bounded_preview_20261007.json
+?? validation/new_demo_live_at_zero_20261007.json
+?? validation/new_demo_live_identity_20261007.json
+?? validation/new_demo_live_preview_20261007.json
+?? validation/new_demo_live_preview_20261007_r2.json
+?? validation/new_demo_model_trial_20261007_r1.json
+?? validation/new_demo_model_trial_20261007_r1.step0.can.jsonl
+?? validation/new_demo_model_trial_20261007_r2.json
+?? validation/new_demo_model_trial_20261007_r2.step0.can.jsonl
+?? validation/new_demo_model_trial_20261007_r3.json
+?? validation/new_demo_model_trial_20261007_r3.step0.can.jsonl
+?? validation/new_demo_model_trial_20261007_r3.step1.can.jsonl
+?? validation/new_demo_model_trial_20261007_r4.json
+?? validation/new_demo_model_trial_20261007_r4.step0.can.jsonl
+?? validation/new_demo_model_trial_20261007_r4.step1.can.jsonl
+?? validation/new_demo_model_trial_20261007_r5.json
+?? validation/new_demo_model_trial_20261007_r5.step0.can.jsonl
+?? validation/new_demo_model_trial_summary_20261007.json
+?? validation/new_demo_server_dataset_20261007.json
+?? validation/new_demo_tinyfit_20261007.json
+?? validation/new_demo_tinyfit_20261007_corrected.json
+?? validation/new_demo_tinyfit_20261007_train.log
+?? validation/new_four_demo_audit_20261007.json
+?? validation/new_model_mode_init_20261007_r1.json
+?? validation/non_camera_deployment_followup_20261007.json
+?? validation/non_can_readiness_recheck_20261006.json
+?? validation/non_can_readiness_supplement_20261006.json
+?? validation/nvidia_broadcast_camera_input_recheck_20261007.json
+?? validation/oem_gripper_capture_20261007_r1/report.json
+?? validation/oem_gripper_capture_20261007_r1/send_frames.jsonl
+?? validation/oem_gripper_capture_20261007_r2/report.json
+?? validation/oem_gripper_capture_20261007_r2/send_frames.jsonl
+?? validation/oem_gripper_capture_20261007_r3/report.json
+?? validation/oem_gripper_capture_20261007_r3/send_frames.jsonl
+?? validation/oem_gripper_capture_analysis_20261007_r3.json
+?? validation/oem_hook_probe_20261007_r1/report.json
+?? validation/oem_hook_probe_20261007_r1/send_frames.jsonl
+?? validation/official_sdk_semantics_audit_20261006.json
+?? validation/offline_contract_and_hil_guard_20261006.json
+?? validation/offline_readiness_20261007.json
+?? validation/offline_safety_configuration_validation_20261006.json
+?? validation/offline_test_execution_20261005.json
+?? validation/offline_test_execution_20261006.json
+?? validation/offline_test_execution_identity_update_20261006.json
+?? validation/offline_test_execution_mainline_20261006.json
+?? validation/offline_test_execution_network_20261006.json
+?? validation/offline_test_execution_network_recheck_20261006.json
+?? validation/offline_test_execution_project_layout_20261006.json
+?? validation/offline_test_execution_server_work_20261006.json
+?? validation/offline_test_execution_watchdog_20261006.json
+?? validation/p12_offline_preflight_timing_20261006.json
+?? validation/p12_proxy_target_source_audit_20261007.json
+?? validation/passive_can_probe_safety_bridge_20261006.json
+?? validation/piper_control_contract_static_20261002.json
+?? validation/piper_feedback_ack_only_recheck_20261007.json
+?? validation/piper_feedback_ack_only_timestamped_20261007.json
+?? validation/piper_feedback_listen_only_recheck_20261007.json
+?? validation/piper_feedback_listen_only_timestamped_20261007.json
+?? validation/piper_feedback_timing_audit_20261007.json
+?? validation/policy_reject_only_offline_20261005.json
+?? validation/post_capture_tinyfit_20261007.json
+?? validation/process_exit_watchdog_20261006.json
+?? validation/proxy_10fps_tiny_fit_20261006.json
+?? validation/proxy_10fps_training_preflight_20261006.json
+?? validation/proxy_2fps_baseline_audited_recheck_20261006.json
+?? validation/proxy_2fps_server_eval_20261006.json
+?? validation/proxy_artifact_identity_lock_20261006.json
+?? validation/proxy_latency_segments_20261003.json
+?? validation/proxy_sampling_rate_comparison_20261005.json
+?? validation/proxy_target_step_envelope_audit_20261007.json
+?? validation/proxy_tiny_fit_comparison_20261003.json
+?? validation/public_piper_smoke.json
+?? validation/recorded_preview_reject_replay_20261006.json
+?? validation/safety_bridge_clock_validation_20261006.json
+?? validation/safety_bridge_offline_audit_20261006.json
+?? validation/safety_bridge_state_machine_20261006.json
+?? validation/server_authorized_offline_recheck_20261006.json
+?? validation/server_current_local_tiny_fit_gate_20261006.json
+?? validation/server_current_survivor_8003_synthetic_recheck_20261006.json
+?? validation/server_current_synthetic_reject_20261006.json
+?? validation/server_current_synthetic_reject_continuation_20261006.json
+?? validation/server_current_synthetic_reject_followup_20261006.json
+?? validation/server_current_synthetic_request_20261006.json
+?? validation/server_data_readiness_recheck_20261006.json
+?? validation/server_openpi_environment_recheck_20261006.json
+?? validation/server_post_restart_synthetic_reject_20261006.json
+?? validation/server_proxy_deployment_20261006.json
+?? validation/server_proxy_prediction_only_live_recheck_20261006.json
+?? validation/server_proxy_prediction_recheck_20261006.json
+?? validation/server_raw_episode_upload_recheck_20261006.json
+?? validation/server_service_consolidation_20261006.json
+?? validation/site_1000_preflight_20261008_r1.json
+?? validation/site_after_gripper_5mm_readonly_20261007_r1.json
+?? validation/site_after_gripper_5mm_readonly_20261007_r1.jsonl
+?? validation/site_after_j1_one_degree_readonly_20261007_r1.json
+?? validation/site_after_j1_one_degree_readonly_20261007_r1.jsonl
+?? validation/site_after_j1_readonly_20261007_r1.json
+?? validation/site_after_j1_readonly_20261007_r1.jsonl
+?? validation/site_after_j2_readonly_20261007_r1.json
+?? validation/site_after_j2_readonly_20261007_r1.jsonl
+?? validation/site_close_at_zero_20261007_r1.can.jsonl
+?? validation/site_close_at_zero_20261007_r1.json
+?? validation/site_feedback_check_20261007_r1.json
+?? validation/site_feedback_check_20261007_r1.jsonl
+?? validation/site_gripper_max_open_20261007_r1.can.jsonl
+?? validation/site_gripper_max_open_20261007_r1.json
+?? validation/site_gripper_max_open_20261007_r2.can.jsonl
+?? validation/site_gripper_max_open_20261007_r2.json
+?? validation/site_gripper_max_open_observe_20261007_r1.json
+?? validation/site_gripper_max_open_observe_20261007_r2.json
+?? validation/site_gripper_open_1mm_20261007_r1.json
+?? validation/site_gripper_open_1mm_20261007_r1.jsonl
+?? validation/site_gripper_open_5mm_20261007_r1.json
+?? validation/site_gripper_open_5mm_20261007_r1.jsonl
+?? validation/site_home_and_close_20261007_r1.can.jsonl
+?? validation/site_home_and_close_20261007_r1.json
+?? validation/site_j1_commissioning_20261007_r1.json
+?? validation/site_j1_one_degree_20261007_r1.json
+?? validation/site_j2_one_degree_20261007_r1.json
+?? validation/site_j3_one_degree_20261007_r1.json
+?? validation/site_j4_one_degree_20261007_r1.json
+?? validation/site_j5_one_degree_20261007_r1.json
+?? validation/site_j6_enable_20261007_r1.json
+?? validation/site_j6_one_degree_20261007_r1.json
+?? validation/site_motor_enable_check_20261007_r1.json
+?? validation/site_oem_gripper_test_20261007_r1.can.jsonl
+?? validation/site_oem_gripper_test_20261007_r1.json
+?? validation/site_oem_gripper_test_20261007_r2.can.jsonl
+?? validation/site_oem_gripper_test_20261007_r2.json
+?? validation/site_oem_test_gripper_parameters_20261007_r1.json
+?? validation/site_pre_home_status_20261007_r1.json
+?? validation/site_seven_actuator_response_20261007_r1.json
+?? validation/site_zero_motor_enable_check_20261007_r1.json
+?? validation/site_zero_pose_check_20261007_r1.json
+?? validation/site_zero_pose_check_20261007_r1.jsonl
+?? validation/ssh_tunnel_drop_recovery_20261006.json
+?? validation/status_after_interrupt5000_20261008_r1.json
+?? validation/status_after_interrupt5000_20261008_r2.json
+?? validation/status_before5000_restart_20261008_r1.json
+?? validation/status_mode_check_20261008_r1.json
+?? validation/supervised_adapter_offline_recheck_20261007.json
+?? validation/supervised_live_step_20261007.json
+?? validation/supervised_post_send_feedback_20261007.json
+?? validation/supervised_short_loop_grant_20261007.json
+?? validation/supervised_site_profile_overlay_20261007_r1.json
+?? validation/synthetic_policy_reject_smoke_20261006.json
+?? validation/task_model_preflight_20261007_r1.json
+?? validation/task_scene_1000_after_20261008_r1/base_snapshot.jpg
+?? validation/task_scene_1000_after_20261008_r1/base_timestamps.jsonl
+?? validation/task_scene_1000_after_20261008_r1/report.json
+?? validation/task_scene_1000_after_20261008_r1/wrist_snapshot.jpg
+?? validation/task_scene_1000_after_20261008_r1/wrist_timestamps.jsonl
+?? validation/task_scene_1000_preflight_20261008_r1/base_snapshot.jpg
+?? validation/task_scene_1000_preflight_20261008_r1/base_timestamps.jsonl
+?? validation/task_scene_1000_preflight_20261008_r1/report.json
+?? validation/task_scene_1000_preflight_20261008_r1/wrist_snapshot.jpg
+?? validation/task_scene_1000_preflight_20261008_r1/wrist_timestamps.jsonl
+?? validation/task_scene_after_segment1_20261007/base_snapshot.jpg
+?? validation/task_scene_after_segment1_20261007/base_timestamps.jsonl
+?? validation/task_scene_after_segment1_20261007/report.json
+?? validation/task_scene_after_segment1_20261007/wrist_snapshot.jpg
+?? validation/task_scene_after_segment1_20261007/wrist_timestamps.jsonl
+?? validation/task_scene_preflight_20261007_r1/base_snapshot.jpg
+?? validation/task_scene_preflight_20261007_r1/base_timestamps.jsonl
+?? validation/task_scene_preflight_20261007_r1/report.json
+?? validation/task_scene_preflight_20261007_r1/wrist_snapshot.jpg
+?? validation/task_scene_preflight_20261007_r1/wrist_timestamps.jsonl
+?? validation/task_scene_preflight_20261007_r2/base_snapshot.jpg
+?? validation/task_scene_preflight_20261007_r2/base_timestamps.jsonl
+?? validation/task_scene_preflight_20261007_r2/report.json
+?? validation/task_scene_preflight_20261007_r2/wrist_snapshot.jpg
+?? validation/task_scene_preflight_20261007_r2/wrist_timestamps.jsonl
+?? validation/task_trial1000_20261008_r1.json
+?? validation/task_trial1000_20261008_r1.step0.can.jsonl
+?? validation/task_trial1000_20261008_r1.step1.can.jsonl
+?? validation/task_trial1000_20261008_r1.step2.can.jsonl
+?? validation/task_trial1000_5deg_20261008_r1.json
+?? validation/task_trial1000_5deg_20261008_r1.step0.can.jsonl
+?? validation/task_trial1000_5deg_20261008_r1/base.avi
+?? validation/task_trial1000_5deg_20261008_r1/base.timestamps.jsonl
+?? validation/task_trial1000_5deg_20261008_r1/progress.json
+?? validation/task_trial1000_5deg_20261008_r1/wrist.avi
+?? validation/task_trial1000_5deg_20261008_r1/wrist.timestamps.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.json
+?? validation/task_trial1000_long10deg_20261008_r1.step0.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step1.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step10.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step11.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step12.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step13.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step14.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step15.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step16.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step17.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step18.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step19.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step2.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step3.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step4.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step5.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step6.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step7.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step8.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1.step9.can.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1/base.avi
+?? validation/task_trial1000_long10deg_20261008_r1/base.timestamps.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1/base_last.jpg
+?? validation/task_trial1000_long10deg_20261008_r1/progress.json
+?? validation/task_trial1000_long10deg_20261008_r1/summary.json
+?? validation/task_trial1000_long10deg_20261008_r1/wrist.avi
+?? validation/task_trial1000_long10deg_20261008_r1/wrist.timestamps.jsonl
+?? validation/task_trial1000_long10deg_20261008_r1/wrist_last.jpg
+?? validation/task_trial1000_long20deg_20261008_r1.json
+?? validation/task_trial1000_long20deg_20261008_r1.step0.can.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1.step1.can.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1.step2.can.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1.step3.can.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1.step4.can.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1.step5.can.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1.step6.can.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1.step7.can.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1.step8.can.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1.step9.can.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1/base.avi
+?? validation/task_trial1000_long20deg_20261008_r1/base.timestamps.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1/base_last.jpg
+?? validation/task_trial1000_long20deg_20261008_r1/progress.json
+?? validation/task_trial1000_long20deg_20261008_r1/summary.json
+?? validation/task_trial1000_long20deg_20261008_r1/wrist.avi
+?? validation/task_trial1000_long20deg_20261008_r1/wrist.timestamps.jsonl
+?? validation/task_trial1000_long20deg_20261008_r1/wrist_last.jpg
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.json
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step0.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step1.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step10.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step11.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step12.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step13.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step14.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step15.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step16.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step17.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step18.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step19.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step2.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step20.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step21.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step22.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step23.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step24.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step25.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step26.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step27.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step28.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step29.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step3.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step30.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step31.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step32.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step33.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step34.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step35.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step36.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step37.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step38.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step39.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step4.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step40.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step41.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step42.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step43.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step44.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step45.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step46.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step47.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step5.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step6.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step7.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step8.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1.step9.can.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1/base.avi
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1/base.timestamps.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1/base_last.jpg
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1/progress.json
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1/summary.json
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1/wrist.avi
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1/wrist.timestamps.jsonl
+?? validation/task_trial1000_long20deg_nocumulative_20261008_r1/wrist_last.jpg
+?? validation/task_trial1000_long5deg_20261008_r1.json
+?? validation/task_trial1000_long5deg_20261008_r1.step0.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step1.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step10.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step11.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step12.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step13.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step14.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step15.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step16.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step17.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step18.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step19.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step2.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step20.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step21.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step22.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step23.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step24.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step3.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step4.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step5.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step6.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step7.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step8.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1.step9.can.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1/base.avi
+?? validation/task_trial1000_long5deg_20261008_r1/base.timestamps.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1/base_last.jpg
+?? validation/task_trial1000_long5deg_20261008_r1/progress.json
+?? validation/task_trial1000_long5deg_20261008_r1/summary.json
+?? validation/task_trial1000_long5deg_20261008_r1/wrist.avi
+?? validation/task_trial1000_long5deg_20261008_r1/wrist.timestamps.jsonl
+?? validation/task_trial1000_long5deg_20261008_r1/wrist_last.jpg
+?? validation/task_trial1000_long_20261008_r1.json
+?? validation/task_trial1000_long_20261008_r1.step0.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step1.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step10.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step11.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step12.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step13.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step14.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step15.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step16.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step17.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step18.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step19.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step2.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step20.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step21.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step22.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step23.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step24.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step25.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step26.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step27.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step28.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step29.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step3.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step30.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step31.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step4.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step5.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step6.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step7.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step8.can.jsonl
+?? validation/task_trial1000_long_20261008_r1.step9.can.jsonl
+?? validation/task_trial1000_long_20261008_r1/base.avi
+?? validation/task_trial1000_long_20261008_r1/base.timestamps.jsonl
+?? validation/task_trial1000_long_20261008_r1/base_last.jpg
+?? validation/task_trial1000_long_20261008_r1/base_sample_0.jpg
+?? validation/task_trial1000_long_20261008_r1/base_sample_1200.jpg
+?? validation/task_trial1000_long_20261008_r1/base_sample_1500.jpg
+?? validation/task_trial1000_long_20261008_r1/base_sample_1800.jpg
+?? validation/task_trial1000_long_20261008_r1/base_sample_300.jpg
+?? validation/task_trial1000_long_20261008_r1/base_sample_600.jpg
+?? validation/task_trial1000_long_20261008_r1/base_sample_900.jpg
+?? validation/task_trial1000_long_20261008_r1/progress.json
+?? validation/task_trial1000_long_20261008_r1/summary.json
+?? validation/task_trial1000_long_20261008_r1/wrist.avi
+?? validation/task_trial1000_long_20261008_r1/wrist.timestamps.jsonl
+?? validation/task_trial1000_long_20261008_r1/wrist_last.jpg
+?? validation/task_trial1000_long_20261008_r1/wrist_sample_0.jpg
+?? validation/task_trial1000_long_20261008_r1/wrist_sample_1200.jpg
+?? validation/task_trial1000_long_20261008_r1/wrist_sample_1500.jpg
+?? validation/task_trial1000_long_20261008_r1/wrist_sample_1800.jpg
+?? validation/task_trial1000_long_20261008_r1/wrist_sample_300.jpg
+?? validation/task_trial1000_long_20261008_r1/wrist_sample_600.jpg
+?? validation/task_trial1000_long_20261008_r1/wrist_sample_900.jpg
+?? validation/task_trial1000_outcome_20261008.json
+?? validation/task_trial5000_60deg_20261008_r1.json
+?? validation/task_trial5000_60deg_20261008_r1.step0.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r1.step1.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r1/base.avi
+?? validation/task_trial5000_60deg_20261008_r1/base.timestamps.jsonl
+?? validation/task_trial5000_60deg_20261008_r1/progress.json
+?? validation/task_trial5000_60deg_20261008_r1/wrist.avi
+?? validation/task_trial5000_60deg_20261008_r1/wrist.timestamps.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.json
+?? validation/task_trial5000_60deg_20261008_r2.step0.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step1.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step10.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step11.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step12.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step13.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step14.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step15.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step16.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step17.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step18.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step19.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step2.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step20.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step21.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step22.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step23.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step24.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step3.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step4.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step5.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step6.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step7.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step8.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2.step9.can.jsonl
+?? validation/task_trial5000_60deg_20261008_r2/base.avi
+?? validation/task_trial5000_60deg_20261008_r2/base.timestamps.jsonl
+?? validation/task_trial5000_60deg_20261008_r2/base_last.jpg
+?? validation/task_trial5000_60deg_20261008_r2/progress.json
+?? validation/task_trial5000_60deg_20261008_r2/summary.json
+?? validation/task_trial5000_60deg_20261008_r2/wrist.avi
+?? validation/task_trial5000_60deg_20261008_r2/wrist.timestamps.jsonl
+?? validation/task_trial5000_60deg_20261008_r2/wrist_last.jpg
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r1.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r2.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r2.step0.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r2/base.avi
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r2/base.timestamps.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r2/progress.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r2/wrist.avi
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r2/wrist.timestamps.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r3.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r3.step0.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r3/base.avi
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r3/base.timestamps.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r3/progress.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r3/wrist.avi
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r3/wrist.timestamps.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4.step0.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4.step1.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4.step2.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4.step3.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4.step4.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4.step5.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4.step6.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4.step7.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4.step8.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4/base.avi
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4/base.timestamps.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4/base_last.jpg
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4/progress.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4/summary.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4/wrist.avi
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4/wrist.timestamps.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r4/wrist_last.jpg
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r5.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r5.step0.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r5.step1.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r5/base.avi
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r5/base.timestamps.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r5/progress.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r5/wrist.avi
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r5/wrist.timestamps.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r6.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r6.step0.can.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r6/base.avi
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r6/base.timestamps.jsonl
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r6/progress.json
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r6/wrist.avi
+?? validation/task_trial5000_long20deg_nocumulative_20261008_r6/wrist.timestamps.jsonl
+?? validation/task_trial5000_long_20261008_attempts_r5_r6.json
+?? validation/task_trial5000_restart_long_20261008_r1.json
+?? validation/task_trial5000_restart_long_20261008_r1.step0.can.jsonl
+?? validation/task_trial5000_restart_long_20261008_r1/base.avi
+?? validation/task_trial5000_restart_long_20261008_r1/base.timestamps.jsonl
+?? validation/task_trial5000_restart_long_20261008_r1/progress.json
+?? validation/task_trial5000_restart_long_20261008_r1/wrist.avi
+?? validation/task_trial5000_restart_long_20261008_r1/wrist.timestamps.jsonl
+?? validation/task_trial5000_restart_long_20261008_r2.json
+?? validation/task_trial5000_restart_long_20261008_r2.step0.can.jsonl
+?? validation/task_trial5000_restart_long_20261008_r2/base.avi
+?? validation/task_trial5000_restart_long_20261008_r2/base.timestamps.jsonl
+?? validation/task_trial5000_restart_long_20261008_r2/progress.json
+?? validation/task_trial5000_restart_long_20261008_r2/summary.json
+?? validation/task_trial5000_restart_long_20261008_r2/wrist.avi
+?? validation/task_trial5000_restart_long_20261008_r2/wrist.timestamps.jsonl
+?? validation/task_trial5000_restart_long_20261008_r3.json
+?? validation/task_trial5000_restart_long_20261008_r3.step0.can.jsonl
+?? validation/task_trial5000_restart_long_20261008_r3.step1.can.jsonl
+?? validation/task_trial5000_restart_long_20261008_r3.step2.can.jsonl
+?? validation/task_trial5000_restart_long_20261008_r3.step3.can.jsonl
+?? validation/task_trial5000_restart_long_20261008_r3.step4.can.jsonl
+?? validation/task_trial5000_restart_long_20261008_r3/base.avi
+?? validation/task_trial5000_restart_long_20261008_r3/base.timestamps.jsonl
+?? validation/task_trial5000_restart_long_20261008_r3/base_last.jpg
+?? validation/task_trial5000_restart_long_20261008_r3/progress.json
+?? validation/task_trial5000_restart_long_20261008_r3/summary.json
+?? validation/task_trial5000_restart_long_20261008_r3/wrist.avi
+?? validation/task_trial5000_restart_long_20261008_r3/wrist.timestamps.jsonl
+?? validation/task_trial5000_restart_long_20261008_r3/wrist_last.jpg
+?? validation/task_trial_20261007_r1.json
+?? validation/task_trial_20261007_r1.step0.can.jsonl
+?? validation/task_trial_20261007_r1.step1.can.jsonl
+?? validation/task_trial_20261007_r1.step2.can.jsonl
+?? validation/task_trial_outcome_20261007.json
+?? validation/train1000_completed_20261008.log
+?? validation/train1000_loss_summary_20261008.json
+?? validation/train1000_report_20261008.json
+?? validation/train5000_completed_20261008.log
+?? validation/train5000_loss_20261008.csv
+?? validation/train5000_loss_20261008.json
+?? validation/train5000_loss_20261008.png
+?? validation/train5000_progress_20261007.log
+?? validation/train5000_progress_latest.log
+?? validation/train5000_report_20261008.json
+?? validation/transport_unification_validation_20261006.json
+?? validation/zero_before20deg_20261008_r1.json
+?? validation/zero_before20deg_20261008_r1.step0.can.jsonl
+?? validation/zero_before20deg_20261008_r1.step1.can.jsonl
+?? validation/zero_before20deg_20261008_r1.step2.can.jsonl
+?? validation/zero_before20deg_20261008_r1.step3.can.jsonl
+?? validation/zero_before20deg_20261008_r1.step4.can.jsonl
+?? validation/zero_before20deg_20261008_r1.step5.can.jsonl
+?? validation/zero_before20deg_20261008_r1.step6.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.json
+?? validation/zero_before20deg_nocumulative_20261008_r1.step0.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step1.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step10.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step11.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step12.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step2.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step3.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step4.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step5.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step6.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step7.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step8.can.jsonl
+?? validation/zero_before20deg_nocumulative_20261008_r1.step9.can.jsonl
+?? validation/zero_before5000_20261008_r1.json
+?? validation/zero_before5000_20261008_r1.step0.can.jsonl
+?? validation/zero_before5000_20261008_r1.step1.can.jsonl
+?? validation/zero_before5000_20261008_r1.step10.can.jsonl
+?? validation/zero_before5000_20261008_r1.step11.can.jsonl
+?? validation/zero_before5000_20261008_r1.step12.can.jsonl
+?? validation/zero_before5000_20261008_r1.step13.can.jsonl
+?? validation/zero_before5000_20261008_r1.step14.can.jsonl
+?? validation/zero_before5000_20261008_r1.step15.can.jsonl
+?? validation/zero_before5000_20261008_r1.step16.can.jsonl
+?? validation/zero_before5000_20261008_r1.step17.can.jsonl
+?? validation/zero_before5000_20261008_r1.step18.can.jsonl
+?? validation/zero_before5000_20261008_r1.step2.can.jsonl
+?? validation/zero_before5000_20261008_r1.step3.can.jsonl
+?? validation/zero_before5000_20261008_r1.step4.can.jsonl
+?? validation/zero_before5000_20261008_r1.step5.can.jsonl
+?? validation/zero_before5000_20261008_r1.step6.can.jsonl
+?? validation/zero_before5000_20261008_r1.step7.can.jsonl
+?? validation/zero_before5000_20261008_r1.step8.can.jsonl
+?? validation/zero_before5000_20261008_r1.step9.can.jsonl
+?? validation/zero_before5000_60deg_20261008_r1.json
+?? validation/zero_before5000_60deg_20261008_r1.step0.can.jsonl
+?? validation/zero_before5000_60deg_20261008_r2.json
+?? validation/zero_before5000_60deg_20261008_r2.step0.can.jsonl
+?? validation/zero_before5000_60deg_20261008_r2.step1.can.jsonl
+?? validation/zero_before5000_60deg_20261008_r2.step2.can.jsonl
+?? validation/zero_before5000_60deg_20261008_r2.step3.can.jsonl
+?? validation/zero_before5000_60deg_20261008_r2.step4.can.jsonl
+?? validation/zero_before5000_60deg_20261008_r2.step5.can.jsonl
+?? validation/zero_before5000_long_20261008_r2.json
+?? validation/zero_before5000_long_20261008_r2.step0.can.jsonl
+?? validation/zero_before5000_long_20261008_r2.step1.can.jsonl
+?? validation/zero_before5000_long_20261008_r2.step2.can.jsonl
+?? validation/zero_before5000_long_20261008_r2.step3.can.jsonl
+?? validation/zero_interrupt5000_20261008_r1.json
+?? validation/zero_interrupt5000_20261008_r1.step0.can.jsonl
+```
+
+## diff_stat
+
+```text
+ .gitignore                              |   1 +
+ README.md                               |  84 +++++---
+ configs/dataset_template.yaml           |   2 +-
+ configs/network_template.yaml           |   6 +
+ configs/piper_joint_limits.yaml         |  80 +++++++-
+ configs/project_contract.yaml           |  12 +-
+ configs/tasks/pick_place_v1.yaml        |  11 +-
+ docs/AGILEX_SOURCE_AUDIT.md             |  19 --
+ docs/CHECKPOINT_INIT_DECISION.md        |  24 ---
+ docs/DATA_SCHEMA.md                     | 112 -----------
+ docs/DIAGNOSTIC_SCRIPT_SPEC.md          |  63 ------
+ docs/GRIPPER_TEACH_OPTIONS.md           |  26 ---
+ docs/LAPTOP_SETUP_PLAN.md               |  40 ----
+ docs/NETWORK_OPTIONS.md                 |  59 ------
+ docs/OPENPI_PROVENANCE.md               | 104 ----------
+ docs/PHASE_GATES.md                     |   8 +
+ docs/PI05_PIPER_MASTER_PLAN.md          |  63 ------
+ docs/PI05_PIPER_MASTER_PLAN_HISTORY.md  | 345 --------------------------------
+ docs/PI05_PIPER_MASTER_PLAN_ORIGINAL.md | 345 --------------------------------
+ docs/PI05_PIPER_PHASE_GATES.json        | 177 ----------------
+ docs/REAL_ROBOT_SAFETY_PLAN.md          |  87 --------
+ docs/REMOTE_ARCHITECTURE.md             |  96 ---------
+ docs/SERVER_SETUP_PLAN.md               |  51 -----
+ docs/SSH_TUNNEL_SETUP.md                |  17 --
+ docs/TEACH_DATA_PIPELINE.md             |  94 ---------
+ docs/USER_DECISIONS.md                  |  26 ---
+ laptop/README_FIRST_CONNECTION.md       |  33 ++-
+ laptop/camera/README.md                 |  98 ++++++++-
+ laptop/client/README.md                 |  41 ++--
+ laptop/client/observation_schema.py     |  13 +-
+ laptop/client/requirements.txt          |   1 +
+ laptop/diagnostics/README.md            |  66 +++++-
+ laptop/piper/README.md                  |  19 +-
+ laptop/piper/unit_conversion.py         |   6 +
+ laptop/recorder/README.md               | 173 +++++++++++++++-
+ laptop/robot_client/README.md           | 202 ++++++++++++++++++-
+ laptop/safety/README.md                 |  21 +-
+ scripts/README.md                       |  43 +++-
+ scripts/validate_piper_contract.py      |   2 +-
+ server/dataset_tools/README.md          |  48 ++++-
+ server/piper_policy/piper_inputs.py     |   2 +-
+ server/policy_server/README.md          |  24 ++-
+ server/training/README.md               |  34 +++-
+ tests/test_piper_contract.py            |  50 -----
+ tests/test_piper_units.py               |  40 ----
+ 45 files changed, 910 insertions(+), 1958 deletions(-)
+```
+
+## diff_names
+
+```text
+.gitignore
+README.md
+configs/dataset_template.yaml
+configs/network_template.yaml
+configs/piper_joint_limits.yaml
+configs/project_contract.yaml
+configs/tasks/pick_place_v1.yaml
+docs/AGILEX_SOURCE_AUDIT.md
+docs/CHECKPOINT_INIT_DECISION.md
+docs/DATA_SCHEMA.md
+docs/DIAGNOSTIC_SCRIPT_SPEC.md
+docs/GRIPPER_TEACH_OPTIONS.md
+docs/LAPTOP_SETUP_PLAN.md
+docs/NETWORK_OPTIONS.md
+docs/OPENPI_PROVENANCE.md
+docs/PHASE_GATES.md
+docs/PI05_PIPER_MASTER_PLAN.md
+docs/PI05_PIPER_MASTER_PLAN_HISTORY.md
+docs/PI05_PIPER_MASTER_PLAN_ORIGINAL.md
+docs/PI05_PIPER_PHASE_GATES.json
+docs/REAL_ROBOT_SAFETY_PLAN.md
+docs/REMOTE_ARCHITECTURE.md
+docs/SERVER_SETUP_PLAN.md
+docs/SSH_TUNNEL_SETUP.md
+docs/TEACH_DATA_PIPELINE.md
+docs/USER_DECISIONS.md
+laptop/README_FIRST_CONNECTION.md
+laptop/camera/README.md
+laptop/client/README.md
+laptop/client/observation_schema.py
+laptop/client/requirements.txt
+laptop/diagnostics/README.md
+laptop/piper/README.md
+laptop/piper/unit_conversion.py
+laptop/recorder/README.md
+laptop/robot_client/README.md
+laptop/safety/README.md
+scripts/README.md
+scripts/validate_piper_contract.py
+server/dataset_tools/README.md
+server/piper_policy/piper_inputs.py
+server/policy_server/README.md
+server/training/README.md
+tests/test_piper_contract.py
+tests/test_piper_units.py
+```
+
+## Git scan limitations
+
+部分旧validation pytest缓存不可读；Git警告原样记录，未删除或尝试修权限。
+
+```text
+warning: could not open directory 'validation/.pytest-codex-20261006-final-r2/': Permission denied
+warning: could not open directory 'validation/.pytest-codex-20261006-final-r3/': Permission denied
+warning: could not open directory 'validation/.pytest-codex-20261006-final-r4/': Permission denied
+warning: could not open directory 'validation/.pytest-deploy-gripper-boundary-20261007/': Permission denied
+warning: could not open directory 'validation/.pytest-deploy-offline-followup-20261007/': Permission denied
+warning: could not open directory 'validation/.pytest-deploy-proxy-envelope-final-20261007/': Permission denied
+warning: could not open directory 'validation/.pytest-pipeline-shadow-20261007/': Permission denied
+warning: could not open directory 'validation/.pytest-postcapture-20261007/': Permission denied
+warning: could not open directory 'validation/.pytest-postcapture-20261007-r2/': Permission denied
+warning: could not open directory 'validation/.pytest-postcapture-20261007-r3/': Permission denied
+warning: could not open directory 'validation/.pytest-postcapture-final-20261007/': Permission denied
+warning: could not open directory 'validation/.pytest-train5000-20261007-r1/': Permission denied
+warning: could not open directory 'validation/.pytest-transport-unify-final-20261006/': Permission denied
+warning: could not open directory 'validation/.pytest-transport-unify-final-r2-20261006/': Permission denied
+warning: could not open directory 'validation/.pytest-transport-unify-full-20261006/': Permission denied
+warning: could not open directory 'validation/pytest_axis_20261007_r1/': Permission denied
+warning: could not open directory 'validation/pytest_calibration_20261007_r1/': Permission denied
+warning: could not open directory 'validation/pytest_calibration_20261007_r2/': Permission denied
+warning: could not open directory 'validation/pytest_calibration_20261007_r3/': Permission denied
+warning: could not open directory 'validation/pytest_capture_boundary_20261007_r3/': Permission denied
+warning: could not open directory 'validation/pytest_dual_capture_20261007_r1/': Permission denied
+warning: could not open directory 'validation/pytest_dual_capture_20261007_r2/': Permission denied
+warning: could not open directory 'validation/pytest_near_home_20261007_r1/': Permission denied
+warning: could not open directory 'validation/pytest_near_home_20261007_r2/': Permission denied
+warning: could not open directory 'validation/pytest_piper_session_20261007_r1/': Permission denied
+warning: could not open directory 'validation/pytest_piper_session_20261007_r2/': Permission denied
+warning: could not open directory 'validation/pytest_piper_session_20261007_r3/': Permission denied
+warning: could not open directory 'validation/pytest_piper_tool_20261007_r1/': Permission denied
+warning: could not open directory 'validation/pytest_reusable_demo_20261007/': Permission denied
+```
+
+## Expected scope
+
+unit_conversion、纯feedback decoder、observation schema/builder、公共camera worker、policy helpers；仅切换相同纯逻辑调用。保留既有修改，不覆盖整文件。SafetyBridge/transport/control/contracts/OpenPI/训练/配置与legacy sender保持不变。
+
+## Source SHA256 baseline
+
+```json
+{
+  "laptop/test_policy_tunnel.py": "4ea116d77bfffa7588c85afa4a8accd37a7ff8df492ff17c0d3d139317bc0120",
+  "laptop/__init__.py": "bd9b9aa73af00c61dbc9b3526dad649cc226dcc33fcf9807e54a2119a1c92619",
+  "laptop/camera/dual_camera.py": "96c849e03a1b6324ede68ed55d6cd684d0222c2ff29b8a51f5ca87426a659caa",
+  "laptop/camera/source.py": "eb86a2c66e6dfec6fb83f3805c5ac39b1119345613219755e35293f052275f09",
+  "laptop/client/action_shadow_replay.py": "38409f85f88891d047e1fa6a338693b24e196ee6abbf1073d65ba447713fe4fc",
+  "laptop/client/audit_live_shadow.py": "eac85861b785ce0ec1047fd65d0b3824a804a966cd38608a2577cd798a4be88a",
+  "laptop/client/bounded_model_trial.py": "f2f571eb2be8457a7f89d17cad3757a96cb59b5c6f0d99ff20c1230045caa30d",
+  "laptop/client/latency_probe.py": "1f8dc3c2bf57ad6ccad46bae0db674895a6ac40450d8f931ff1e85dfb4a6790f",
+  "laptop/client/live_model_preview.py": "3496ac5ca9638abb48ab9fa285d36b1934d3d82318fc7d7a0ba72c8c377e162c",
+  "laptop/client/live_shadow.py": "f3e8ca72d1c42285af30e182a6f3492d700b3c51289cfd6b6b88bbedd0eecb3c",
+  "laptop/client/network_latency_probe.py": "f47bf937cdc575fa67b8e4be6b991315068ce7b9e28f7ec36940f7222dacd8b5",
+  "laptop/client/observation_schema.py": "3e13cc833c9bdbfe8d9a690b8e972dae469c17fb590a9ade2bf388b63419af5f",
+  "laptop/client/offline_latency_replay.py": "d1e9515ad5154a3abe656a5c8c7749d624cafcb0b162a1aabed90ac31a2b9f59",
+  "laptop/client/policy_client_smoke.py": "2c2de39b6cb25a3892e053e2f7eb8bf3d78b4fcde8be13a16e34bebb3e569c60",
+  "laptop/client/public_piper_transport_smoke.py": "3df6e7781018a65fcfbccc49dfc4960c930c299c5b277827fe3589ac83e9574f",
+  "laptop/client/requirements-dev.txt": "502af188e657fc51b5e6abc16c3e7754ebd0bdfb85d0908ad4aaed7a746f5724",
+  "laptop/client/requirements.txt": "2df2716dac238eb7aee50b95b999bf878bcf0dd6da39e2078cc68980dd048e5c",
+  "laptop/client/shadow_preview_smoke.py": "f0151e881aa73a88fcd8eb0e50d91bbf99a3426f969acf7f159dcaf294c9ff2c",
+  "laptop/client/supervised_live_step.py": "be45b258a722c7490205e99d0895e9c698a939f74b763e6d62eb1e65f540402d",
+  "laptop/client/synthetic_policy_reject_smoke.py": "337186e7ec11e71e0f15135b5292c33aa90a4a780734dc0824a52f3976962661",
+  "laptop/client/__init__.py": "80630debebe5f1688c1c9744fbef61b9280d72da83460b3098ab224c906ab592",
+  "laptop/control/contracts.py": "6b05a3f3700e6d5f23c37d555415e56eaa1473962bbc4ff55ef89b524300c7a2",
+  "laptop/control/__init__.py": "afcfb6c846eebc845dcd2223b8ffb967164964da4bf9ad7f6aba915055983192",
+  "laptop/diagnostics/audit_feedback_log.py": "d8ecea53142b8acf7218a0cdc69eca6afc1ad1086c2113849cc8c81374a63497",
+  "laptop/diagnostics/bounded_process.py": "c5dade9f850fb8afdf75c23c4bb6fcd53093e90e0bc0b21e3dd076a11816f2c2",
+  "laptop/diagnostics/camera_identity.py": "a360c8f67098436492dcbfbff108ad222ba467d962256f62d886e6088a309311",
+  "laptop/diagnostics/camera_stream_smoke.py": "f91a256e590ccbdbce8052d506bb4ad99585d2a85bb2629ec5ccce04d69e91e9",
+  "laptop/diagnostics/can_diagnostic_session.py": "ef4eec53ae1382da5b2497a431de56281bc2bed39422e742d8e544a72894e5bd",
+  "laptop/diagnostics/capture_oem_can.py": "8124dc1572b3d8bb3898f2cbd9db0c5b8429519382163604c6ffaf6d0ba64cba",
+  "laptop/diagnostics/compare_gripper_feedback.py": "fd44d6235872149ce199ca122c78a7528a2c9ffc963dbfc1fb14af1de37f4a36",
+  "laptop/diagnostics/list_candlelight_adapters.py": "6f13fa159b44d1a016fcb1eb954abf1568e90d29ee3943aa32a5d37bc4626044",
+  "laptop/diagnostics/list_directshow_cameras.ps1": "5b41bd0d78f7f07b393d73eaad9e62e6c1e59980ae701893be0688a4c9cf6891",
+  "laptop/diagnostics/probe_cameras.py": "e848e416f0907e54e9879dd736db905cc27a3d35ee2cdfcde79058f534113cc9",
+  "laptop/diagnostics/probe_can_ack_only.py": "813d52d081efeece5d804e6bcc687adb9aaa9d0c8836a3a1d2a559a8c5178c46",
+  "laptop/diagnostics/probe_can_listen_only.py": "c7257ca4a592853de12e3e48d211b03311869c60ccdebd06d0718198ef32a472",
+  "laptop/diagnostics/probe_dual_cameras.py": "c2e274ebc7b9e3d9fb0cc82fb9cb499fd79ac9dfe0057e66a0ce91aae537f290",
+  "laptop/diagnostics/probe_motor_enable_ack_only.py": "45fea03cf7d64e2a6cb0507c3327fd3d4cf0da84919ec4867154efb33a1b9a9d",
+  "laptop/diagnostics/probe_network.py": "727bcfbf33386f911884faef0a4b710ead41559d427543b1d9e42f2e5ca49bdf",
+  "laptop/diagnostics/probe_piper.py": "5e527672e849335908c22364aa43378b8db6ed305ffbaddf96ce885d62b856b1",
+  "laptop/diagnostics/probe_piper_feedback_ack_only.py": "6df181f4fe16e606599ff4da36124e6bed5aaa6c39f817a2040162a93c9c92c6",
+  "laptop/diagnostics/probe_piper_readonly.py": "8a1d4e234404a933db68b2750887a4b03abc809089712e58ddc37813eb30caec",
+  "laptop/diagnostics/query_all_joint_parameters.py": "93b9337d0583c1ef80450641d2a11e0d5df62b32db648d259de94870be2bcc00",
+  "laptop/diagnostics/query_joint_limits.py": "d7f1d2637146958864036f7a926c325ff7f269c46e33fbae921faec61b5081be",
+  "laptop/diagnostics/query_piper_firmware.py": "1e58273911f705c7629e5d34b6dba1c0d0d420d1417dea4e85ffb8032864040c",
+  "laptop/diagnostics/query_piper_gripper_parameters.py": "a04ad4c0c9e06e6e7477c6a36d948cf9a503e3f9a5438392b6b21fbeaa60df05",
+  "laptop/diagnostics/query_piper_readiness_snapshot.py": "f559082f05f7dcb20b0f15e6e49cb1965904b26f7b4e6e3d7886ae6ce06844e4",
+  "laptop/piper/unit_conversion.py": "f1a92193620444b2aeffd3147761e8193342040991dda8668bde0319a7651166",
+  "laptop/piper/__init__.py": "7cd731e61594959de6b5465493584b7eeed53b7318c44ee8b55119698caff399",
+  "laptop/recorder/align_raw.py": "d6dc1ad6ce02252b9e9d16fe32616b7856208605052936084ca8a6ea204365e7",
+  "laptop/recorder/audit_episode.py": "99cad6c50dd0517ee23a2a0f3ac11ee0143df224a73c41832271fd3bbf8478a7",
+  "laptop/recorder/capture_session.py": "82492330bafad1d496d88a71b239f236f17ad6a009f2d26adc5ce1e2c60c3962",
+  "laptop/recorder/episode.py": "d43bd64148070c3bb0cef24a2bd7ccb00922ba742db5e8bd80a8ef764b79b2ab",
+  "laptop/recorder/label_episode.py": "58b91eee279111fefd7af71c8b49431971c7f4b904a9cf24522e693f7c5b0385",
+  "laptop/recorder/manual_teach_capture.py": "a35db2537575346432bb40ae5961cbe03f3787fc231a8412edf7c2e4162bce88",
+  "laptop/recorder/next_state_proxy.py": "ee87de7528eb4f641c20163b74b9662648d1ac23571cacfcda492b32650929fd",
+  "laptop/recorder/passive_capture.py": "dc8ab41a7e8591ce9a408c60f2f8226e19b6694ab584392a6021244ac897f9ca",
+  "laptop/recorder/piper_command_targets.py": "00500b32700fbd29c1d3607cd48fc41adcb6b1322d7f18c07d2bffc6b0689b88",
+  "laptop/recorder/record_demonstrations.py": "68da4edd5b668e7c5cc10a116c37f5b2b7fe741f6e8d5d170fda011ae06dc851",
+  "laptop/recorder/synthetic_smoke.py": "c749fe3fb58c37066b95b0e41e0825f4eafe50dd33a8b31146f4057395550108",
+  "laptop/recorder/verify_source.py": "14892c311b4d6628656c4092ff26b9578e955f58ffbc7764b9084cb923422c93",
+  "laptop/recorder/__init__.py": "564d9bbf4f9847d2224ee781cde99f8828995b509166dca6acf5a360d20e1a64",
+  "laptop/robot_client/bounded_policy_target.py": "489179f9b01080ca5fb428ee2c8772256d669ab318b681aae962d2a24c61c010",
+  "laptop/robot_client/bounded_zero_return.py": "cfca2afd4e56c18ba4bfc64082c657edbb4f7c0b1ee5f122f658786d803daa7f",
+  "laptop/robot_client/gripper_command_preview.py": "0d6a7fe82132934aeaf159a5a2b4b35238cc1ec75a6198f7beb6a595a8bb7130",
+  "laptop/robot_client/hil_guard.py": "771ffbac5a00def3fe65db5c580195b6e584f1fe61abe00c70ce5367f529b923",
+  "laptop/robot_client/joint_command_preview.py": "4dc78fc28a635bd7885c0fb276ecdb0f3d2aa3018c208eb9d3d7a3ffe996dfc2",
+  "laptop/robot_client/offline_replay.py": "3c077798a10990c6fced9c46480c1e1789b2d0e82e39b44bad3005969d3fe658",
+  "laptop/robot_client/piper_session.py": "bf2732d79a271e29e5fa79ae8043c6f7739d211b5e9c7d41d8d5c6ff212cc63e",
+  "laptop/robot_client/piper_tool.py": "21bd06a467941b0a4fd43faaa102143351e9b45a329bd4611aac31b2bd068f6b",
+  "laptop/robot_client/policy_reject_only.py": "65d3422e1189f298c6d165a2816fd8f275e836d8e7b30e51351a73d8631c7d02",
+  "laptop/robot_client/policy_sdk_preview.py": "e4f7f73f5f601131085a311646d784f2c5bf9995a15152fdeed851440dbf3263",
+  "laptop/robot_client/replay_preflight.py": "9c0a4bd9961cceb496590181a9bba8444bd8e19c1d4e697db0a6ffd187294b86",
+  "laptop/robot_client/single_step_dry_run.py": "889783e5fefb6fab193cd554ac93e228a82230bdea5d7b1ba8282c9aeff69db9",
+  "laptop/robot_client/supervised_axis_commissioning.py": "5e8458fa961612147c76d763da2c7f7fcde7ca25a86f388070d5740a7fd0f8c5",
+  "laptop/robot_client/supervised_enable_j6.py": "c785c050d5cf7e179b6dd79f5da526d39c85cb7a716b4d45f72b3b04aa752a70",
+  "laptop/robot_client/supervised_gripper_commissioning.py": "5ce6374d72af7e459fe4b5bf3128528836bbc3f3899f5c2efaa7251d9616fb66",
+  "laptop/robot_client/supervised_gripper_max_open.py": "9a375f528e8caf13ed06c25c897843be2ff1520b2bb6c6601854f0328dea5ec9",
+  "laptop/robot_client/supervised_j1_commissioning.py": "f6f43bba3dbe0d30c889cd760b00054f1b9e9baa2aca52fc2508c496c229b993",
+  "laptop/robot_client/supervised_j1_one_degree_trial.py": "00ab54236bed5205d367ad34dfcd5944afd82efc0d2eaead8c86678acec106c9",
+  "laptop/robot_client/supervised_j1_step_trial.py": "16b61ed1fb2cd3438b2ffb656e8d1c2c5c5abc39cdc42c1524c0e8a021156c77",
+  "laptop/robot_client/supervised_j5_probe.py": "a47f31e1290a7b520188c70ddf7d60cfd2cde5b6d1433861e2a4f32181f075fb",
+  "laptop/robot_client/supervised_joint_replay.py": "4d796f9c599184467ac64a90fb0644d42905ee2bc6830625788d19b71469e323",
+  "laptop/robot_client/supervised_mode_initialization.py": "7733573401c380ba310d65b8cc553e336aea5d929539e8b27d6a2571a069117f",
+  "laptop/robot_client/supervised_near_zero_home.py": "7c331f353396d0f72aeb27629891ee0a8ef067a1b9f0adeaca400aa289b2a605",
+  "laptop/robot_client/supervised_oem_gripper_test.py": "f212b903a37a524ed16a7b84f4e8be7c9394e3b00092fb89c8e76bdbe413d6a8",
+  "laptop/robot_client/supervised_policy_session.py": "4d5552419cf91d4c82045db8f3f8756d022d9d5093454d68fe0bc16c14441e7a",
+  "laptop/robot_client/supervised_policy_step.py": "daf3fa1e4289c71fe12f9bc59554c011f3ec3bde6363c3d8af0fa2118452b9b2",
+  "laptop/robot_client/supervised_restore_gripper.py": "d90d0559e2cb915f26c1c7d949ba4d169d4e8519081706a7ee9760490e106b12",
+  "laptop/robot_client/supervised_restore_start.py": "b81857019fe12e8729374ce9b0877101a9530161fbcda49e0e216d9f30fd2f9e",
+  "laptop/robot_client/supervised_site_profile.py": "b1292d9275971f73d43e2fb3c1c5a09d7b3ab2c1bb5ec2bf87534ac562299be2",
+  "laptop/robot_client/supervised_smooth_joint_replay.py": "e6ad3220832bec7cb326923cd2bd721451acd191a214b4464247636446ea8776",
+  "laptop/robot_client/verified_policy_command.py": "0fd8bbcb8ee3fcf4953b7434e2948c458ac8f385e7bfe4a78af8fc5b44afb7c9",
+  "laptop/robot_client/__init__.py": "2aea45c692b66d8f53d334a9e00a408fdf40da24181e70222ff236663facd059",
+  "laptop/runtime/bridge_protocol.py": "0004885aada3142101c3215ae02c2efabc9f43cd28a8cda60d4e344255634323",
+  "laptop/runtime/config.py": "308ca606dcc44c24f2e3474fc61686e90e92b6da2c2cbd2b79ced3af66deb6ca",
+  "laptop/runtime/modes.py": "f723ccb28274d57d24c92b6c538223aece544ecf7026f58b7bf48822be9a7ebb",
+  "laptop/runtime/__init__.py": "4b3e7ce870509fe1ec8959c351da7c91cecc2e85678722b8510b696bb4b12ca0",
+  "laptop/safety/bridge.py": "821f5242f5f3948768b742d0d674fa8d793ff92db1a26d37ff385e6ffab6f2ab",
+  "laptop/safety/offline_guard.py": "d489782bd415ccccea1b4a7ea914823dac759bbca44e2506483510cde77fd6fe",
+  "laptop/safety/__init__.py": "bcbde27e8d66e54ca2aba925197b0aade017037584ff15886459430966602f25",
+  "laptop/transport/bounded_trial.py": "216a02431be46f68b9fa292e6adee3c55f5be2e9831a5d088428690aad36c235",
+  "laptop/transport/can_transport.py": "1ebb004b714b93395e54c3b241445919cdde04f5e879fe78931cef2ee7ce05dd",
+  "laptop/transport/diagnostic_queries.py": "cd22f5a1b0953a6ffbd890a391c480bcdb713989574d8c2a7090a0f2211cef74",
+  "laptop/transport/gripper_commissioning.py": "fadc32f1728e3d51d74e27fc9f7ab468b46b1ead6ba53b080a6a727f9a990c22",
+  "laptop/transport/gs_usb_piper_can.py": "bcfbd27d0c8bedde55d348ca8435534e74f50e88890afef7446e299effa32f2b",
+  "laptop/transport/mode_initialization.py": "fb786be0b5a5518ce56600c19630b77c3d461848c12517fd831f842781ababe2",
+  "laptop/transport/position_commands.py": "3cf920558e43367df729a91e84d9e0264219e876c425188421eb373a8380f9a1",
+  "laptop/transport/__init__.py": "761928a3a477ce2fc13a5b53d46bbf89308c1dd9b51a320001eaaee10c866b25",
+  "server/public_piper_smoke_infer.py": "dcba37f7a874fb348d509e8b503192ebab5ba3706a4cd10741e4bb169784c9d6",
+  "server/serve_derived_state_multi_shadow.py": "90c99469abe838862d2713487fe7556933cfd4f0bbd79ec19170dbadbeef14e6",
+  "server/serve_piper_action_shadow.py": "fb11995d85afae8db0ed17c22d9e7da532237ad63a1a8322b734464562de66ac",
+  "server/serve_policy_local.py": "553b33233ed84e577daa504a5c93072c514e55581fbd7dbbc81ca1d70c0254d9",
+  "server/serve_proxy_piper_shadow.py": "efb5209b6a4c83decaa07c87b0beccaf03a134398ada44d5a735c425fbeff9b4",
+  "server/serve_public_piper_smoke.py": "9f8090db375ce6405a3514e506c8c8368cf251bf32c454d535602249b3321183",
+  "server/__init__.py": "262deb50b135aceb00452c2065025f06f25ad3898e74f2018415fc144257c38c",
+  "server/dataset_tools/audit_proxy_lerobot.py": "2d81118487352adf2e40ae59c60ed2f2970633bc8483e888a57cc90e6fb00035",
+  "server/dataset_tools/audit_training_data.py": "2258351672a24f4efadc500897dd0bc083eae7bcc2e1341884f78339434a1779",
+  "server/dataset_tools/compare_proxy_sampling_rates.py": "09e3b6b386e81edbb8d13e6f9fa65ce3a56db78a8d54a476fff4efb166d0022a",
+  "server/dataset_tools/convert_next_state_proxy.py": "d67d6f5a2177bac26c2a780e5756186e7900ab1ee1f797938f6e4bd4cef60678",
+  "server/dataset_tools/convert_piper_aligned.py": "4fc9110305b4fd3f9c250dc1db86685dd0a61a2876ba708519a55264dea68ed2",
+  "server/dataset_tools/synthetic_lerobot_smoke.py": "c87e50cdcf6e5ee9fe3219c6042c863a735e4052f8d31e59b109276068120a6b",
+  "server/piper_policy/piper_data_config.py": "5df4b0add9d019664443cbb03ca3ea0e2dcb9325db80e6734e219a2bd0d6c0d2",
+  "server/piper_policy/piper_inputs.py": "0ec8f94dd16812be4cc4f59e2f7cb4d6e855898ff55823bec56a3657930641c4",
+  "server/piper_policy/piper_outputs.py": "db5037cc445a667f0fb17b36e070ac48f5b4f356cb12480ccf570dda60ef7106",
+  "server/piper_policy/piper_policy_config.py": "1285b398055df4f10b06d3ab579b679b2085ed14494705be4f8bd60a1ef7161e",
+  "server/piper_policy/__init__.py": "e22e043db50a972fbd09bc48b317007b504a8561ac4a523485fabd6798d7e964",
+  "server/policy_server/artifact_identity.py": "992cd9ebc3cb6e756bc9e1badf043fa1d1af5e4e453731ab2daa2cae1f866b60",
+  "server/policy_server/proxy_config.py": "25fa4a942bb425d90aa7c7d8c04c74cd875369d892667f9da8c52289db8d3af7",
+  "server/training/action_target_contract.py": "6480ac75f5a8189d2c199259eecc567854d46575c597573d12c363b3b6e7b1d4",
+  "server/training/check_piper_readiness.py": "686e330d89f622488e243a3cfa11aac04f845898fbdc8b1481e4577c409d17b3",
+  "server/training/evaluate_demonstrations.py": "3f7df90af5027b2328fa7e4aab8fb5a68c311776fb8b30ca907f9109f95f301d",
+  "server/training/piper_action_eval.py": "dd10919e7b5b8d49cb77027a2edf448c15f30b6f1bbb93d0cacbe78474a6f243",
+  "server/training/piper_openpi_config.py": "2b6db0d08796678a02037008c80ca07b1aaf057f343a7417f9caf507a7c65480",
+  "server/training/piper_train_entry.py": "d475a2a5401ae3aea3f231be28558a76a85b5db24c403a1b5a6442c5076d8c1b",
+  "server/training/post_capture_pipeline.py": "d531d8d7c67f710ad0545ad9def0af544e9139b7c1b8a8d20f0e954975351765",
+  "server/training/proxy_dataset_contract.py": "f53aecfc210b81536d898a96265653ce3a8ce9825abf6ef730f1b576bf03c087",
+  "server/training/proxy_latency_profile.py": "9eafcdbf5a13ed8ec02000aab8d38908cc2f89fe521f429fd7f822031671d134",
+  "server/training/proxy_multi_episode_contract.py": "007a9d0aab2e450701ace954ff1e77da8cec6d6223f59e9d2d882646370fbe9b",
+  "server/training/proxy_multi_episode_pilot.py": "f965b85c0c1c6abf7e63b02a0a191465051f751cdabe24cda15f4aa9da707fba",
+  "server/training/proxy_piper_eval.py": "ba61bd82d1fc7c509d38a6c059cfbf8047d893f4416712fa240d4dd0f9d6b5c5",
+  "server/training/proxy_piper_tiny_fit.py": "4cd84cdcb6d2dd71dd303b7bd852d6d6f1349ad48571407f5ca4488688c817c2",
+  "server/training/public_data_contract.py": "1e445c63a97c37511c3d7255e6166aad498ba9f3f770bf636bcfebfb725914f4",
+  "server/training/public_piper_smoke.py": "e3fa22f7059cebd6a4fb58212221d7d4d2c097181826515d1f33f925fe27aa90",
+  "server/training/serve_trained_demonstrations.py": "3c58c4d991e1197c3ddbb4a08abc1f687e2f4dfe519f476367643f2ee4cee055",
+  "server/training/summarize_training_loss.py": "716c901650172d6dbcd43f62317111b458ce1a6552215a52ed7e037f6d1ae320",
+  "server/training/train_demonstrations.py": "f4329152ea7303341c81cd742e52dd6b91b81bc004e2db62bb30f63c69f27b10",
+  "scripts/add_final_gate_aliases.py": "a070f0423d8d8cc22a5338b981ec13ea2ce0a965202e418326f2ef4fc62a4cde",
+  "scripts/annotate_pi05_smoke_metadata.py": "fe7d39adaad7db0a23002c5441f7e3bfdca28d7e17e921a66508a015129f0bb1",
+  "scripts/audit_laptop_probe.py": "60f6d5b641d8725aac4ddae76917fbdedfe12e91de2ad021ac2b16e56672cf26",
+  "scripts/refresh_environment_audit.py": "e307e08fafbe0ce03ac3493f937673514fd212589e9cd71fbfbce857da984d89",
+  "scripts/run_local_policy_server_smoke.py": "782591f8838a709ac0c1d3ea4532acd81a96820280a84ae90fda00e3cbee4bad",
+  "scripts/run_pi05_base_smoke.py": "5455c06130f77f4fca991d513eb62f9049162148f993d6f467a98609c68104a3",
+  "scripts/run_server_performance.py": "992d13d27b26e908522ede85629981e5f2ad78b99ca2d2d3f7dc3aedf009148f",
+  "scripts/validate_piper_continuous.py": "2069da7eca0ea819aea180f69018a30e00ec90941050f824525c6bd49a02cc42",
+  "scripts/validate_piper_contract.py": "71c7a701779c25317d0e8133ce607e072680dc2e34e9a2cbe6191173f4bfd9b6",
+  "scripts/write_checkpoint_provenance.py": "2066955eabd4a929da9061ff81abbd62e0690c121a754ec631beb5a2d607d999",
+  "scripts/write_deployment_manifest.py": "d89c751174a03b33bbc709599aab234351b5eb9b2391c06c6acc2011a70b9a6f",
+  "scripts/write_socket_binding_report.py": "512fa0301588a9432e97bdb6a322763b522025e315f5063f82a0d16148199fb3",
+  "tests/__init__.py": "09196b5e122ffa186e3a3c761137e056932865a7d15f8fa71aad9bd5653b9df4",
+  "tests/contracts/test_control_contracts.py": "c46236f941eafb6cfa68b0917c3dc070e16f975cf463bc01a28c75b8f9c45a31",
+  "tests/contracts/test_piper_contract.py": "4dde466dd08c29dcefa67a3a498a671306b91e533f02564e69667a5c64210edd",
+  "tests/contracts/test_piper_units.py": "12ed152ca7061a6e3ab132513c65ebe7835a20c0bd416ba96371ad82ccef5dea",
+  "tests/contracts/test_runtime_config.py": "f252e48df60541c31991929f43654c815c3d1d4d57f6528fff07012e9a0a5b8e",
+  "tests/contracts/__init__.py": "bacb89cd680bf2f9b6926b40cd3a938f10480ce5334aa3f09c9c0d9c496a007d",
+  "tests/data/test_align_raw.py": "79ad2f728eb175dfbd8e152c9cc0a59cd920ead5aa99e82853a9c70a462caee6",
+  "tests/data/test_align_raw_to_lerobot.py": "3e72376d428ef64084ed59a77ed511d3725c14ec1f2f4b62701f46c8290f7870",
+  "tests/data/test_convert_next_state_proxy.py": "0a15954504bfe76612a4abc80462e220c344775c924d081d111a17b0dfd61320",
+  "tests/data/test_next_state_proxy.py": "02aa838be45758749f6239427ad1f5f5ad96bc8b8218257a1c3c90c9033f1af6",
+  "tests/data/test_piper_command_targets.py": "11e2a76abe84b9b9796e394baf32b17a9305e94513faef59050a73aa65abafb0",
+  "tests/data/test_proxy_lerobot_audit.py": "9a33375870d10c1caeaa264db1b86b21f211d2b20610ecf87d14ee82bce4a77f",
+  "tests/data/test_proxy_sampling_rate_comparison.py": "1f59b75de51d0a37af21cd0666b4c8e55f50f5d4c0334bef8040fd1b374ed4fc",
+  "tests/data/test_source_verification.py": "7caa57769d72b956fd5e658109911365f7a19c61aedcf0429b15fb09e02f4501",
+  "tests/data/__init__.py": "d0f30bc2badab3bab08368d5dda73b9b4f1d96acb4fbcc4d615e0065fb6731f8",
+  "tests/laptop/test_action_shadow_replay.py": "10ff4135263d57f667dd009d60e6153b6695ddf99dca59615c30ec706136f3f4",
+  "tests/laptop/test_bounded_model_trial.py": "aab7609c3abb921b724821f2614801a94a35a2a1a55b12768f514ec4b20d454f",
+  "tests/laptop/test_bounded_policy_target.py": "8a170af21514e916cc3be8b3dd1df9b65ab8603eaf29f81acf5d43aaf29d85f8",
+  "tests/laptop/test_bounded_process.py": "be3f0b3dc8a49e67650df0d50167036a82c40f906e4809a317a57aad2bb593f9",
+  "tests/laptop/test_bounded_zero_return.py": "15c52ae816c197cf80b030230c2aa4abcb8de5dca895b1558a1cf7c59c9c2b0b",
+  "tests/laptop/test_bridge_protocol.py": "d7ae26e34e2d02e7d9bab90af35d99b8703a3f15f783f8354f5adf3947064b79",
+  "tests/laptop/test_camera_identity_inventory.py": "fd83d31380c879d701d1c9814d5ab595c9f5410eefcd282e7f2686b40ffc21b3",
+  "tests/laptop/test_camera_stream_smoke.py": "4fc2648de46017d99899c18cc7b2af2db6426827ccc9f364d983c8e54f1d78cb",
+  "tests/laptop/test_can_ack_only_guard.py": "365a7ae5814ff09c5eec5731a1f92607365484f536d838fed1e6072d1535f429",
+  "tests/laptop/test_can_listen_only_guard.py": "dd544a578b86cd10a373219f10e89a849390d2e25e2b9a5a1cb98e748eb55f3f",
+  "tests/laptop/test_capture_boundary_frames.py": "4611305d98d16b0f3acae005aeb165518c1251876f2258722c95c99b0f5e55a3",
+  "tests/laptop/test_capture_supervision.py": "2ff61e2046ad60c73dee536f37f26faca20a25c1118fe91c94df01d12d9592ee",
+  "tests/laptop/test_compare_gripper_feedback.py": "c36e9cdad78c35c8cd26054d1e31dfb7e99b4a63f80a76551a5cfe51ff0973b6",
+  "tests/laptop/test_diagnostic_queries.py": "064ca837405a7744ebbfc32985ce9818ec55008454167fb761f4dde96d94141f",
+  "tests/laptop/test_dual_camera_capture.py": "7a868e63468a07db1c5338e5c8c7ddc07ceee32c50eeea7fb9199126227d9ec6",
+  "tests/laptop/test_dual_camera_probe.py": "a8c9a4773b0a616fb82c9f0da5303098df820209b0bccd2fc85e561de1399f32",
+  "tests/laptop/test_episode_recorder.py": "206c2ee4a57ce58c22ab8bcc19c44bf5409661f9cd952db9c33383c4f7b015f7",
+  "tests/laptop/test_fake_can_single_step_rehearsal.py": "f828a6d1b7dca0444cd0c52bad0cc6dfc0f8c11640e16379df087e844668a4e5",
+  "tests/laptop/test_feedback_log_audit.py": "61645110ac845faca3c4ebc364b95874c5ff0d9c06f32d2d80b8fef2fd727f26",
+  "tests/laptop/test_firmware_query.py": "4cc61c44ca9435a45a881b438132fbc7e6166d76047ab7ff7d4ece9ddff0d550",
+  "tests/laptop/test_gripper_command_preview.py": "64a568bcf214143628a00003f9b0cea1c24052851e663018ec3bdddc96bd300e",
+  "tests/laptop/test_gripper_commissioning.py": "9300058a9dee8761b7828dcfc135b0e9a07b89407e97dd759a42d830bc2c9e86",
+  "tests/laptop/test_gripper_parameter_query.py": "3f1cf86532dab57d518f6546a275e7d08e66e0648e7db8c58f812d3f2b114366",
+  "tests/laptop/test_j1_commissioning_bridge.py": "d72f9724940a054499999b4b414bfe6d3743c50ffa7580aa6d4d1285430297db",
+  "tests/laptop/test_joint_command_preview.py": "b38c8087d751b797041ed4d18b9faf9085f157f1f4918a7a227ea88ad88d5223",
+  "tests/laptop/test_legacy_hil_guard.py": "4d9b74bb93b90c9ca2058aa6f315624798554b66bbdfb57991062af8f0ddc744",
+  "tests/laptop/test_live_shadow.py": "a3bfb7b2134f6143ed97de6b6f5ff4a9399da8d8c22407ac37e57879aaf5ba40",
+  "tests/laptop/test_near_zero_home.py": "00276f4aae1f479d569d892cf6c5823ab1bd428076aa7ef6f6abf424e22f03b9",
+  "tests/laptop/test_network_latency_probe.py": "5003c9905f07ccad802afe7632b9fe3cf16d5a1e5b8b9426bf0e52d4d0a55483",
+  "tests/laptop/test_oem_can_capture.py": "34447f2a245783db8de0fa71aae69aa9a4042928a5e5c765dc96bf45d10591fe",
+  "tests/laptop/test_oem_gripper_test.py": "f950a1023e91053593d482f24cf295d6c77f548aa86f1d03942c53029da3d0e2",
+  "tests/laptop/test_offline_safety_bridge.py": "8652cd3176ede132bf0ba5d9a02f75bf5636560a902d0a88ad3bd11c21615622",
+  "tests/laptop/test_passive_capture.py": "7d2c2b9d478fa064e0070ebe5637fe8be593ae19b91606de18c4d0577a511163",
+  "tests/laptop/test_piper_can_transport.py": "12329898f8d3fde3605bdeb6b2711ef9928fa234b41ee6bcaaa57d2028347d50",
+  "tests/laptop/test_piper_feedback_ack_only_guard.py": "125a894ebea66c7a00f274aad824e71515eb54eb5661f2e61aab6c0677cda30a",
+  "tests/laptop/test_piper_session.py": "258ad7acd40c19749c04c2965111ec3a9e39e458d412e938072bd26501ebbed6",
+  "tests/laptop/test_piper_tool.py": "c8b1a07f46a49fa1b8959b9d9901179e21340576684719c22eb302f34222c254",
+  "tests/laptop/test_policy_reject_only.py": "ba7574aa2116e1ecbdbd30aae3b9e3fd8f16fdacbf199efd49877c07dd1e6ea5",
+  "tests/laptop/test_policy_sdk_preview.py": "16a4f2af49d246aef4555548c31eb33f0240ec7d9163d9f564c9a02de0d0c555",
+  "tests/laptop/test_probe_motor_enable_ack_only.py": "e2f9faf88ccaa40714c359d07ea104c241b05761fe500e5cffbe38c1d13431ec",
+  "tests/laptop/test_process_exit_watchdog.py": "2194f6cd56bdf3d53febe0a441a7510e8a786a73f38dc384ab0536fe4d4e7230",
+  "tests/laptop/test_query_all_joint_parameters.py": "ed4da57de073bee6b4f5a5bdbd791ff7f20ebfbd7a3106f5d96acf177fbe5a13",
+  "tests/laptop/test_query_joint_limits.py": "50d6b9ec9ab87ea95f384825200c791dfeb8a1f9b3b41657207c2f2ced8371b2",
+  "tests/laptop/test_query_piper_readiness_snapshot.py": "5fd8d64956cd96ca734e8258cfe05437d8c285eed700afdcb7958a3215db0c5b",
+  "tests/laptop/test_record_demonstrations.py": "bfcb4f596b00a1ccae6224a61234f099992f43110fbe39ea0f413983170e5d36",
+  "tests/laptop/test_replay_preflight.py": "f00c58b01b62c565b1e919cc9bc108b8ab0831765915a694fdf3cd4a61dbfc2d",
+  "tests/laptop/test_safety_bridge_runtime.py": "956274696066e24874d91ed2deccd50759aa027a0b611ecec2a4ac88065b3d30",
+  "tests/laptop/test_shadow_preview_smoke.py": "7a82ced2650931635fc2ada0a1ca28efe51921a1fa795319723c32872cd0cbb9",
+  "tests/laptop/test_single_step_dry_run.py": "cc2f20a2c1677102298b5fa2eee24faab8f533898b9e0a23a2af8ad639187eae",
+  "tests/laptop/test_supervised_enable_j6.py": "b01aaa814d41d799bb7b0fb07dd02295ae172c880b6eff910b7290e521a3f0c5",
+  "tests/laptop/test_supervised_j1_one_degree_trial.py": "0cbbc884a978c0a8de6c309adbac1df114fc7e4521d715226cdc92163eeb7a08",
+  "tests/laptop/test_supervised_j1_step_trial.py": "094580c38e5f9de4f3e0115c39b3baa301020c1432bff95e42a827c70fbe7574",
+  "tests/laptop/test_supervised_j5_probe.py": "f893ab94d2d5213ef428b9bc2d56e7925fb233047f9807e09e10b543b7c12277",
+  "tests/laptop/test_supervised_live_step.py": "b5757faeb9b31ecbb566f268ff564a844dd2efbba4aea1eb902073d7bf9b00a9",
+  "tests/laptop/test_supervised_mode_initialization.py": "792d5b9b1d2ff919413b73f09b1fa6b7e75b8598bcee702bcb2cb94089fd4f49",
+  "tests/laptop/test_supervised_policy_session.py": "92831c894b809eb3de3e2d6ac86e0d107d43b1b754548a1174c19e7d7fd8c95e",
+  "tests/laptop/test_supervised_policy_step.py": "fc4785fe5f3b0166bc48ff65e66ac33bc479759dc5393d26d33434ab5013cf90",
+  "tests/laptop/test_supervised_position_bridge.py": "4cd312a886ed8ba1b952312d05c047e95fea3b4525875aed6c3773fa9f829edb",
+  "tests/laptop/test_supervised_position_transport.py": "dffc451b5ded0246b90234c296dc4efe9b7cba213bac2790cb1a5d93345afc25",
+  "tests/laptop/test_supervised_restore_gripper.py": "324560c813278f383071028726494c7c6af59bf974e7ec0c8fed36be22ba2f62",
+  "tests/laptop/test_supervised_restore_start.py": "6570f6a70d962b9d5bfeed1ec36a8a68318ca9bef0b4a646310f7eb1bb144c0b",
+  "tests/laptop/test_supervised_site_profile.py": "8b7d8c4a7e7608676b141a37c63ad871ad876945bbef73bc06cc14fab15471d0",
+  "tests/laptop/test_synthetic_policy_reject_smoke.py": "38001e46708a5563f0ebc9b5de5809ad2554d7fdbe9d5a0c7922dd06b6f1da1d",
+  "tests/laptop/test_verified_policy_command.py": "aba3cadc4dbc638276d20fa52ed29a31b6181f8b5ecc8d458ddd247e70ffaa67",
+  "tests/laptop/__init__.py": "43193457ebbf6767856e60711f9b2665e0be1d5ae658cd313dc1ceee7f16908d",
+  "tests/server/test_action_target_contract.py": "b801595041d161dba14db0285d8d5fbd775183b6ee65da626c9570e8969af8bb",
+  "tests/server/test_derived_state_multi_shadow.py": "87da349a0e833c8db333d988d761521af9ebadb7f5d2b3f4ea95ddf3e10a2ab3",
+  "tests/server/test_piper_action_eval.py": "e74dc5dbc141b39513167f1c1dc10a96e8754c42cafd3e54d7f25a72cb34b2a0",
+  "tests/server/test_piper_aligned_converter.py": "54806fbeacef7f32ca92455f9f34a9f893acaa59b9409fe35c30a39e8265779a",
+  "tests/server/test_piper_openpi_offline.py": "7d0a26d8b203d411c79ebc00eb4e206f130bc754dcc378e89f6579a6b575875f",
+  "tests/server/test_piper_train_entry.py": "004f032e7abbcbb9b32c311ff04efb39c4319d9b6c449b4d39c31fa17f109b19",
+  "tests/server/test_policy_artifact_identity.py": "d205678b9f6a41a8477bf1f1b6cb82a912429ba584e2799f366a1bc7deff4564",
+  "tests/server/test_post_capture_pipeline.py": "60911509c4900e62598a2af8b2d0a6fb8c0364668bb08564c1ac62f43bc4fa4e",
+  "tests/server/test_proxy_dataset_contract.py": "31622d64d3751e76144db499412be55d04208293d2b0c9f7377d177853dbd9de",
+  "tests/server/test_proxy_latency_profile.py": "d5f6f81134090682ccb7e1695c47afbc564817355a4747c4d72fbbd799377eaa",
+  "tests/server/test_proxy_multi_episode_contract.py": "a76224b44d9881cbc246cbb84d7bbf76bdac649328b095acb7764a218a269c54",
+  "tests/server/test_proxy_policy_config.py": "ab2809c29419d440b16fa69cfe47661f704cec9f22e5b6bb9efcc40a9a7a93e3",
+  "tests/server/test_public_data_contract.py": "1d46825f66b578f287d22e5a91f00d68cc3fb964337b7c4389987c2081bb6e4c",
+  "tests/server/test_training_data_audit.py": "323a859bbbab3367a55cdb78e83e860e1411c3b4681e40b065534fd9051f64f5",
+  "tests/server/test_training_modes.py": "de63f6b776f93f4e7b3ff0d15db13d2e41ffa75a837b4bd563e6fe8d1fe398b4",
+  "tests/server/test_train_demonstrations.py": "6ed43aa91d4717acc159c6281e0f5eefd209c02e1bde418cfaa003086a5829a5",
+  "tests/server/__init__.py": "a588d6fe5e0458e95cb00ea7ecec63d2100f1a8f3721c8ef5e201c5c2a03bb3c",
+  "configs/camera_template.yaml": "47b48eb1ccd1618646181fb4c75990f5c9c2b7f576faa3b20feaf62169a3254c",
+  "configs/dataset_template.yaml": "a98b25fbea5ee897b3e4bf451b450fdde6b7f52cf25b21945bb4b9771f16118f",
+  "configs/network_template.yaml": "06b888b5c26bc8897856ff57b985c837298da4359012a68b9332ee8c9df0e766",
+  "configs/piper_joint_limits.yaml": "4cc8548dda1c75fea38c9308d4e224388cdbbe12895fe338a6ae83d56522662a",
+  "configs/piper_state_v1.yaml": "23a555eb258af440f7860dc786800b254d3523ac5e8660869a26416e07bffef6",
+  "configs/project_contract.yaml": "b2b73391f9562d7986392653f44a72c4ec7a52e08b54f0a0badf9eb7de9849a5",
+  "configs/robot_template.yaml": "01916866a2cf5607a358f86afaf276cfbb83d08684fdd4db95d3a15a6a046342",
+  "configs/model/pi05_piper_v1.yaml": "3443268d1c3a27a6ae7f00cf2849ed194eadc38bb954b255b3961231cc50249d",
+  "configs/policy/pi05_derived_state_10fps_shadow.json": "02e0aa25c68cbad58f7670c4c6360351fa6ea5e286bf5a7099289585a429bdd8",
+  "configs/policy/pi05_proxy_shadow.json": "2b547470e7a315eee20bd5f6eea6665790472233ceb7c2d3fe87e91df91e1708",
+  "configs/runtime/diagnostic_query.json": "8b028c9f8d94d202d211c4a1aae79f5b839c7b2358224c7e26eb4c8a35512211",
+  "configs/runtime/pi05_proxy_shadow_identity_lock.json": "2411cb4f46d877c8c0d8057a5c12976e508f677e8b987e4f00988cb3594eb64d",
+  "configs/runtime/policy_reject_only.json": "3cb38a02ecc512918f40e16a4a1e84e32a2d2a1c33cab66be3d4971ce31b7b29",
+  "configs/runtime/shadow.json": "a4e14bcdc2d1978e44951f1c98e92fdd3f34c1a4e47506160d971f6f3863559b",
+  "configs/runtime/supervised_site_profile.template.json": "79f9c59d6bad4e556d9381c4c09bf8453fd74bbbbf867b5126a9719048fc9a2b",
+  "configs/tasks/pick_place_v1.yaml": "19697dc3abd2547f9e4da6f2b372dc713964792d65e55366ff0cf44bc86230f9"
+}
+```
+
+## AST send call baseline
+
+```json
+[
+  {
+    "path": "laptop/camera/dual_camera.py",
+    "line": 168,
+    "call": "sender.send"
+  },
+  {
+    "path": "laptop/camera/dual_camera.py",
+    "line": 170,
+    "call": "sender.send"
+  },
+  {
+    "path": "laptop/camera/dual_camera.py",
+    "line": 167,
+    "call": "sender.send"
+  },
+  {
+    "path": "laptop/client/action_shadow_replay.py",
+    "line": 136,
+    "call": "connection.send"
+  },
+  {
+    "path": "laptop/client/network_latency_probe.py",
+    "line": 57,
+    "call": "connection.send"
+  },
+  {
+    "path": "laptop/client/synthetic_policy_reject_smoke.py",
+    "line": 53,
+    "call": "connection.send"
+  },
+  {
+    "path": "laptop/diagnostics/bounded_process.py",
+    "line": 12,
+    "call": "sender.send"
+  },
+  {
+    "path": "laptop/diagnostics/bounded_process.py",
+    "line": 14,
+    "call": "sender.send"
+  },
+  {
+    "path": "laptop/robot_client/supervised_j1_one_degree_trial.py",
+    "line": 73,
+    "call": "device.send"
+  },
+  {
+    "path": "laptop/robot_client/supervised_j1_step_trial.py",
+    "line": 119,
+    "call": "device.send"
+  },
+  {
+    "path": "laptop/robot_client/supervised_j5_probe.py",
+    "line": 59,
+    "call": "device.send"
+  },
+  {
+    "path": "laptop/robot_client/supervised_joint_replay.py",
+    "line": 121,
+    "call": "device.send"
+  },
+  {
+    "path": "laptop/robot_client/supervised_restore_gripper.py",
+    "line": 79,
+    "call": "device.send"
+  },
+  {
+    "path": "laptop/robot_client/supervised_restore_start.py",
+    "line": 139,
+    "call": "device.send"
+  },
+  {
+    "path": "laptop/robot_client/supervised_smooth_joint_replay.py",
+    "line": 231,
+    "call": "device.send"
+  },
+  {
+    "path": "laptop/safety/bridge.py",
+    "line": 1097,
+    "call": "self.transport.send"
+  },
+  {
+    "path": "laptop/transport/gs_usb_piper_can.py",
+    "line": 245,
+    "call": "self._device.send"
+  },
+  {
+    "path": "laptop/transport/gs_usb_piper_can.py",
+    "line": 255,
+    "call": "self._device.send"
+  },
+  {
+    "path": "laptop/transport/gs_usb_piper_can.py",
+    "line": 264,
+    "call": "self._device.send"
+  },
+  {
+    "path": "laptop/transport/gs_usb_piper_can.py",
+    "line": 274,
+    "call": "self._device.send"
+  },
+  {
+    "path": "tests/laptop/test_offline_safety_bridge.py",
+    "line": 188,
+    "call": "fake.send"
+  },
+  {
+    "path": "tests/laptop/test_piper_can_transport.py",
+    "line": 76,
+    "call": "transport.send"
+  },
+  {
+    "path": "tests/laptop/test_supervised_position_transport.py",
+    "line": 186,
+    "call": "transport.send"
+  }
+]
+```

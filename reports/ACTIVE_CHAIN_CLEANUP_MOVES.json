@@ -1,0 +1,786 @@
+[
+  {
+    "old": "laptop/test_policy_tunnel.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/test_policy_tunnel.py",
+    "sha256": "4ea116d77bfffa7588c85afa4a8accd37a7ff8df492ff17c0d3d139317bc0120",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "laptop/client/action_shadow_replay.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/client/action_shadow_replay.py",
+    "sha256": "38409f85f88891d047e1fa6a338693b24e196ee6abbf1073d65ba447713fe4fc",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/client/latency_probe.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/client/latency_probe.py",
+    "sha256": "1f8dc3c2bf57ad6ccad46bae0db674895a6ac40450d8f931ff1e85dfb4a6790f",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "laptop/client/network_latency_probe.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/client/network_latency_probe.py",
+    "sha256": "f47bf937cdc575fa67b8e4be6b991315068ce7b9e28f7ec36940f7222dacd8b5",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/client/offline_latency_replay.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/client/offline_latency_replay.py",
+    "sha256": "d1e9515ad5154a3abe656a5c8c7749d624cafcb0b162a1aabed90ac31a2b9f59",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/client/policy_client_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/client/policy_client_smoke.py",
+    "sha256": "2c2de39b6cb25a3892e053e2f7eb8bf3d78b4fcde8be13a16e34bebb3e569c60",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "laptop/client/public_piper_transport_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/client/public_piper_transport_smoke.py",
+    "sha256": "3df6e7781018a65fcfbccc49dfc4960c930c299c5b277827fe3589ac83e9574f",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/client/shadow_preview_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/client/shadow_preview_smoke.py",
+    "sha256": "f0151e881aa73a88fcd8eb0e50d91bbf99a3426f969acf7f159dcaf294c9ff2c",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/client/supervised_live_step.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/client/supervised_live_step.py",
+    "sha256": "74573dc241ff6eafd6949788e1a85fb554bcce160ff412e1aef4b2765bdb3191",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/client/synthetic_policy_reject_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/client/synthetic_policy_reject_smoke.py",
+    "sha256": "337186e7ec11e71e0f15135b5292c33aa90a4a780734dc0824a52f3976962661",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/recorder/manual_teach_capture.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/recorder/manual_teach_capture.py",
+    "sha256": "a35db2537575346432bb40ae5961cbe03f3787fc231a8412edf7c2e4162bce88",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/recorder/synthetic_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/recorder/synthetic_smoke.py",
+    "sha256": "c749fe3fb58c37066b95b0e41e0825f4eafe50dd33a8b31146f4057395550108",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/gripper_command_preview.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/gripper_command_preview.py",
+    "sha256": "0d6a7fe82132934aeaf159a5a2b4b35238cc1ec75a6198f7beb6a595a8bb7130",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/hil_guard.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/hil_guard.py",
+    "sha256": "771ffbac5a00def3fe65db5c580195b6e584f1fe61abe00c70ce5367f529b923",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/offline_replay.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/offline_replay.py",
+    "sha256": "3c077798a10990c6fced9c46480c1e1789b2d0e82e39b44bad3005969d3fe658",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/policy_reject_only.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/policy_reject_only.py",
+    "sha256": "65d3422e1189f298c6d165a2816fd8f275e836d8e7b30e51351a73d8631c7d02",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/policy_sdk_preview.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/policy_sdk_preview.py",
+    "sha256": "e4f7f73f5f601131085a311646d784f2c5bf9995a15152fdeed851440dbf3263",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/supervised_j1_one_degree_trial.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/supervised_j1_one_degree_trial.py",
+    "sha256": "00ab54236bed5205d367ad34dfcd5944afd82efc0d2eaead8c86678acec106c9",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/supervised_j1_step_trial.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/supervised_j1_step_trial.py",
+    "sha256": "16b61ed1fb2cd3438b2ffb656e8d1c2c5c5abc39cdc42c1524c0e8a021156c77",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/supervised_j5_probe.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/supervised_j5_probe.py",
+    "sha256": "a47f31e1290a7b520188c70ddf7d60cfd2cde5b6d1433861e2a4f32181f075fb",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/supervised_joint_replay.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/supervised_joint_replay.py",
+    "sha256": "4d796f9c599184467ac64a90fb0644d42905ee2bc6830625788d19b71469e323",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/supervised_policy_session.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/supervised_policy_session.py",
+    "sha256": "4d5552419cf91d4c82045db8f3f8756d022d9d5093454d68fe0bc16c14441e7a",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/supervised_policy_step.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/supervised_policy_step.py",
+    "sha256": "daf3fa1e4289c71fe12f9bc59554c011f3ec3bde6363c3d8af0fa2118452b9b2",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/supervised_restore_gripper.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/supervised_restore_gripper.py",
+    "sha256": "d90d0559e2cb915f26c1c7d949ba4d169d4e8519081706a7ee9760490e106b12",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/supervised_restore_start.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/supervised_restore_start.py",
+    "sha256": "b81857019fe12e8729374ce9b0877101a9530161fbcda49e0e216d9f30fd2f9e",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/supervised_smooth_joint_replay.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/supervised_smooth_joint_replay.py",
+    "sha256": "e6ad3220832bec7cb326923cd2bd721451acd191a214b4464247636446ea8776",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "laptop/robot_client/verified_policy_command.py",
+    "new": "archive/legacy_snapshot_20261009/laptop/robot_client/verified_policy_command.py",
+    "sha256": "0fd8bbcb8ee3fcf4953b7434e2948c458ac8f385e7bfe4a78af8fc5b44afb7c9",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/public_piper_smoke_infer.py",
+    "new": "archive/legacy_snapshot_20261009/server/public_piper_smoke_infer.py",
+    "sha256": "dcba37f7a874fb348d509e8b503192ebab5ba3706a4cd10741e4bb169784c9d6",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/serve_piper_action_shadow.py",
+    "new": "archive/legacy_snapshot_20261009/server/serve_piper_action_shadow.py",
+    "sha256": "fb11995d85afae8db0ed17c22d9e7da532237ad63a1a8322b734464562de66ac",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/serve_policy_local.py",
+    "new": "archive/legacy_snapshot_20261009/server/serve_policy_local.py",
+    "sha256": "553b33233ed84e577daa504a5c93072c514e55581fbd7dbbc81ca1d70c0254d9",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "server/serve_proxy_piper_shadow.py",
+    "new": "archive/legacy_snapshot_20261009/server/serve_proxy_piper_shadow.py",
+    "sha256": "efb5209b6a4c83decaa07c87b0beccaf03a134398ada44d5a735c425fbeff9b4",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/serve_public_piper_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/server/serve_public_piper_smoke.py",
+    "sha256": "9f8090db375ce6405a3514e506c8c8368cf251bf32c454d535602249b3321183",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/dataset_tools/audit_proxy_lerobot.py",
+    "new": "archive/legacy_snapshot_20261009/server/dataset_tools/audit_proxy_lerobot.py",
+    "sha256": "2d81118487352adf2e40ae59c60ed2f2970633bc8483e888a57cc90e6fb00035",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/dataset_tools/audit_training_data.py",
+    "new": "archive/legacy_snapshot_20261009/server/dataset_tools/audit_training_data.py",
+    "sha256": "2258351672a24f4efadc500897dd0bc083eae7bcc2e1341884f78339434a1779",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/dataset_tools/compare_proxy_sampling_rates.py",
+    "new": "archive/legacy_snapshot_20261009/server/dataset_tools/compare_proxy_sampling_rates.py",
+    "sha256": "09e3b6b386e81edbb8d13e6f9fa65ce3a56db78a8d54a476fff4efb166d0022a",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/dataset_tools/convert_piper_aligned.py",
+    "new": "archive/legacy_snapshot_20261009/server/dataset_tools/convert_piper_aligned.py",
+    "sha256": "4fc9110305b4fd3f9c250dc1db86685dd0a61a2876ba708519a55264dea68ed2",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/dataset_tools/synthetic_lerobot_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/server/dataset_tools/synthetic_lerobot_smoke.py",
+    "sha256": "c87e50cdcf6e5ee9fe3219c6042c863a735e4052f8d31e59b109276068120a6b",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/piper_policy/piper_data_config.py",
+    "new": "archive/legacy_snapshot_20261009/server/piper_policy/piper_data_config.py",
+    "sha256": "5df4b0add9d019664443cbb03ca3ea0e2dcb9325db80e6734e219a2bd0d6c0d2",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "server/piper_policy/piper_inputs.py",
+    "new": "archive/legacy_snapshot_20261009/server/piper_policy/piper_inputs.py",
+    "sha256": "0ec8f94dd16812be4cc4f59e2f7cb4d6e855898ff55823bec56a3657930641c4",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "server/piper_policy/piper_outputs.py",
+    "new": "archive/legacy_snapshot_20261009/server/piper_policy/piper_outputs.py",
+    "sha256": "db5037cc445a667f0fb17b36e070ac48f5b4f356cb12480ccf570dda60ef7106",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "server/piper_policy/piper_policy_config.py",
+    "new": "archive/legacy_snapshot_20261009/server/piper_policy/piper_policy_config.py",
+    "sha256": "1285b398055df4f10b06d3ab579b679b2085ed14494705be4f8bd60a1ef7161e",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "server/policy_server/proxy_config.py",
+    "new": "archive/legacy_snapshot_20261009/server/policy_server/proxy_config.py",
+    "sha256": "25fa4a942bb425d90aa7c7d8c04c74cd875369d892667f9da8c52289db8d3af7",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/training/action_target_contract.py",
+    "new": "archive/legacy_snapshot_20261009/server/training/action_target_contract.py",
+    "sha256": "6480ac75f5a8189d2c199259eecc567854d46575c597573d12c363b3b6e7b1d4",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/training/check_piper_readiness.py",
+    "new": "archive/legacy_snapshot_20261009/server/training/check_piper_readiness.py",
+    "sha256": "686e330d89f622488e243a3cfa11aac04f845898fbdc8b1481e4577c409d17b3",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/training/piper_action_eval.py",
+    "new": "archive/legacy_snapshot_20261009/server/training/piper_action_eval.py",
+    "sha256": "dd10919e7b5b8d49cb77027a2edf448c15f30b6f1bbb93d0cacbe78474a6f243",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/training/piper_train_entry.py",
+    "new": "archive/legacy_snapshot_20261009/server/training/piper_train_entry.py",
+    "sha256": "d475a2a5401ae3aea3f231be28558a76a85b5db24c403a1b5a6442c5076d8c1b",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/training/proxy_dataset_contract.py",
+    "new": "archive/legacy_snapshot_20261009/server/training/proxy_dataset_contract.py",
+    "sha256": "f53aecfc210b81536d898a96265653ce3a8ce9825abf6ef730f1b576bf03c087",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/training/proxy_latency_profile.py",
+    "new": "archive/legacy_snapshot_20261009/server/training/proxy_latency_profile.py",
+    "sha256": "9eafcdbf5a13ed8ec02000aab8d38908cc2f89fe521f429fd7f822031671d134",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/training/proxy_piper_eval.py",
+    "new": "archive/legacy_snapshot_20261009/server/training/proxy_piper_eval.py",
+    "sha256": "ba61bd82d1fc7c509d38a6c059cfbf8047d893f4416712fa240d4dd0f9d6b5c5",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/training/proxy_piper_tiny_fit.py",
+    "new": "archive/legacy_snapshot_20261009/server/training/proxy_piper_tiny_fit.py",
+    "sha256": "4cd84cdcb6d2dd71dd303b7bd852d6d6f1349ad48571407f5ca4488688c817c2",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/training/public_data_contract.py",
+    "new": "archive/legacy_snapshot_20261009/server/training/public_data_contract.py",
+    "sha256": "1e445c63a97c37511c3d7255e6166aad498ba9f3f770bf636bcfebfb725914f4",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/training/public_piper_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/server/training/public_piper_smoke.py",
+    "sha256": "e3fa22f7059cebd6a4fb58212221d7d4d2c097181826515d1f33f925fe27aa90",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "scripts/audit_laptop_probe.py",
+    "new": "archive/legacy_snapshot_20261009/scripts/audit_laptop_probe.py",
+    "sha256": "60f6d5b641d8725aac4ddae76917fbdedfe12e91de2ad021ac2b16e56672cf26",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "scripts/refresh_environment_audit.py",
+    "new": "archive/legacy_snapshot_20261009/scripts/refresh_environment_audit.py",
+    "sha256": "e307e08fafbe0ce03ac3493f937673514fd212589e9cd71fbfbce857da984d89",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "scripts/run_local_policy_server_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/scripts/run_local_policy_server_smoke.py",
+    "sha256": "782591f8838a709ac0c1d3ea4532acd81a96820280a84ae90fda00e3cbee4bad",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "scripts/run_pi05_base_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/scripts/run_pi05_base_smoke.py",
+    "sha256": "5455c06130f77f4fca991d513eb62f9049162148f993d6f467a98609c68104a3",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "scripts/run_server_performance.py",
+    "new": "archive/legacy_snapshot_20261009/scripts/run_server_performance.py",
+    "sha256": "992d13d27b26e908522ede85629981e5f2ad78b99ca2d2d3f7dc3aedf009148f",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "scripts/validate_piper_continuous.py",
+    "new": "archive/legacy_snapshot_20261009/scripts/validate_piper_continuous.py",
+    "sha256": "2069da7eca0ea819aea180f69018a30e00ec90941050f824525c6bd49a02cc42",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "scripts/validate_piper_contract.py",
+    "new": "archive/legacy_snapshot_20261009/scripts/validate_piper_contract.py",
+    "sha256": "71c7a701779c25317d0e8133ce607e072680dc2e34e9a2cbe6191173f4bfd9b6",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "scripts/write_checkpoint_provenance.py",
+    "new": "archive/legacy_snapshot_20261009/scripts/write_checkpoint_provenance.py",
+    "sha256": "2066955eabd4a929da9061ff81abbd62e0690c121a754ec631beb5a2d607d999",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "scripts/write_deployment_manifest.py",
+    "new": "archive/legacy_snapshot_20261009/scripts/write_deployment_manifest.py",
+    "sha256": "d89c751174a03b33bbc709599aab234351b5eb9b2391c06c6acc2011a70b9a6f",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "scripts/write_socket_binding_report.py",
+    "new": "archive/legacy_snapshot_20261009/scripts/write_socket_binding_report.py",
+    "sha256": "512fa0301588a9432e97bdb6a322763b522025e315f5063f82a0d16148199fb3",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  },
+  {
+    "old": "tests/contracts/test_piper_contract.py",
+    "new": "archive/legacy_snapshot_20261009/tests/contracts/test_piper_contract.py",
+    "sha256": "4dde466dd08c29dcefa67a3a498a671306b91e533f02564e69667a5c64210edd",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/data/test_align_raw_to_lerobot.py",
+    "new": "archive/legacy_snapshot_20261009/tests/data/test_align_raw_to_lerobot.py",
+    "sha256": "3e72376d428ef64084ed59a77ed511d3725c14ec1f2f4b62701f46c8290f7870",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/data/test_proxy_lerobot_audit.py",
+    "new": "archive/legacy_snapshot_20261009/tests/data/test_proxy_lerobot_audit.py",
+    "sha256": "9a33375870d10c1caeaa264db1b86b21f211d2b20610ecf87d14ee82bce4a77f",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/data/test_proxy_sampling_rate_comparison.py",
+    "new": "archive/legacy_snapshot_20261009/tests/data/test_proxy_sampling_rate_comparison.py",
+    "sha256": "1f59b75de51d0a37af21cd0666b4c8e55f50f5d4c0334bef8040fd1b374ed4fc",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_action_shadow_replay.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_action_shadow_replay.py",
+    "sha256": "10ff4135263d57f667dd009d60e6153b6695ddf99dca59615c30ec706136f3f4",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_gripper_command_preview.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_gripper_command_preview.py",
+    "sha256": "64a568bcf214143628a00003f9b0cea1c24052851e663018ec3bdddc96bd300e",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_legacy_hil_guard.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_legacy_hil_guard.py",
+    "sha256": "4d9b74bb93b90c9ca2058aa6f315624798554b66bbdfb57991062af8f0ddc744",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_network_latency_probe.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_network_latency_probe.py",
+    "sha256": "5003c9905f07ccad802afe7632b9fe3cf16d5a1e5b8b9426bf0e52d4d0a55483",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_offline_safety_bridge.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_offline_safety_bridge.py",
+    "sha256": "8652cd3176ede132bf0ba5d9a02f75bf5636560a902d0a88ad3bd11c21615622",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_policy_reject_only.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_policy_reject_only.py",
+    "sha256": "ba7574aa2116e1ecbdbd30aae3b9e3fd8f16fdacbf199efd49877c07dd1e6ea5",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_policy_sdk_preview.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_policy_sdk_preview.py",
+    "sha256": "16a4f2af49d246aef4555548c31eb33f0240ec7d9163d9f564c9a02de0d0c555",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_shadow_preview_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_shadow_preview_smoke.py",
+    "sha256": "7a82ced2650931635fc2ada0a1ca28efe51921a1fa795319723c32872cd0cbb9",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_supervised_j1_one_degree_trial.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_supervised_j1_one_degree_trial.py",
+    "sha256": "0cbbc884a978c0a8de6c309adbac1df114fc7e4521d715226cdc92163eeb7a08",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_supervised_j1_step_trial.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_supervised_j1_step_trial.py",
+    "sha256": "094580c38e5f9de4f3e0115c39b3baa301020c1432bff95e42a827c70fbe7574",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_supervised_j5_probe.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_supervised_j5_probe.py",
+    "sha256": "f893ab94d2d5213ef428b9bc2d56e7925fb233047f9807e09e10b543b7c12277",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_supervised_live_step.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_supervised_live_step.py",
+    "sha256": "b5757faeb9b31ecbb566f268ff564a844dd2efbba4aea1eb902073d7bf9b00a9",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_supervised_policy_session.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_supervised_policy_session.py",
+    "sha256": "92831c894b809eb3de3e2d6ac86e0d107d43b1b754548a1174c19e7d7fd8c95e",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_supervised_policy_step.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_supervised_policy_step.py",
+    "sha256": "fc4785fe5f3b0166bc48ff65e66ac33bc479759dc5393d26d33434ab5013cf90",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_supervised_restore_gripper.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_supervised_restore_gripper.py",
+    "sha256": "324560c813278f383071028726494c7c6af59bf974e7ec0c8fed36be22ba2f62",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_supervised_restore_start.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_supervised_restore_start.py",
+    "sha256": "6570f6a70d962b9d5bfeed1ec36a8a68318ca9bef0b4a646310f7eb1bb144c0b",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_synthetic_policy_reject_smoke.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_synthetic_policy_reject_smoke.py",
+    "sha256": "38001e46708a5563f0ebc9b5de5809ad2554d7fdbe9d5a0c7922dd06b6f1da1d",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/laptop/test_verified_policy_command.py",
+    "new": "archive/legacy_snapshot_20261009/tests/laptop/test_verified_policy_command.py",
+    "sha256": "aba3cadc4dbc638276d20fa52ed29a31b6181f8b5ecc8d458ddd247e70ffaa67",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/server/test_action_target_contract.py",
+    "new": "archive/legacy_snapshot_20261009/tests/server/test_action_target_contract.py",
+    "sha256": "b801595041d161dba14db0285d8d5fbd775183b6ee65da626c9570e8969af8bb",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/server/test_piper_action_eval.py",
+    "new": "archive/legacy_snapshot_20261009/tests/server/test_piper_action_eval.py",
+    "sha256": "e74dc5dbc141b39513167f1c1dc10a96e8754c42cafd3e54d7f25a72cb34b2a0",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/server/test_piper_aligned_converter.py",
+    "new": "archive/legacy_snapshot_20261009/tests/server/test_piper_aligned_converter.py",
+    "sha256": "54806fbeacef7f32ca92455f9f34a9f893acaa59b9409fe35c30a39e8265779a",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/server/test_piper_openpi_offline.py",
+    "new": "archive/legacy_snapshot_20261009/tests/server/test_piper_openpi_offline.py",
+    "sha256": "7d0a26d8b203d411c79ebc00eb4e206f130bc754dcc378e89f6579a6b575875f",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/server/test_piper_train_entry.py",
+    "new": "archive/legacy_snapshot_20261009/tests/server/test_piper_train_entry.py",
+    "sha256": "004f032e7abbcbb9b32c311ff04efb39c4319d9b6c449b4d39c31fa17f109b19",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/server/test_proxy_dataset_contract.py",
+    "new": "archive/legacy_snapshot_20261009/tests/server/test_proxy_dataset_contract.py",
+    "sha256": "31622d64d3751e76144db499412be55d04208293d2b0c9f7377d177853dbd9de",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/server/test_proxy_latency_profile.py",
+    "new": "archive/legacy_snapshot_20261009/tests/server/test_proxy_latency_profile.py",
+    "sha256": "d5f6f81134090682ccb7e1695c47afbc564817355a4747c4d72fbbd799377eaa",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/server/test_proxy_policy_config.py",
+    "new": "archive/legacy_snapshot_20261009/tests/server/test_proxy_policy_config.py",
+    "sha256": "ab2809c29419d440b16fa69cfe47661f704cec9f22e5b6bb9efcc40a9a7a93e3",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/server/test_public_data_contract.py",
+    "new": "archive/legacy_snapshot_20261009/tests/server/test_public_data_contract.py",
+    "sha256": "1d46825f66b578f287d22e5a91f00d68cc3fb964337b7c4389987c2081bb6e4c",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/server/test_training_data_audit.py",
+    "new": "archive/legacy_snapshot_20261009/tests/server/test_training_data_audit.py",
+    "sha256": "323a859bbbab3367a55cdb78e83e860e1411c3b4681e40b065534fd9051f64f5",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "tests/server/test_training_modes.py",
+    "new": "archive/legacy_snapshot_20261009/tests/server/test_training_modes.py",
+    "sha256": "de63f6b776f93f4e7b3ff0d15db13d2e41ffa75a837b4bd563e6fe8d1fe398b4",
+    "classification": "HISTORICAL_TEST",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "validation/derived_state_shadow_loopback_20261007.py",
+    "new": "archive/legacy_snapshot_20261009/validation/derived_state_shadow_loopback_20261007.py",
+    "sha256": "d017916e92634affa6f95aa13e305690504f1d4f190f793af62a926abc47fa92",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "validation/inspect_cando_function.py",
+    "new": "archive/legacy_snapshot_20261009/validation/inspect_cando_function.py",
+    "sha256": "e8b347d6c7de69ec6584cb55732c5a240636c97798148e866987d3aea6190cc2",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": false
+  },
+  {
+    "old": "server/piper_policy/__init__.py",
+    "new": "archive/legacy_snapshot_20261009/server/piper_policy/__init__.py",
+    "sha256": "e22e043db50a972fbd09bc48b317007b504a8561ac4a523485fabd6798d7e964",
+    "classification": "HISTORICAL_IMPLEMENTATION",
+    "replacement": "Current dependency closure; see docs/ACTIVE_CODE_INDEX.md",
+    "tracked": true
+  }
+]

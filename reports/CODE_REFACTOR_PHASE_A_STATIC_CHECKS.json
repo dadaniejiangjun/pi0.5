@@ -1,0 +1,1434 @@
+{
+  "changed": [
+    "laptop/client/bounded_model_trial.py",
+    "laptop/client/live_model_preview.py",
+    "laptop/client/live_shadow.py",
+    "laptop/client/observation_schema.py",
+    "laptop/client/supervised_live_step.py",
+    "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+    "laptop/piper/unit_conversion.py",
+    "laptop/recorder/align_raw.py",
+    "laptop/recorder/verify_source.py",
+    "laptop/robot_client/piper_session.py"
+  ],
+  "added": [
+    "laptop/camera/worker.py",
+    "laptop/client/policy_client.py",
+    "laptop/robot_client/feedback.py",
+    "tests/fixtures/phase_a_before.json",
+    "tests/fixtures/phase_a_recorded_feedback.json",
+    "tests/laptop/test_phase_a_pure_core.py"
+  ],
+  "send_calls_before": [
+    {
+      "path": "laptop/camera/dual_camera.py",
+      "line": 168,
+      "call": "sender.send"
+    },
+    {
+      "path": "laptop/camera/dual_camera.py",
+      "line": 170,
+      "call": "sender.send"
+    },
+    {
+      "path": "laptop/camera/dual_camera.py",
+      "line": 167,
+      "call": "sender.send"
+    },
+    {
+      "path": "laptop/client/action_shadow_replay.py",
+      "line": 136,
+      "call": "connection.send"
+    },
+    {
+      "path": "laptop/client/network_latency_probe.py",
+      "line": 57,
+      "call": "connection.send"
+    },
+    {
+      "path": "laptop/client/synthetic_policy_reject_smoke.py",
+      "line": 53,
+      "call": "connection.send"
+    },
+    {
+      "path": "laptop/diagnostics/bounded_process.py",
+      "line": 12,
+      "call": "sender.send"
+    },
+    {
+      "path": "laptop/diagnostics/bounded_process.py",
+      "line": 14,
+      "call": "sender.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j1_one_degree_trial.py",
+      "line": 73,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j1_step_trial.py",
+      "line": 119,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j5_probe.py",
+      "line": 59,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_joint_replay.py",
+      "line": 121,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_restore_gripper.py",
+      "line": 79,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_restore_start.py",
+      "line": 139,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_smooth_joint_replay.py",
+      "line": 231,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/safety/bridge.py",
+      "line": 1097,
+      "call": "self.transport.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 245,
+      "call": "self._device.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 255,
+      "call": "self._device.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 264,
+      "call": "self._device.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 274,
+      "call": "self._device.send"
+    },
+    {
+      "path": "tests/laptop/test_offline_safety_bridge.py",
+      "line": 188,
+      "call": "fake.send"
+    },
+    {
+      "path": "tests/laptop/test_piper_can_transport.py",
+      "line": 76,
+      "call": "transport.send"
+    },
+    {
+      "path": "tests/laptop/test_supervised_position_transport.py",
+      "line": 186,
+      "call": "transport.send"
+    }
+  ],
+  "send_calls_after": [
+    {
+      "path": "laptop/camera/dual_camera.py",
+      "line": 168,
+      "call": "sender.send"
+    },
+    {
+      "path": "laptop/camera/dual_camera.py",
+      "line": 170,
+      "call": "sender.send"
+    },
+    {
+      "path": "laptop/camera/dual_camera.py",
+      "line": 167,
+      "call": "sender.send"
+    },
+    {
+      "path": "laptop/client/action_shadow_replay.py",
+      "line": 136,
+      "call": "connection.send"
+    },
+    {
+      "path": "laptop/client/network_latency_probe.py",
+      "line": 57,
+      "call": "connection.send"
+    },
+    {
+      "path": "laptop/client/synthetic_policy_reject_smoke.py",
+      "line": 53,
+      "call": "connection.send"
+    },
+    {
+      "path": "laptop/diagnostics/bounded_process.py",
+      "line": 12,
+      "call": "sender.send"
+    },
+    {
+      "path": "laptop/diagnostics/bounded_process.py",
+      "line": 14,
+      "call": "sender.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j1_one_degree_trial.py",
+      "line": 73,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j1_step_trial.py",
+      "line": 119,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j5_probe.py",
+      "line": 59,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_joint_replay.py",
+      "line": 121,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_restore_gripper.py",
+      "line": 79,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_restore_start.py",
+      "line": 139,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_smooth_joint_replay.py",
+      "line": 231,
+      "call": "device.send"
+    },
+    {
+      "path": "laptop/safety/bridge.py",
+      "line": 1097,
+      "call": "self.transport.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 245,
+      "call": "self._device.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 255,
+      "call": "self._device.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 264,
+      "call": "self._device.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 274,
+      "call": "self._device.send"
+    },
+    {
+      "path": "tests/laptop/test_offline_safety_bridge.py",
+      "line": 188,
+      "call": "fake.send"
+    },
+    {
+      "path": "tests/laptop/test_piper_can_transport.py",
+      "line": 76,
+      "call": "transport.send"
+    },
+    {
+      "path": "tests/laptop/test_supervised_position_transport.py",
+      "line": 186,
+      "call": "transport.send"
+    }
+  ],
+  "send_receivers_same": true,
+  "protected_unchanged": [
+    "laptop/safety/bridge.py",
+    "laptop/transport/gs_usb_piper_can.py",
+    "laptop/transport/position_commands.py",
+    "laptop/transport/bounded_trial.py",
+    "laptop/transport/mode_initialization.py",
+    "laptop/robot_client/hil_guard.py",
+    "server/training/piper_openpi_config.py",
+    "laptop/control/contracts.py"
+  ],
+  "remaining_conversions": [
+    {
+      "path": "laptop/camera/dual_camera.py",
+      "line": 107,
+      "classification": "INTENTIONAL",
+      "text": "                period = 1_000_000_000/image_fps"
+    },
+    {
+      "path": "laptop/camera/dual_camera.py",
+      "line": 119,
+      "classification": "INTENTIONAL",
+      "text": "                    if stamp-last_progress[0] >= 1_000_000_000:"
+    },
+    {
+      "path": "laptop/client/action_shadow_replay.py",
+      "line": 182,
+      "classification": "INTENTIONAL",
+      "text": "            \"prediction_round_trip_ms\": (finished_ns - started_ns) / 1e6,",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "laptop/client/bounded_model_trial.py",
+      "line": 99,
+      "classification": "INTENTIONAL",
+      "text": "                camera_wait_ms=(time.perf_counter_ns()-camera_wait_started)/1e6",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "laptop/client/bounded_model_trial.py",
+      "line": 128,
+      "classification": "INTENTIONAL",
+      "text": "                record=dict(step=step,request_id=batch.prediction_request_id,action_index=index,inference_ms=(received-started)/1e6,camera_wait_ms=camera_wait_ms,bounded=bounded,target_joint_raw=list(targets),target_gripper_raw=gripper)"
+    },
+    {
+      "path": "laptop/client/live_shadow.py",
+      "line": 273,
+      "classification": "INTENTIONAL",
+      "text": "        \"camera_skew_ms\": abs(times[0] - times[1]) / 1e6,",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "laptop/client/live_shadow.py",
+      "line": 274,
+      "classification": "INTENTIONAL",
+      "text": "        \"oldest_sensor_age_ms\": (now_ns - min(times + can_times)) / 1e6,"
+    },
+    {
+      "path": "laptop/client/live_shadow.py",
+      "line": 452,
+      "classification": "INTENTIONAL",
+      "text": "            startup[\"wait_ms\"] = (time.perf_counter_ns() - startup_started_ns) / 1e6",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "laptop/client/live_shadow.py",
+      "line": 461,
+      "classification": "INTENTIONAL",
+      "text": "            startup[\"wait_ms\"] = (time.perf_counter_ns() - startup_started_ns) / 1e6",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "laptop/client/live_shadow.py",
+      "line": 508,
+      "classification": "INTENTIONAL",
+      "text": "            latency = segment_latency(result, (response_ns - request_ns) / 1e6)"
+    },
+    {
+      "path": "laptop/client/live_shadow.py",
+      "line": 526,
+      "classification": "INTENTIONAL",
+      "text": "                                \"inference_latency_ms\": (response_ns - request_ns) / 1e6,"
+    },
+    {
+      "path": "laptop/client/network_latency_probe.py",
+      "line": 160,
+      "classification": "INTENTIONAL",
+      "text": "                roundtrip_ms = (finished_ns - started_ns) / 1e6",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "laptop/client/network_latency_probe.py",
+      "line": 206,
+      "classification": "INTENTIONAL",
+      "text": "            reconnect_ms = (time.perf_counter_ns() - reconnect_started_ns) / 1e6",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "laptop/client/offline_latency_replay.py",
+      "line": 63,
+      "classification": "INTENTIONAL",
+      "text": "        roundtrip_ms = (time.perf_counter_ns() - start_ns) / 1e6",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "laptop/client/policy_client.py",
+      "line": 227,
+      "classification": "INTENTIONAL",
+      "text": "        \"latency_ms\": (finished_ns - started_ns) / 1e6,"
+    },
+    {
+      "path": "laptop/client/shadow_preview_smoke.py",
+      "line": 86,
+      "classification": "HISTORICAL",
+      "text": "                row[\"joint_rad_nominal_only\"] + [row[\"gripper_raw\"] * 1e-6],"
+    },
+    {
+      "path": "laptop/client/shadow_preview_smoke.py",
+      "line": 104,
+      "classification": "INTENTIONAL",
+      "text": "            latency_ms = (response_ns - observation_ns) / 1e6"
+    },
+    {
+      "path": "laptop/control/contracts.py",
+      "line": 182,
+      "classification": "INTENTIONAL",
+      "text": "            offset = value * 1_000_000_000"
+    },
+    {
+      "path": "laptop/control/contracts.py",
+      "line": 213,
+      "classification": "INTENTIONAL",
+      "text": "            self.observation_monotonic_ns + round(offset_s * 1_000_000_000)"
+    },
+    {
+      "path": "laptop/diagnostics/audit_feedback_log.py",
+      "line": 35,
+      "classification": "INTENTIONAL",
+      "text": "        intervals = [(b - a) / 1e6 for a, b in zip(times, times[1:])]",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "laptop/diagnostics/probe_can_ack_only.py",
+      "line": 53,
+      "classification": "INTENTIONAL",
+      "text": "        end_ns = start_ns + int(duration_s * 1_000_000_000)"
+    },
+    {
+      "path": "laptop/diagnostics/probe_can_ack_only.py",
+      "line": 69,
+      "classification": "INTENTIONAL",
+      "text": "        \"duration_s\": round((time.perf_counter_ns() - start_ns) / 1_000_000_000, 3),"
+    },
+    {
+      "path": "laptop/diagnostics/probe_can_ack_only.py",
+      "line": 71,
+      "classification": "INTENTIONAL",
+      "text": "        \"bitrate\": 1_000_000,"
+    },
+    {
+      "path": "laptop/diagnostics/probe_can_listen_only.py",
+      "line": 37,
+      "classification": "INTENTIONAL",
+      "text": "    if bitrate != 1_000_000:"
+    },
+    {
+      "path": "laptop/diagnostics/probe_can_listen_only.py",
+      "line": 72,
+      "classification": "INTENTIONAL",
+      "text": "        end_ns = start_ns + int(duration_s * 1_000_000_000)"
+    },
+    {
+      "path": "laptop/diagnostics/probe_can_listen_only.py",
+      "line": 89,
+      "classification": "INTENTIONAL",
+      "text": "        \"duration_s\": round((time.perf_counter_ns() - start_ns) / 1_000_000_000, 3),"
+    },
+    {
+      "path": "laptop/diagnostics/probe_can_listen_only.py",
+      "line": 110,
+      "classification": "INTENTIONAL",
+      "text": "    parser.add_argument(\"--bitrate\", type=int, default=1_000_000)"
+    },
+    {
+      "path": "laptop/diagnostics/probe_dual_cameras.py",
+      "line": 35,
+      "classification": "INTENTIONAL",
+      "text": "    intervals_ms = [(right - left) / 1_000_000 for left, right in zip(timestamps, timestamps[1:])]"
+    },
+    {
+      "path": "laptop/diagnostics/probe_dual_cameras.py",
+      "line": 56,
+      "classification": "INTENTIONAL",
+      "text": "        skews.append(min(abs(timestamp - other) for other in neighbors) / 1_000_000)"
+    },
+    {
+      "path": "laptop/diagnostics/probe_dual_cameras.py",
+      "line": 185,
+      "classification": "INTENTIONAL",
+      "text": "        end_ns = start_ns + int(duration_s * 1_000_000_000)"
+    },
+    {
+      "path": "laptop/diagnostics/probe_dual_cameras.py",
+      "line": 198,
+      "classification": "INTENTIONAL",
+      "text": "                                or timestamp - last_quality_sample_ns >= 1_000_000_000):"
+    },
+    {
+      "path": "laptop/diagnostics/probe_dual_cameras.py",
+      "line": 227,
+      "classification": "INTENTIONAL",
+      "text": "        elapsed_s = (time.perf_counter_ns() - start_ns) / 1_000_000_000"
+    },
+    {
+      "path": "laptop/diagnostics/probe_motor_enable_ack_only.py",
+      "line": 72,
+      "classification": "INTENTIONAL",
+      "text": "        \"duration_s\": round((time.perf_counter_ns() - start_ns) / 1_000_000_000, 3),"
+    },
+    {
+      "path": "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "line": 118,
+      "classification": "INTENTIONAL",
+      "text": "        end_ns = start_ns + int(duration_s * 1_000_000_000)"
+    },
+    {
+      "path": "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "line": 149,
+      "classification": "INTENTIONAL",
+      "text": "                    timestamp=arrival_ns / 1_000_000_000,"
+    },
+    {
+      "path": "laptop/diagnostics/probe_piper_feedback_ack_only.py",
+      "line": 179,
+      "classification": "INTENTIONAL",
+      "text": "        \"duration_s\": round((time.perf_counter_ns() - start_ns) / 1_000_000_000, 3),"
+    },
+    {
+      "path": "laptop/diagnostics/query_all_joint_parameters.py",
+      "line": 79,
+      "classification": "INTENTIONAL",
+      "text": "        timestamp=frame.received_monotonic_ns / 1_000_000_000,"
+    },
+    {
+      "path": "laptop/diagnostics/query_all_joint_parameters.py",
+      "line": 174,
+      "classification": "INTENTIONAL",
+      "text": "        \"duration_s\": round((time.perf_counter_ns() - start_ns) / 1_000_000_000, 3),"
+    },
+    {
+      "path": "laptop/diagnostics/query_all_joint_parameters.py",
+      "line": 176,
+      "classification": "INTENTIONAL",
+      "text": "        \"bitrate\": 1_000_000,"
+    },
+    {
+      "path": "laptop/diagnostics/query_piper_firmware.py",
+      "line": 80,
+      "classification": "INTENTIONAL",
+      "text": "        \"duration_s\": round((time.perf_counter_ns() - start_ns) / 1_000_000_000, 3),"
+    },
+    {
+      "path": "laptop/diagnostics/query_piper_firmware.py",
+      "line": 82,
+      "classification": "INTENTIONAL",
+      "text": "        \"bitrate\": 1_000_000,"
+    },
+    {
+      "path": "laptop/diagnostics/query_piper_gripper_parameters.py",
+      "line": 77,
+      "classification": "INTENTIONAL",
+      "text": "            ages_ms[f\"0x{can_id:03X}\"] = round(age_ns / 1_000_000, 3)"
+    },
+    {
+      "path": "laptop/diagnostics/query_piper_gripper_parameters.py",
+      "line": 86,
+      "classification": "INTENTIONAL",
+      "text": "        \"freshness_limit_ms\": max_age_ns / 1_000_000,"
+    },
+    {
+      "path": "laptop/diagnostics/query_piper_gripper_parameters.py",
+      "line": 143,
+      "classification": "INTENTIONAL",
+      "text": "                    timestamp=arrival_ns / 1_000_000_000,"
+    },
+    {
+      "path": "laptop/diagnostics/query_piper_gripper_parameters.py",
+      "line": 189,
+      "classification": "INTENTIONAL",
+      "text": "    elapsed_s = round((time.perf_counter_ns() - start_ns) / 1_000_000_000, 3)"
+    },
+    {
+      "path": "laptop/diagnostics/query_piper_gripper_parameters.py",
+      "line": 201,
+      "classification": "INTENTIONAL",
+      "text": "        \"bitrate\": 1_000_000,"
+    },
+    {
+      "path": "laptop/diagnostics/query_piper_readiness_snapshot.py",
+      "line": 151,
+      "classification": "INTENTIONAL",
+      "text": "        \"duration_s\": round((time.perf_counter_ns() - started_ns) / 1_000_000_000, 3),"
+    },
+    {
+      "path": "laptop/piper/unit_conversion.py",
+      "line": 65,
+      "classification": "INTENTIONAL",
+      "text": "    \"\"\"Python scalar raw * pi / 180000; no added coercion or validation.\"\"\""
+    },
+    {
+      "path": "laptop/piper/unit_conversion.py",
+      "line": 66,
+      "classification": "INTENTIONAL",
+      "text": "    return raw * math.pi / 180000"
+    },
+    {
+      "path": "laptop/piper/unit_conversion.py",
+      "line": 70,
+      "classification": "INTENTIONAL",
+      "text": "    \"\"\"Python round(rad * 180000 / pi), retaining exceptions and ties-to-even.\"\"\""
+    },
+    {
+      "path": "laptop/piper/unit_conversion.py",
+      "line": 71,
+      "classification": "INTENTIONAL",
+      "text": "    return round(rad * 180000 / math.pi)"
+    },
+    {
+      "path": "laptop/piper/unit_conversion.py",
+      "line": 75,
+      "classification": "INTENTIONAL",
+      "text": "    \"\"\"Multiply by 1e-6 as in the shadow/data path, not jaw calibration.\"\"\""
+    },
+    {
+      "path": "laptop/piper/unit_conversion.py",
+      "line": 76,
+      "classification": "INTENTIONAL",
+      "text": "    return raw * 1e-6"
+    },
+    {
+      "path": "laptop/piper/unit_conversion.py",
+      "line": 80,
+      "classification": "INTENTIONAL",
+      "text": "    \"\"\"Divide by 1e6 as in bounded runtime; preserve its arithmetic order.\"\"\""
+    },
+    {
+      "path": "laptop/piper/unit_conversion.py",
+      "line": 81,
+      "classification": "INTENTIONAL",
+      "text": "    return raw / 1e6"
+    },
+    {
+      "path": "laptop/piper/unit_conversion.py",
+      "line": 85,
+      "classification": "INTENTIONAL",
+      "text": "    \"\"\"Python round(meters * 1e6) as in bounded runtime.\"\"\""
+    },
+    {
+      "path": "laptop/piper/unit_conversion.py",
+      "line": 86,
+      "classification": "INTENTIONAL",
+      "text": "    return round(meters * 1e6)"
+    },
+    {
+      "path": "laptop/recorder/align_raw.py",
+      "line": 133,
+      "classification": "INTENTIONAL",
+      "text": "    tolerance_ns = round(_positive_number(max_skew_ms, \"max_skew_ms\") * 1_000_000)"
+    },
+    {
+      "path": "laptop/recorder/align_raw.py",
+      "line": 149,
+      "classification": "INTENTIONAL",
+      "text": "    period = round(1_000_000_000 / fps)"
+    },
+    {
+      "path": "laptop/recorder/episode.py",
+      "line": 183,
+      "classification": "INTENTIONAL",
+      "text": "        skew_ms.append(min(abs(ts - other) for other in nearby) / 1e6)",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "laptop/recorder/episode.py",
+      "line": 202,
+      "classification": "INTENTIONAL",
+      "text": "                nearest_ms.append(min(abs(ts - other) for other in nearby) / 1e6)",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "laptop/recorder/next_state_proxy.py",
+      "line": 21,
+      "classification": "INTENTIONAL",
+      "text": "GRIPPER_METERS_PER_RAW_NOMINAL = 1e-6"
+    },
+    {
+      "path": "laptop/recorder/next_state_proxy.py",
+      "line": 122,
+      "classification": "INTENTIONAL",
+      "text": "    period_ns = round(1_000_000_000 / meta[\"fps\"])"
+    },
+    {
+      "path": "laptop/recorder/piper_command_targets.py",
+      "line": 21,
+      "classification": "INTENTIONAL",
+      "text": "GRIPPER_METERS_PER_RAW = 1e-6"
+    },
+    {
+      "path": "laptop/recorder/synthetic_smoke.py",
+      "line": 25,
+      "classification": "INTENTIONAL",
+      "text": "        start_ns = 1_000_000_000"
+    },
+    {
+      "path": "laptop/robot_client/piper_session.py",
+      "line": 99,
+      "classification": "INTENTIONAL",
+      "text": "                 not 0 <= now - self._latest[i][0] <= max_age_ms * 1_000_000]"
+    },
+    {
+      "path": "laptop/robot_client/single_step_dry_run.py",
+      "line": 278,
+      "classification": "INTENTIONAL",
+      "text": "        created_monotonic_ns=now_ns - 1_000_000,"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j1_one_degree_trial.py",
+      "line": 54,
+      "classification": "INTENTIONAL",
+      "text": "    if not device.set_bitrate(1_000_000):"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j1_step_trial.py",
+      "line": 104,
+      "classification": "INTENTIONAL",
+      "text": "    if not device.set_bitrate(1_000_000):"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j5_probe.py",
+      "line": 34,
+      "classification": "INTENTIONAL",
+      "text": "    if not device.set_bitrate(1_000_000):"
+    },
+    {
+      "path": "laptop/robot_client/supervised_joint_replay.py",
+      "line": 89,
+      "classification": "INTENTIONAL",
+      "text": "    if not device.set_bitrate(1_000_000):"
+    },
+    {
+      "path": "laptop/robot_client/supervised_restore_gripper.py",
+      "line": 59,
+      "classification": "INTENTIONAL",
+      "text": "    if not device.set_bitrate(1_000_000):"
+    },
+    {
+      "path": "laptop/robot_client/supervised_restore_start.py",
+      "line": 109,
+      "classification": "INTENTIONAL",
+      "text": "    if not device.set_bitrate(1_000_000):"
+    },
+    {
+      "path": "laptop/robot_client/supervised_smooth_joint_replay.py",
+      "line": 186,
+      "classification": "INTENTIONAL",
+      "text": "    if not device.set_bitrate(1_000_000):"
+    },
+    {
+      "path": "laptop/safety/bridge.py",
+      "line": 433,
+      "classification": "PROTOCOL_REQUIRED",
+      "text": "                        cutoff = frame.received_monotonic_ns - 1_000_000_000"
+    },
+    {
+      "path": "laptop/safety/offline_guard.py",
+      "line": 166,
+      "classification": "PROTOCOL_REQUIRED",
+      "text": "        seconds = horizon / 1_000_000_000"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 189,
+      "classification": "PROTOCOL_REQUIRED",
+      "text": "        if not device.set_bitrate(1_000_000):"
+    },
+    {
+      "path": "server/dataset_tools/convert_piper_aligned.py",
+      "line": 166,
+      "classification": "INTENTIONAL",
+      "text": "            if abs((row[\"action_target_timestamp_ns\"] - policy_ts) - offset) > 1_000_000:"
+    },
+    {
+      "path": "server/training/proxy_latency_profile.py",
+      "line": 66,
+      "classification": "INTENTIONAL",
+      "text": "        roundtrip_ms = (time.perf_counter_ns() - start_ns) / 1e6",
+      "reason": "Host timestamp nanoseconds to milliseconds; not robot unit conversion."
+    },
+    {
+      "path": "scripts/validate_piper_contract.py",
+      "line": 27,
+      "classification": "TEST_EXPECTATION",
+      "text": "    raw_joint = rng.integers(-180_000, 180_001, size=10_000, dtype=np.int64)"
+    },
+    {
+      "path": "tests/contracts/test_control_contracts.py",
+      "line": 20,
+      "classification": "TEST_EXPECTATION",
+      "text": "        \"observation_monotonic_ns\": 1_000_000_000,"
+    },
+    {
+      "path": "tests/contracts/test_control_contracts.py",
+      "line": 36,
+      "classification": "TEST_EXPECTATION",
+      "text": "        \"captured_monotonic_ns\": 1_000_000_000,"
+    },
+    {
+      "path": "tests/contracts/test_control_contracts.py",
+      "line": 98,
+      "classification": "TEST_EXPECTATION",
+      "text": "        {\"captured_monotonic_ns\": 1_000_000_000.0},"
+    },
+    {
+      "path": "tests/contracts/test_control_contracts.py",
+      "line": 115,
+      "classification": "TEST_EXPECTATION",
+      "text": "        {\"observation_monotonic_ns\": 1_000_000_000.0},"
+    },
+    {
+      "path": "tests/contracts/test_piper_units.py",
+      "line": 20,
+      "classification": "TEST_EXPECTATION",
+      "text": "        raw = rng.integers(-180_000, 180_001, size=10_000, dtype=np.int64)"
+    },
+    {
+      "path": "tests/data/test_align_raw.py",
+      "line": 32,
+      "classification": "TEST_EXPECTATION",
+      "text": "        ts = 1_000_000_000 + index * 100_000_000"
+    },
+    {
+      "path": "tests/data/test_align_raw.py",
+      "line": 34,
+      "classification": "TEST_EXPECTATION",
+      "text": "        writer.add(\"wrist\", ts + 1_000_000, {\"frame_id\": index})"
+    },
+    {
+      "path": "tests/data/test_align_raw.py",
+      "line": 36,
+      "classification": "TEST_EXPECTATION",
+      "text": "            writer.add(channel, ts + offset * 1_000_000,"
+    },
+    {
+      "path": "tests/data/test_align_raw.py",
+      "line": 48,
+      "classification": "TEST_EXPECTATION",
+      "text": "                base_ts = 1_000_000_000 + tick * 100_000_000"
+    },
+    {
+      "path": "tests/data/test_align_raw.py",
+      "line": 120,
+      "classification": "TEST_EXPECTATION",
+      "text": "                \"joint_degrees_per_raw\": 0.001, \"gripper_meters_per_raw\": 1e-6,"
+    },
+    {
+      "path": "tests/data/test_align_raw.py",
+      "line": 155,
+      "classification": "TEST_EXPECTATION",
+      "text": "                \"gripper_meters_per_raw\": 1e-6,"
+    },
+    {
+      "path": "tests/data/test_align_raw_to_lerobot.py",
+      "line": 40,
+      "classification": "TEST_EXPECTATION",
+      "text": "                \"gripper_meters_per_raw\": 1e-6,"
+    },
+    {
+      "path": "tests/data/test_piper_command_targets.py",
+      "line": 29,
+      "classification": "TEST_EXPECTATION",
+      "text": "def complete_frames(base_ns: int = 1_000_000_000, *, offset: int = 0):"
+    },
+    {
+      "path": "tests/data/test_source_verification.py",
+      "line": 66,
+      "classification": "TEST_EXPECTATION",
+      "text": "                \"gripper_meters_per_raw\": 1e-6,"
+    },
+    {
+      "path": "tests/laptop/test_action_shadow_replay.py",
+      "line": 29,
+      "classification": "TEST_EXPECTATION",
+      "text": "        \"gripper_meters_per_raw\": 1e-6,"
+    },
+    {
+      "path": "tests/laptop/test_bounded_model_trial.py",
+      "line": 98,
+      "classification": "TEST_EXPECTATION",
+      "text": "    assert stable_snapshot(robot,{},time.perf_counter_ns()+1_000_000_000)=='stable'"
+    },
+    {
+      "path": "tests/laptop/test_bounded_model_trial.py",
+      "line": 103,
+      "classification": "TEST_EXPECTATION",
+      "text": "    with pytest.raises(PermissionError,match='motor disabled'):stable_snapshot(fault,{},time.perf_counter_ns()+1_000_000_000)"
+    },
+    {
+      "path": "tests/laptop/test_can_listen_only_guard.py",
+      "line": 13,
+      "classification": "TEST_EXPECTATION",
+      "text": "        result = probe(10, 1_000_000)"
+    },
+    {
+      "path": "tests/laptop/test_can_listen_only_guard.py",
+      "line": 28,
+      "classification": "TEST_EXPECTATION",
+      "text": "            1_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_compare_gripper_feedback.py",
+      "line": 18,
+      "classification": "TEST_EXPECTATION",
+      "text": "                        \"monotonic_ns\": index * 1_000_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_diagnostic_queries.py",
+      "line": 191,
+      "classification": "TEST_EXPECTATION",
+      "text": "        received_monotonic_ns=NOW - 1_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_dual_camera_capture.py",
+      "line": 17,
+      "classification": "TEST_EXPECTATION",
+      "text": "            on_frame(role, image, 1_000_000_000+index*50_000_000, index)"
+    },
+    {
+      "path": "tests/laptop/test_dual_camera_capture.py",
+      "line": 38,
+      "classification": "TEST_EXPECTATION",
+      "text": "    assert [r[\"received_monotonic_ns\"] for r in rows] == [1_000_000_000, 1_050_000_000, 1_100_000_000]"
+    },
+    {
+      "path": "tests/laptop/test_fake_can_single_step_rehearsal.py",
+      "line": 60,
+      "classification": "TEST_EXPECTATION",
+      "text": "        bridge.record_heartbeat(now_ns - 1_000_000)"
+    },
+    {
+      "path": "tests/laptop/test_fake_can_single_step_rehearsal.py",
+      "line": 77,
+      "classification": "TEST_EXPECTATION",
+      "text": "            (\"state_stale\", lambda now: make_inputs(now - 1_000_000_000)),"
+    },
+    {
+      "path": "tests/laptop/test_fake_can_single_step_rehearsal.py",
+      "line": 88,
+      "classification": "TEST_EXPECTATION",
+      "text": "                bridge.record_heartbeat(now_ns - 1_000_000)"
+    },
+    {
+      "path": "tests/laptop/test_fake_can_single_step_rehearsal.py",
+      "line": 114,
+      "classification": "TEST_EXPECTATION",
+      "text": "        bridge.record_heartbeat(now_ns - 1_000_000)"
+    },
+    {
+      "path": "tests/laptop/test_fake_can_single_step_rehearsal.py",
+      "line": 132,
+      "classification": "TEST_EXPECTATION",
+      "text": "                bridge.record_heartbeat(now_ns - 1_000_000)"
+    },
+    {
+      "path": "tests/laptop/test_feedback_log_audit.py",
+      "line": 25,
+      "classification": "TEST_EXPECTATION",
+      "text": "                    for ts in range(1_000_000_000, 3_100_000_000, 50_000_000):"
+    },
+    {
+      "path": "tests/laptop/test_feedback_log_audit.py",
+      "line": 40,
+      "classification": "TEST_EXPECTATION",
+      "text": "                    for ts in [1_000_000_000, *range(1_000_000_000, 3_100_000_000, 50_000_000)]:"
+    },
+    {
+      "path": "tests/laptop/test_gripper_parameter_query.py",
+      "line": 63,
+      "classification": "TEST_EXPECTATION",
+      "text": "    timestamps[0x2A8] = now_ns - 251_000_000"
+    },
+    {
+      "path": "tests/laptop/test_j1_commissioning_bridge.py",
+      "line": 332,
+      "classification": "TEST_EXPECTATION",
+      "text": "        _post_feedback(target, now - 1_000_000),"
+    },
+    {
+      "path": "tests/laptop/test_j1_commissioning_bridge.py",
+      "line": 333,
+      "classification": "TEST_EXPECTATION",
+      "text": "        [(now - 1_000_000, target)], source, target, now,"
+    },
+    {
+      "path": "tests/laptop/test_j1_commissioning_bridge.py",
+      "line": 346,
+      "classification": "TEST_EXPECTATION",
+      "text": "        _post_feedback(wrong, now - 1_000_000),"
+    },
+    {
+      "path": "tests/laptop/test_j1_commissioning_bridge.py",
+      "line": 347,
+      "classification": "TEST_EXPECTATION",
+      "text": "        [(now - 1_000_000, wrong)], source, target, now,"
+    },
+    {
+      "path": "tests/laptop/test_live_shadow.py",
+      "line": 393,
+      "classification": "TEST_EXPECTATION",
+      "text": "        self.now = 1_000_000_000"
+    },
+    {
+      "path": "tests/laptop/test_offline_safety_bridge.py",
+      "line": 17,
+      "classification": "TEST_EXPECTATION",
+      "text": "NOW = 1_000_000_000"
+    },
+    {
+      "path": "tests/laptop/test_passive_capture.py",
+      "line": 76,
+      "classification": "TEST_EXPECTATION",
+      "text": "                    \"frame_timestamps_ns\": {\"base\": [1_000_000_000 + i * 100_000_000 for i in range(10)],"
+    },
+    {
+      "path": "tests/laptop/test_passive_capture.py",
+      "line": 90,
+      "classification": "TEST_EXPECTATION",
+      "text": "                            \"can_id\": can_id, \"monotonic_ns\": 1_000_000_000 + i * 100_000_000 + offset,"
+    },
+    {
+      "path": "tests/laptop/test_passive_capture.py",
+      "line": 145,
+      "classification": "TEST_EXPECTATION",
+      "text": "                    \"frame_timestamps_ns\": {\"base\": [1_000_000_000], \"wrist\": [1_001_000_000]}}"
+    },
+    {
+      "path": "tests/laptop/test_passive_capture.py",
+      "line": 159,
+      "classification": "TEST_EXPECTATION",
+      "text": "                        \"can_id\": can_id, \"monotonic_ns\": 1_000_000_000 + offset,"
+    },
+    {
+      "path": "tests/laptop/test_passive_capture.py",
+      "line": 226,
+      "classification": "TEST_EXPECTATION",
+      "text": "                    stamps[role].append(1_010_000_000 + index * 100_000_000 + (0 if role == \"base\" else 1_000_000))"
+    },
+    {
+      "path": "tests/laptop/test_passive_capture.py",
+      "line": 243,
+      "classification": "TEST_EXPECTATION",
+      "text": "                    base = 1_000_000_000 + index * 100_000_000"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 34,
+      "classification": "TEST_EXPECTATION",
+      "text": "@pytest.mark.parametrize('raw', [0,1,-1,929,-12345,150000,-150000,180000,-170000,"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 38,
+      "classification": "TEST_EXPECTATION",
+      "text": "    old = raw * math.pi / 180000"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 40,
+      "classification": "TEST_EXPECTATION",
+      "text": "    assert units.nominal_rad_to_joint_raw(old) == round(old*180000/math.pi)"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 46,
+      "classification": "TEST_EXPECTATION",
+      "text": "    assert units.gripper_raw_to_nominal_m(raw) == raw * 1e-6"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 47,
+      "classification": "TEST_EXPECTATION",
+      "text": "    assert units.gripper_raw_to_nominal_m_divided(raw) == raw / 1e6"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 48,
+      "classification": "TEST_EXPECTATION",
+      "text": "    for v in (raw*1e-6, raw/1e6):"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 49,
+      "classification": "TEST_EXPECTATION",
+      "text": "        assert units.nominal_m_to_gripper_raw(v) == round(v*1e6)"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 55,
+      "classification": "TEST_EXPECTATION",
+      "text": "    for new, old in [(units.nominal_rad_to_joint_raw,lambda v:round(v*180000/math.pi)),"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 56,
+      "classification": "TEST_EXPECTATION",
+      "text": "                     (units.nominal_m_to_gripper_raw,lambda v:round(v*1e6))]:"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 111,
+      "classification": "TEST_EXPECTATION",
+      "text": "    now=1_000_000_000"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 138,
+      "classification": "TEST_EXPECTATION",
+      "text": "    now=1_000_000_000;base=np.zeros((5,6,3),dtype=np.uint8);base[:,:,0]=7;base[:,:,2]=91"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 180,
+      "classification": "TEST_EXPECTATION",
+      "text": "    monkeypatch.setattr(policy_client.time,'perf_counter_ns',lambda:1_000_000_000)"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 228,
+      "classification": "TEST_EXPECTATION",
+      "text": "            formulas={'joint_raw_to_nominal_rad':'VALUE*math.pi/180000','nominal_rad_to_joint_raw':'round(VALUE*180000/math.pi)',"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 229,
+      "classification": "TEST_EXPECTATION",
+      "text": "                      'gripper_raw_to_nominal_m_divided':'VALUE/1e6','nominal_m_to_gripper_raw':'round(VALUE*1e6)'}"
+    },
+    {
+      "path": "tests/laptop/test_piper_can_transport.py",
+      "line": 190,
+      "classification": "TEST_EXPECTATION",
+      "text": "            return bitrate == 1_000_000"
+    },
+    {
+      "path": "tests/laptop/test_piper_can_transport.py",
+      "line": 251,
+      "classification": "TEST_EXPECTATION",
+      "text": "            return bitrate == 1_000_000"
+    },
+    {
+      "path": "tests/laptop/test_piper_can_transport.py",
+      "line": 311,
+      "classification": "TEST_EXPECTATION",
+      "text": "            return bitrate == 1_000_000"
+    },
+    {
+      "path": "tests/laptop/test_piper_can_transport.py",
+      "line": 399,
+      "classification": "TEST_EXPECTATION",
+      "text": "            return bitrate == 1_000_000"
+    },
+    {
+      "path": "tests/laptop/test_policy_reject_only.py",
+      "line": 13,
+      "classification": "TEST_EXPECTATION",
+      "text": "    observation_ns = 1_000_000_000"
+    },
+    {
+      "path": "tests/laptop/test_policy_sdk_preview.py",
+      "line": 19,
+      "classification": "TEST_EXPECTATION",
+      "text": "        observation_monotonic_ns=1_000_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_policy_sdk_preview.py",
+      "line": 33,
+      "classification": "TEST_EXPECTATION",
+      "text": "        captured_monotonic_ns=received_ns - 1_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_safety_bridge_runtime.py",
+      "line": 93,
+      "classification": "TEST_EXPECTATION",
+      "text": "    bridge.record_heartbeat(NOW - 1_000_000)"
+    },
+    {
+      "path": "tests/laptop/test_safety_bridge_runtime.py",
+      "line": 168,
+      "classification": "TEST_EXPECTATION",
+      "text": "    values[\"max_state_age_ns\"] = 1_000_000_000"
+    },
+    {
+      "path": "tests/laptop/test_safety_bridge_runtime.py",
+      "line": 169,
+      "classification": "TEST_EXPECTATION",
+      "text": "    values[\"max_prediction_response_latency_ns\"] = 1_000_000_000"
+    },
+    {
+      "path": "tests/laptop/test_safety_bridge_runtime.py",
+      "line": 170,
+      "classification": "TEST_EXPECTATION",
+      "text": "    values[\"max_proposal_age_ns\"] = 1_000_000_000"
+    },
+    {
+      "path": "tests/laptop/test_safety_bridge_runtime.py",
+      "line": 342,
+      "classification": "TEST_EXPECTATION",
+      "text": "        valid_until_monotonic_ns=NOW + 1_000_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_supervised_enable_j6.py",
+      "line": 53,
+      "classification": "TEST_EXPECTATION",
+      "text": "            stamp = clock[0] - 361_000_000 + index * 6_000_000"
+    },
+    {
+      "path": "tests/laptop/test_supervised_j1_one_degree_trial.py",
+      "line": 12,
+      "classification": "TEST_EXPECTATION",
+      "text": "    now = 1_000_000_000"
+    },
+    {
+      "path": "tests/laptop/test_supervised_j1_step_trial.py",
+      "line": 11,
+      "classification": "TEST_EXPECTATION",
+      "text": "    clock = 1_000_000_000"
+    },
+    {
+      "path": "tests/laptop/test_supervised_mode_initialization.py",
+      "line": 64,
+      "classification": "TEST_EXPECTATION",
+      "text": "            stamp = clock[0] - 361_000_000 + index * 6_000_000"
+    },
+    {
+      "path": "tests/laptop/test_supervised_policy_session.py",
+      "line": 84,
+      "classification": "TEST_EXPECTATION",
+      "text": "        observation_monotonic_ns=started_ns - 1_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_supervised_policy_step.py",
+      "line": 54,
+      "classification": "TEST_EXPECTATION",
+      "text": "        received_monotonic_ns=observation_ns + 1_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_supervised_policy_step.py",
+      "line": 66,
+      "classification": "TEST_EXPECTATION",
+      "text": "        received_monotonic_ns=now - 1_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_supervised_position_bridge.py",
+      "line": 71,
+      "classification": "TEST_EXPECTATION",
+      "text": "        received_monotonic_ns=base - 1_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_supervised_position_transport.py",
+      "line": 71,
+      "classification": "TEST_EXPECTATION",
+      "text": "        created_monotonic_ns=now - 1_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_supervised_position_transport.py",
+      "line": 89,
+      "classification": "TEST_EXPECTATION",
+      "text": "        CanTxFrame(0x159, struct.pack(\">iHBB\", round(proposal.target[6] * 1_000_000), 120, 1, 0)),"
+    },
+    {
+      "path": "tests/laptop/test_supervised_position_transport.py",
+      "line": 364,
+      "classification": "TEST_EXPECTATION",
+      "text": "            return bitrate == 1_000_000"
+    },
+    {
+      "path": "tests/laptop/test_supervised_restore_start.py",
+      "line": 14,
+      "classification": "TEST_EXPECTATION",
+      "text": "    now = 1_000_000_000"
+    },
+    {
+      "path": "tests/laptop/test_verified_policy_command.py",
+      "line": 26,
+      "classification": "TEST_EXPECTATION",
+      "text": "        observation_monotonic_ns=1_000_000_000,"
+    },
+    {
+      "path": "tests/laptop/test_verified_policy_command.py",
+      "line": 44,
+      "classification": "TEST_EXPECTATION",
+      "text": "        captured_monotonic_ns=received_ns - 1_000_000,"
+    },
+    {
+      "path": "tests/server/test_piper_aligned_converter.py",
+      "line": 51,
+      "classification": "TEST_EXPECTATION",
+      "text": "            ts = 1_000_000_000 + index * 100_000_000"
+    },
+    {
+      "path": "tests/server/test_piper_aligned_converter.py",
+      "line": 56,
+      "classification": "TEST_EXPECTATION",
+      "text": "                \"wrist_timestamp_ns\": ts + 1_000_000,"
+    },
+    {
+      "path": "tests/server/test_proxy_multi_episode_contract.py",
+      "line": 73,
+      "classification": "TEST_EXPECTATION",
+      "text": "            timestamp = episode_index * 1_000_000_000 + local_index * 100_000_000"
+    }
+  ],
+  "observation_scan": [
+    {
+      "path": "laptop/client/action_shadow_replay.py",
+      "line": 166,
+      "text": "            \"base_rgb\": _read_rgb(_inside(Path(aligned_path), row.get(\"base_image\"))),"
+    },
+    {
+      "path": "laptop/client/network_latency_probe.py",
+      "line": 139,
+      "text": "        for name in (\"base_rgb\", \"wrist_rgb\")"
+    },
+    {
+      "path": "laptop/client/observation_schema.py",
+      "line": 43,
+      "text": "    required = {\"base_rgb\", \"wrist_rgb\", \"state\", \"prompt\"}"
+    },
+    {
+      "path": "laptop/client/observation_schema.py",
+      "line": 47,
+      "text": "    for key in (\"base_rgb\", \"wrist_rgb\"):"
+    },
+    {
+      "path": "laptop/client/observation_schema.py",
+      "line": 65,
+      "text": "        \"base_rgb\": base_rgb,"
+    },
+    {
+      "path": "laptop/client/offline_latency_replay.py",
+      "line": 46,
+      "text": "        \"base_rgb\": _first_rgb(base_video),"
+    },
+    {
+      "path": "laptop/client/offline_latency_replay.py",
+      "line": 74,
+      "text": "        \"image_shapes\": {key: list(observation[key].shape) for key in (\"base_rgb\", \"wrist_rgb\")},"
+    },
+    {
+      "path": "laptop/client/public_piper_transport_smoke.py",
+      "line": 41,
+      "text": "        \"base_rgb\": blank,"
+    },
+    {
+      "path": "laptop/client/shadow_preview_smoke.py",
+      "line": 89,
+      "text": "            observation = {\"base_rgb\": base, \"wrist_rgb\": wrist,"
+    },
+    {
+      "path": "server/public_piper_smoke_infer.py",
+      "line": 26,
+      "text": "        \"base_rgb\": sample[\"observation.images.top\"].numpy(),"
+    },
+    {
+      "path": "server/piper_policy/piper_inputs.py",
+      "line": 46,
+      "text": "        base = _canonical_image(self.base_rgb, name=\"base_rgb\")"
+    },
+    {
+      "path": "server/piper_policy/piper_inputs.py",
+      "line": 58,
+      "text": "        object.__setattr__(self, \"base_rgb\", base)"
+    },
+    {
+      "path": "server/piper_policy/piper_inputs.py",
+      "line": 64,
+      "text": "        required = {\"base_rgb\", \"wrist_rgb\", \"state\", \"prompt\"}"
+    },
+    {
+      "path": "server/piper_policy/piper_inputs.py",
+      "line": 69,
+      "text": "            base_rgb=observation[\"base_rgb\"],"
+    },
+    {
+      "path": "server/training/piper_action_eval.py",
+      "line": 129,
+      "text": "            \"base_rgb\": row[\"observation.images.image\"].numpy(),"
+    },
+    {
+      "path": "server/training/piper_openpi_config.py",
+      "line": 54,
+      "text": "        base = _image(data[\"base_rgb\"], \"base_rgb\")"
+    },
+    {
+      "path": "server/training/piper_openpi_config.py",
+      "line": 101,
+      "text": "            \"base_rgb\": \"observation.images.image\","
+    },
+    {
+      "path": "server/training/proxy_latency_profile.py",
+      "line": 47,
+      "text": "        \"base_rgb\": row[\"observation.images.image\"].numpy(),"
+    },
+    {
+      "path": "server/training/proxy_multi_episode_pilot.py",
+      "line": 355,
+      "text": "            \"base_rgb\": row[\"observation.images.image\"].numpy(),"
+    },
+    {
+      "path": "server/training/proxy_piper_eval.py",
+      "line": 50,
+      "text": "            \"base_rgb\": row[\"observation.images.image\"].numpy(),"
+    },
+    {
+      "path": "server/training/public_piper_smoke.py",
+      "line": 42,
+      "text": "                \"base_rgb\": \"observation.images.top\","
+    },
+    {
+      "path": "scripts/validate_piper_contract.py",
+      "line": 70,
+      "text": "        \"semantic_input\": [\"base_rgb\", \"wrist_rgb\", \"state\", \"prompt\"],"
+    },
+    {
+      "path": "tests/laptop/test_action_shadow_replay.py",
+      "line": 99,
+      "text": "            self.assertEqual(client.observations[0][\"base_rgb\"].shape, (48, 64, 3))"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 128,
+      "text": "    for key in ('base_rgb','wrist_rgb','state'):"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 132,
+      "text": "    assert new['base_rgb'] is base and new['wrist_rgb'] is wrist"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 142,
+      "text": "    for key in ('base_rgb','wrist_rgb','state'):assert np.array_equal(got[key],expected[key])"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 143,
+      "text": "    assert got['base_rgb'][0,0].tolist()==[91,0,7]"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 187,
+      "text": "        for key in ('base_rgb','wrist_rgb','state'):assert np.array_equal(a.observation[key],b.observation[key])"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 237,
+      "text": "                return ast.Dict(keys=[ast.Constant(k) for k in ('base_rgb','wrist_rgb','state','prompt')],values=[n.args[0],n.args[1],state,n.args[3]])"
+    },
+    {
+      "path": "tests/laptop/test_phase_a_pure_core.py",
+      "line": 238,
+      "text": "            if n.func.id=='dict' and [k.arg for k in n.keywords]==['base_rgb','wrist_rgb','state','prompt']:"
+    },
+    {
+      "path": "tests/server/test_piper_openpi_offline.py",
+      "line": 75,
+      "text": "        common = {\"base_rgb\": np.zeros((4, 4, 3), dtype=np.uint8),"
+    }
+  ]
+}

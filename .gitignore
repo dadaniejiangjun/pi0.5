@@ -15,6 +15,7 @@ datasets/incoming/*
 datasets/raw/*
 datasets/lerobot/*
 datasets/manifests/generated/*
+datasets/manifests/outcomes/*
 
 # Keep directory documentation and explicit manifests tracked.
 !cache/.gitkeep
@@ -30,3 +31,22 @@ datasets/manifests/generated/*
 *.key
 *.token
 *.secret
+
+# Pure generated pytest cache; retain validation evidence.
+.pytest_cache/
+
+# GitHub source snapshot: real captures and generated machine/runtime evidence stay local.
+/validation/
+Log/
+artifacts/
+datasets/derived/
+datasets/manifests/capture_sessions/
+tests/fixtures/phase_a_recorded_feedback.json
+reports/GITHUB_SAVE_*.json
+reports/GITHUB_SAVE_*.bin
+reports/*BASELINE.json
+reports/*BASELINE_STATUS.bin
+reports/*.log
+
+# Unrelated local experiment, not part of PiPER deployment.
+knowledge_landsea_experiment/

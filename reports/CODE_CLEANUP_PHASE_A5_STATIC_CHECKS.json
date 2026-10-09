@@ -1,0 +1,72 @@
+{
+  "original_source_config_hash_count": 281,
+  "changed_source_or_config": [],
+  "active_archive_imports": [],
+  "parse_errors": [],
+  "direct_tx_after": [
+    {
+      "path": "laptop/robot_client/supervised_j1_one_degree_trial.py",
+      "line": 73,
+      "receiver": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j1_step_trial.py",
+      "line": 119,
+      "receiver": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_j5_probe.py",
+      "line": 59,
+      "receiver": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_joint_replay.py",
+      "line": 121,
+      "receiver": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_restore_gripper.py",
+      "line": 79,
+      "receiver": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_restore_start.py",
+      "line": 139,
+      "receiver": "device.send"
+    },
+    {
+      "path": "laptop/robot_client/supervised_smooth_joint_replay.py",
+      "line": 231,
+      "receiver": "device.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 245,
+      "receiver": "self._device.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 255,
+      "receiver": "self._device.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 264,
+      "receiver": "self._device.send"
+    },
+    {
+      "path": "laptop/transport/gs_usb_piper_can.py",
+      "line": 274,
+      "receiver": "self._device.send"
+    }
+  ],
+  "metrics_after": {
+    "active_python": 158,
+    "scripts_python": 10,
+    "validation_top_python": 2,
+    "legacy_senders": 7,
+    "archive_python": 4,
+    "phase_a_compatibility_reexports": 14
+  },
+  "literal_dynamic_archive_imports": []
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "piper_runtime_v1",
+  "mode": "DIAGNOSTIC_QUERY",
+  "policy_config": "none",
+  "can_tx_enabled": true,
+  "command_tx_enabled": false,
+  "single_can_owner": "safety-bridge",
+  "max_state_age_ms": 250,
+  "max_prediction_age_ms": 250,
+  "notes": "Permit only explicitly approved, allowlisted firmware/joint/gripper getter requests after fresh PiPER feedback; robot command TX stays disabled."
+}

@@ -5,7 +5,18 @@ from __future__ import annotations
 import numpy as np
 
 
-PIPER_PROMPT = "Pick up the block and place it in the tray."
+PIPER_PROMPT = "Pick up the black rod and place it on the green desk mat."
+
+
+def make_piper_proxy_warmup_observation() -> dict:
+    """Create a deterministic, hardware-free observation for server prewarm."""
+
+    return build_piper_observation(
+        np.zeros((224, 224, 3), dtype=np.uint8),
+        np.zeros((224, 224, 3), dtype=np.uint8),
+        np.zeros((7,), dtype=np.float32),
+        PIPER_PROMPT,
+    )
 
 
 def make_official_aloha_dummy_observation(seed: int = 0) -> dict:
@@ -42,3 +53,17 @@ def validate_piper_semantic_observation(observation: dict) -> None:
         raise ValueError(f"state must be float32[7], got {state.shape} {state.dtype}")
     if not isinstance(observation["prompt"], str):
         raise ValueError("prompt must be str")
+
+
+def build_piper_observation(base_rgb, wrist_rgb, robot_state, prompt):
+    """Pack already-RGB images and float32 state; validation stays explicit.
+
+    No image conversion, copying, freshness check, or extra rejection is added.
+    Call validate_piper_semantic_observation where the old caller validated.
+    """
+    return {
+        "base_rgb": base_rgb,
+        "wrist_rgb": wrist_rgb,
+        "state": np.asarray(robot_state, dtype=np.float32),
+        "prompt": prompt,
+    }

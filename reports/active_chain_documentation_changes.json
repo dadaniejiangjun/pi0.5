@@ -1,0 +1,13 @@
+{
+  "replaced_guides": [
+    "laptop/client/README.md",
+    "laptop/robot_client/README.md",
+    "server/training/README.md",
+    "server/dataset_tools/README.md",
+    "server/policy_server/README.md",
+    "scripts/README.md"
+  ],
+  "fixed_links": [
+    "docs/reference/CURRENT_PROJECT_PLAN.md"
+  ]
+}

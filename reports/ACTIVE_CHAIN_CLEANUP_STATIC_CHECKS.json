@@ -1,0 +1,38 @@
+{
+  "python_archived": 98,
+  "tests_archived": 33,
+  "implementation_and_runner_archived": 65,
+  "retained_test_modules": 60,
+  "changed_original_python": [
+    "tests/server/test_policy_artifact_identity.py",
+    "tests/server/test_train_demonstrations.py"
+  ],
+  "missing_original_files": [],
+  "active_archive_imports": [],
+  "active_direct_tx": [
+    [
+      "laptop/transport/gs_usb_piper_can.py",
+      245,
+      "self._device.send"
+    ],
+    [
+      "laptop/transport/gs_usb_piper_can.py",
+      255,
+      "self._device.send"
+    ],
+    [
+      "laptop/transport/gs_usb_piper_can.py",
+      264,
+      "self._device.send"
+    ],
+    [
+      "laptop/transport/gs_usb_piper_can.py",
+      274,
+      "self._device.send"
+    ]
+  ],
+  "archived_sha256_verified": true,
+  "additional_archived_test_function": true,
+  "archive_new_python_files": 99,
+  "current_source_python": 93
+}
