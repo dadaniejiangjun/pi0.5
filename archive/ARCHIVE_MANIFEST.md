@@ -144,3 +144,9 @@ CONDITIONAL：保留源码不等于本轮验证重跑。需要匹配历史环境
 | Original | Archived | Date | Classification | Replacement | Reason | Reproducible |
 |---|---|---|---|---|---|---|
 | `tests/server/test_policy_artifact_identity.py::test_proxy_server_imports_all_identity_helpers_before_runtime` | [test_historical_proxy_identity_import.py](legacy_snapshot_20261009/tests/server/test_historical_proxy_identity_import.py) | 2026-10-09 | HISTORICAL_TEST_FRAGMENT | 当前身份校验回归保留 | 被测 server 已归档 | CONDITIONAL；历史工作树恢复函数与旧 server |
+
+## Remote history reconciliation
+
+| Original Path | Archived Path | Date | Classification | Replacement | Reason | Last Known Role | Still Reproducible? | Git Commit | SHA256 |
+|---|---|---|---|---|---|---|---|---|---|
+| `scripts/reconcile_phase_status.py` | [reconcile_phase_status.py](deprecated_scripts/reconcile_phase_status.py) | 2026-10-09 | HISTORICAL_STATUS_WRITER | CURRENT_STATUS / PHASE_GATES / RUNBOOK | 远端早期 P0/P1 写入入口，当前状态 authority 已更换 | P0/P1 reconciliation | CONDITIONAL；历史工作树 | `ac0e8b7` | `dd48915ac2dfa33a281bbc44e8273c4b22dd666d6afae90e6379e5a335280cdc` |

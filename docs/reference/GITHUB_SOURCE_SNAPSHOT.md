@@ -28,3 +28,5 @@ Last reviewed: 2026-10-09
 ## Verification
 
 已核对官方 submodule remote、HEAD 和 clean 状态。代码清理回归通过；本次强制使用 public synthetic fixture 核验：537 项测试、61 个子测试通过，3 项条件跳过。公开样本含 10 帧，比本地 5 帧样本多 5 项参数化检查；生产代码没有变化。远端旧 P0/P1 整理提交保留历史，当前状态以本地当前 authority 文档为准。实际保存 commit 与远端结果由 git log/远端分支及本地上传报告确认，不用本页假定推送已完成。
+
+远端早期提交 `ac0e8b7` 通过正常 merge 保留；README 与历史 JSON 冲突采用本地当前版本，远端 JSON 另存 history。远端新增 `reconcile_phase_status.py` 归入 archive，避免恢复旧活跃入口。收尾清除了 5 个文件的末尾空行，运行逻辑不变。

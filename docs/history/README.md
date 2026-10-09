@@ -67,3 +67,5 @@ Phase A.5 已将两份历史 Python 补丁归档，原字节不变；历史文�
 - [历史阶段JSON](PI05_PIPER_PHASE_GATES.json)：只修正文档路径，不修改gate或权限。
 
 表中proposed archive位置仅是旧建议；实际文档现统一保留于docs/history。
+
+远端早期 P0/P1 状态整理提交 `ac0e8b7` 的机器快照另存为 [remote phase snapshot](PI05_PIPER_PHASE_GATES_REMOTE_20261009.json)，仅为历史来源；不覆盖当前部署状态。旧状态写入脚本已归档。

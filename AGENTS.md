@@ -32,3 +32,15 @@ may connect to CAN, enable/reset a PiPER, or start robot motion.
 Credentials must be supplied by the user's configured Git credential helper,
 SSH agent, or an interactive HTTPS prompt. Never place tokens or private keys
 in this repository, commit message, remote URL, or project reports.
+## Phase status authority
+
+Current human-readable deployment status is `docs/CURRENT_STATUS.md`.
+Formal acceptance criteria are `docs/PHASE_GATES.md`; operational commands are
+`docs/RUNBOOK.md`. Update their affected summaries when new verified evidence
+changes the project status. README links to these authorities.
+
+`docs/history/PI05_PIPER_PHASE_GATES*.json` and the initial
+`provenance/deployment_manifest.json` retain dated P0/P1 provenance. Do not use
+these historical snapshots to override current deployment evidence or infer
+new phase PASS statuses. Source organization and a GitHub push are not new
+training, inference, hardware, data-collection, or autonomous-task evidence.
