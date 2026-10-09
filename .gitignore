@@ -50,3 +50,10 @@ reports/*.log
 
 # Unrelated local experiment, not part of PiPER deployment.
 knowledge_landsea_experiment/
+
+# Derived run manifests and local audit search outputs.
+/datasets/manifests/derived_state_pilot/
+/reports/phase_a5_candidate_paths.txt
+/reports/phase_a5_link_check.json
+/reports/phase_a_git_grep_after.txt
+/reports/phase_a_inventory_search.txt
