@@ -1,5 +1,12 @@
 # Runtime and environment material
 .venv/
+quest_capture/upstream/
+quest_capture/.cache/
+quest_capture/data/
+quest_capture/validation/
+gamepad_capture/.cache/
+gamepad_capture/data/
+gamepad_capture/validation/
 venv/
 __pycache__/
 *.py[cod]
@@ -7,6 +14,7 @@ __pycache__/
 .env.*
 
 # Project-local caches and generated runtime outputs
+.cache/depthai/
 cache/*
 logs/*
 experiments/*
@@ -34,6 +42,8 @@ datasets/manifests/outcomes/*
 
 # Pure generated pytest cache; retain validation evidence.
 .pytest_cache/
+**/.test_tmp/
+/tmp/
 
 # GitHub source snapshot: real captures and generated machine/runtime evidence stay local.
 /validation/
