@@ -1,0 +1,10 @@
+std_msgs/Header header
+string request_id
+string observation_id
+string decision
+string reason
+uint64 sequence
+uint64 source_monotonic_ns
+bool adapter_accepted
+bool feedback_matched
+uint32 can_tx_calls

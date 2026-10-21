@@ -30,10 +30,15 @@ def parser():
         else:
             command.add_argument("--physical-estop-ready", action="store_true")
             command.add_argument("--motion-envelope-cleared", action="store_true")
-        if name in ("mode-init", "enable-j6"):
+        if name == "mode-init":
             command.add_argument("--zero-pose-supported", action="store_true")
-            flag = "operator-authorized-reset" if name == "mode-init" else "operator-authorized-enable"
-            command.add_argument("--" + flag, action="store_true")
+            command.add_argument("--standby-to-can-from-standby", action="store_true",
+                                 help="use the existing fixed CAN mode frame once; skip reset")
+            command.add_argument("--operator-authorized-mode-switch", action="store_true")
+            command.add_argument("--operator-authorized-reset", action="store_true")
+        if name == "enable-j6":
+            command.add_argument("--zero-pose-supported", action="store_true")
+            command.add_argument("--operator-authorized-enable", action="store_true")
         if name == "step-j1":
             command.add_argument("--degrees", type=float, choices=(0.1, 1.0), required=True)
             command.add_argument("--low-speed-confirmed", action="store_true")
@@ -56,6 +61,8 @@ def dispatch(args):
     if args.operation == "mode-init":
         return initialize(initialize_can_mode=True,
                           operator_authorized_reset=args.operator_authorized_reset,
+                          standby_to_can_from_standby=args.standby_to_can_from_standby,
+                          operator_authorized_mode_switch=args.operator_authorized_mode_switch,
                           zero_pose_supported=args.zero_pose_supported, **site)
     if args.operation == "enable-j6":
         return enable_j6(enable_j6_once=True,

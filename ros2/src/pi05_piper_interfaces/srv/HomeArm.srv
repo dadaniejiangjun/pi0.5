@@ -1,0 +1,7 @@
+string request_id
+string confirmation_token
+---
+bool accepted
+string decision
+string reason
+string request_id

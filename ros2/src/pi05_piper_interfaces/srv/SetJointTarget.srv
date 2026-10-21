@@ -1,0 +1,11 @@
+sensor_msgs/JointState target
+string request_id
+string task_scope_id
+string source_session_id
+uint64 source_state_sequence
+uint32 validity_ms
+---
+bool accepted
+string decision
+string reason
+string request_id

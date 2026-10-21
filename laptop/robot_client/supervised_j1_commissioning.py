@@ -33,6 +33,7 @@ from laptop.transport.position_commands import (
 CONFIRMATION_PHRASE = "AUTHORIZE J1 +0.100 DEGREE COMMISSIONING STEP"
 CONFIRMATION_PHRASE_ONE_DEGREE = "AUTHORIZE J1 +1.000 DEGREE COMMISSIONING STEP"
 PRECHECK_SECONDS = 0.55
+POST_CONFIRMATION_REFRESH_SECONDS = 0.4
 POSTCHECK_SECONDS = 1.5
 MAX_FEEDBACK_AGE_NS = 120_000_000
 
@@ -179,6 +180,36 @@ def execute(
         print(json.dumps(preview, indent=2))
         if confirm(preview) != phrase:
             raise PermissionError("exact J1 commissioning confirmation phrase was not entered")
+
+        # The operator may take longer than the feedback freshness window to
+        # read and type the confirmation. Refresh after confirmation, then
+        # require the newly measured pose and exact target to match the preview.
+        _read_for(bridge, POST_CONFIRMATION_REFRESH_SECONDS, latest, joint_history)
+        confirmed_snapshot: J1CommissioningSnapshot = bridge.create_j1_commissioning_snapshot(
+            physical_estop_ready=physical_estop_ready,
+            low_speed_confirmed=low_speed_confirmed,
+            motion_envelope_cleared=motion_envelope_cleared,
+        )
+        confirmed_batch = J1CommissioningBatch.for_fixed_j1_step(
+            confirmed_snapshot, step_raw=step_raw,
+            configure_control_mode=commissioning_j1_plus_1deg,
+            selected_axis=selected_axis,
+        )
+        if (confirmed_batch.current_joint_raw_0p001deg != batch.current_joint_raw_0p001deg
+                or confirmed_batch.target_joint_raw_0p001deg != batch.target_joint_raw_0p001deg):
+            return {
+                **preview,
+                "status": "FEEDBACK_CHANGED_AFTER_CONFIRMATION_NO_WRITE",
+                "confirmed_current_joint_raw_0p001deg": list(
+                    confirmed_batch.current_joint_raw_0p001deg),
+                "confirmed_target_joint_raw_0p001deg": list(
+                    confirmed_batch.target_joint_raw_0p001deg),
+                "can_data_tx_calls": 0,
+                "robot_motion_claimed": False,
+                "automatic_retry": False,
+            }
+        snapshot = confirmed_snapshot
+        batch = confirmed_batch
 
         now_ns = time.perf_counter_ns()
         authorization = J1CommissioningAuthorization(

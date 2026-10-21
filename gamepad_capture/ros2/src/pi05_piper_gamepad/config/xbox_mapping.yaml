@@ -1,0 +1,23 @@
+pi05_gamepad_operator:
+  ros__parameters:
+    axis_deadzone: 0.12
+    joint_step_deg: 5.0
+    joint_target_lead_deg: 5.0
+    gripper_step_raw: 12500
+    gripper_target_lead_raw: 12500
+    deadman_button: 10
+    gripper_close_button: 2
+    gripper_open_button: 3
+    feedback_max_age_ms: 120
+    joy_max_age_ms: 250
+    allow_synthetic: false
+    require_deadman: false
+    mapping_profile: gamepad_piper
+    gripper_control: triggers
+    joint_velocity_deg_s: 30.0
+    cartesian_linear_speed_m_s: 0.30
+    kinematics_backend: builtin
+    tracking_stall_enabled: false
+    tracking_stall_window_s: 1.0
+    tracking_stall_error_deg: 0.5
+    tracking_stall_progress_deg: 0.1

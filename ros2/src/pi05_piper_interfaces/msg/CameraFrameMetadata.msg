@@ -1,0 +1,14 @@
+std_msgs/Header header
+string role
+string session_id
+string device_name
+uint64 sequence
+uint64 source_monotonic_ns
+string source_clock_id
+uint64 source_local_monotonic_ns
+string source_local_clock_id
+uint64 clock_mapping_uncertainty_ns
+uint64 dropped_frames
+string encoding
+uint32 width
+uint32 height

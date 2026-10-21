@@ -1,0 +1,7 @@
+bool enable
+string request_id
+---
+bool accepted
+string decision
+string reason
+string request_id

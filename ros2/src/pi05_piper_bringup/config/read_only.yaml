@@ -1,0 +1,8 @@
+pi05_read_only_bridge:
+  ros__parameters:
+    host: "172.27.64.1"
+    control_port: 18765
+    base_image_port: 18766
+    wrist_image_port: 18767
+    connect_timeout_s: 2.0
+    client_name: "pi05_ros_read_only_bridge"

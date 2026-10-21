@@ -22,6 +22,7 @@ class RuntimeConfig:
     command_tx_enabled: bool = False
     supervised_position_tx_enabled: bool = False
     supervised_j1_commissioning_tx_enabled: bool = False
+    supervised_manual_gamepad_tx_enabled: bool = False
 
     @classmethod
     def load(cls, path: Path) -> "RuntimeConfig":
@@ -29,7 +30,7 @@ class RuntimeConfig:
         allowed = set(cls.__dataclass_fields__)
         required = allowed - {
             "command_tx_enabled", "supervised_position_tx_enabled",
-            "supervised_j1_commissioning_tx_enabled",
+            "supervised_j1_commissioning_tx_enabled", "supervised_manual_gamepad_tx_enabled",
         }
         missing = sorted(required - set(data))
         extra = sorted(set(data) - allowed)
@@ -38,6 +39,7 @@ class RuntimeConfig:
         data.setdefault("command_tx_enabled", False)
         data.setdefault("supervised_position_tx_enabled", False)
         data.setdefault("supervised_j1_commissioning_tx_enabled", False)
+        data.setdefault("supervised_manual_gamepad_tx_enabled", False)
         data["mode"] = RuntimeMode(data["mode"])
         config = cls(**data)
         config.validate()
@@ -51,31 +53,45 @@ class RuntimeConfig:
                 or type(self.supervised_position_tx_enabled) is not bool
                 or type(self.supervised_j1_commissioning_tx_enabled) is not bool):
             raise ValueError("CAN transmit fields must be booleans")
+        if type(self.supervised_manual_gamepad_tx_enabled) is not bool:
+            raise ValueError("manual gamepad transmit field must be a boolean")
         if self.mode is RuntimeMode.DIAGNOSTIC_QUERY:
             if (not self.can_tx_enabled or self.command_tx_enabled
-                    or self.supervised_position_tx_enabled):
+                    or self.supervised_position_tx_enabled
+                    or self.supervised_manual_gamepad_tx_enabled):
                 raise PermissionError(
                     "diagnostic mode permits only the allowlisted query-frame channel"
                 )
         elif self.mode is RuntimeMode.SUPERVISED_POLICY_STEP:
             if (not self.supervised_position_tx_enabled
                     or self.can_tx_enabled or self.command_tx_enabled
-                    or self.supervised_j1_commissioning_tx_enabled):
+                    or self.supervised_j1_commissioning_tx_enabled
+                    or self.supervised_manual_gamepad_tx_enabled):
                 raise PermissionError(
                     "supervised mode requires only its dedicated position-TX gate"
                 )
         elif self.mode is RuntimeMode.SUPERVISED_J1_COMMISSIONING:
             if (not self.supervised_j1_commissioning_tx_enabled
                     or self.can_tx_enabled or self.command_tx_enabled
-                    or self.supervised_position_tx_enabled):
+                    or self.supervised_position_tx_enabled
+                    or self.supervised_manual_gamepad_tx_enabled):
                 raise PermissionError(
                     "J1 commissioning requires only its dedicated one-shot TX gate"
+                )
+        elif self.mode is RuntimeMode.SUPERVISED_MANUAL_GAMEPAD:
+            if (not self.supervised_manual_gamepad_tx_enabled
+                    or self.can_tx_enabled or self.command_tx_enabled
+                    or self.supervised_position_tx_enabled
+                    or self.supervised_j1_commissioning_tx_enabled):
+                raise PermissionError(
+                    "manual gamepad control requires only its dedicated operator TX gate"
                 )
         else:
             require_offline_mode(self.mode)
             if (self.can_tx_enabled or self.command_tx_enabled
                     or self.supervised_position_tx_enabled
-                    or self.supervised_j1_commissioning_tx_enabled):
+                    or self.supervised_j1_commissioning_tx_enabled
+                    or self.supervised_manual_gamepad_tx_enabled):
                 raise PermissionError("CAN transmit is disabled in this runtime mode")
         if self.single_can_owner != "safety-bridge":
             raise ValueError("SafetyBridge must be the sole declared CAN owner")

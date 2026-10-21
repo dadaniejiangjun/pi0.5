@@ -17,7 +17,8 @@ import uuid
 import numpy as np
 from PIL import Image
 
-TASK = "Pick up the black rod and place it on the green desk mat."
+DEFAULT_TASK = "Pick up the black rod and place it on the green desk mat."
+TASK = DEFAULT_TASK
 EXPECTED_DATASETS_VERSION = "3.6.0"
 EXPECTED_LEROBOT_REVISION = "0cf864870cf29f4738d3ade893e6fd13fbd7cdb5"
 
@@ -44,6 +45,13 @@ def _seven(value: object) -> np.ndarray:
     if array.shape != (7,) or not np.isfinite(array).all():
         raise ValueError("state/proxy action must be finite 7D")
     return array
+
+
+def _task(value: str | None) -> str:
+    selected = DEFAULT_TASK if value is None else value.strip()
+    if not selected or len(selected) > 512:
+        raise ValueError("task must be a non-empty string of at most 512 characters")
+    return selected
 
 
 def _rgb_sha256(path: Path) -> str:
@@ -356,7 +364,8 @@ def build_source_map(proxy: Path, preview: Path, *, episode_index: int = 0,
     return source_map, report
 
 
-def convert_many(episodes: list[tuple[Path, Path]], output: Path, repo_id: str) -> dict:
+def convert_many(episodes: list[tuple[Path, Path]], output: Path, repo_id: str,
+                 *, task: str | None = None) -> dict:
     """Write a new 10fps train-only LeRobot dataset from successful demos.
 
     Each tuple is ``(proxy_directory, aligned_preview_directory)``. The raw
@@ -366,6 +375,7 @@ def convert_many(episodes: list[tuple[Path, Path]], output: Path, repo_id: str) 
     """
     if not episodes:
         raise ValueError("derived-state conversion requires at least one demonstration")
+    selected_task = _task(task)
     checked: list[dict] = []
     seen_ids: set[str] = set()
     common_fps: int | None = None
@@ -431,7 +441,7 @@ def convert_many(episodes: list[tuple[Path, Path]], output: Path, repo_id: str) 
             dataset.add_frame({"observation.images.image": base,
                                "observation.images.wrist_image": wrist,
                                "observation.state": _seven(row["state"]),
-                               "action": _seven(row["proxy_action"]), "task": TASK})
+                               "action": _seven(row["proxy_action"]), "task": selected_task})
         dataset.save_episode()
         all_source_map.extend(item["source_map"])
         source_report = item["source_report"]
@@ -465,6 +475,7 @@ def convert_many(episodes: list[tuple[Path, Path]], output: Path, repo_id: str) 
         "source_map_rows": len(all_source_map),
         "source_map_sha256": map_sha,
         "action_semantics": "next_observed_state_proxy_nominal_units",
+        "task": selected_task,
         "formal_training_eligible": False,
         "hardware_control_allowed": False,
     }
@@ -509,7 +520,9 @@ def convert_many(episodes: list[tuple[Path, Path]], output: Path, repo_id: str) 
             "readback_audit_required_before_training": True}
 
 
-def convert(proxy: Path, preview: Path, output: Path, repo_id: str) -> dict:
+def convert(proxy: Path, preview: Path, output: Path, repo_id: str,
+            *, task: str | None = None) -> dict:
+    selected_task = _task(task)
     manifest, rows, shapes = inspect(proxy, preview)
     source_map, source_map_report = build_source_map(proxy, preview)
     conversion_runtime = _conversion_runtime()
@@ -537,7 +550,7 @@ def convert(proxy: Path, preview: Path, output: Path, repo_id: str) -> dict:
         dataset.add_frame({"observation.images.image": base,
                            "observation.images.wrist_image": wrist,
                            "observation.state": _seven(row["state"]),
-                           "action": _seven(row["proxy_action"]), "task": TASK})
+                           "action": _seven(row["proxy_action"]), "task": selected_task})
     dataset.save_episode()
     provenance = pending / "provenance"
     provenance.mkdir()
@@ -555,6 +568,7 @@ def convert(proxy: Path, preview: Path, output: Path, repo_id: str) -> dict:
               "source_map_rows": len(source_map),
               "conversion_runtime": conversion_runtime,
               "action_semantics": manifest["semantics"],
+              "task": selected_task,
               "formal_training_eligible": False, "hardware_control_allowed": False}
     (provenance / "proxy_conversion.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     pending.rename(output)
@@ -569,6 +583,7 @@ def main() -> None:
                         help="JSON object with episodes:[{proxy,preview}, ...] for multi-episode conversion")
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--repo-id", required=True)
+    parser.add_argument("--task", help="Exact task text copied from the source episode")
     parser.add_argument("--write-derived", action="store_true")
     args = parser.parse_args()
     if args.episode_manifest:
@@ -597,7 +612,8 @@ def main() -> None:
                               "action_semantics": "next_observed_state_proxy_nominal_units",
                               "hardware_control_allowed": False}, indent=2))
         else:
-            print(json.dumps(convert_many(inputs, args.output, args.repo_id), indent=2))
+            print(json.dumps(convert_many(inputs, args.output, args.repo_id,
+                                         task=args.task), indent=2))
         return
     if args.proxy is None or args.preview is None:
         parser.error("single-episode mode requires --proxy and --preview")
@@ -606,7 +622,8 @@ def main() -> None:
         print(json.dumps({"status": "PREFLIGHT_PASS_NO_WRITE", "frames": len(rows),
                           "semantics": manifest["semantics"], "hardware_control_allowed": False}))
     else:
-        print(json.dumps(convert(args.proxy, args.preview, args.output, args.repo_id), indent=2))
+        print(json.dumps(convert(args.proxy, args.preview, args.output, args.repo_id,
+                                 task=args.task), indent=2))
 
 
 if __name__ == "__main__":

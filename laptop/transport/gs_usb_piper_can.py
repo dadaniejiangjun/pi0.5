@@ -78,6 +78,25 @@ class CanPositionDeliveryUnknown(RuntimeError):
         self.failed_at_monotonic_ns = failed_at_monotonic_ns
 
 
+class CanManualGamepadDeliveryUnknown(RuntimeError):
+    """Preserve partial-batch evidence without permitting an automatic retry."""
+
+    def __init__(self, *, request_id, writes, failed_frame, elapsed_ns, cause):
+        self.delivery_diagnostics = dict(
+            request_id=request_id,
+            confirmed_frame_ids=[write.arbitration_id for write in writes],
+            failed_frame_id=failed_frame.arbitration_id,
+            failed_frame_data_hex=failed_frame.data.hex(),
+            batch_elapsed_ns=elapsed_ns,
+            error_type=type(cause).__name__, reason=str(cause),
+            delivery_status="UNKNOWN", retry_allowed=False,
+        )
+        super().__init__(
+            f"manual gamepad delivery unknown at CAN 0x{failed_frame.arbitration_id:03X}; "
+            f"{len(writes)} prior writes confirmed; {type(cause).__name__}: {cause}; no retry"
+        )
+
+
 class CanJ1CommissioningDeliveryUnknown(RuntimeError):
     """A fixed J1 commissioning batch may be partially delivered; never retry."""
 
@@ -229,6 +248,7 @@ class _GsUsbReceiveAdapter:
             is_extended_id=bool(raw.is_extended_id),
             is_error_frame=bool(raw.is_error_frame),
             received_monotonic_ns=time.perf_counter_ns(),
+            adapter_echo_id=getattr(raw, "echo_id", None),
         )
 
     def send_diagnostic_query(self, query: DiagnosticCanQuery) -> bool:
@@ -303,6 +323,11 @@ class GsUsbPiperCanTransport:
     generic proposal/frame transmission remains rejected.
     """
 
+    DEFAULT_BOUNDED_TRIAL_REQUEST_BUDGET = 3
+    MAX_BOUNDED_TRIAL_REQUEST_BUDGET = 602  # two P2 probes plus 600 fixed updates.
+    DEFAULT_MANUAL_GAMEPAD_REQUEST_BUDGET = 1200  # 10 Hz for a 120-second local scope.
+    MAX_MANUAL_GAMEPAD_REQUEST_BUDGET = 72000
+
     def __init__(
         self,
         *,
@@ -310,6 +335,8 @@ class GsUsbPiperCanTransport:
         receive_mode: CanReceiveMode = CanReceiveMode.NORMAL_ACKING,
         adapter_bus: int | None = None,
         adapter_address: int | None = None,
+        bounded_trial_request_budget: int = DEFAULT_BOUNDED_TRIAL_REQUEST_BUDGET,
+        manual_gamepad_request_budget: int = DEFAULT_MANUAL_GAMEPAD_REQUEST_BUDGET,
     ) -> None:
         if not isinstance(receive_mode, CanReceiveMode):
             raise ValueError("receive_mode must be a CanReceiveMode")
@@ -322,7 +349,18 @@ class GsUsbPiperCanTransport:
             raise ValueError("adapter bus must be >=0 and USB address must be >=1")
         if adapter_factory is not None and adapter_bus is not None:
             raise ValueError("adapter selector cannot be combined with adapter_factory")
+        if (type(bounded_trial_request_budget) is not int
+                or not 1 <= bounded_trial_request_budget <= self.MAX_BOUNDED_TRIAL_REQUEST_BUDGET):
+            raise ValueError(
+                "bounded trial request budget must be in 1..602; ordinary sessions default to 3"
+            )
+        if (type(manual_gamepad_request_budget) is not int
+                or not 1 <= manual_gamepad_request_budget
+                <= self.MAX_MANUAL_GAMEPAD_REQUEST_BUDGET):
+            raise ValueError("manual gamepad request budget must be within 1..72000")
         self.receive_mode = receive_mode
+        self.bounded_trial_request_budget = bounded_trial_request_budget
+        self.manual_gamepad_request_budget = manual_gamepad_request_budget
         self.owner: Optional[str] = None
         self.send_attempts = 0
         self.connected = False
@@ -331,6 +369,7 @@ class GsUsbPiperCanTransport:
         self.position_send_attempts = 0
         self.position_frames_accepted = 0
         self.position_delivery_unknown = False
+        self._manual_gamepad_request_ids: set[str] = set()
         self.j1_commissioning_send_attempts = 0
         self.j1_commissioning_frames_accepted = 0
         self._used_j1_commissioning_approval_ids: set[str] = set()
@@ -447,6 +486,34 @@ class GsUsbPiperCanTransport:
             self._close_adapter()
             raise CanInitializationDeliveryUnknown(
                 "reset/mode delivery is unknown; stop, check robot, and do not retry") from exc
+
+    def send_standby_to_can_once(self, owner: str, frame: ModeInitializationFrame) -> int:
+        self._require_owner(owner)
+        if (owner != "safety-bridge" or type(frame) is not ModeInitializationFrame
+                or frame.stage != "can_joint"):
+            raise PermissionError("standby-to-CAN mode switch requires a bridge-owned fixed frame")
+        if self._mode_initialization_index != 0 or self.mode_initialization_attempts:
+            raise PermissionError("standby-to-CAN mode switch is one-use; no retry")
+        if (not self.connected or self._adapter is None
+                or self.receive_mode is CanReceiveMode.LISTEN_ONLY):
+            raise PermissionError("mode switching requires an open normal receive session")
+        sender = getattr(self._adapter, "send_mode_initialization_frame", None)
+        if not callable(sender):
+            raise PermissionError("adapter lacks the dedicated mode initialization path")
+        self._mode_initialization_index = len(STAGES)
+        self.mode_initialization_attempts += 1
+        try:
+            if sender(frame) is not True:
+                raise OSError("adapter did not confirm the mode-switch write")
+            return time.perf_counter_ns()
+        except Exception as exc:
+            self._mode_initialization_delivery_unknown = True
+            self.connected = False
+            self.disconnect_reason = "mode_initialization_delivery_unknown"
+            self._close_adapter()
+            raise CanInitializationDeliveryUnknown(
+                "standby-to-CAN delivery is unknown; inspect live feedback and do not retry"
+            ) from exc
 
     def send_j6_enable_once(self, owner: str, frame: J6EnableFrame) -> int:
         self._require_owner(owner)
@@ -699,16 +766,19 @@ class GsUsbPiperCanTransport:
         if self.receive_mode is CanReceiveMode.LISTEN_ONLY:
             raise PermissionError("trial TX unavailable in listen-only mode")
         used = getattr(self, "_bounded_trial_requests", set())
-        if batch.prediction_request_id in used or len(used) >= 3:
+        if (batch.prediction_request_id in used
+                or len(used) >= self.bounded_trial_request_budget):
             raise PermissionError("trial budget or one-use request violated")
         used.add(batch.prediction_request_id)
         self._bounded_trial_requests = used
         writes = []
         try:
-            # Exact CAN/MOVE_J/5% configuration; no reset or enable operation.
-            if self._adapter.send_mode_initialization_frame(ModeInitializationFrame("can_joint")) is not True:
+            # Exact CAN/MOVE_J speed configuration; no reset or enable operation.
+            mode_frame = ModeInitializationFrame(
+                "can_joint", speed_percent=batch.controller_speed_percent)
+            if self._adapter.send_mode_initialization_frame(mode_frame) is not True:
                 raise OSError("mode frame acceptance unknown")
-            writes.append(PositionFrameWrite(0x151, ModeInitializationFrame("can_joint").data, time.perf_counter_ns()))
+            writes.append(PositionFrameWrite(0x151, mode_frame.data, time.perf_counter_ns()))
             for frame in batch.frames:
                 batch.validate_time(time.perf_counter_ns())
                 if self._adapter.send_position_frame(frame) is not True:
@@ -718,6 +788,59 @@ class GsUsbPiperCanTransport:
         except Exception:
             self._latch_position_delivery_unknown()
             raise
+
+    def send_manual_gamepad_target(self, owner, snapshot, batch):
+        """Transmit one fresh, operator-approved gamepad update; never retry."""
+        from laptop.transport.manual_gamepad import (
+            ManualGamepadBatch, validate_manual_gamepad_snapshot,
+        )
+
+        if owner != "safety-bridge":
+            raise PermissionError("manual gamepad TX is bridge-owned")
+        self._require_owner(owner)
+        if type(batch) is not ManualGamepadBatch:
+            raise TypeError("typed manual gamepad target required")
+        now = time.perf_counter_ns()
+        validate_manual_gamepad_snapshot(snapshot, now_ns=now, joints_only=batch.joints_only)
+        batch.validate_time(now)
+        if (batch.source_sequence != snapshot.sequence
+                or batch.current_joints != snapshot.joint_raw_0p001deg
+                or batch.current_gripper != snapshot.gripper_raw):
+            raise PermissionError("gamepad target differs from its source feedback")
+        if (self.position_delivery_unknown or not self.connected or self._adapter is None
+                or self.receive_mode is CanReceiveMode.LISTEN_ONLY):
+            raise ConnectionError("manual gamepad transport unavailable; no retry")
+        if (batch.request_id in self._manual_gamepad_request_ids
+                or len(self._manual_gamepad_request_ids) >= self.manual_gamepad_request_budget):
+            raise PermissionError("manual gamepad request budget or one-use ID violated")
+
+        # Consume the request before touching the adapter because delivery may be unknown.
+        self._manual_gamepad_request_ids.add(batch.request_id)
+        writes = []
+        mode_frame = ModeInitializationFrame("can_joint", speed_percent=batch.controller_speed_percent)
+        failed_frame = mode_frame
+        batch_started_ns = time.perf_counter_ns()
+        try:
+            if self._adapter.send_mode_initialization_frame(mode_frame) is not True:
+                raise OSError("manual gamepad mode frame acceptance unknown")
+            writes.append(PositionFrameWrite(
+                mode_frame.arbitration_id, mode_frame.data, time.perf_counter_ns(),
+            ))
+            for frame in batch.frames:
+                failed_frame = frame
+                batch.validate_time(time.perf_counter_ns())
+                if self._adapter.send_position_frame(frame) is not True:
+                    raise OSError("manual gamepad target frame acceptance unknown")
+                writes.append(PositionFrameWrite(
+                    frame.arbitration_id, frame.data, time.perf_counter_ns(),
+                ))
+            return tuple(writes)
+        except Exception as exc:
+            self._latch_position_delivery_unknown()
+            raise CanManualGamepadDeliveryUnknown(
+                request_id=batch.request_id, writes=writes, failed_frame=failed_frame,
+                elapsed_ns=time.perf_counter_ns()-batch_started_ns, cause=exc,
+            ) from exc
 
     def _latch_position_delivery_unknown(self) -> None:
         self.position_delivery_unknown = True

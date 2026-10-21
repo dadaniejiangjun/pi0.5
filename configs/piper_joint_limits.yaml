@@ -1,7 +1,7 @@
-schema: piper_joint_limits_v2
+schema: piper_joint_limits_v3
 status: FULL_LIVE_CAN_READBACK_WITH_UNIT_CAVEATS
 hardware_status: LIVE_CONTROLLER_PARAMETER_RESPONSES_PRESENT
-limits_role: official_sdk_nominal_reference_not_a_verified_mechanical_envelope
+limits_role: task_envelope_is_sdk_controller_intersection_not_a_verified_mechanical_envelope
 source:
   url: https://github.com/agilexrobotics/piper_sdk/blob/c9e8a28174e71eeaac448593cb65f8ab258a92fe/asserts/V2/INTERFACE_V2.MD
   source_commit: c9e8a28174e71eeaac448593cb65f8ab258a92fe
@@ -15,6 +15,54 @@ joints:
   joint4: {min: -1.745, max: 1.745}
   joint5: {min: -1.22, max: 1.22}
   joint6: {min: -2.09439, max: 2.09439}
+task_motion_envelope_deg:
+  joint1: {min: -149.994621, max: 149.994621, source: sdk_controller_intersection}
+  joint2: {min: 0.0, max: 180.0, source: sdk_controller_intersection}
+  joint3: {min: -170.0, max: 0.0, source: sdk_controller_intersection}
+  joint4: {min: -99.981135, max: 99.981135, source: sdk_controller_intersection}
+  joint5: {min: -69.900007, max: 69.900007, source: sdk_controller_intersection}
+  joint6: {min: -120.0, max: 120.0, source: narrower_sdk_reference_than_controller_readback}
+hardware_identity:
+  model: AgileX PiPER V2 / CAN protocol
+  serial_number: NOT_CAPTURED
+  firmware_version: S-V1.9-1
+  firmware_evidence: ../validation/lab_firmware_query_20261006_170233.json
+  sdk_package_version: 0.6.2
+  controller_parameter_evidence: ../validation/can_joint_parameters_20261005.json
+  software_display_evidence: ../validation/joint_limit_software_display_20261005.json
+parameter_conversions:
+  sdk_joint_target: {raw_per_degree: 1000, status: documented_nominal}
+  controller_joint_limit: {degree_per_raw: 0.1, status: live_readback_protocol_documented}
+  controller_speed_query:
+    rad_s_per_raw: 0.01
+    sdk_getter_comment_rad_s_per_raw: 0.001
+    status: vendor_confirmed_protocol_scale_sdk_getter_comment_is_wrong
+    evidence: https://github.com/agilexrobotics/piper_sdk/issues/122
+  sdk_speed_setter:
+    rad_s_per_raw: 0.001
+    status: sdk_documented_setter_path_not_used_by_runtime
+    evidence: https://github.com/agilexrobotics/piper_sdk/blob/master/asserts/V2/INTERFACE_V2.MD
+  controller_acceleration_query:
+    rad_s2_per_raw: 0.001
+    status: sdk_documented_readback_scale_not_reconciled_with_setter
+  controller_acceleration_setter:
+    rad_s2_per_raw: 0.01
+    status: sdk_documented_setting_scale_not_used_by_runtime_and_not_for_readback
+    evidence: https://github.com/agilexrobotics/piper_sdk/blob/master/asserts/V2/INTERFACE_V2.MD
+motion_measurements:
+  actual_speed_rad_s: {value: null, status: NOT_MEASURED}
+  actual_acceleration_rad_s2: {value: null, status: NOT_MEASURED}
+  current_runtime_speed_setting: {value_percent: 5, status: EXISTING_POSITION_COMMAND_SETTING}
+  controller_maximum_speed_write: {enabled: false, reason: NO_WRITE_REQUIRED_ACTUAL_MOTION_SPEED_NOT_MEASURED}
+  controller_maximum_acceleration_write: {enabled: false, reason: QUERY_AND_SETTER_UNIT_DIFFERENCE_UNRESOLVED}
+runtime_motion:
+  selected_speed_percent: 5
+  maximum_single_joint_step_deg: 20.0
+  cumulative_joint_angle_limit_enabled: false
+  target_update_hz: 10
+  maximum_task_duration_s: 120
+  maximum_speed_parameter_write_enabled: false
+  maximum_acceleration_parameter_write_enabled: false
 hardware_query_evidence:
   date: "2026-10-05"
   test_utc: "2026-10-05T14:13:03.423170+00:00"
@@ -26,19 +74,23 @@ hardware_query_evidence:
   only_parameter_read_requests_sent: true
   mode_enable_reset_joint_target_gripper_or_setter_frames_sent: false
   angle_units: {raw: "0.1 degree", decoded: degree}
-  speed_units: {raw: "0.001 rad/s", documented_decoded: rad/s}
+  speed_units:
+    raw: "0.01 rad/s per raw unit for 0x473 readback"
+    vendor_confirmed_decoded: rad/s
+    sdk_getter_comment: "0.001 rad/s per raw unit; vendor says this comment is wrong for protocol readback"
+    sdk_setter_documentation: "0.001 rad/s per raw unit; separate write encoding, not used"
   acceleration_units:
     raw: 500
     sdk_query_response_documentation: "0.001 rad/s^2"
     sdk_setter_documentation: "0.01 rad/s^2"
     decoded_value_status: CONFLICTING_SDK_UNIT_DOCUMENTATION
   controller_parameter_readback:
-    joint1: {min_deg: -150.0, max_deg: 150.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
-    joint2: {min_deg: 0.0, max_deg: 180.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
-    joint3: {min_deg: -170.0, max_deg: 0.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
-    joint4: {min_deg: -100.0, max_deg: 100.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
-    joint5: {min_deg: -70.0, max_deg: 70.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
-    joint6: {min_deg: -170.0, max_deg: 170.0, max_speed_raw: 300, max_speed_doc_rad_s: 0.3, max_acceleration_raw: 500}
+    joint1: {min_deg: -150.0, max_deg: 150.0, max_speed_raw: 300, max_speed_protocol_rad_s: 3.0, max_acceleration_raw: 500}
+    joint2: {min_deg: 0.0, max_deg: 180.0, max_speed_raw: 300, max_speed_protocol_rad_s: 3.0, max_acceleration_raw: 500}
+    joint3: {min_deg: -170.0, max_deg: 0.0, max_speed_raw: 300, max_speed_protocol_rad_s: 3.0, max_acceleration_raw: 500}
+    joint4: {min_deg: -100.0, max_deg: 100.0, max_speed_raw: 300, max_speed_protocol_rad_s: 3.0, max_acceleration_raw: 500}
+    joint5: {min_deg: -70.0, max_deg: 70.0, max_speed_raw: 300, max_speed_protocol_rad_s: 3.0, max_acceleration_raw: 500}
+    joint6: {min_deg: -170.0, max_deg: 170.0, max_speed_raw: 300, max_speed_protocol_rad_s: 3.0, max_acceleration_raw: 500}
   live_feedback_snapshot:
     ctrl_mode: "CAN_CTRL(0x1)"
     arm_status: "NORMAL(0x0)"
@@ -61,9 +113,9 @@ software_displayed_settings:
     joint5: {min_deg: -70.0, max_deg: 70.0, max_rad_s: 3.0, max_rad_s2: 5.0}
     joint6: {min_deg: -170.0, max_deg: 170.0, max_rad_s: 3.0, max_rad_s2: 5.0}
   discrepancies:
-    - all_joint_max_speed: "UI displays 3.0 rad/s; all six CAN responses returned raw 300, which the SDK query-response documentation decodes as 0.3 rad/s."
-    - all_joint_max_acceleration: "UI displays 5.0 rad/s^2 and all six CAN responses returned raw 500. The SDK query response and setter documentation specify different scales, so the physical value is unresolved."
-    - joint6_angle_range: "CAN reports +/-170 degrees, while the official SDK nominal JointCtrl range is +/-120 degrees. Keep the narrower nominal range for any software motion guard until the branch and firmware behavior are verified."
+    - all_joint_max_speed: "UI displays 3.0 rad/s; all six CAN responses returned raw 300, which AgileX support clarifies is 3.0 rad/s under the 0.01 rad/s-per-raw protocol scale. UI display and protocol readback agree numerically; the screenshot does not prove whether the UI displayed a readback or a stored setting."
+    - all_joint_max_acceleration: "UI displays 5.0 rad/s^2 and all six CAN responses returned raw 500. SDK readback documentation says 0.001 rad/s^2/raw while setting documentation says 0.01; the mapping between the UI field and query response is not independently proven."
+    - joint6_angle_range: "CAN reports +/-170 degrees, while the official SDK nominal JointCtrl range is +/-120 degrees. Record +/-170 as controller readback, retain +/-120 for the task envelope, and do not approach controller endpoints without separate motion planning and approval."
     - earlier_joint2_joint3_feedback_range: "The earlier feedback-change log's nominal ranges extended about 1.96 degrees below J2 min and 1.82 degrees above J3 max; that old sample's zero/sign/unit mapping remains unverified."
   evidence: ../validation/joint_limit_software_display_20261005.json
 gripper:
@@ -74,14 +126,42 @@ gripper:
   operator_observed_endpoints_raw: {closed: 200, fully_open: 101800, delta: 101600}
   nominal_sdk_scale_mm_per_raw_unit: 0.001
   nominal_endpoint_delta_mm: 101.6
-  configured_max_range_mm: 100
+  protocol_nominal_command_envelope_mm: 100
+  configured_task_command_envelope_nominal_mm: 10
   physical_gap_measured: false
+  nominal_meters_per_raw: 0.000001
+  physical_scale_status: NOMINAL_CONVERSION_ONLY_NOT_CALIPER_VERIFIED
+  tested_command_envelope_raw: {min: 0, max: 10000}
+  observed_feedback_at_test_commands_raw:
+    command_0: 300
+    command_5000: 4600
+    command_10000: 9400
+  single_step_commissioning:
+    minimum_raw: 0
+    maximum_raw: 10000
+    maximum_step_raw: 10000
+    effort_raw: 0
+    purpose: explicitly_approved_single_step_debug_only
+  continuous_task:
+    minimum_raw: 0
+    maximum_raw: 10000
+    maximum_step_raw: 1000
+    effort_raw: 0
+    purpose: bounded_continuous_task_only
+  manual_gamepad:
+    minimum_raw: 0
+    maximum_raw: 70000
+    maximum_step_raw: 12500
+    effort_raw: 0
+    purpose: manual_teleop_oem_target_range_pending_new_physical_validation
   evidence: ../validation/lab_gripper_endpoint_feedback_comparison_20261006.json
 warning: >-
   The CAN responses confirm current controller parameter values, not the
   mechanical safe travel envelope. Keep software motion limits at the
-  intersection of the SDK nominal ranges and CAN angle ranges. Treat the speed
-  query scale as documented but not experimentally validated; do not use the
-  acceleration conversion or gripper value as a control limit until the SDK,
-  firmware, and upper-computer units are reconciled. No motion authorization is
-  implied by this readback.
+  intersection of the SDK nominal ranges and CAN angle ranges. AgileX support
+  clarifies the 0x473 speed readback scale as 0.01 rad/s per raw unit; raw 300
+  therefore reads 3 rad/s, matching the displayed UI value. This does not
+  measure actual motion speed, and the runtime must not write maximum-speed
+  parameters. Keep acceleration readback (0.001) and setter (0.01) scales
+  separate and unresolved; do not write acceleration parameters. Gripper mm
+  scale remains nominal. No motion authorization is implied by this readback.

@@ -13,7 +13,13 @@ import math
 from pathlib import Path
 from typing import Any
 
-from laptop.robot_client.replay_preflight import NOMINAL_JOINT_BOUNDS_DEG
+from laptop.piper.control_profile import (
+    CONTINUOUS_GRIPPER_LIMITS,
+    CONTINUOUS_GRIPPER_MAX_M,
+    CONTINUOUS_GRIPPER_MAX_STEP_M,
+    CONTINUOUS_GRIPPER_MIN_M,
+    TASK_JOINT_BOUNDS_DEG,
+)
 from laptop.robot_client.single_step_dry_run import P12GateEvidence
 from laptop.safety.bridge import SafetyLimits
 from laptop.transport.position_commands import P12_SITE_GATE_NAMES
@@ -21,11 +27,7 @@ from laptop.transport.position_commands import P12_SITE_GATE_NAMES
 
 SITE_PROFILE_SCHEMA = "piper_supervised_site_profile_v1"
 READY_STATUS = "OPERATOR_DECLARED_READY_FOR_SINGLE_STEP"
-# The current project config caps the SDK gripper command at 100 mm. This is a
-# software ceiling, not evidence of the physical gripper travel.
-MAX_CONFIGURED_GRIPPER_COMMAND_M = 0.100
 FIRST_STEP_MAX_JOINT_DELTA_RAD = math.radians(1.0)
-FIRST_STEP_MAX_GRIPPER_DELTA_M = 0.001
 _TOP_LEVEL_FIELDS = {
     "schema", "status", "site_id", "robot_serial", "firmware_version",
     "commissioned_by", "commissioned_at_utc", "gripper_effort_raw", "limits",
@@ -75,13 +77,13 @@ def _nonempty_text(value: object, field: str) -> str:
 
 def _check_sdk_nominal_joint_subset(limits: SafetyLimits) -> None:
     for index, (low, high, (sdk_low_deg, sdk_high_deg)) in enumerate(
-        zip(limits.joint_min_rad, limits.joint_max_rad, NOMINAL_JOINT_BOUNDS_DEG),
+        zip(limits.joint_min_rad, limits.joint_max_rad, TASK_JOINT_BOUNDS_DEG),
         start=1,
     ):
         sdk_low, sdk_high = math.radians(sdk_low_deg), math.radians(sdk_high_deg)
         if low < sdk_low or high > sdk_high:
             raise ValueError(
-                f"joint_{index} site range exceeds the official SDK nominal range"
+                f"joint_{index} site range exceeds the configured task motion envelope"
             )
 
 
@@ -119,8 +121,8 @@ def load_supervised_site_profile(path: Path) -> SupervisedSiteProfile:
         raise ValueError("commissioned_at_utc must include a timezone")
 
     gripper_effort_raw = data["gripper_effort_raw"]
-    if type(gripper_effort_raw) is not int or not 0 <= gripper_effort_raw <= 5000:
-        raise ValueError("gripper_effort_raw must be an explicit integer in [0, 5000]")
+    if type(gripper_effort_raw) is not int or gripper_effort_raw != CONTINUOUS_GRIPPER_LIMITS.effort_raw:
+        raise ValueError("gripper_effort_raw must match the continuous-task profile")
 
     raw_limits = data["limits"]
     if not isinstance(raw_limits, dict) or set(raw_limits) != _LIMIT_FIELDS:
@@ -130,13 +132,13 @@ def load_supervised_site_profile(path: Path) -> SupervisedSiteProfile:
     except (TypeError, ValueError) as exc:
         raise ValueError(f"invalid site SafetyLimits: {exc}") from exc
     _check_sdk_nominal_joint_subset(limits)
-    if limits.gripper_max_m > MAX_CONFIGURED_GRIPPER_COMMAND_M:
-        raise ValueError("site gripper limit exceeds the current 100 mm SDK command cap")
+    if (limits.gripper_min_m != CONTINUOUS_GRIPPER_MIN_M
+            or limits.gripper_max_m != CONTINUOUS_GRIPPER_MAX_M
+            or limits.max_gripper_delta_m != CONTINUOUS_GRIPPER_MAX_STEP_M):
+        raise ValueError("site gripper range and step must exactly match the shared continuous-task profile")
     if any(value > FIRST_STEP_MAX_JOINT_DELTA_RAD
            for value in limits.max_joint_delta_rad):
         raise ValueError("first supervised step is limited to 1 degree per joint")
-    if limits.max_gripper_delta_m > FIRST_STEP_MAX_GRIPPER_DELTA_M:
-        raise ValueError("first supervised step is limited to 1 mm gripper travel")
 
     raw_gates = data["p12_gate_evidence"]
     if not isinstance(raw_gates, dict) or set(raw_gates) != set(P12_SITE_GATE_NAMES):

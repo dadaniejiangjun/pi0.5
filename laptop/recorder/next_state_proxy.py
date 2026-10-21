@@ -13,10 +13,8 @@ from pathlib import Path
 
 from laptop.recorder.label_episode import verify_label
 from laptop.recorder.verify_source import verify_source
-from laptop.robot_client.supervised_site_profile import (
-    FIRST_STEP_MAX_GRIPPER_DELTA_M,
-    FIRST_STEP_MAX_JOINT_DELTA_RAD,
-)
+from laptop.piper.control_profile import CONTINUOUS_GRIPPER_MAX_STEP_M
+from laptop.robot_client.supervised_site_profile import FIRST_STEP_MAX_JOINT_DELTA_RAD
 
 GRIPPER_METERS_PER_RAW_NOMINAL = 1e-6
 SEMANTICS = "next_observed_state_proxy_nominal_units"
@@ -65,7 +63,7 @@ def audit_transition_deltas(records: list[dict]) -> dict:
             joint_deltas[joint].append(delta)
         gripper_deltas.append(gripper_delta)
         any_joint_over += any(delta > FIRST_STEP_MAX_JOINT_DELTA_RAD for delta in deltas)
-        gripper_over += gripper_delta > FIRST_STEP_MAX_GRIPPER_DELTA_M
+        gripper_over += gripper_delta > CONTINUOUS_GRIPPER_MAX_STEP_M
 
     joint_exceed_by_axis = [
         sum(delta > FIRST_STEP_MAX_JOINT_DELTA_RAD for delta in axis)
@@ -77,8 +75,11 @@ def audit_transition_deltas(records: list[dict]) -> dict:
         "transitions": len(records),
         "comparison_limits": {
             "max_joint_delta_deg_per_proposal": math.degrees(FIRST_STEP_MAX_JOINT_DELTA_RAD),
-            "max_gripper_delta_mm_per_proposal": FIRST_STEP_MAX_GRIPPER_DELTA_M * 1000.0,
-            "source": "supervised_site_profile.py first-step software caps",
+            "max_gripper_delta_mm_per_proposal": CONTINUOUS_GRIPPER_MAX_STEP_M * 1000.0,
+            "source": (
+                "current continuous-task gripper step profile and supervised-site "
+                "joint first-step cap"
+            ),
         },
         "transitions_with_any_joint_delta_over_limit": any_joint_over,
         "joint_transitions_over_limit_by_axis": {

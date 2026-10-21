@@ -29,7 +29,7 @@ from laptop.transport.gs_usb_piper_can import GsUsbPiperCanTransport
 
 MAX_CAMERA_AGE_NS = 250_000_000
 MAX_CAN_AGE_NS = 250_000_000
-MAX_CAMERA_SKEW_NS = 100_000_000
+MAX_CAMERA_SKEW_NS = 20_000_000
 MAX_SENSOR_SKEW_NS = 250_000_000
 MAX_INITIAL_SENSOR_WAIT_NS = 2_000_000_000
 REQUIRED_CAMERA_ROLES = ("base", "wrist")
@@ -249,7 +249,7 @@ def select_observation(cameras: dict, feedback: dict, now_ns: int) -> tuple[dict
     if any(now_ns < timestamp or now_ns - timestamp > MAX_CAN_AGE_NS for timestamp in can_times):
         raise ValueError("stale CAN feedback")
     if abs(times[0] - times[1]) > MAX_CAMERA_SKEW_NS:
-        raise ValueError("camera skew exceeds bound")
+        raise ValueError("Base/Wrist host-after-read timestamp skew exceeds 20 ms")
     if max(times + can_times) - min(times + can_times) > MAX_SENSOR_SKEW_NS:
         raise ValueError("camera/CAN skew exceeds bound")
     joints = feedback.get("joint_raw")

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>pi05_piper_gamepad</name>
+  <version>0.1.0</version>
+  <description>Xbox/gamepad teleoperation input and demonstration capture for PiPER.</description>
+  <maintainer email="maintainer@example.invalid">Pi0.5 project</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_python</buildtool_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>joy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>pi05_piper_interfaces</exec_depend>
+  <exec_depend>pi05_piper_quest</exec_depend>
+  <exec_depend>rosbag2</exec_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

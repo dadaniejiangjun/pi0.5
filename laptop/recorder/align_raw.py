@@ -126,13 +126,19 @@ def _positive_number(value: object, label: str) -> float:
     return float(value)
 
 
-def plan_alignment(raw: Path, *, fps: int = 10, max_skew_ms: float = 50) -> dict:
+def plan_alignment(raw: Path, *, fps: int = 10, max_skew_ms: float = 50,
+                   max_camera_skew_ms: float = 20) -> dict:
     """Validate a raw episode and create a deterministic, in-memory source map."""
     if type(fps) is not int or not 1 <= fps <= 60:
         raise ValueError("fps must be an integer in [1, 60]")
     tolerance_ns = round(_positive_number(max_skew_ms, "max_skew_ms") * 1_000_000)
     if tolerance_ns > 50_000_000:
         raise ValueError("host-arrival tolerance may not exceed 50 ms")
+    camera_tolerance_ns = round(
+        _positive_number(max_camera_skew_ms, "max_camera_skew_ms") * 1_000_000
+    )
+    if camera_tolerance_ns > 50_000_000:
+        raise ValueError("Base/Wrist host-timestamp pair tolerance may not exceed 50 ms")
     metadata, manifest, channels, raw_sha, command_log_hash = _raw_episode(raw)
     # Keep raw channel inventories intact for full video/hash verification.
     # Select images only inside the common complete feedback window.
@@ -158,6 +164,16 @@ def plan_alignment(raw: Path, *, fps: int = 10, max_skew_ms: float = 50) -> dict
         state_ts = selected["joint_12"]["monotonic_ns"]
         if any(abs(row["monotonic_ns"] - state_ts) > tolerance_ns for row in selected.values()):
             raise ValueError("selected camera/state samples exceed skew tolerance")
+        camera_pair_skew_ns = abs(
+            selected["base"]["monotonic_ns"] - selected["wrist"]["monotonic_ns"]
+        )
+        if (metadata.get("source") in ("operator_demonstration", "manual_teach")
+                and camera_pair_skew_ns > camera_tolerance_ns):
+            raise ValueError(
+                "selected Base/Wrist host-after-read timestamps exceed "
+                f"the {max_camera_skew_ms:g} ms software-pair tolerance; "
+                "this is not an exposure-synchronization measurement"
+            )
         joint_raw = []
         for name in ("joint_12", "joint_34", "joint_56"):
             pair = selected[name].get("raw_joint_pair")
@@ -173,6 +189,7 @@ def plan_alignment(raw: Path, *, fps: int = 10, max_skew_ms: float = 50) -> dict
             "frame_index": len(planned), "policy_timestamp_ns": policy_ts,
             "base_timestamp_ns": selected["base"]["monotonic_ns"],
             "wrist_timestamp_ns": selected["wrist"]["monotonic_ns"],
+            "base_wrist_host_timestamp_skew_ms": camera_pair_skew_ns / 1e6,
             "state_timestamp_ns": state_ts,
             "source_refs": refs, "joint_raw": joint_raw, "gripper_raw": gripper_raw,
             "status": {key: selected["status"].get(key) for key in ("ctrl_mode", "arm_status", "teach_status", "err_code")},
@@ -183,6 +200,7 @@ def plan_alignment(raw: Path, *, fps: int = 10, max_skew_ms: float = 50) -> dict
     return {"metadata": metadata, "manifest": manifest, "channels": channels,
             "raw_path": raw, "command_log_sha256": command_log_hash,
             "raw_manifest_sha256": raw_sha, "frames": planned, "fps": fps,
+            "max_camera_pair_skew_ms": max_camera_skew_ms,
             "max_skew_ms": max_skew_ms, "frame_map_sha256": hashlib.sha256(encoded.encode()).hexdigest()}
 
 
@@ -276,6 +294,7 @@ def _extract_video(video: Path, output: Path, role: str, refs: list[int], expect
 
 
 def align(raw: Path, output: Path, *, fps: int = 10, max_skew_ms: float = 50,
+          max_camera_skew_ms: float = 20,
           review_path: Path | None = None) -> dict:
     """Write one immutable preview or a reviewed converter input."""
     raw = Path(raw).resolve()
@@ -284,7 +303,8 @@ def align(raw: Path, output: Path, *, fps: int = 10, max_skew_ms: float = 50,
         raise ValueError("output must be unused and outside the raw episode")
     if review_path and not output.name.isalnum():
         raise ValueError("reviewed aligned episode ID must be alphanumeric")
-    plan = plan_alignment(raw, fps=fps, max_skew_ms=max_skew_ms)
+    plan = plan_alignment(raw, fps=fps, max_skew_ms=max_skew_ms,
+                          max_camera_skew_ms=max_camera_skew_ms)
     review, actions, review_sha = _review(review_path, plan) if review_path else (None, None, None)
     output.parent.mkdir(parents=True, exist_ok=True)
     pending = output.with_name(output.name + ".INCOMPLETE-" + uuid.uuid4().hex[:12])
@@ -326,6 +346,8 @@ def align(raw: Path, output: Path, *, fps: int = 10, max_skew_ms: float = 50,
         "frame_map_sha256": plan["frame_map_sha256"],
         "timestamp_kind": "host_perf_counter_ns_after_read_not_camera_exposure",
         "max_skew_ms": max_skew_ms, "training_eligible": False,
+        "max_camera_pair_skew_ms": max_camera_skew_ms,
+        "camera_pairing_semantics": "host_after_read_timestamp_pairing_not_exposure_sync",
         "success": review["success"] if review else None,
         **{flag: review[flag] if review else False for flag in QC_FLAGS},
     }
@@ -361,10 +383,14 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--fps", type=int, default=10)
     parser.add_argument("--max-skew-ms", type=float, default=50)
+    parser.add_argument("--max-camera-skew-ms", type=float, default=20,
+                        help="maximum Base/Wrist host-after-read timestamp skew for each operator-demo sample")
     parser.add_argument("--review", type=Path, help="separate checksum-bound review JSON; omit for preview")
     args = parser.parse_args()
     print(json.dumps(align(args.raw, args.output, fps=args.fps,
-                           max_skew_ms=args.max_skew_ms, review_path=args.review), indent=2))
+                           max_skew_ms=args.max_skew_ms,
+                           max_camera_skew_ms=args.max_camera_skew_ms,
+                           review_path=args.review), indent=2))
     return 0
 
 

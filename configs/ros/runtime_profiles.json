@@ -1,0 +1,148 @@
+{
+  "schema": "pi05_ros_runtime_profiles_v1",
+  "project": {
+    "wsl_distribution": "Ubuntu-22.04",
+    "wsl_project_root": "/mnt/e/01_NUS/02_5003/12_pi0.5",
+    "gateway_host_resolution": "wsl_default_route_gateway",
+    "workspace_env": "PI05_ROS_WORKSPACE",
+    "legacy_workspace_env": "PIPER_ROS_WORKSPACE",
+    "overlay_env": "PI05_ROS_OVERLAY",
+    "default_workspace": "/home/mingkai/piper_ros_ws"
+  },
+  "profiles": {
+    "p2_control": {
+      "phase": "P2",
+      "ros_domain_id": 222,
+      "gateway": {
+        "control_port": 18768,
+        "base_image_port": null,
+        "wrist_image_port": null,
+        "camera_enabled": false
+      },
+      "features": {
+        "camera": false,
+        "policy_inference": false,
+        "run_task_action": false
+      }
+    },
+    "p3_p4_shadow": {
+      "phase": "P3-P4",
+      "ros_domain_id": 222,
+      "gateway": {
+        "control_port": 18765,
+        "base_image_port": 18766,
+        "wrist_image_port": 18767,
+        "camera_enabled": true,
+        "image_stream_hz": 30
+      },
+      "cameras": {
+        "base": {
+          "source": "directshow",
+          "device_name": "ACER HD User Facing",
+          "opencv_index_hint": 0,
+          "alternate_source": "oak-d-pro"
+        },
+        "wrist": {
+          "source": "directshow",
+          "device_name": "Dabai DC1",
+          "opencv_index_hint": 1
+        }
+      },
+      "rates": {
+        "camera_capture_hz": 30,
+        "image_publish_hz": 30,
+        "policy_inference_hz": 10,
+        "target_hz": 10
+      },
+      "policy": {
+        "host_resolution": "wsl_default_route_gateway",
+        "port": 18021,
+        "mode": "shadow",
+        "identity_lock_path": "validation/live5000_identity_20261008.json"
+      },
+      "features": {
+        "camera": true,
+        "policy_inference": true,
+        "run_task_action": false,
+        "physical_task_control": false
+      }
+    },
+    "p4_shadow_only": {
+      "phase": "P4",
+      "ros_domain_id": 222,
+      "gateway": {
+        "control_port": null,
+        "base_image_port": null,
+        "wrist_image_port": null,
+        "camera_enabled": false
+      },
+      "rates": {
+        "policy_inference_hz": 10
+      },
+      "policy": {
+        "host_resolution": "wsl_default_route_gateway",
+        "port": 18021,
+        "mode": "shadow",
+        "identity_lock_path": "validation/live5000_identity_20261008.json"
+      },
+      "features": {
+        "camera": false,
+        "policy_inference": true,
+        "run_task_action": false,
+        "physical_task_control": false
+      }
+    },
+    "p6_camera_record": {
+      "phase": "P6",
+      "ros_domain_id": 78,
+      "gateway": {
+        "control_port": null,
+        "base_image_port": null,
+        "wrist_image_port": null,
+        "camera_enabled": false
+      },
+      "record_topics": {
+        "metadata": "/piper/cameras/frame_metadata",
+        "base": "/piper/cameras/base/image_raw",
+        "wrist": "/piper/cameras/wrist/image_raw"
+      },
+      "features": {
+        "camera": false,
+        "policy_inference": false,
+        "run_task_action": false,
+        "record_only": true
+      }
+    },
+    "p6_operator_demo": {
+      "phase": "P6",
+      "ros_domain_id": 222,
+      "gateway": {
+        "control_port": null,
+        "base_image_port": null,
+        "wrist_image_port": null,
+        "camera_enabled": false
+      },
+      "record_topics": {
+        "state": "/piper/state_snapshot",
+        "metadata": "/piper/cameras/frame_metadata",
+        "base": "/piper/cameras/base/image_raw",
+        "wrist": "/piper/cameras/wrist/image_raw"
+      },
+      "features": {
+        "camera": false,
+        "policy_inference": false,
+        "run_task_action": false,
+        "record_only": true
+      }
+    }
+  },
+  "phase_config_owners": {
+    "P1": "fake smoke entrypoints keep isolated ports and ROS domains",
+    "P2": "p2_control; motion and gripper limits remain in configs/piper_joint_limits.yaml and laptop/piper/control_profile.py",
+    "P3": "p3_p4_shadow; camera device identity is resolved from current DirectShow enumeration",
+    "P4": "p4_shadow_only; inference identity and action semantics remain in their existing model and runtime configs",
+    "P5": "production RunTask remains disabled; queue and task configuration stay in their owning modules",
+    "P6": "p6_camera_record (isolated camera audit) or p6_operator_demo (domain 222) plus existing recorder/dataset configs",
+    "P7": "existing model, dataset, and server training configs; not duplicated in ROS runtime settings"
+  }
+}

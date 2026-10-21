@@ -1,0 +1,9 @@
+/**:
+  ros__parameters:
+    policy_host: "127.0.0.1"
+    policy_port: 8021
+    identity_lock_path: "/mnt/e/01_NUS/02_5003/12_pi0.5/validation/live5000_identity_20261008.json"
+    allow_fake_observations: false
+    connect_timeout_s: 5.0
+    request_timeout_s: 15.0
+    inference_hz: 10.0

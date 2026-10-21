@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PiPER operator console</title>
+  <style>
+    :root { color-scheme: dark; font: 14px/1.45 "Segoe UI", sans-serif; background: #10151e; color: #e7edf5; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 20px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+    h1 { margin: 0; font-size: 22px; letter-spacing: .02em; }
+    h2 { margin: 0 0 12px; font-size: 16px; }
+    .muted { color: #9ba9bc; }
+    .badge { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border-radius: 999px; background: #283241; color: #c5d4e8; font-weight: 650; }
+    .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #78879b; }
+    .badge.online::before { background: #54d68b; }
+    .badge.warn::before { background: #ffbd4a; }
+    .badge.error::before { background: #ff6f73; }
+    .banner { border: 1px solid #815d2a; background: #302714; color: #ffe2a6; border-radius: 9px; padding: 10px 13px; margin-bottom: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .panel { border: 1px solid #2d3847; background: #171e28; border-radius: 10px; padding: 14px; min-width: 0; }
+    .video-wrap { background: #080b10; border-radius: 7px; min-height: 220px; aspect-ratio: 4 / 3; display: grid; place-items: center; overflow: hidden; }
+    .video-wrap img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+    .video-placeholder { color: #8290a2; text-align: center; padding: 20px; }
+    .camera-meta { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; color: #9ba9bc; font-size: 12px; }
+    .state-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .state-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px 16px; margin-top: 10px; }
+    .kv { min-width: 0; }
+    .kv span { display: block; color: #91a0b4; font-size: 12px; }
+    .kv strong { overflow-wrap: anywhere; font-weight: 600; }
+    .joints { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-top: 12px; }
+    .joint { padding: 8px; border-radius: 7px; background: #202a37; }
+    .joint span { display: block; color: #91a0b4; font-size: 11px; }
+    .joint strong { font-variant-numeric: tabular-nums; }
+    .controls { margin-top: 14px; }
+    .target-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
+    label.field { display: grid; gap: 4px; color: #9ba9bc; font-size: 12px; }
+    input[type=number] { width: 100%; color: #eef4fc; background: #0f151d; border: 1px solid #38475a; border-radius: 6px; padding: 8px; font: inherit; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    button { border: 1px solid #426895; border-radius: 7px; background: #254b74; color: #f1f7ff; padding: 8px 12px; font: inherit; font-weight: 650; cursor: pointer; }
+    button.secondary { background: #25303d; border-color: #465365; }
+    button:disabled { cursor: not-allowed; opacity: .48; }
+    .consent { display: flex; align-items: flex-start; gap: 8px; margin-top: 12px; color: #bac6d6; }
+    .consent input { margin-top: 3px; }
+    .receipt { min-height: 88px; margin-top: 12px; padding: 10px; border-radius: 7px; background: #0d1219; white-space: pre-wrap; overflow-wrap: anywhere; color: #c5d1e0; }
+    .receipt.success { color: #9cf0b9; }
+    .receipt.failure { color: #ffb0a9; }
+    .footer { margin-top: 14px; color: #77869a; font-size: 12px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+    @media (max-width: 520px) { body { padding: 12px; } .target-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>PiPER operator console</h1>
+      <div class="muted">WSL ROS preview, feedback, and bounded request proposals</div>
+    </div>
+    <div id="connection" class="badge">Connecting</div>
+  </header>
+
+  <div id="banner" class="banner">Control requests are disabled on the WSL adapter by default. The local fake mode never opens a camera or CAN device.</div>
+
+  <main class="grid">
+    <section class="panel">
+      <h2>Base camera</h2>
+      <div class="video-wrap"><div id="base-placeholder" class="video-placeholder">Waiting for Base frames</div><img id="base-image" alt="Base camera preview" hidden></div>
+      <div id="base-meta" class="camera-meta"><span>Waiting</span><span>Latest frame only</span></div>
+    </section>
+    <section class="panel">
+      <h2>Wrist camera</h2>
+      <div class="video-wrap"><div id="wrist-placeholder" class="video-placeholder">Waiting for Wrist frames</div><img id="wrist-image" alt="Wrist camera preview" hidden></div>
+      <div id="wrist-meta" class="camera-meta"><span>Waiting</span><span>Latest frame only</span></div>
+    </section>
+
+    <section class="panel">
+      <div class="state-top">
+        <h2>Robot feedback</h2>
+        <span id="state-freshness" class="badge">No state</span>
+      </div>
+      <div class="state-grid">
+        <div class="kv"><span>Hardware</span><strong id="hardware">Unknown</strong></div>
+        <div class="kv"><span>Backend</span><strong id="backend">Unknown</strong></div>
+        <div class="kv"><span>Source session</span><strong id="source-session">—</strong></div>
+        <div class="kv"><span>State sequence / age</span><strong id="sequence-age">—</strong></div>
+        <div class="kv"><span>Control mode / arm status</span><strong id="mode-status">—</strong></div>
+        <div class="kv"><span>Error code</span><strong id="error-code">—</strong></div>
+      </div>
+      <div id="joint-values" class="joints"></div>
+      <div class="state-grid">
+        <div class="kv"><span>Gripper nominal value (m)</span><strong id="gripper-state">—</strong></div>
+        <div class="kv"><span>Motor enabled flags</span><strong id="motor-state">—</strong></div>
+        <div class="kv"><span>Source clock</span><strong id="clock-state">—</strong></div>
+        <div class="kv"><span>ROS diagnostics</span><strong id="diagnostics">—</strong></div>
+      </div>
+    </section>
+
+    <section class="panel controls">
+      <h2>Propose a target</h2>
+      <p class="muted">A proposal is bound to the latest source state and a one-use, five-second authorization. The WSL adapter has no hardware dispatcher. Fake mode can only return a simulated receipt.</p>
+      <div class="target-grid" id="joint-inputs"></div>
+      <div class="actions"><button id="joint-request" disabled>Request joint target</button></div>
+      <div class="target-grid" style="grid-template-columns:minmax(120px, 220px); margin-top:12px">
+        <label class="field">Gripper target (m)<input id="gripper-target" type="number" step="0.001" value="0"></label>
+      </div>
+      <div class="actions"><button id="gripper-request" disabled>Request gripper target</button></div>
+      <label class="consent"><input id="operator-confirm" type="checkbox"><span>I confirm that I am submitting one bounded request proposal. This interface does not enable or move the robot.</span></label>
+      <div id="receipt" class="receipt">No request submitted.</div>
+    </section>
+  </main>
+
+  <div class="footer">All values are displayed as received. This console does not calibrate units, start ROS, open cameras, or send CAN.</div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const roles = ["base", "wrist"];
+    let appSession = null;
+    let latest = null;
+    let initializedInputs = false;
+    let stopped = false;
+    let pollPending = false;
+
+    function display(value, digits = 4) {
+      return typeof value === "number" && Number.isFinite(value) ? value.toFixed(digits) : "—";
+    }
+
+    function setConnection(text, kind = "") {
+      const el = $("connection");
+      el.textContent = text;
+      el.className = `badge ${kind}`;
+    }
+
+    function renderState(data) {
+      latest = data;
+      const s = data.state || {};
+      const fresh = s.fresh === true;
+      $("state-freshness").textContent = fresh ? "Fresh" : (s.available ? "Stale" : "No state");
+      $("state-freshness").className = `badge ${fresh ? "online" : (s.available ? "warn" : "error")}`;
+      $("hardware").textContent = s.hardware_connected ? "Connected" : (s.fake ? "Synthetic" : "Not verified");
+      $("backend").textContent = data.control_mode === "fake" ? "FAKE ONLY" : "Control disabled";
+      $("source-session").textContent = s.source_session_id || "—";
+      $("sequence-age").textContent = s.available ? `${s.sequence} / ${display(s.age_ms, 1)} ms` : "—";
+      $("mode-status").textContent = `${s.ctrl_mode_raw ?? "—"} / ${s.arm_status_raw ?? "—"}`;
+      $("error-code").textContent = s.error_code ?? "—";
+      $("gripper-state").textContent = display(s.gripper_nominal_m, 5);
+      $("motor-state").textContent = Array.isArray(s.motor_enabled) ? s.motor_enabled.map((v) => v ? "1" : "0").join(" ") : "—";
+      $("clock-state").textContent = s.source_clock_id ? `${s.source_clock_id} → ${s.source_local_clock_id || "?"}` : "—";
+      const diag = (data.status?.items || []).map((item) => `${item.name}: ${item.message}`).join("; ");
+      $("diagnostics").textContent = diag || (s.fake ? "synthetic input" : "—");
+
+      const jointValues = Array.isArray(s.joint_position_rad) ? s.joint_position_rad : [];
+      $("joint-values").innerHTML = Array.from({ length: 6 }, (_, i) =>
+        `<div class="joint"><span>J${i + 1} (rad)</span><strong>${display(jointValues[i])}</strong></div>`
+      ).join("");
+      if (!initializedInputs && jointValues.length === 6) {
+        $("joint-inputs").innerHTML = jointValues.map((value, i) =>
+          `<label class="field">J${i + 1} target (rad)<input class="joint-target" data-index="${i}" type="number" step="0.001" value="${Number.isFinite(value) ? value : 0}"></label>`
+        ).join("");
+        $("gripper-target").value = Number.isFinite(s.gripper_nominal_m) ? s.gripper_nominal_m : 0;
+        initializedInputs = true;
+      }
+      const canPropose = fresh && Boolean(appSession);
+      $("joint-request").disabled = !canPropose;
+      $("gripper-request").disabled = !canPropose;
+      const deploymentBanner = data.control_mode === "fake"
+        ? "FAKE MODE: state and camera panels are synthetic. Target requests receive simulated receipts only; no hardware is opened."
+        : "Live ROS telemetry mode. WSL target dispatch is not deployed; every control request will be explicitly rejected.";
+      $("banner").textContent = deploymentBanner;
+      $("banner").style.borderColor = data.control_mode === "fake" ? "#815d2a" : "#66552d";
+    }
+
+    async function api(path, options = {}) {
+      const response = await fetch(path, { cache: "no-store", ...options });
+      const type = response.headers.get("Content-Type") || "";
+      const value = type.includes("application/json") ? await response.json() : await response.blob();
+      if (!response.ok) throw new Error(value?.error || `HTTP ${response.status}`);
+      return { response, value };
+    }
+
+    async function openSession() {
+      const { value } = await api("/api/v1/session", {
+        method: "POST", headers: { "Content-Type": "application/json" }, body: "{}",
+      });
+      appSession = value;
+      return value;
+    }
+
+    async function pollState() {
+      if (pollPending) return;
+      pollPending = true;
+      try {
+        const { value } = await api("/api/v1/state");
+        if (!appSession) await openSession();
+        if (appSession.source_state_session_id !== undefined && value.state?.source_session_id
+            && appSession.source_state_session_id !== value.state.source_session_id) {
+          appSession = null;
+          await openSession();
+          $("receipt").textContent = "Source session changed. A new operator session was opened; previous authorizations are revoked.";
+        }
+        if (value.state?.fresh) setConnection("Connected", "online");
+        else if (value.state?.available) setConnection("Connected, state stale", "warn");
+        else setConnection("Connected, waiting for state", "warn");
+        renderState(value);
+      } catch (error) {
+        appSession = null;
+        setConnection("WSL/API offline", "error");
+        $("state-freshness").textContent = "No state";
+        $("state-freshness").className = "badge error";
+        $("joint-request").disabled = true;
+        $("gripper-request").disabled = true;
+        $("receipt").textContent = `API unavailable: ${error.message}`;
+      } finally {
+        pollPending = false;
+      }
+    }
+
+    async function frameLoop(role) {
+      let sequence = 0;
+      const image = $(`${role}-image`);
+      const placeholder = $(`${role}-placeholder`);
+      const meta = $(`${role}-meta`);
+      while (!stopped) {
+        try {
+          const { response, value: blob } = await api(`/api/v1/camera/${role}/frame?after=${sequence}&timeout_ms=1200`);
+          if (response.status === 204) {
+            const cameraStatus = latest?.cameras?.[role] || {};
+            if (cameraStatus.error && cameraStatus.error !== "waiting for image") {
+              placeholder.hidden = false;
+              placeholder.textContent = `${role} image unavailable: ${cameraStatus.error}`;
+            }
+            continue;
+          }
+          const next = Number(response.headers.get("X-Frame-Sequence") || sequence + 1);
+          const previousUrl = image.dataset.objectUrl;
+          const nextUrl = URL.createObjectURL(blob);
+          image.src = nextUrl;
+          image.dataset.objectUrl = nextUrl;
+          image.hidden = false;
+          placeholder.hidden = true;
+          if (previousUrl) URL.revokeObjectURL(previousUrl);
+          sequence = next;
+          const stateCamera = latest?.cameras?.[role] || {};
+          const identity = stateCamera.metadata?.device_name || stateCamera.frame_id || `${role} camera`;
+          const identityLabel = document.createElement("span");
+          identityLabel.textContent = identity;
+          const frameLabel = document.createElement("span");
+          frameLabel.textContent = `frame ${sequence} · ${stateCamera.width || "?"}×${stateCamera.height || "?"} · latest only`;
+          meta.replaceChildren(identityLabel, frameLabel);
+        } catch (error) {
+          image.hidden = true;
+          placeholder.hidden = false;
+          placeholder.textContent = `Waiting for ${role} frames · ${error.message}`;
+          const unavailable = document.createElement("span");
+          unavailable.textContent = "Unavailable";
+          const reconnect = document.createElement("span");
+          reconnect.textContent = "Reconnects automatically";
+          meta.replaceChildren(unavailable, reconnect);
+          await new Promise((resolve) => setTimeout(resolve, 700));
+        }
+      }
+    }
+
+    async function sendProposal(operation, argumentsValue) {
+      const state = latest?.state;
+      if (!appSession || !state?.fresh || !$("operator-confirm").checked) {
+        $("receipt").className = "receipt failure";
+        $("receipt").textContent = "Request blocked: establish a fresh state, open a session, and confirm the proposal.";
+        return;
+      }
+      const common = {
+        session_id: appSession.session_id,
+        task_scope_id: "windows_operator_console",
+        source_state_session_id: state.source_session_id,
+        source_state_sequence: state.sequence,
+        operation,
+      };
+      try {
+        const auth = await api("/api/v1/authorize", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...common, operator_confirmed: true }),
+        });
+        if (!auth.value.accepted) throw Object.assign(new Error(auth.value.reason), { receipt: auth.value });
+        const request = {
+          ...common,
+          authorization_id: auth.value.authorization_id,
+          request_id: crypto.randomUUID(),
+          validity_ms: 500,
+          arguments: argumentsValue,
+        };
+        const result = await api("/api/v1/control/request", {
+          method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(request),
+        });
+        $("receipt").className = `receipt ${result.value.accepted ? "success" : "failure"}`;
+        $("receipt").textContent = JSON.stringify(result.value, null, 2);
+      } catch (error) {
+        $("receipt").className = "receipt failure";
+        $("receipt").textContent = JSON.stringify(error.receipt || { accepted: false, reason: error.message, hardware_control_allowed: false, can_tx_calls: 0 }, null, 2);
+      }
+    }
+
+    $("joint-request").addEventListener("click", () => {
+      const values = [...document.querySelectorAll(".joint-target")].map((input) => Number(input.value));
+      sendProposal("set_joint_target", { joint_position_rad: values });
+    });
+    $("gripper-request").addEventListener("click", () =>
+      sendProposal("set_gripper", { gripper_nominal_m: Number($("gripper-target").value) })
+    );
+    window.addEventListener("beforeunload", () => { stopped = true; });
+    roles.forEach((role) => frameLoop(role));
+    pollState();
+    setInterval(pollState, 75);
+  </script>
+</body>
+</html>

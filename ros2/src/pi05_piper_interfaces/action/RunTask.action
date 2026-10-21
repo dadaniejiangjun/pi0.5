@@ -1,0 +1,21 @@
+string task
+string model_profile
+string checkpoint_id
+bool record_full_evidence
+uint32 max_duration_s
+string authorization_id
+---
+bool success
+string outcome
+string reason
+string trial_id
+uint32 target_updates
+uint32 matched_feedback_updates
+uint32 prediction_updates
+---
+string phase
+float32 elapsed_s
+uint32 target_updates
+float32 progress
+uint32 prediction_updates
+uint32 matched_feedback_updates

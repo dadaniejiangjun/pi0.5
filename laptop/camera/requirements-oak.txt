@@ -1,0 +1,3 @@
+# OAK-D Pro DepthAI v3 environment pin. OpenCV and NumPy are already present in
+# the project's Windows laptop environment and are used by oak_rgbd.py.
+depthai==3.7.1

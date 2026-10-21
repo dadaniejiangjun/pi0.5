@@ -1,0 +1,14 @@
+/**:
+  ros__parameters:
+    # Existing behavior starts in joint mode. START switches to Cartesian preview.
+    require_deadman: false
+    joint_velocity_deg_s: 15.0
+    cartesian_coordinate_frame: base
+    cartesian_linear_speed_m_s: 0.05
+    # Zero offset targets link6/flange_joint, whose URDF transform is identity.
+    # Set a calibrated tool offset explicitly if the installed tool is measured.
+    tool_translation_xyz: [0.0, 0.0, 0.0]
+    # Empty uses PI05_PIPER_URDF / PI05_QUEST_URDF or the checked-in piper URDF.
+    urdf_path: ""
+    # Empty stores operator presets under gamepad_capture/data/presets/positions.json.
+    pose_preset_path: ""

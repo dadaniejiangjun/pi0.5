@@ -238,6 +238,9 @@ class CommandProposal:
     units: Tuple[str, ...]
     hardware_units_verified: bool
     mapping_verified: bool
+    task_scope_id: str = ""
+    model_profile: str = ""
+    checkpoint_id: str = ""
 
     def __post_init__(self) -> None:
         if (not isinstance(self.proposal_id, str) or not self.proposal_id.strip()
@@ -258,6 +261,11 @@ class CommandProposal:
             raise ValueError("command units must be radian x6 plus meter")
         if type(self.hardware_units_verified) is not bool or type(self.mapping_verified) is not bool:
             raise ValueError("verification fields must be booleans")
+        scope_fields = (self.task_scope_id, self.model_profile, self.checkpoint_id)
+        if any(not isinstance(value, str) for value in scope_fields):
+            raise ValueError("task scope and model identity fields must be strings")
+        if any(scope_fields) and any(not value.strip() or len(value) > 256 for value in scope_fields):
+            raise ValueError("task-scoped proposals require bounded task/model/checkpoint identities")
         object.__setattr__(self, "target", _vector7(self.target, "target"))
         object.__setattr__(self, "units", tuple(self.units))
 

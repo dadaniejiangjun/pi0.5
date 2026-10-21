@@ -16,6 +16,10 @@ ARTIFACT_IDENTITY_SCHEMA = "piper_policy_artifact_identity_v1"
 ARTIFACT_LOCK_SCHEMA = "piper_proxy_artifact_lock_v1"
 DERIVED_MULTI_ARTIFACT_SCHEMA = "piper_derived_state_multi_shadow_identity_v1"
 DERIVED_MULTI_LOCK_SCHEMA = "piper_derived_state_multi_shadow_identity_lock_v1"
+LEROBOT_PI05_LOCK_SCHEMA = "piper_lerobot_pi05_prediction_only_lock_v1"
+LEROBOT_PI05_CONFIG_SCHEMA = "piper_lerobot_pi05_prediction_only_v1"
+LEROBOT_PI05_BACKEND = "lerobot_pi05"
+LEROBOT_PI05_ACTION_SEMANTICS = "lerobot_pi05_absolute_action_chunk_preview_only"
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_IDENTITY_LOCK = (
     PROJECT_ROOT / "configs" / "runtime" / "pi05_proxy_shadow_identity_lock.json"
@@ -32,6 +36,21 @@ IDENTITY_HASH_FIELDS = (
 
 def validate_artifact_identity_lock(lock: dict) -> dict:
     """Validate the laptop-side expected identity pins before shadow starts."""
+    if isinstance(lock, dict) and lock.get("schema") == LEROBOT_PI05_LOCK_SCHEMA:
+        required = {
+            "schema", "config_schema", "backend", "action_semantics",
+            "checkpoint", "checkpoint_sha256", "checkpoint_identity_sha256",
+            "dataset", "dataset_manifest_sha256", "processor_identity_sha256",
+            "normalization_sha256", "training_step", "base_model", "base_revision",
+            "action_horizon", "action_dimension", "first_target_dt_s", "source_kind",
+            "training_eligible", "software_only", "prediction_only", "control_enabled",
+            "robot_control_ready", "hardware_control_allowed", "can_opened",
+            "can_data_tx_calls",
+        }
+        if set(lock) != required:
+            raise ValueError("LeRobot PI05 identity lock has missing or unexpected fields")
+        _validate_lerobot_pi05_identity(lock, lock=True)
+        return dict(lock)
     if isinstance(lock, dict) and lock.get("schema") == DERIVED_MULTI_LOCK_SCHEMA:
         required = {
             "schema", "artifact_identity_schema", "config_schema", "checkpoint",
@@ -109,10 +128,70 @@ def load_artifact_identity_lock(path: Path) -> dict:
     return validate_artifact_identity_lock(data)
 
 
-def validate_policy_metadata(metadata: dict, expected_identity_lock: dict | None = None) -> None:
+def _validate_lerobot_pi05_identity(identity: dict, *, lock: bool) -> None:
+    """Validate the separate synthetic LeRobot preview contract and its pins."""
+    prefix = "LeRobot PI05 identity lock" if lock else "LeRobot PI05 policy metadata"
+    expected = {
+        "config_schema": LEROBOT_PI05_CONFIG_SCHEMA,
+        "backend": LEROBOT_PI05_BACKEND,
+        "action_semantics": LEROBOT_PI05_ACTION_SEMANTICS,
+        "action_horizon": 16,
+        "action_dimension": 7,
+        "first_target_dt_s": 0.1,
+        "source_kind": "synthetic",
+        "training_eligible": False,
+        "software_only": True,
+        "prediction_only": True,
+        "control_enabled": False,
+        "robot_control_ready": False,
+        "hardware_control_allowed": False,
+        "can_opened": False,
+        "can_data_tx_calls": 0,
+    }
+    for field, value in expected.items():
+        if identity.get(field) != value:
+            raise PermissionError(f"{prefix} {field} does not match prediction-only synthetic contract")
+    for field in ("checkpoint", "dataset", "base_model", "base_revision"):
+        if not isinstance(identity.get(field), str) or not identity[field].strip():
+            raise ValueError(f"{prefix} {field} is missing")
+    if identity["base_model"] != "lerobot/pi05_base":
+        raise PermissionError(f"{prefix} base_model is not the supported PI05 base")
+    if not _COMMIT_RE.fullmatch(identity["base_revision"]):
+        raise ValueError(f"{prefix} base_revision must be a pinned commit SHA")
+    step = identity.get("training_step")
+    if isinstance(step, bool) or not isinstance(step, int) or step < 0:
+        raise ValueError(f"{prefix} training_step must be a nonnegative integer")
+    hash_fields = (
+        "checkpoint_sha256", "checkpoint_identity_sha256", "dataset_manifest_sha256",
+        "processor_identity_sha256", "normalization_sha256",
+    )
+    for field in hash_fields:
+        if not isinstance(identity.get(field), str) or not _SHA256_RE.fullmatch(identity[field]):
+            raise ValueError(f"{prefix} {field} is not a lowercase SHA-256 digest")
+
+
+def validate_policy_metadata(metadata: dict, expected_identity_lock: dict | None = None,
+                             *, backend: str = "openpi") -> None:
     """Require complete content identities before opening any hardware reads."""
     if not isinstance(metadata, dict):
         raise ValueError("policy server metadata must be an object")
+    if backend == LEROBOT_PI05_BACKEND:
+        _validate_lerobot_pi05_identity(metadata, lock=False)
+        if expected_identity_lock is None:
+            raise PermissionError("LeRobot PI05 shadow requires a local identity lock")
+        lock = validate_artifact_identity_lock(expected_identity_lock)
+        if lock.get("schema") != LEROBOT_PI05_LOCK_SCHEMA:
+            raise PermissionError("LeRobot PI05 shadow requires its dedicated identity lock")
+        compared = set(lock) - {"schema"}
+        mismatched = sorted(field for field in compared if metadata.get(field) != lock[field])
+        if mismatched:
+            raise PermissionError("LeRobot PI05 service identity differs from local lock: "
+                                  + ", ".join(mismatched))
+        return
+    if backend != "openpi":
+        raise ValueError(f"unsupported policy backend: {backend}")
+    if metadata.get("backend") == LEROBOT_PI05_BACKEND:
+        raise PermissionError("LeRobot PI05 metadata requires explicit backend selection")
     if metadata.get("config_schema") == "pi05_derived_state_multi_episode_shadow_v1":
         expected_values = {
             "artifact_identity_schema": DERIVED_MULTI_ARTIFACT_SCHEMA,

@@ -37,7 +37,8 @@ class DiagnosticCanQuery:
         if can_id == 0x477:
             # Byte 0 = query gripper/teaching-pendant parameters; all fields
             # that could request a configuration change must remain zero.
-            return payload == bytes((0x04, 0, 0, 0, 0, 0, 0, 0))
+            return payload in (bytes((0x04, 0, 0, 0, 0, 0, 0, 0)),
+                               bytes((0x02, 0, 0, 0, 0, 0, 0, 0)))
         return False
 
     @property
@@ -46,7 +47,7 @@ class DiagnosticCanQuery:
             return 0x4AF
         if self.request_can_id == 0x472:
             return 0x473 if self.payload[1] == 0x01 else 0x47C
-        return 0x47E
+        return 0x47B if self.payload[0] == 0x02 else 0x47E
 
     @property
     def name(self) -> str:
@@ -54,7 +55,7 @@ class DiagnosticCanQuery:
             return "firmware_version"
         if self.request_can_id == 0x472:
             return "joint_angle_speed_limits" if self.payload[1] == 0x01 else "joint_acceleration_limit"
-        return "gripper_teaching_parameters"
+        return "collision_protection_levels" if self.payload[0] == 0x02 else "gripper_teaching_parameters"
 
     @property
     def payload_sha256(self) -> str:
@@ -79,3 +80,7 @@ def joint_limit_query(motor_num: int, *, acceleration: bool = False) -> Diagnost
 
 def gripper_parameters_query() -> DiagnosticCanQuery:
     return DiagnosticCanQuery(0x477, bytes((0x04, 0, 0, 0, 0, 0, 0, 0)))
+
+
+def collision_protection_query() -> DiagnosticCanQuery:
+    return DiagnosticCanQuery(0x477, bytes((0x02, 0, 0, 0, 0, 0, 0, 0)))

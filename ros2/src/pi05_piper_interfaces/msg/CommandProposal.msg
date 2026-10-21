@@ -1,0 +1,16 @@
+std_msgs/Header header
+string request_id
+string task_scope_id
+string model_profile
+string checkpoint_id
+string source_request_id
+string source_observation_id
+uint64 source_state_sequence
+uint64 created_monotonic_ns
+uint64 valid_until_monotonic_ns
+string source_clock_id
+float64[7] target
+string action_semantics
+string[7] units
+bool hardware_units_verified
+bool mapping_verified

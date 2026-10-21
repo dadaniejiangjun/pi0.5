@@ -10,6 +10,12 @@ from laptop.client.policy_client import load_artifact_identity_lock,validate_pol
 from laptop.piper.unit_conversion import (joint_raw_to_nominal_rad, nominal_rad_to_joint_raw, gripper_raw_to_nominal_m_divided, nominal_m_to_gripper_raw)
 from laptop.client.observation_schema import PIPER_PROMPT, build_piper_observation
 from laptop.robot_client.piper_session import PiperSession
+from laptop.control.feedback_acceptance import (
+    MANUAL_FEEDBACK_LIMITS,
+    MODEL_TRIAL_GRIPPER_TARGET_TOLERANCE_RAW,
+    MODEL_TRIAL_HELD_GRIPPER_DRIFT_RAW,
+    MODEL_TRIAL_HELD_JOINT_DRIFT_RAW,
+)
 from laptop.robot_client.bounded_policy_target import limit_target
 from laptop.transport.bounded_trial import BoundedTrialBatch
 from laptop.safety.bridge import SafetyBridge,UNVERIFIED_ANALYSIS_LIMITS
@@ -25,14 +31,93 @@ def stable_snapshot(robot, site, deadline_ns):
         try:
             return robot.commissioning_snapshot(**site)
         except PermissionError as exc:
-            if 'joint feedback must stay within SDK bounds and drift' not in str(exc):
+            if 'joint feedback must stay within the task motion envelope and drift' not in str(exc):
                 raise
             if time.perf_counter_ns()>=wait_until:
                 raise
             robot.poll(0.05)
 
 
-def worker(lock_path,output,port,updates,duration_s=20,long_loop=False,joint_step_deg=5,joint_tolerance_deg=0.5):
+def classify_trial_acceptance(*, send_interface_accepted, observed_motion,
+                              precision_arrival):
+    """Keep receipt, functional motion, and precision as separate outcomes."""
+    send_status = "ACCEPTED" if send_interface_accepted else "REJECTED_OR_UNKNOWN"
+    motion_status = "EXPECTED_DIRECTION_AND_HELD_AXES_CONFIRMED" if observed_motion else "NOT_CONFIRMED"
+    return {
+        "send_interface": send_status,
+        "observed_motion": motion_status,
+        "precision_arrival": precision_arrival,
+        "functional_control": "PASS" if send_interface_accepted and observed_motion else "NOT_CONFIRMED",
+    }
+
+
+def classify_model_trial_motion(*, source_joint_raw, target_joint_raw,
+                                observed_joint_raw, source_gripper_raw,
+                                target_gripper_raw, observed_gripper_raw):
+    """Require above-noise directional motion and normal held channels."""
+    joint_values = (source_joint_raw, target_joint_raw, observed_joint_raw)
+    if any(type(values) is not tuple or len(values) != 6
+           or any(type(value) is not int for value in values)
+           for values in joint_values):
+        raise ValueError("source, target, and observed joints must be six integer raw values")
+    if any(type(value) is not int for value in
+           (source_gripper_raw, target_gripper_raw, observed_gripper_raw)):
+        raise ValueError("gripper values must be integer raw units")
+
+    active_joints = tuple(
+        index for index, (source, target) in enumerate(zip(source_joint_raw, target_joint_raw))
+        if abs(target-source) > MANUAL_FEEDBACK_LIMITS.motion_noise_joint_raw
+    )
+    joint_direction = {}
+    for index in active_joints:
+        direction = 1 if target_joint_raw[index] > source_joint_raw[index] else -1
+        moved = (observed_joint_raw[index]-source_joint_raw[index]) * direction
+        joint_direction[f"joint_{index+1}"] = moved > MANUAL_FEEDBACK_LIMITS.motion_noise_joint_raw
+    held_joint_indices = tuple(index for index in range(6) if index not in active_joints)
+    held_joints_ok = all(
+        abs(observed_joint_raw[index]-source_joint_raw[index])
+        <= MODEL_TRIAL_HELD_JOINT_DRIFT_RAW for index in held_joint_indices
+    )
+
+    active_gripper = (
+        abs(target_gripper_raw-source_gripper_raw)
+        > MANUAL_FEEDBACK_LIMITS.motion_noise_gripper_raw
+    )
+    if active_gripper:
+        direction = 1 if target_gripper_raw > source_gripper_raw else -1
+        moved = (observed_gripper_raw-source_gripper_raw) * direction
+        gripper_direction = moved > MANUAL_FEEDBACK_LIMITS.motion_noise_gripper_raw
+        held_gripper_ok = True
+    else:
+        gripper_direction = None
+        held_gripper_ok = (
+            abs(observed_gripper_raw-source_gripper_raw)
+            <= MODEL_TRIAL_HELD_GRIPPER_DRIFT_RAW
+        )
+
+    has_target_change = bool(active_joints) or active_gripper
+    active_channels_ok = (
+        (not active_joints or (bool(joint_direction) and all(joint_direction.values())))
+        and gripper_direction is not False
+    )
+    confirmed = has_target_change and active_channels_ok and held_joints_ok and held_gripper_ok
+    return {
+        "status": "EXPECTED_DIRECTION_AND_HELD_AXES_CONFIRMED" if confirmed else "NOT_CONFIRMED",
+        "functional_motion_confirmed": confirmed,
+        "joint_direction_above_noise": joint_direction,
+        "gripper_direction_above_noise": gripper_direction,
+        "held_joint_axes": [f"joint_{index+1}" for index in held_joint_indices],
+        "held_joints_within_tolerance": held_joints_ok,
+        "gripper_was_held": not active_gripper,
+        "held_gripper_within_tolerance": held_gripper_ok,
+        "motion_noise_joint_raw": MANUAL_FEEDBACK_LIMITS.motion_noise_joint_raw,
+        "motion_noise_gripper_raw": MANUAL_FEEDBACK_LIMITS.motion_noise_gripper_raw,
+        "held_joint_drift_tolerance_raw": MODEL_TRIAL_HELD_JOINT_DRIFT_RAW,
+        "held_gripper_drift_tolerance_raw": MODEL_TRIAL_HELD_GRIPPER_DRIFT_RAW,
+    }
+
+
+def worker(lock_path,output,port,updates,duration_s=20,long_loop=False,joint_step_deg=20,joint_tolerance_deg=0.5):
     import cv2
     from openpi_client.websocket_client_policy import WebsocketClientPolicy
     lock=load_artifact_identity_lock(lock_path)
@@ -53,9 +138,8 @@ def worker(lock_path,output,port,updates,duration_s=20,long_loop=False,joint_ste
         counts[role]+=1
     threads=[threading.Thread(target=camera_loop,args=(v['opencv_index'],k,cameras,mutex,stop,errors,record_frame),daemon=True) for k,v in identity['roles'].items()]
     report=dict(status='STARTED',steps=[],camera_identity=identity,physical_gripper_scale_verified=False,task_success_claim=False)
-    origin=None;deadline=None
-    envelope_raw=None if long_loop else round(updates*joint_step_deg*1000)
-    report.update(long_loop=long_loop,duration_limit_s=duration_s,max_updates=updates,video_directory=str(video_dir),joint_step_limit_deg=joint_step_deg,joint_arrival_tolerance_deg=joint_tolerance_deg,joint_arrival_timeout_s=5,gripper_step_limit_nominal_m=None,cumulative_joint_limit_deg=None if long_loop else updates*joint_step_deg)
+    deadline=None
+    report.update(long_loop=long_loop,duration_limit_s=duration_s,max_updates=updates,video_directory=str(video_dir),joint_step_limit_deg=joint_step_deg,joint_arrival_tolerance_deg=joint_tolerance_deg,joint_arrival_tolerance_raw=round(joint_tolerance_deg*1000),joint_arrival_timeout_s=5,joint_stable_duration_ns=MANUAL_FEEDBACK_LIMITS.stable_duration_ns,joint_stability_drift_tolerance_raw=MANUAL_FEEDBACK_LIMITS.held_joint_drift_tolerance_raw,gripper_arrival_tolerance_raw=MODEL_TRIAL_GRIPPER_TARGET_TOLERANCE_RAW,held_joint_drift_tolerance_raw=MODEL_TRIAL_HELD_JOINT_DRIFT_RAW,held_gripper_drift_tolerance_raw=MODEL_TRIAL_HELD_GRIPPER_DRIFT_RAW,gripper_step_limit_raw=1000,gripper_step_limit_nominal_m=0.001,cumulative_joint_limit_enabled=False)
     try:
         for t in threads:t.start()
         camera_deadline=time.monotonic()+3
@@ -78,8 +162,6 @@ def worker(lock_path,output,port,updates,duration_s=20,long_loop=False,joint_ste
                 stable_snapshot(robot,site,deadline)
                 state=robot.state();start_joints=state['joint_raw_0p001deg']
                 if not state['complete_fresh'] or state['gripper']['status_raw']&0xBF:raise RuntimeError('feedback incomplete or gripper fault')
-                if origin is None:origin=start_joints
-                if envelope_raw is not None and any(abs(a-b)>envelope_raw+100 for a,b in zip(start_joints,origin)):raise RuntimeError('trial left bounded cumulative envelope')
                 camera_wait_started=time.perf_counter_ns()
                 camera_wait_deadline=min(deadline,camera_wait_started+2_000_000_000)
                 while True:
@@ -115,8 +197,8 @@ def worker(lock_path,output,port,updates,duration_s=20,long_loop=False,joint_ste
                 snapshot=robot.commissioning_snapshot(**site);fresh=robot.state()
                 now=time.perf_counter_ns()
                 if now-started>250_000_000:raise TimeoutError('inference/source age exceeds 250 ms')
-                if any(abs(a-b)>50 for a,b in zip(start_joints,snapshot.joint_raw_0p001deg)):raise RuntimeError('robot moved during inference')
-                if abs(fresh['gripper']['position_raw']-state['gripper']['position_raw'])>1000:raise RuntimeError('gripper moved during inference')
+                if any(abs(a-b)>MODEL_TRIAL_HELD_JOINT_DRIFT_RAW for a,b in zip(start_joints,snapshot.joint_raw_0p001deg)):raise RuntimeError('robot moved during inference')
+                if abs(fresh['gripper']['position_raw']-state['gripper']['position_raw'])>MODEL_TRIAL_HELD_GRIPPER_DRIFT_RAW:raise RuntimeError('gripper moved during inference')
                 index=int((now-started)//100_000_000)
                 if index>=16:raise TimeoutError('action horizon expired')
                 current=[joint_raw_to_nominal_rad(v) for v in snapshot.joint_raw_0p001deg]+[gripper_raw_to_nominal_m_divided(fresh['gripper']['position_raw'])]
@@ -124,24 +206,77 @@ def worker(lock_path,output,port,updates,duration_s=20,long_loop=False,joint_ste
                 targets=tuple(nominal_rad_to_joint_raw(v) for v in bounded['bounded_target'][:6]);gripper=nominal_m_to_gripper_raw(bounded['bounded_target'][6])
                 if envelope_raw is not None and any(abs(a-b)>envelope_raw for a,b in zip(targets,origin)):raise ValueError('target exceeds bounded cumulative envelope')
                 if time.perf_counter_ns()>=deadline:break
-                batch=BoundedTrialBatch(snapshot.sequence,snapshot.joint_raw_0p001deg,targets,fresh['gripper']['position_raw'],gripper,'trial-'+uuid.uuid4().hex,min(started+250_000_000,deadline),joint_step_limit_raw=round(joint_step_deg*1000),gripper_step_limit_raw=None)
-                record=dict(step=step,request_id=batch.prediction_request_id,action_index=index,inference_ms=(received-started)/1e6,camera_wait_ms=camera_wait_ms,bounded=bounded,target_joint_raw=list(targets),target_gripper_raw=gripper)
+                batch=BoundedTrialBatch(snapshot.sequence,snapshot.joint_raw_0p001deg,targets,fresh['gripper']['position_raw'],gripper,'trial-'+uuid.uuid4().hex,min(started+250_000_000,deadline),joint_step_limit_raw=round(joint_step_deg*1000),gripper_step_limit_raw=1000,gripper_profile='continuous_task',gripper_effort_raw=0)
+                record=dict(step=step,request_id=batch.prediction_request_id,action_index=index,inference_ms=(received-started)/1e6,camera_wait_ms=camera_wait_ms,bounded=bounded,source_joint_raw=list(snapshot.joint_raw_0p001deg),source_gripper_raw=fresh['gripper']['position_raw'],target_joint_raw=list(targets),target_gripper_raw=gripper)
                 report['steps'].append(record)
                 writes=robot.send_bounded_model_trial(snapshot=snapshot,batch=batch,operator_approved=True)
+                record['send_interface']={'status':'ADAPTER_ACCEPTED','frame_count':len(writes),'physical_motion_proven':False}
                 record['adapter_accepted_frames']=[dict(can_id=w.arbitration_id,data_hex=w.data.hex(),monotonic_ns=w.adapter_accepted_monotonic_ns) for w in writes]
-                checked=robot.wait_joint_target(targets,timeout_s=5,tolerance_raw=round(joint_tolerance_deg*1000))
+                checked=robot.wait_joint_target(targets,timeout_s=5,
+                    tolerance_raw=round(joint_tolerance_deg*1000),
+                    stable_for_ns=MANUAL_FEEDBACK_LIMITS.stable_duration_ns,
+                    stable_max_gap_ns=MANUAL_FEEDBACK_LIMITS.stable_max_gap_ns,
+                    stability_drift_raw=MANUAL_FEEDBACK_LIMITS.held_joint_drift_tolerance_raw)
                 record['feedback_check']=checked
-                if checked['status']!='JOINT_FEEDBACK_MATCH':raise RuntimeError('joint tracking unconfirmed; no retry')
                 robot.poll(0.35);after=robot.state();record['final_state']=after
                 if not after['complete_fresh'] or after['error_code'] or after['ctrl_mode_raw']!=1 or not all(after['motor_enabled']):raise RuntimeError('post-write robot fault')
-                if abs(after['gripper']['position_raw']-gripper)>1000:raise RuntimeError('gripper tracking unconfirmed; no retry')
+                final_joints=after['joint_raw_0p001deg']
+                motion_check=classify_model_trial_motion(
+                    source_joint_raw=tuple(snapshot.joint_raw_0p001deg),
+                    target_joint_raw=tuple(targets),
+                    observed_joint_raw=tuple(final_joints),
+                    source_gripper_raw=fresh['gripper']['position_raw'],
+                    target_gripper_raw=gripper,
+                    observed_gripper_raw=after['gripper']['position_raw'],
+                )
+                observed_motion=motion_check['functional_motion_confirmed']
+                gripper_residual=gripper-after['gripper']['position_raw']
+                joint_precision_ok=checked['status']=='JOINT_FEEDBACK_MATCH'
+                gripper_precision_ok=abs(gripper_residual)<=MODEL_TRIAL_GRIPPER_TARGET_TOLERANCE_RAW
+                precision_ok=joint_precision_ok and gripper_precision_ok
+                record['motion_check']=motion_check
+                record['precision']={
+                    'joint': {
+                        'status': checked['status'],
+                        'target_residual_raw_0p001deg': checked.get('target_residual_raw'),
+                        'tolerance_raw': checked.get('target_tolerance_raw'),
+                        'stable_duration_required_ns': checked.get('stable_duration_required_ns'),
+                        'stable_duration_observed_ns': checked.get('stable_duration_observed_ns'),
+                    },
+                    'gripper': {
+                        'status': ('WITHIN_TOLERANCE_FINAL_SAMPLE_STABILITY_NOT_MEASURED'
+                                   if gripper_precision_ok else 'OUTSIDE_TARGET_TOLERANCE'),
+                        'target_residual_raw': gripper_residual,
+                        'tolerance_raw': MODEL_TRIAL_GRIPPER_TARGET_TOLERANCE_RAW,
+                        'stable': None,
+                        'unit_scale_verified': False,
+                    },
+                    'combined_pass': precision_ok,
+                }
+                record['acceptance']=classify_trial_acceptance(
+                    send_interface_accepted=True,
+                    observed_motion=observed_motion,
+                    precision_arrival=('JOINT_STABLE_AND_GRIPPER_FINAL_RESIDUAL_WITHIN_TOLERANCE' if precision_ok
+                                       else 'TARGET_OR_GRIPPER_RESIDUAL_NOT_CONFIRMED'),
+                )
+                record['acceptance'].update({
+                    'gripper_residual_raw':gripper_residual,
+                    'gripper_tolerance_raw':MODEL_TRIAL_GRIPPER_TARGET_TOLERANCE_RAW,
+                })
+                if not observed_motion:raise RuntimeError('expected directional motion or held axes unconfirmed; no retry')
             (video_dir/'progress.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
             # Release the previous PyUSB context before reopening for a new preflight.
             import gc
             del robot,bridge
             gc.collect()
             time.sleep(0.5)
-        report['status']='TIME_BOUNDED_TRIAL_COMPLETE' if long_loop else 'BOUNDED_UPDATES_FEEDBACK_MATCH'
+        report['functional_motion_confirmed_updates']=sum(
+            step.get('acceptance',{}).get('functional_control')=='PASS'
+            for step in report['steps'])
+        report['precision_arrival_unconfirmed_updates']=sum(
+            step.get('precision',{}).get('combined_pass') is not True
+            for step in report['steps'])
+        report['status']='TIME_BOUNDED_TRIAL_COMPLETE' if long_loop else 'BOUNDED_UPDATES_FUNCTIONAL_CONTROL_CONFIRMED'
         report['loop_elapsed_s']=(time.perf_counter_ns()-loop_started)/1e9
     except Exception as e:
         report.update(status='STOPPED_NO_RETRY',error_type=type(e).__name__,reason=str(e))
@@ -165,7 +300,7 @@ def main():
     p.add_argument('--port',type=int,default=8020)
     p.add_argument('--updates',type=int,choices=(1,2,3),default=3)
     p.add_argument('--site-cleared-three-updates-authorized',action='store_true')
-    p.add_argument('--joint-step-deg',type=float,choices=(1,5,10,20,60),default=60)
+    p.add_argument('--joint-step-deg',type=float,choices=(1,5,10,20),default=20)
     p.add_argument('--joint-tolerance-deg',type=float,choices=(0.1,0.5),default=0.5)
     p.add_argument('--long-loop',action='store_true')
     p.add_argument('--duration',type=float,default=120)

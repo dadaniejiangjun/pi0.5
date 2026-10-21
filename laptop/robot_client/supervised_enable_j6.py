@@ -1,4 +1,4 @@
-"""One approved EnableArm(6), with fresh zero-pose and six-motor readback."""
+"""One approved EnableArm(6), with fresh stable-pose and six-motor readback."""
 
 import argparse
 import json
@@ -33,7 +33,7 @@ def execute(*, enable_j6_once=False, operator_authorized_enable=False,
         bridge.start_read_only()
         opened = True
         read_for(bridge)
-        initial = bridge.mode_initialization_snapshot(require_zero=True)
+        initial = bridge.mode_initialization_snapshot(require_stable=True)
         if initial["ctrl_mode_raw"] != 1:
             raise PermissionError("CAN_CTRL is required before J6 enable")
         if all(initial["motor_enabled"]):

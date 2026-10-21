@@ -18,7 +18,7 @@ import os
 from pathlib import Path
 import re
 import sys
-from typing import Any
+from typing import Any, Sequence
 
 from laptop.recorder.align_raw import align
 from laptop.recorder.label_episode import verify_label
@@ -65,20 +65,39 @@ def _repo_id(run_id: str, requested: str | None) -> str:
 
 
 def select_successful_episodes(raw_root: Path, outcome_root: Path,
-                               *, min_episodes: int = MIN_SUCCESSFUL_EPISODES) -> dict[str, Any]:
+                               *, min_episodes: int = MIN_SUCCESSFUL_EPISODES,
+                               episode_ids: Sequence[str] | None = None) -> dict[str, Any]:
     """Select only checksum-bound, explicitly successful operator episodes."""
     if type(min_episodes) is not int or min_episodes < MIN_SUCCESSFUL_EPISODES:
         raise ValueError("the fast Pi0.5 tiny-fit requires at least one successful episode")
+    requested_ids = None
+    if episode_ids is not None:
+        if (not isinstance(episode_ids, (list, tuple)) or not episode_ids
+                or any(not isinstance(item, str) or not item or Path(item).name != item
+                       for item in episode_ids)):
+            raise ValueError("episode_ids must be a nonempty list of directory names")
+        if len(set(episode_ids)) != len(episode_ids):
+            raise ValueError("episode_ids must not contain duplicates")
+        requested_ids = set(episode_ids)
     raw_root = Path(raw_root).resolve(strict=True)
     outcome_root = Path(outcome_root).resolve()
     raw_ids = sorted(
         path.name for path in raw_root.iterdir()
         if path.is_dir() and (path / "manifest.json").is_file()
     )
+    if requested_ids is not None:
+        missing_ids = sorted(requested_ids - set(raw_ids))
+        if missing_ids:
+            raise ValueError(f"requested raw episode IDs are missing: {missing_ids}")
+        candidate_raw_ids = requested_ids
+    else:
+        candidate_raw_ids = set(raw_ids)
     labels = {}
     failed_ids = []
     for label_path in sorted(outcome_root.glob("*.json")):
         episode_id = label_path.stem
+        if episode_id not in candidate_raw_ids:
+            continue
         raw_episode = raw_root / episode_id
         if not raw_episode.is_dir():
             raise ValueError(f"outcome label has no matching raw episode: {episode_id}")
@@ -87,7 +106,7 @@ def select_successful_episodes(raw_root: Path, outcome_root: Path,
             labels[episode_id] = {"raw": raw_episode, "outcome": label_path}
         else:
             failed_ids.append(episode_id)
-    unlabeled_ids = sorted(set(raw_ids) - (set(labels) | set(failed_ids)))
+    unlabeled_ids = sorted(candidate_raw_ids - (set(labels) | set(failed_ids)))
     if len(labels) < min_episodes:
         raise ValueError(
             f"need at least {min_episodes} checksum-bound successful episodes; "
@@ -107,7 +126,8 @@ def prepare_dataset(*, raw_root: Path = DEFAULT_RAW_ROOT,
                     dataset_home: Path = DEFAULT_DATASET_HOME,
                     run_id: str | None = None, repo_id: str | None = None,
                     min_episodes: int = MIN_SUCCESSFUL_EPISODES,
-                    max_skew_ms: float = 50.0) -> dict[str, Any]:
+                    max_skew_ms: float = 50.0,
+                    episode_ids: Sequence[str] | None = None) -> dict[str, Any]:
     """Create one new hash-audited LeRobot dataset from labeled successes."""
     run_id = run_id or _utc_run_id()
     if RUN_ID_RE.fullmatch(run_id) is None:
@@ -124,6 +144,7 @@ def prepare_dataset(*, raw_root: Path = DEFAULT_RAW_ROOT,
 
     selection = select_successful_episodes(
         raw_root, outcome_root, min_episodes=min_episodes,
+        episode_ids=episode_ids,
     )
     run_root = derived_root / run_id
     if run_root.exists():

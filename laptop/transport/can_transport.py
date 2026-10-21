@@ -36,8 +36,17 @@ class CanFrame:
     is_extended_id: bool
     is_error_frame: bool
     received_monotonic_ns: int
+    adapter_echo_id: Optional[int] = None
+
+    @property
+    def is_tx_echo(self) -> bool:
+        return self.adapter_echo_id is not None and self.adapter_echo_id != 0xFFFFFFFF
 
     def __post_init__(self) -> None:
+        if self.adapter_echo_id is not None and (
+                type(self.adapter_echo_id) is not int
+                or not 0 <= self.adapter_echo_id <= 0xFFFFFFFF):
+            raise ValueError("adapter_echo_id must be an unsigned 32-bit integer or None")
         if (type(self.arbitration_id) is not int
                 or not 0 <= self.arbitration_id <= 0x1FFFFFFF):
             raise ValueError("arbitration_id must be a valid CAN identifier")

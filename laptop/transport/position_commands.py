@@ -16,8 +16,8 @@ from laptop.control.contracts import (
     JOINT_GRIPPER_UNITS,
     CommandProposal,
 )
+from laptop.piper.control_profile import TASK_JOINT_BOUNDS_DEG
 from laptop.piper.unit_conversion import (
-    PIPER_NOMINAL_JOINT_BOUNDS_DEG,
     m_to_sdk_gripper,
     rad_to_sdk_joint,
 )
@@ -32,10 +32,14 @@ MAX_COMMISSIONING_APPROVAL_WINDOW_NS = 250_000_000
 COMMISSIONING_J1_STEP_RAW = 100  # fixed +0.100 degree at 0.001 degree/raw
 COMMISSIONING_J1_STABLE_WINDOW_NS = 300_000_000
 COMMISSIONING_JOINT_STABILITY_TOLERANCE_RAW = 50  # fixed +/-0.050 degree drift
-COMMISSIONING_JOINT_BOUNDS_RAW = tuple(
+TASK_JOINT_BOUNDS_RAW = tuple(
     (round(low * 1000), round(high * 1000))
-    for low, high in PIPER_NOMINAL_JOINT_BOUNDS_DEG
+    for low, high in TASK_JOINT_BOUNDS_DEG
 )
+# Backward-compatible name for legacy commissioning helpers. Its values now
+# come from the same controller/SDK task envelope used by ROS preview and the
+# SafetyBridge, rather than the SDK nominal table alone.
+COMMISSIONING_JOINT_BOUNDS_RAW = TASK_JOINT_BOUNDS_RAW
 COMMISSIONING_FEEDBACK_IDS = (
     0x2A1, 0x2A5, 0x2A6, 0x2A7, 0x261, 0x262, 0x263, 0x264, 0x265, 0x266,
 )
@@ -176,8 +180,8 @@ class J1CommissioningBatch:
                 or any(type(value) is not int for value in current + target)):
             raise ValueError("J1 commissioning current and target must contain six integers")
         if any(not low <= value <= high
-               for value, (low, high) in zip(current, COMMISSIONING_JOINT_BOUNDS_RAW)):
-            raise ValueError("J1 commissioning source is outside conservative SDK joint bounds")
+               for value, (low, high) in zip(current, TASK_JOINT_BOUNDS_RAW)):
+            raise ValueError("J1 commissioning source is outside the configured task motion envelope")
         if type(self.selected_axis) is not int or self.selected_axis not in range(1, 7):
             raise ValueError("commissioning axis must be J1 through J6")
         allowed_steps = (100, 1000) if self.selected_axis == 1 else ((-1000,) if self.selected_axis == 3 else (1000,))
@@ -198,8 +202,8 @@ class J1CommissioningBatch:
         if target != expected_target:
             raise ValueError("commissioning target must equal the selected fixed step on exactly one axis")
         if any(not low <= value <= high
-               for value, (low, high) in zip(target, COMMISSIONING_JOINT_BOUNDS_RAW)):
-            raise ValueError("J1 commissioning target is outside conservative SDK joint bounds")
+               for value, (low, high) in zip(target, TASK_JOINT_BOUNDS_RAW)):
+            raise ValueError("J1 commissioning target is outside the configured task motion envelope")
         frames = tuple(self.frames)
         ids = ((0x151,) if self.configure_control_mode else ()) + COMMISSIONING_J1_FRAME_IDS
         if (len(frames) != len(ids) or any(type(frame) is not CanTxFrame for frame in frames)
@@ -380,8 +384,8 @@ def validate_j1_commissioning_snapshot(
             and snapshot.motion_envelope_cleared):
         raise PermissionError("onsite E-stop, low-speed, and envelope checks are required")
     if any(not low <= value <= high for value, (low, high) in
-           zip(snapshot.joint_raw_0p001deg, COMMISSIONING_JOINT_BOUNDS_RAW)):
-        raise PermissionError("current six-joint pose is outside conservative SDK position bounds")
+           zip(snapshot.joint_raw_0p001deg, TASK_JOINT_BOUNDS_RAW)):
+        raise PermissionError("current six-joint pose is outside the configured task motion envelope")
     stable_history = tuple(
         (stamp, joints) for stamp, joints in snapshot.stable_joint_samples
         if stamp <= now_monotonic_ns
@@ -402,12 +406,12 @@ def validate_j1_commissioning_snapshot(
             )
             or now_monotonic_ns - stable_history[-1][0] > MAX_COMMISSIONING_FEEDBACK_AGE_NS
             or any(any(not low <= value <= high
-                       for value, (low, high) in zip(joints, COMMISSIONING_JOINT_BOUNDS_RAW))
+                       for value, (low, high) in zip(joints, TASK_JOINT_BOUNDS_RAW))
                    for _, joints in stable_history)
             or drift_exceeded
             or stable_history[-1][1] != snapshot.joint_raw_0p001deg):
         raise PermissionError(
-            "joint feedback must stay within SDK bounds and drift at most 0.050 degree "
+            "joint feedback must stay within the task motion envelope and drift at most 0.050 degree "
             "across a 300 ms window, matching the latest sample"
         )
 
